@@ -277,13 +277,13 @@ En la tabla siguiente se resume los operadores de C#, la lista de las categoría
 |                                  | `x != y`          | No igual |
 | AND lógico                      | `x & y`           | Bit a bit entero, AND lógico booleano |
 | XOR lógico                      | `x ^ y`           | XOR bit a bit entero, XOR lógico booleano |
-| OR lógico                       | ' x | y "           | OR bit a bit entero, OR lógico booleano |
+| OR lógico                       | <code>x &#124; y</code> | OR bit a bit entero, OR lógico booleano |
 | AND condicional                  | `x && y`          | Se evalúa como `y` solo si `x` es `true` |
-| OR condicional                   | ' x || y "          | Se evalúa como `y` solo si `x` es `false` |
+| OR condicional                   | <code>x &#124;&#124; y</code> | Se evalúa como `y` solo si `x` es `false` |
 | Uso combinado de NULL                  | `X ?? y`          | Se evalúa como `y` si `x` es `null`a `x` en caso contrario |
 | Condicional                      | `x ? y : z`       | Se evalúa como `y` si `x` es `true`, `z` si `x` es `false` |
 | Asignación o función anónima | `x = y`           | Asignación |
-|                                  | `x op= y`         | Asignación compuesta; operadores admitidos son `*=` `/=` `%=` `+=` `-=` `<<=` `>>=` `&=` `^=` `|=` |
+|                                  | `x op= y`         | Asignación compuesta; operadores admitidos son `*=` `/=` `%=` `+=` `-=` `<<=` `>>=` `&=` `^=` <code>&#124;=</code> |
 |                                  | `(T x) => y`      | Función anónima (expresión lambda) |
 
 ## <a name="statements"></a>Instrucciones

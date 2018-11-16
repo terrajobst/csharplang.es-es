@@ -366,7 +366,7 @@ class X<T>
 }
 ```
 
-Si la conversión explícita directa de `t` a `int` permiten, fácilmente uno podría esperar que `X<int>.F(7)` devolvería `7L`. Sin embargo, no es así porque las conversiones numéricas estándares solo se consideran cuando se conocen los tipos numéricos en tiempo de enlace. Para hacer que la semántica claras y en el ejemplo anterior se debe escribir:
+Si la conversión explícita directa de `t` a `int` permiten, fácilmente uno podría esperar que `X<int>.F(7)` devolvería `7L`. Sin embargo, no es así porque las conversiones numéricas estándares solo se consideran cuando se conocen los tipos numéricos en tiempo de enlace. Para hacer que la semántica claras y en el ejemplo anterior se debe escribir:
 ```csharp
 class X<T>
 {
@@ -738,7 +738,7 @@ La aplicación en tiempo de compilación de una conversión de un grupo de méto
 *  El método seleccionado `M` deben ser compatibles ([compatibilidad de delegado](delegates.md#delegate-compatibility)) con el tipo de delegado `D`, o en caso contrario, se produce un error en tiempo de compilación.
 *  Si el método seleccionado `M` es un método de instancia, la expresión de instancia asociada `E` determina el objeto de destino del delegado.
 *  Si el método seleccionado M es un método de extensión que se indica mediante un acceso de miembro en una expresión de instancia, esa expresión de instancia determina el objeto de destino del delegado.
-*  El resultado de la conversión es un valor de tipo `D`, es decir, un delegado recién creado que hace referencia al objeto de método y el destino seleccionado.
+*  El resultado de la conversión es un valor de tipo `D`, es decir, un delegado recién creado que hace referencia al objeto de método y el destino seleccionado.
 *  Tenga en cuenta que este proceso puede dar lugar a la creación de un delegado a un método de extensión, si el algoritmo de [las invocaciones de método](expressions.md#method-invocations) no puede encontrar un método de instancia, pero se realiza correctamente en el procesamiento de la invocación de `E(A)` como una extensión invocación de método ([las invocaciones de método de extensión](expressions.md#extension-method-invocations)). Un delegado creado, por tanto, captura el método de extensión, así como su primer argumento.
 
 El ejemplo siguiente muestra las conversiones de grupo de métodos:
@@ -770,7 +770,7 @@ class Test
 
 La asignación a `d1` convierte implícitamente el grupo de métodos `F` en un valor de tipo `D1`.
 
-La asignación a `d2` muestra cómo es posible crear un delegado a un método que tiene menos derivados de tipos de parámetros (contravariantes) y una más derivado a tipo de valor devuelto (covariante).
+La asignación a `d2` muestra cómo es posible crear un delegado a un método que tiene tipos de parámetro menos derivados (contravariante) y una más derivado a tipo de valor devuelto (covariante).
 
 La asignación a `d3` muestra cómo no existe ninguna conversión si el método no es aplicable.
 

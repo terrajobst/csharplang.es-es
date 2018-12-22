@@ -202,7 +202,7 @@ es válido y utiliza el nombre `x` como un parámetro y una etiqueta.
 
 Ejecución de una instrucción con etiqueta corresponde exactamente con la ejecución de la instrucción siguiente a la etiqueta.
 
-Además de la disponibilidad proporcionado por el flujo de control normal, una instrucción con etiqueta estará accesible si se hace referencia a la etiqueta por un accesible `goto` instrucción. (Excepción: si un `goto` instrucción está dentro de un `try` que incluye un `finally` bloque y la instrucción con etiqueta está fuera de la `try`y el punto final de la `finally` bloque es inaccesible, a continuación, la instrucción con etiqueta no es accesible desde el que `goto` instrucción.)
+Además de la disponibilidad proporcionado por el flujo de control normal, una instrucción con etiqueta estará accesible si se hace referencia a la etiqueta por un accesible `goto` instrucción. (Excepción: Si un `goto` instrucción está dentro de un `try` que incluye un `finally` bloque y la instrucción con etiqueta está fuera de la `try`y el punto final de la `finally` bloque es inaccesible, entonces no es accesible desde la instrucción con etiqueta que `goto` instrucción.)
 
 ## <a name="declaration-statements"></a>Instrucciones de declaración
 
@@ -801,7 +801,7 @@ El cuerpo de la, por último, se construye el bloque según los pasos siguientes
 
    La variable local `d` no es visible o accesible a cualquier código de usuario. En concreto, no está en conflicto con cualquier otra variable cuyo ámbito incluye el bloque finally.
 
-El orden en que `foreach` recorre los elementos de una matriz, es el siguiente: para los elementos de matrices unidimensionales se recorren en orden de índice ascendente, empezando por el índice `0` y terminando con el índice `Length - 1`. Las matrices multidimensionales, se recorren los elementos que tanto los índices de la dimensión más a la derecha se incrementan en primer lugar, a continuación, en la siguiente dimensión izquierda, y así sucesivamente hacia la izquierda.
+El orden en que `foreach` recorre los elementos de una matriz, es como sigue: Para los elementos de matrices unidimensionales se recorren en orden de índice ascendente, empezando por el índice `0` y terminando con el índice `Length - 1`. Las matrices multidimensionales, se recorren los elementos que tanto los índices de la dimensión más a la derecha se incrementan en primer lugar, a continuación, en la siguiente dimensión izquierda, y así sucesivamente hacia la izquierda.
 
 El ejemplo siguiente se imprime cada valor en una matriz bidimensional, en orden de los elementos:
 ```csharp

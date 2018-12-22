@@ -4,7 +4,7 @@ Una matriz es una estructura de datos que contiene una serie de variables que se
 
 Una matriz tiene un rango que determina el número de índices asociados a cada elemento de matriz. El rango de matriz se conoce también como las dimensiones de la matriz. Una matriz con un rango de uno se denomina un ***matriz unidimensional***. Una matriz con un rango mayor que uno se denomina un ***matriz multidimensional***. Matrices multidimensionales de tamaño específicas a menudo se conocen como las matrices bidimensionales, las matrices tridimensionales y así sucesivamente.
 
-Cada dimensión de una matriz tiene una longitud asociada que es un número entero mayor o igual que cero. Las longitudes de dimensión no forman parte del tipo de la matriz, pero se establecen cuando se crea una instancia del tipo de matriz en tiempo de ejecución. La longitud de una dimensión determina el intervalo válido de índices para esa dimensión: para una dimensión de longitud `N`, los índices pueden oscilar entre `0` a `N - 1` inclusive. El número total de elementos de una matriz es el producto de las longitudes de cada dimensión de la matriz. Si una o varias de las dimensiones de la matriz tienen una longitud de cero, se dice que la matriz estar vacío.
+Cada dimensión de una matriz tiene una longitud asociada que es un número entero mayor o igual que cero. Las longitudes de dimensión no forman parte del tipo de la matriz, pero se establecen cuando se crea una instancia del tipo de matriz en tiempo de ejecución. La longitud de una dimensión determina el intervalo válido de índices para esa dimensión: Para una dimensión de longitud `N`, los índices pueden oscilar entre `0` a `N - 1` inclusive. El número total de elementos de una matriz es el producto de las longitudes de cada dimensión de la matriz. Si una o varias de las dimensiones de la matriz tienen una longitud de cero, se dice que la matriz estar vacío.
 
 El tipo de elemento de una matriz puede ser cualquiera, incluido un tipo de matriz.
 
@@ -32,7 +32,7 @@ dim_separator
 
 Un *non_array_type* es cualquier *tipo* que es no sí un *array_type*.
 
-El rango de un tipo de matriz viene dado por el extremo izquierdo *rank_specifier* en el *array_type*: un *rank_specifier* indica que la matriz es una matriz con un rango de uno más el número de "`,`" tokens en el *rank_specifier*.
+El rango de un tipo de matriz viene dado por el extremo izquierdo *rank_specifier* en el *array_type*: Un *rank_specifier* indica que la matriz es una matriz con un rango de uno más el número de "`,`" tokens en el *rank_specifier*.
 
 El tipo de elemento de un tipo de matriz es el tipo resultante de eliminar el extremo izquierdo *rank_specifier*:
 

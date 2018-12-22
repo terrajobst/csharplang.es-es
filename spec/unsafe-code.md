@@ -276,7 +276,7 @@ En un contexto no seguro, existen varias construcciones para operar con punteros
 
 ## <a name="fixed-and-moveable-variables"></a>Variables fijas y móviles
 
-El operador address-of ([el operador address-of](unsafe-code.md#the-address-of-operator)) y el `fixed` instrucción ([la instrucción fixed](unsafe-code.md#the-fixed-statement)) dividen las variables en dos categorías: ***fijo variables***y ***variables móviles***.
+El operador address-of ([el operador address-of](unsafe-code.md#the-address-of-operator)) y el `fixed` instrucción ([la instrucción fixed](unsafe-code.md#the-fixed-statement)) dividen las variables en dos categorías: ***Se ha corregido variables*** y ***variables móviles***.
 
 Variables fijas residen en ubicaciones de almacenamiento que se ven afectadas por la operación del recolector de elementos no utilizados. (Ejemplos de variables fijas incluyen variables locales, parámetros de valor y las variables creadas por desreferenciar punteros). Por otro lado, variables móviles residen en ubicaciones de almacenamiento que están sujetos a reubicación o eliminación por el recolector de elementos no utilizados. (Ejemplos de variables móviles incluyen campos de objetos y elementos de matrices).
 

@@ -189,7 +189,7 @@ public interface IStringList
     string this[int index] { get; set; }
 }
 ```
-declara una interfaz que contiene uno de los posibles tipos de miembros: un método, una propiedad, un evento y un indizador.
+declara una interfaz que contiene uno de los posibles tipos de miembros: Un método, una propiedad, un evento y un indizador.
 
 Un *interface_declaration* crea un nuevo espacio de declaración ([declaraciones](basic-concepts.md#declarations)) y el *interface_member_declaration*s contenidas inmediatamente en el *interface_declaration* introducir nuevos miembros en este espacio de declaración. Las siguientes reglas se aplican a *interface_member_declaration*s:
 
@@ -295,7 +295,7 @@ El tipo de un indizador de interfaz debe ser seguro para la salida si hay un des
 
 Se tiene acceso a los miembros de interfaz a través de acceso a miembros ([acceso a miembros](expressions.md#member-access)) y el acceso de indizador ([acceso al indizador](expressions.md#indexer-access)) expresiones de la forma `I.M` y `I[A]`, donde `I` es un tipo de interfaz, `M` es un método, propiedad o evento de ese tipo de interfaz, y `A` es una lista de argumentos del indizador.
 
-Para las interfaces que son estrictamente de herencia simple (cada interfaz en la cadena de herencia tiene exactamente cero o una interfaz base directa), los efectos de la búsqueda de miembros ([búsqueda de miembros](expressions.md#member-lookup)), la invocación de método ([ Las invocaciones de método](expressions.md#method-invocations)) y acceso al indizador ([acceso al indizador](expressions.md#indexer-access)) las reglas son exactamente los mismos que para las clases y estructuras: más miembros derivados ocultan menos miembros derivados con el mismo nombre o signatura. Sin embargo, para las interfaces de herencia múltiple, las ambigüedades que pueden producirse cuando dos o más interfaces base no relacionadas declaran a miembros con el mismo nombre o signatura. En esta sección se muestra varios ejemplos de tales situaciones. En todos los casos, se pueden usar conversiones explícitas para resolver las ambigüedades.
+Para las interfaces que son estrictamente de herencia simple (cada interfaz en la cadena de herencia tiene exactamente cero o una interfaz base directa), los efectos de la búsqueda de miembros ([búsqueda de miembros](expressions.md#member-lookup)), la invocación de método ([ Las invocaciones de método](expressions.md#method-invocations)) y el acceso de indizador ([acceso al indizador](expressions.md#indexer-access)) las reglas son exactamente los mismos que para las clases y estructuras: Ocultar miembros más derivados de menos miembros derivados con el mismo nombre o la firma. Sin embargo, para las interfaces de herencia múltiple, las ambigüedades que pueden producirse cuando dos o más interfaces base no relacionadas declaran a miembros con el mismo nombre o signatura. En esta sección se muestra varios ejemplos de tales situaciones. En todos los casos, se pueden usar conversiones explícitas para resolver las ambigüedades.
 
 En el ejemplo
 ```csharp
@@ -380,7 +380,7 @@ class A
 ```
 el `IBase.F` miembro está oculto por la `ILeft.F` miembro. La invocación `d.F(1)` , por tanto, se selecciona `ILeft.F`, aunque `IBase.F` parece no estar oculto en la ruta de acceso que le guíe por `IRight`.
 
-La regla intuitiva para la ocultación en interfaces de herencia múltiple es simplemente el siguiente: si un miembro está oculto en cualquier ruta de acceso, está oculta en todas las rutas de acceso. Dado que la ruta de acceso de `IDerived` a `ILeft` a `IBase` oculta `IBase.F`, también se oculta el miembro en la ruta de acceso de `IDerived` a `IRight` a `IBase`.
+La regla intuitiva para la ocultación en interfaces de herencia múltiple es simplemente el siguiente: Si un miembro está oculto en cualquier ruta de acceso, se oculta en todas las rutas de acceso. Dado que la ruta de acceso de `IDerived` a `ILeft` a `IBase` oculta `IBase.F`, también se oculta el miembro en la ruta de acceso de `IDerived` a `IRight` a `IBase`.
 
 ## <a name="fully-qualified-interface-member-names"></a>Nombres de miembro de interfaz completo
 

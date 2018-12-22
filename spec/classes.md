@@ -601,7 +601,7 @@ Métodos parciales pueden definirse en una parte de una declaración de tipo y s
 
 Los métodos parciales no se puede definir los modificadores de acceso, pero son implícitamente `private`. Tipo de valor devuelto debe ser `void`, y no pueden tener sus parámetros la `out` modificador. El identificador `partial` se reconoce como palabra clave especial en una declaración de método sólo si aparece justo antes de que el `void` tipo; en caso contrario, se puede usar como un identificador normal. Un método parcial no puede implementar explícitamente los métodos de interfaz.
 
-Hay dos tipos de declaraciones de método parcial: si el cuerpo de la declaración del método es un punto y coma, la declaración se dice que un ***definir la declaración de método parcial***. Si el cuerpo se expresa como un *bloque*, la declaración se dice que un ***implementar la declaración de método parcial***. Entre las partes de una declaración de tipo puede haber solo una declaración de método parcial con una firma determinada de definición y puede haber solo una implementación de la declaración de método parcial con una firma dada. Si tiene una declaración de método parcial de implementación, una definición de la declaración de método parcial correspondiente debe existir y deben coincidir con las declaraciones como se especifica en la siguiente:
+Hay dos tipos de declaraciones de método parcial: Si el cuerpo de la declaración del método es un punto y coma, la declaración se dice que un ***definir la declaración de método parcial***. Si el cuerpo se expresa como un *bloque*, la declaración se dice que un ***implementar la declaración de método parcial***. Entre las partes de una declaración de tipo puede haber solo una declaración de método parcial con una firma determinada de definición y puede haber solo una implementación de la declaración de método parcial con una firma dada. Si tiene una declaración de método parcial de implementación, una definición de la declaración de método parcial correspondiente debe existir y deben coincidir con las declaraciones como se especifica en la siguiente:
 
 * Las declaraciones deben tener los mismos modificadores (aunque no necesariamente en el mismo orden), nombre del método, el número de parámetros de tipo y el número de parámetros.
 * Los parámetros correspondientes en las declaraciones deben tener los mismos modificadores (aunque no necesariamente en el mismo orden) y los mismos tipos (módulo las diferencias en los nombres de parámetro de tipo).
@@ -2114,7 +2114,7 @@ Las diferencias entre estático y los miembros de instancia se tratan con más d
 
 Cuando una declaración de método de instancia incluye un `virtual` modificador, que el método se dice que es un método virtual. Cuando no hay ninguna `virtual` modificador está presente, se dice que el método es un método no virtual.
 
-La implementación de un método no virtual es invariable: la implementación es la misma, si se invoca el método en una instancia de la clase en que se declaró o una instancia de una clase derivada. En cambio, las clases derivadas pueden reemplazar la implementación de un método virtual. El proceso de sustitución de la implementación de un método virtual heredado se conoce como ***reemplazar*** ese método ([invalidar métodos](classes.md#override-methods)).
+La implementación de un método no virtual es invariable: La implementación es la misma, si se invoca el método en una instancia de la clase en que se declaró o una instancia de una clase derivada. En cambio, las clases derivadas pueden reemplazar la implementación de un método virtual. El proceso de sustitución de la implementación de un método virtual heredado se conoce como ***reemplazar*** ese método ([invalidar métodos](classes.md#override-methods)).
 
 En una invocación de método virtual, el ***tipo en tiempo de ejecución*** de la instancia para el que tiene esa invocación lugar determina la implementación del método real a invocar. En una invocación de método no virtual, el ***tipo en tiempo de compilación*** de la instancia es el factor determinante. En términos precisos, cuando un método denominado `N` se invoca con una lista de argumentos `A` en una instancia con un tipo de tiempo de compilación `C` y un tipo de tiempo de ejecución `R` (donde `R` sea `C` o una clase derivada desde `C`), la invocación se procesa como sigue:
 
@@ -2207,7 +2207,7 @@ class Test
     }
 }
 ```
-el `C` y `D` clases contienen dos métodos virtuales con la misma firma: el introducidos por `A` y otro introducido por `C`. El método introducido por `C` oculta el método heredado de `A`. Por lo tanto, la declaración de reemplazo en `D` invalida el método introducido por `C`, y no es posible que `D` para invalidar el método introducido por `A`. El ejemplo genera el resultado:
+el `C` y `D` clases contienen dos métodos virtuales con la misma firma: El introducidos por `A` y otro introducido por `C`. El método introducido por `C` oculta el método heredado de `A`. Por lo tanto, la declaración de reemplazo en `D` invalida el método introducido por `C`, y no es posible que `D` para invalidar el método introducido por `A`. El ejemplo genera el resultado:
 ```
 B.F
 B.F
@@ -2694,7 +2694,7 @@ public class Button: Control
     }
 }
 ```
-el `Button` control declara una pública `Caption` propiedad. El `get` descriptor de acceso de la `Caption` propiedad devuelve la cadena almacenada en privado `caption` campo. El `set` comprueba si el nuevo valor es diferente del valor actual; en caso afirmativo, almacena el nuevo valor de descriptor de acceso y vuelve a dibujar el control. Las propiedades a menudo siguen el patrón que se muestra arriba: el `get` descriptor de acceso simplemente devuelve un valor almacenado en un campo privado y el `set` modifica el campo privado de descriptor de acceso y, a continuación, realiza acciones adicionales necesarias para actualizar completamente el estado del objeto.
+el `Button` control declara una pública `Caption` propiedad. El `get` descriptor de acceso de la `Caption` propiedad devuelve la cadena almacenada en privado `caption` campo. El `set` comprueba si el nuevo valor es diferente del valor actual; en caso afirmativo, almacena el nuevo valor de descriptor de acceso y vuelve a dibujar el control. Las propiedades a menudo siguen el patrón anterior: El `get` descriptor de acceso simplemente devuelve un valor almacenado en un campo privado y el `set` modifica el campo privado de descriptor de acceso y, a continuación, realiza acciones adicionales necesarias para actualizar completamente el estado del objeto.
 
 Dada la `Button` clase anterior, el siguiente es un ejemplo de uso de la `Caption` propiedad:
 ```csharp
@@ -3532,7 +3532,7 @@ binary_operator_declarator
 
 overloadable_binary_operator
     : '+'   | '-'   | '*'   | '/'   | '%'   | '&'   | '|'   | '^'   | '<<'
-    | 'right_shift' | '=='  | '!='  | '>'   | '<'   | '>='  | '<='
+    | right_shift | '=='  | '!='  | '>'   | '<'   | '>='  | '<='
     ;
 
 conversion_operator_declarator
@@ -3547,7 +3547,7 @@ operator_body
     ;
 ```
 
-Hay tres categorías de operadores sobrecargables: operadores unarios ([operadores unarios](classes.md#unary-operators)), los operadores binarios ([operadores binarios](classes.md#binary-operators)) y los operadores de conversión ([operadores de conversión ](classes.md#conversion-operators)).
+Hay tres categorías de operadores sobrecargables: Operadores unarios ([operadores unarios](classes.md#unary-operators)), los operadores binarios ([operadores binarios](classes.md#binary-operators)) y los operadores de conversión ([operadores de conversión](classes.md#conversion-operators)).
 
 El *operator_body* ya sea un punto y coma, un ***cuerpo de instrucción*** o un ***cuerpo de expresión***. Consta de un cuerpo de instrucción de un *bloque*, que especifica las instrucciones que se ejecutará cuando se invoca el operador. El *bloque* debe cumplir las reglas de devolución por valor métodos descritos en [cuerpo del método](classes.md#method-body). Un cuerpo de expresión consta de `=>` seguido de una expresión y un punto y coma y denota una expresión única para realizar cuando se invoca el operador.
 
@@ -4115,7 +4115,7 @@ genera el resultado
 X = 1, Y = 2
 ```
 
-Para ejecutar el `Main` método, el sistema ejecuta por primera vez el inicializador para `B.Y`, antes de la clase `B`del constructor estático. `Y`del inicializador hace `A`del constructor estático para que se puede ejecutar porque el valor de `A.X` se hace referencia. El constructor estático de `A` a su vez va a calcular el valor de `X`y hacer búsquedas por lo que el valor predeterminado de `Y`, que es cero. `A.X` por lo tanto se inicializa a 1. El proceso de ejecución `A`inicializadores de campo estático de constructor estático y, a continuación, finaliza, volviendo al cálculo del valor inicial de `Y`, el resultado se convierte en 2.
+Para ejecutar el `Main` método, el sistema ejecuta por primera vez el inicializador para `B.Y`, antes de la clase `B`del constructor estático. `Y`del inicializador hace `A`del constructor estático para que se puede ejecutar porque el valor de `A.X` se hace referencia. El constructor estático de `A` a su vez va a calcular el valor de `X`y hacer búsquedas por lo que el valor predeterminado de `Y`, que es cero. `A.X` por lo tanto se inicializa a 1. El proceso de ejecución `A`inicializadores de campo estático de constructor estático y, a continuación, finaliza, volviendo al cálculo del valor inicial de `Y`, el resultado se convierte en 2.
 
 Dado que el constructor estático se ejecuta exactamente una vez para cada tipo de clase construida de cerrado, es un lugar conveniente para exigir comprobaciones de tiempo de ejecución en el parámetro de tipo que no se puede comprobar en tiempo de compilación a través de restricciones ([parámetro de tipo restricciones](classes.md#type-parameter-constraints)). Por ejemplo, el siguiente tipo utiliza un constructor estático para exigir que el argumento de tipo es una enumeración:
 ```csharp
@@ -4272,7 +4272,7 @@ El `MoveNext` método de un objeto de enumerador encapsula el código de un bloq
 *  Si el estado del objeto del enumerador es ***después***, al invocar `MoveNext` devuelve `false`.
 
 
-Cuando `MoveNext` ejecuta el bloque de iteradores, puede interrumpir la ejecución de cuatro maneras: mediante un `yield return` instrucción, por un `yield break` instrucción cuando se encuentra al final del bloque de iteradores y debido a una excepción que se produce y se propaga fuera de la bloque de iteradores.
+Cuando `MoveNext` ejecuta el bloque de iteradores, puede interrumpir la ejecución de cuatro maneras: Por un `yield return` instrucción, por un `yield break` instrucción cuando se encuentra al final del bloque de iteradores y debido a una excepción que se produce y se propaga fuera del bloque de iteradores.
 
 *  Cuando un `yield return` se encuentra la instrucción ([la instrucción yield](statements.md#the-yield-statement)):
    * La expresión proporcionada en la instrucción se evalúa implícitamente convierte al tipo yield y asignada a la `Current` propiedad del objeto enumerador.
@@ -4734,6 +4734,6 @@ Cuando el cuerpo de la función asincrónica termina, la tarea devuelta se mueve
 
 ### <a name="evaluation-of-a-void-returning-async-function"></a>Evaluación de una función asincrónica devuelve void
 
-Si es el tipo de valor devuelto de la función async `void`, evaluación difiere de los pasos anteriores en la siguiente manera: porque no se devuelve ninguna tarea, la función comunica en su lugar excepciones en el subproceso actual y finalización ***sincronización contexto***. La definición exacta del contexto de sincronización depende de la implementación, pero es una representación de "donde" se está ejecutando el subproceso actual. El contexto de sincronización se notifica cuando comienza la evaluación de una función asincrónica devuelve void, se completa correctamente o provoca que se produzca una excepción no detectada.
+Si el tipo de valor devuelto de la función async es `void`, evaluación difiere de los pasos anteriores en la siguiente manera: Dado que no se devuelve ninguna tarea, la función comunica en su lugar excepciones en el subproceso actual y finalización ***contexto de sincronización***. La definición exacta del contexto de sincronización depende de la implementación, pero es una representación de "donde" se está ejecutando el subproceso actual. El contexto de sincronización se notifica cuando comienza la evaluación de una función asincrónica devuelve void, se completa correctamente o provoca que se produzca una excepción no detectada.
 
 Esto permite que el contexto para realizar un seguimiento de cuántas funciones async devuelven void se ejecutan en él y decidir cómo propagar las excepciones que salen de ellas.

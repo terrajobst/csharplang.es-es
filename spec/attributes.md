@@ -358,7 +358,7 @@ Una expresión `E` es un *attribute_argument_expression* si se cumplen todas las
 *  El tipo de `E` es un tipo de parámetro de atributo ([tipos de parámetro de atributo](attributes.md#attribute-parameter-types)).
 *  En tiempo de compilación, el valor de `E` puede resolverse en uno de los siguientes:
    * Un valor constante.
-   * Un objeto `System.Type`.
+   * Objeto `System.Type`.
    * Una matriz unidimensional de *attribute_argument_expression*s.
 
 Por ejemplo:
@@ -821,7 +821,7 @@ Para las llamadas que se producen dentro de las declaraciones de constructores d
 
 ## <a name="attributes-for-interoperation"></a>Atributos para la interoperación
 
-Nota: Esta sección solo es aplicable a la implementación de Microsoft .NET de C#.
+Nota: En esta sección solo es aplicable a la implementación de Microsoft .NET C#.
 
 ### <a name="interoperation-with-com-and-win32-components"></a>Interoperabilidad con componentes COM y Win32
 

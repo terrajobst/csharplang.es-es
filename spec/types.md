@@ -146,7 +146,7 @@ string s = i.ToString();        // System.Int32.ToString() instance method
 string t = 123.ToString();      // System.Int32.ToString() instance method
 ```
 
-Los tipos simples se diferencian de otros tipos de struct en que permiten determinadas operaciones adicionales:
+Los tipos simples se diferencian de otros tipos struct en que permiten determinadas operaciones adicionales:
 
 *  La mayoría de los tipos simples permiten crear escribiendo valores *literales* ([literales](lexical-structure.md#literals)). Por ejemplo, `123` es un literal de tipo `int` y `'a'` es un literal de tipo `char`. C# no hace ninguna disposición para los literales de tipos struct en general y los valores no predeterminados de otros tipos de struct en última instancia, siempre se crean a través de constructores de instancias de esos tipos de struct.
 *  Cuando los operandos de expresión son todos constantes de tipo simple, es posible que el compilador evaluar la expresión en tiempo de compilación. Se conoce como una expresión como un *constant_expression* ([expresiones constantes](expressions.md#constant-expressions)). Las expresiones que implican los operadores definidos por otros tipos struct no se consideran expresiones constantes.
@@ -188,11 +188,11 @@ C# admite dos tipos de punto flotante: `float` y `double`. El `float` y `double`
 *  Positivo cero y cero negativo. En la mayoría de las situaciones, cero positivo y negativo cero se comportan exactamente igual como del valor simple cero, pero algunas operaciones distinguen entre los dos ([operador de división](expressions.md#division-operator)).
 *  Infinito positivo e infinito negativo. Infinitos son generados por operaciones tales como dividir un número distinto de cero por cero. Por ejemplo, `1.0 / 0.0` da como resultado infinito positivo, y `-1.0 / 0.0` es infinito negativo.
 *  El ***Not a Number*** valor, a menudo abreviado como NaN. NaN producen las operaciones de punto flotante no válidas, como dividir cero por cero.
-*  El conjunto finito de valores distintos de cero del formulario `s * m * 2^e`, donde `s` es 1 o -1, y `m` y `e` están determinados por el tipo de punto flotante concreto: para `float`, `0 < m < 2^24` y `-149 <= e <= 104`y para `double`, `0 < m < 2^53` y `1075 <= e <= 970`. Números de punto flotante desnormalizados se consideran válidos valores distintos de cero.
+*  El conjunto finito de valores distintos de cero del formulario `s * m * 2^e`, donde `s` es 1 o -1, y `m` y `e` están determinados por el tipo de punto flotante concreto: Para `float`, `0 < m < 2^24` y `-149 <= e <= 104`y para `double`, `0 < m < 2^53` y `1075 <= e <= 970`. Números de punto flotante desnormalizados se consideran válidos valores distintos de cero.
 
-El `float` tipo puede representar los valores comprendidos entre aproximadamente `1.5 * 10^-45` a `3.4 * 10^38` con una precisión de 7 dígitos.
+El `float` tipo puede representar los valores comprendidos entre aproximadamente `1.5 * 10^-45` a `3.4 * 10^38` con una precisión de 7 dígitos.
 
-El `double` tipo puede representar los valores comprendidos entre aproximadamente `5.0 * 10^-324` a `1.7 × 10^308` con una precisión de 15-16 dígitos.
+El `double` tipo puede representar los valores comprendidos entre aproximadamente `5.0 * 10^-324` a `1.7 × 10^308` con una precisión de 15-16 dígitos.
 
 Si uno de los operandos de un operador binario es de un tipo de punto flotante, a continuación, el otro operando debe ser de un tipo entero o un tipo de punto flotante, y la operación se evalúa como sigue:
 
@@ -211,15 +211,15 @@ Operaciones de punto flotante se pueden realizar con mayor precisión que el tip
 
 ### <a name="the-decimal-type"></a>El tipo decimal
 
-El tipo `decimal` es un tipo de datos de 128 bits adecuado para cálculos financieros y monetarios. El `decimal` tipo puede representar los valores comprendidos entre `1.0 * 10^-28` a aproximadamente `7.9 * 10^28` con 28-29 dígitos significativos.
+El tipo `decimal` es un tipo de datos de 128 bits adecuado para cálculos financieros y monetarios. El `decimal` tipo puede representar los valores comprendidos entre `1.0 * 10^-28` a aproximadamente `7.9 * 10^28` con 28-29 dígitos significativos.
 
-El conjunto finito de valores de tipo `decimal` tienen el formato `(-1)^s * c * 10^-e`, donde el signo `s` es 0 o 1, el coeficiente `c` viene dado por `0 <= *c* < 2^96`y la escala `e` es tal que `0 <= e <= 28`. El `decimal` tipo no admite ceros con signo, infinitos o NaN. Un `decimal` se representa como un entero de 96 bits multiplicado por una potencia de diez. Para `decimal`s con un valor absoluto menor `1.0m`, el valor es exacta a la posición decimal 28, pero no más. Para `decimal`s con un valor absoluto mayor que o igual que `1.0m`, el valor es exacto a 28 o 29 dígitos. Contrariamente a la `float` y `double` tipos de datos, se pueden representar números fraccionarios decimales como 0,1 exactamente en el `decimal` representación. En el `float` y `double` representaciones, estos números son a menudo fracciones infinitas, lo que las hace más propensos a redondear errores.
+El conjunto finito de valores de tipo `decimal` tienen el formato `(-1)^s * c * 10^-e`, donde el signo `s` es 0 o 1, el coeficiente `c` viene dado por `0 <= *c* < 2^96`y la escala `e` es tal que `0 <= e <= 28`. El `decimal` tipo no admite ceros con signo, infinitos o NaN. Un `decimal` se representa como un entero de 96 bits multiplicado por una potencia de diez. Para `decimal`s con un valor absoluto menor `1.0m`, el valor es exacta a la posición decimal 28, pero no más. Para `decimal`s con un valor absoluto mayor que o igual que `1.0m`, el valor es exacto a 28 o 29 dígitos. Contrariamente a la `float` y `double` tipos de datos, se pueden representar números fraccionarios decimales como 0,1 exactamente en el `decimal` representación. En el `float` y `double` representaciones, estos números son a menudo fracciones infinitas, lo que las hace más propensos a redondear errores.
 
 Si uno de los operandos de un operador binario es de tipo `decimal`, a continuación, el otro operando debe ser de tipo entero o de tipo `decimal`. Si hay un operando de tipo entero, se convierte en `decimal` antes de realizar la operación.
 
 El resultado de una operación en los valores de tipo `decimal` es que resultaría de calcular un resultado exacto (conservación escala, según se define para cada operador) y, a continuación, redondear para ajustarse a la representación. Los resultados se redondean hasta el valor representable más próximo y, cuando un resultado está equidistante a dos valores que se puede representar, en el valor que tiene un número par en la posición de dígitos menos significativa (Esto se conoce como "redondeo bancario"). Un resultado cero siempre tiene un inicio de sesión 0 y una escala de 0.
 
-Si una operación aritmética decimal genera un valor menor o igual que `5 * 10^-29` en valor absoluto, el resultado de la operación se convierte en cero. Si un `decimal` operación aritmética genera un resultado que es demasiado grande para el `decimal` formato, un `System.OverflowException` se produce.
+Si una operación aritmética decimal genera un valor menor o igual que `5 * 10^-29` en valor absoluto, el resultado de la operación se convierte en cero. Si un `decimal` operación aritmética genera un resultado que es demasiado grande para el `decimal` formato, un `System.OverflowException` se produce.
 
 El `decimal` tipo tiene una precisión mayor intervalo pero menor que los tipos de punto flotante. Por lo tanto, las conversiones de tipos de punto flotante a `decimal` podría generar excepciones de desbordamiento y conversiones de `decimal` a los tipos de punto flotante podría provocar la pérdida de precisión. Por estas razones, no existe ninguna conversión implícita entre los tipos de punto flotante y `decimal`, y sin conversiones explícitas, no es posible mezclar de punto flotante y `decimal` operandos en la misma expresión.
 

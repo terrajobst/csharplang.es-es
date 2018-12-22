@@ -597,13 +597,13 @@ El generador de documentación cumple las siguientes reglas cuando genera las ca
 *  La segunda parte de la cadena es el nombre completo del elemento, empezando por la raíz del espacio de nombres. El nombre del elemento, su tipos envolventes y el espacio de nombres están separados por puntos. Si el nombre del elemento ya contiene puntos, éstos se reemplazan por `#(U+0023)` caracteres. (Se supone que ningún elemento tiene este carácter en su nombre.)
 *  Para los métodos y propiedades con argumentos, el argumento de lista se indica a continuación, incluya entre paréntesis. Para aquellos sin argumentos, se omiten los paréntesis. Los argumentos están separados por comas. La codificación de cada argumento es el mismo que una firma de la CLI, como sigue:
    *  Los argumentos se representan por su nombre de la documentación, que se basa en su nombre completo, puede modificado como sigue:
-      * Argumentos que representan tipos genéricos tienen un anexado "'" carácter seguido del número de parámetros de tipo
+      * Argumentos que representan tipos genéricos tienen un anexados `` ` `` carácter (comilla simple) seguido del número de parámetros de tipo
       * Argumentos que contienen el `out` o `ref` modificador tiene una `@` siguiendo su nombre de tipo. Argumentos pasan por valor o a través de `params` no tienen una ninguna anotación especial.
-      * Argumentos que son matrices se representan como `[lowerbound:size, ... , lowerbound:size]` donde el número de comas es el rango menos 1, y los límites inferiores y el tamaño de cada dimensión, si se conocen, se representan en formato decimal. Si no se especifica un límite inferior ni el tamaño, se omite. Si se omiten el límite inferior y el tamaño de una dimensión determinada, el "`:`" también se omite. Matrices escalonadas se representan mediante uno "`[]`" por cada nivel.
+      * Argumentos que son matrices se representan como `[lowerbound:size, ... , lowerbound:size]` donde el número de comas es el rango menos 1, y los límites inferiores y el tamaño de cada dimensión, si se conocen, se representan en formato decimal. Si no se especifica un límite inferior ni el tamaño, se omite. Si se omiten el límite inferior y el tamaño de una dimensión determinada, el `:` también se omite. Matrices escalonadas se representan mediante uno `[]` por nivel.
       * Argumentos que tienen tipos de puntero no es void se representan mediante un `*` después del nombre de tipo. Un puntero void se representa mediante un nombre de tipo de `System.Void`.
-      * Argumentos que hacen referencia a parámetros de tipo genérico que se definen en los tipos se codifican utilizando el "'" carácter seguido de índice de base cero del parámetro de tipo.
-      * Argumentos que usan parámetros de tipo genérico definidos en los métodos use un doble-acento grave "\`\`" en lugar de la "\`" utilizado para los tipos.
-      * Argumentos que hacen referencia a tipos genéricos construidos se codifican utilizando el tipo genérico, seguido de "{", seguido de una lista separada por comas de argumentos de tipo, seguido de "}".
+      * Argumentos que hacen referencia a parámetros de tipo genérico que se definen en los tipos se codifican utilizando el `` ` `` carácter (comilla simple) seguido por el índice de base cero del parámetro de tipo.
+      * Argumentos que usan parámetros de tipo genérico definidos en los métodos use un doble-acento grave ``` `` ``` en lugar de la `` ` `` utiliza para los tipos.
+      * Argumentos que hacen referencia a tipos genéricos construidos se codifican utilizando el tipo genérico, seguido de `{`, seguido de una lista separada por comas de argumentos de tipo, seguido de `}`.
 
 ### <a name="id-string-examples"></a>Ejemplos de cadenas de identificador
 

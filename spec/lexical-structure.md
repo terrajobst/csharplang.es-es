@@ -28,7 +28,7 @@ Cada archivo de código fuente en un programa de C# debe ajustarse a la *entrada
 
 La gramática sintáctica de C# se presenta en los capítulos y apéndices que siguen este capítulo. Los símbolos terminales de la gramática sintáctica son los tokens definidos por la gramática léxica, y la gramática sintáctica especifica cómo se combinan los tokens para formar programas de C#.
 
-Cada archivo de código fuente en un programa de C# debe ajustarse a la *compilation_unit* producción de la gramática sintáctica ([unidades de compilación](namespaces.md#compilation-units)).
+Cada archivo de código fuente en un C# programa debe ajustarse a la *compilation_unit* producción de la gramática sintáctica ([unidades de compilación](namespaces.md#compilation-units)).
 
 ## <a name="lexical-analysis"></a>Análisis léxico
 
@@ -55,7 +55,7 @@ input_element
     ;
 ```
 
-Cinco elementos básicos constituyen la estructura léxica de un archivo de código fuente de C#: terminadores de línea ([terminadores de línea](lexical-structure.md#line-terminators)), espacio en blanco ([espacio en blanco](lexical-structure.md#white-space)), los comentarios ([comentarios](lexical-structure.md#comments)), los tokens ([Tokens](lexical-structure.md#tokens)) y las directivas de preprocesamiento ([directivas de preprocesamiento](lexical-structure.md#pre-processing-directives)). Estos elementos básicos, solo los tokens son significativos en la gramática sintáctica de un programa de C# ([gramática sintáctica](lexical-structure.md#syntactic-grammar)).
+Cinco elementos básicos constituyen la estructura léxica de un C# archivo de código fuente: Terminadores de línea ([terminadores de línea](lexical-structure.md#line-terminators)), espacio en blanco ([espacio en blanco](lexical-structure.md#white-space)), los comentarios ([comentarios](lexical-structure.md#comments)), los tokens ([Tokens](lexical-structure.md#tokens)), y directivas de preprocesamiento ([directivas de preprocesamiento](lexical-structure.md#pre-processing-directives)). Estos elementos básicos, solo los tokens son significativos en la gramática sintáctica de un programa de C# ([gramática sintáctica](lexical-structure.md#syntactic-grammar)).
 
 El procesamiento léxico de un archivo de código fuente de C# consiste en reducir el archivo a una secuencia de tokens que se convierte en la entrada del análisis sintáctico. Los terminadores de línea, espacio en blanco y los comentarios que pueden servir para separar los tokens y las directivas de preprocesamiento pueden hacer secciones del archivo de origen se omite, pero estos elementos léxicos no tienen ningún impacto en la estructura sintáctica de un programa de C#.
 
@@ -467,7 +467,7 @@ Tenga en cuenta que en un literal real, siempre son necesarios dígitos decimale
 
 Un literal de carácter representa un único carácter y suele estar compuesto por un carácter de comillas, como en `'a'`.
 
-Nota: La notación gramatical ANTLR hace lo siguiente confuso! En ANTLR, al escribir `\'` significa una comilla `'`. Y al escribir `\\` significa una sola barra diagonal inversa `\`. Por lo tanto, la primera regla para un literal de carácter significa que comienza con una comilla simple, un carácter y, luego, una comilla simple. Y las secuencias de escape sencillas posible once son `\'`, `\"`, `\\`, `\0`, `\a`, `\b`, `\f`, `\n`, `\r`, `\t`, `\v`.
+Nota: ¡La notación gramatical ANTLR hace lo siguiente confuso! En ANTLR, al escribir `\'` significa una comilla `'`. Y al escribir `\\` significa una sola barra diagonal inversa `\`. Por lo tanto, la primera regla para un literal de carácter significa que comienza con una comilla simple, un carácter y, luego, una comilla simple. Y las secuencias de escape sencillas posible once son `\'`, `\"`, `\\`, `\0`, `\a`, `\b`, `\f`, `\n`, `\r`, `\t`, `\v`.
 
 ```antlr
 character_literal

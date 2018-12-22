@@ -496,7 +496,7 @@ el *using_static_directive* importa el método de extensión `M` contenidos en `
 
 Un *using_static_directive* sólo importa los miembros y tipos declarados directamente en el tipo especificado, no a los tipos y miembros declaran en las clases base.
 
-TODO: ejemplo
+TODO: Ejemplo
 
 Las ambigüedades entre varias *using_namespace_directives* y *using_static_directives* se tratan en [mediante directivas de espacio de nombres](namespaces.md#using-namespace-directives).
 
@@ -561,22 +561,22 @@ Un *qualified_alias_member* tiene uno de dos formas:
 Usa esta notación, el significado de un *qualified_alias_member* se determina como sigue:
 
 *  Si `N` es el identificador `global`, a continuación, se busca el espacio de nombres global `I`:
-   * Si el espacio de nombres global contiene un espacio de nombres denominado `I` y `K` es cero, el *qualified_alias_member* hace referencia a ese espacio de nombres.
-   * En caso contrario, si el espacio de nombres global contiene un tipo no genérico denominado `I` y `K` es cero, el *qualified_alias_member* hace referencia a ese tipo.
-   * En caso contrario, si el espacio de nombres global contiene un tipo denominado `I` cuya `K` parámetros de tipo, el *qualified_alias_member* hace referencia a ese tipo construido con los argumentos de tipo especificado.
+   * Si el espacio de nombres global contiene un espacio de nombres denominado `I` y `K` es cero, el *qualified_alias_member* hace referencia a ese espacio de nombres.
+   * En caso contrario, si el espacio de nombres global contiene un tipo no genérico denominado `I` y `K` es cero, el *qualified_alias_member* hace referencia a ese tipo.
+   * En caso contrario, si el espacio de nombres global contiene un tipo denominado `I` cuya `K`  parámetros de tipo, el *qualified_alias_member* hace referencia a ese tipo construido con los argumentos de tipo especificado.
    * En caso contrario, el *qualified_alias_member* es no definido y se produce un error de tiempo de compilación.
 
 *  En caso contrario, empezando con la declaración de espacio de nombres ([declaraciones Namespace](namespaces.md#namespace-declarations)) inmediatamente que contiene el *qualified_alias_member* (si existe), continuando con cada declaración de espacio de nombres envolvente (si existe) y termina con la unidad de compilación que contiene el *qualified_alias_member*, se evalúan los pasos siguientes hasta que se encuentra una entidad:
 
    * Si la unidad de compilación o de declaración de espacio de nombres contiene un *using_alias_directive* que asocia `N` con un tipo, el *qualified_alias_member* no está definido y un tiempo de compilación se produce un error.
    * En caso contrario, si la unidad de compilación o de declaración de espacio de nombres contiene un *extern_alias_directive* o *using_alias_directive* que asocia `N` con un espacio de nombres, a continuación:
-     * Si el espacio de nombres asociado `N` contiene un espacio de nombres denominado `I` y `K` es cero, el *qualified_alias_member* hace referencia a ese espacio de nombres.
-     * En caso contrario, si el espacio de nombres asociado `N` contiene un tipo no genérico denominado `I` y `K` es cero, el *qualified_alias_member* hace referencia a ese tipo.
-     * En caso contrario, si el espacio de nombres asociado `N` contiene un tipo denominado `I` cuya `K` parámetros de tipo, el *qualified_alias_member* hace referencia a ese tipo construido con el tipo especificado argumentos.
+     * Si el espacio de nombres asociado `N` contiene un espacio de nombres denominado `I` y `K` es cero, el *qualified_alias_member* hace referencia a ese espacio de nombres.
+     * En caso contrario, si el espacio de nombres asociado `N` contiene un tipo no genérico denominado `I` y `K` es cero, el *qualified_alias_member* hace referencia a ese tipo.
+     * En caso contrario, si el espacio de nombres asociado `N` contiene un tipo denominado `I` cuya `K`  parámetros de tipo, el *qualified_alias_member* hace referencia a dicho tipo construido con los argumentos de tipo especificado.
      * En caso contrario, el *qualified_alias_member* es no definido y se produce un error de tiempo de compilación.
 *  En caso contrario, el *qualified_alias_member* es no definido y se produce un error de tiempo de compilación.
 
-Tenga en cuenta que uso el calificador de alias de espacio de nombres con un alias que hace referencia a un tipo produce un error de tiempo de compilación. Observe también que si el identificador `N` es `global`, a continuación, se realiza una búsqueda en el espacio de nombres global, incluso si hay un alias using que asocia `global` con un tipo o espacio de nombres.
+Tenga en cuenta que uso el calificador de alias de espacio de nombres con un alias que hace referencia a un tipo produce un error de tiempo de compilación. Observe también que si el identificador `N` es `global`, a continuación, se realiza una búsqueda en el espacio de nombres global, incluso si hay un alias using que asocia `global` con un tipo o espacio de nombres.
 
 ### <a name="uniqueness-of-aliases"></a>Unicidad de los alias
 

@@ -512,7 +512,7 @@ Para mayor brevedad, esta sección usa la forma abreviada para los tipos de tare
 
 Una expresión lambda `F` es compatible con un tipo de árbol de expresión `Expression<D>` si `F` es compatible con el tipo de delegado `D`. Tenga en cuenta que esto no es aplicable a los métodos anónimos, solo las expresiones lambda.
 
-Algunas expresiones lambda no se puede convertir a tipos de árbol de expresión: aunque la conversión *existe*, se produce un error en tiempo de compilación. Este es el caso si la expresión lambda:
+Algunas expresiones lambda no se puede convertir a tipos de árbol de expresión: Aunque la conversión *existe*, se produce un error en tiempo de compilación. Este es el caso si la expresión lambda:
 
 *  Tiene un *bloque* cuerpo
 *  Contiene los operadores de asignación simple o compuesta
@@ -723,7 +723,7 @@ class Test
 }
 ```
 
-También puede usarse la misma técnica que se aplica aquí para capturar las variables locales al convertir las funciones anónimas en árboles de expresión: referencias a los objetos generados por el compilador pueden almacenarse en el árbol de expresión y puede tener acceso a las variables locales se representan como campo tiene acceso a estos objetos. La ventaja de este enfoque es que permite que las variables locales "elevación" para compartirse entre los delegados y árboles de expresión.
+También puede utilizar la misma técnica que se aplica aquí para capturar las variables locales al convertir las funciones anónimas en árboles de expresión: Referencias a los objetos generados por el compilador pueden almacenarse en el árbol de expresión y el acceso a las variables locales se puede representar como campo tiene acceso a estos objetos. La ventaja de este enfoque es que permite que las variables locales "elevación" para compartirse entre los delegados y árboles de expresión.
 
 ## <a name="method-group-conversions"></a>Conversiones de métodos de grupo
 

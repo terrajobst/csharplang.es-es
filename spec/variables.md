@@ -14,13 +14,13 @@ En el ejemplo
 ```csharp
 class A
 {
-public static int x;
-int y;
+    public static int x;
+    int y;
 
-void F(int[] v, int a, ref int b, out int c) {
-int i = 1;
-c = a + b++;
-}
+    void F(int[] v, int a, ref int b, out int c) {
+        int i = 1;
+        c = a + b++;
+    }
 }
 ```
 `x` es una variable estática, `y` es una variable de instancia, `v[0]` es un elemento de matriz, `a` es un parámetro de valor, `b` es un parámetro de referencia, `c` es un parámetro de salida, y `i` es una variable local.
@@ -272,11 +272,11 @@ for ( for_initializer ; for_condition ; for_iterator ) embedded_statement
 se realiza como si hubiera escrito la instrucción:
 ```csharp
 {
-for_initializer ;
-while ( for_condition ) {
-embedded_statement ;
-for_iterator ;
-}
+    for_initializer ;
+    while ( for_condition ) {
+        embedded_statement ;
+        for_iterator ;
+    }
 }
 ```
 
@@ -328,7 +328,7 @@ catch(...) catch_block_n
 
 *  El estado de asignación definitiva de *v* al principio de *try_block* es el mismo que el estado de asignación definitiva de *v* al principio de *stmt*.
 *  El estado de asignación definitiva de *v* al principio de *catch_block_i* (para cualquier *i*) es el mismo que el estado de asignación definitiva de *v*al principio de *stmt*.
-*  El estado de asignación definitiva de *v* en el punto final de *stmt* está asignado definitivamente si (y sólo si) *v* se asigna definitivamente en el punto final de *try_block* y cada *catch_block_i* (para cada *i* de 1 a *n*).
+*  El estado de asignación definitiva de *v* en el punto final de *stmt* está asignado definitivamente si (y sólo si) *v* se asigna definitivamente en el punto final de  *try_block* y cada *catch_block_i* (para cada *i* de 1 a *n*).
 
 #### <a name="try-finally-statements"></a>Instrucciones try-finally
 
@@ -358,10 +358,10 @@ finally *finally_block*
 se realiza como si la instrucción fuera un `try` - `finally` instrucción envolvente un `try` - `catch` instrucción:
 ```csharp
 try {
-try try_block
-catch(...) catch_block_1
-...
-catch(...) catch_block_n
+    try try_block
+    catch(...) catch_block_1
+    ...
+    catch(...) catch_block_n
 }
 finally finally_block
 ```
@@ -370,31 +370,31 @@ En el ejemplo siguiente se muestra cómo los diferentes bloques de un `try` inst
 ```csharp
 class A
 {
-static void F() {
-int i, j;
-try {
-goto LABEL;
-// neither i nor j definitely assigned
-i = 1;
-// i definitely assigned
-}
+    static void F() {
+        int i, j;
+        try {
+            goto LABEL;
+            // neither i nor j definitely assigned
+            i = 1;
+            // i definitely assigned
+        }
 
-catch {
-// neither i nor j definitely assigned
-i = 3;
-// i definitely assigned
-}
+        catch {
+            // neither i nor j definitely assigned
+            i = 3;
+            // i definitely assigned
+        }
 
-finally {
-// neither i nor j definitely assigned
-j = 5;
-// j definitely assigned
-}
-// i and j definitely assigned
-LABEL:;
-// j definitely assigned
+        finally {
+            // neither i nor j definitely assigned
+            j = 5;
+            // j definitely assigned
+            }
+        // i and j definitely assigned
+        LABEL:;
+        // j definitely assigned
 
-}
+    }
 }
 ```
 

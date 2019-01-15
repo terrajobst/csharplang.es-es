@@ -37,12 +37,12 @@ public class Point
 }
 ```
 
-El texto dentro de los comentarios de documentación debe tener un formato correcto según las reglas de XML (http://www.w3.org/TR/REC-xml). Si el XML está enfermo formado, se genera una advertencia y el archivo de documentación incluirá un comentario que indica que se detectó un error.
+El texto dentro de los comentarios de documentación debe tener un formato correcto según las reglas de XML (https://www.w3.org/TR/REC-xml). Si el XML está enfermo formado, se genera una advertencia y el archivo de documentación incluirá un comentario que indica que se detectó un error.
 
 Aunque los desarrolladores son gratuitos crear su propio conjunto de etiquetas, se define un conjunto recomendado de [etiquetas recomendadas](documentation-comments.md#recommended-tags). Algunas de las etiquetas recomendadas tienen significados especiales:
 
 *  El `<param>` etiqueta a la que se usa para describir los parámetros. Si se utiliza dicha etiqueta, el generador de documentación debe comprobar que el parámetro especificado existe y que todos los parámetros se describen en los comentarios de documentación. Si se produce un error en dicha comprobación, el generador de documentación emite una advertencia.
-*  El atributo `cref` se puede asociar a cualquier etiqueta para proporcionar una referencia a un elemento de código. El generador de documentación debe comprobar la existencia de este elemento de código. Si se produce un error en la comprobación, el generador de documentación emite una advertencia. Al buscar un nombre que se describe en un `cref` atributo, el generador de documentación debe respetar la visibilidad del espacio de nombres según `using` instrucciones que aparecen en el código fuente. Los elementos de código que son genéricos, la sintaxis genérica normal (es decir "`List<T>`") no se puede usar porque no genera un XML no válido. Las llaves se pueden usar en lugar de corchetes (es decir "`List{T}`"), o se puede usar la sintaxis de escape XML (es decir "`List&lt;T&gt;`").
+*  El atributo `cref` se puede asociar a cualquier etiqueta para proporcionar una referencia a un elemento de código. El generador de documentación debe comprobar la existencia de este elemento de código. Si se produce un error en la comprobación, el generador de documentación emite una advertencia. Al buscar un nombre que se describe en un `cref` atributo, el generador de documentación debe respetar la visibilidad del espacio de nombres según `using` instrucciones que aparecen en el código fuente. Los elementos de código que son genéricos, la sintaxis genérica normal (es decir, "`List<T>`") no se puede usar porque no genera un XML no válido. Se pueden usar llaves en lugar de corchetes (es decir, "`List{T}`"), o se puede usar la sintaxis de escape XML (es decir, "`List&lt;T&gt;`").
 *  El `<summary>` etiqueta está pensada para usarse con un visor de documentación para mostrar información adicional sobre un tipo o miembro.
 *  El `<include>` tag incluye información de un archivo XML externo.
 
@@ -53,7 +53,7 @@ Observe que el archivo de documentación no proporciona información completa so
 El generador de documentación debe aceptar y procesar cualquier etiqueta válida según las reglas de XML. Las siguientes etiquetas proporcionan funcionalidad de uso común en la documentación de usuario. (Por supuesto, otras etiquetas son posibles).
 
 
-| __Etiqueta__          | __Sección__                                            | __Propósito__                                            |
+| __Tag__          | __Sección__                                            | __Propósito__                                            |
 |------------------|--------------------------------------------------------|--------------------------------------------------------|
 | `<c>`            | [`<c>`](documentation-comments.md#c)                   | Establecer el texto en una fuente como código                           | 
 | `<code>`         | [`<code>`](documentation-comments.md#code)             | Establezca una o varias líneas de salida de código o programa de origen |

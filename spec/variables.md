@@ -1,3 +1,11 @@
+---
+ms.openlocfilehash: b7bb7dd575d9e2e6d5dd85bdd3e535411e29fcf4
+ms.sourcegitcommit: 3fc033b6e98ed7ecdf46a85c79b00a3a3ddcf963
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 01/18/2019
+ms.locfileid: "47229747"
+---
 # <a name="variables"></a>Variables
 
 Las variables representan ubicaciones de almacenamiento. Cada variable tiene un tipo que determina qué valores se pueden almacenar en la variable. C# es un lenguaje con seguridad de tipos y el compilador de C# garantiza que los valores almacenados en variables siempre son del tipo adecuado. El valor de una variable se puede cambiar mediante una asignación o mediante el uso de la `++` y `--` operadores.
@@ -313,7 +321,7 @@ return ;
 ```
 
 *  Si *v* es un parámetro output, a continuación, se debe asignarlo definitivamente cualquiera:
-    * antes de *stmt*
+    * before *stmt*
     * o al final de la `finally` block de un `try` - `finally` o `try` - `catch` - `finally` que rodea el `return` instrucción.
 
 #### <a name="try-catch-statements"></a>Instrucciones try-catch

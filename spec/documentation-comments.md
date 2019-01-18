@@ -1,3 +1,11 @@
+---
+ms.openlocfilehash: c9f8417dc68153f02ceb72bb1d51f3615f3c4961
+ms.sourcegitcommit: 3fc033b6e98ed7ecdf46a85c79b00a3a3ddcf963
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 01/18/2019
+ms.locfileid: "54272051"
+---
 # <a name="documentation-comments"></a>Comentarios de documentación
 
 C# proporciona un mecanismo para que los programadores puedan documentar el código mediante una sintaxis de comentario especial que contiene el texto XML. En los archivos de código fuente, comentarios con un formato determinado pueden usarse para dirigir una herramienta para generar XML desde estos comentarios y los elementos de código fuente que preceden. Los comentarios con esta sintaxis se denominan ***comentarios de documentación***. Debe preceder inmediatamente a un tipo definido por el usuario (por ejemplo, una clase, un delegado o una interfaz) o un miembro (por ejemplo, un campo, evento, propiedad o método). La herramienta de generación de XML se denomina el ***generador de documentación***. (Este generador podría ser, pero no es necesario, el propio compilador de C#). El resultado producido por el generador de documentación se denomina el ***archivo de documentación***. Un archivo de documentación se usa como entrada para un ***Visor de la documentación***; una herramienta diseñada para producir algún tipo de presentación visual de la información de tipo y su documentación asociada.

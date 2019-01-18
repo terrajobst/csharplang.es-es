@@ -1,3 +1,11 @@
+---
+ms.openlocfilehash: 75454072a5137b3044f78bb896317fd88a29e336
+ms.sourcegitcommit: 3fc033b6e98ed7ecdf46a85c79b00a3a3ddcf963
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 01/18/2019
+ms.locfileid: "49640917"
+---
 # <a name="expressions"></a>Expresiones
 
 Una expresión es una secuencia de operadores y operandos. Este capítulo define la sintaxis, el orden de evaluación de operandos y operadores y el significado de las expresiones.
@@ -2701,8 +2709,8 @@ A continuación, se enumeran los operadores de multiplicación predefinidos. Tod
    |      |      |      |     |     |      |      |     |
    |:----:|-----:|:----:|:---:|:---:|:----:|:----:|:----|
    |      | + y   | -y   | +0  | -0  | +inf | -inf | NaN | 
-   | + x   | + z   | -z   | +0  | -0  | +inf | -inf | NaN | 
-   | -x   | -z   | + z   | -0  | +0  | -inf | +inf | NaN | 
+   | +x   | +z   | -z   | +0  | -0  | +inf | -inf | NaN | 
+   | -x   | -z   | +z   | -0  | +0  | -inf | +inf | NaN | 
    | +0   | +0   | -0   | +0  | -0  | NaN  | NaN  | NaN | 
    | -0   | -0   | +0   | -0  | +0  | NaN  | NaN  | NaN | 
    | +inf | +inf | -inf | NaN | NaN | +inf | -inf | NaN | 
@@ -2753,8 +2761,8 @@ A continuación, se enumeran los operadores de división predefinidos. Todos los
    |      |      |      |      |      |      |      |      |
    |:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
    |      | + y   | -y   | +0   | -0   | +inf | -inf | NaN  | 
-   | + x   | + z   | -z   | +inf | -inf | +0   | -0   | NaN  | 
-   | -x   | -z   | + z   | -inf | +inf | -0   | +0   | NaN  | 
+   | +x   | +z   | -z   | +inf | -inf | +0   | -0   | NaN  | 
+   | -x   | -z   | +z   | -inf | +inf | -0   | +0   | NaN  | 
    | +0   | +0   | -0   | NaN  | NaN  | +0   | -0   | NaN  | 
    | -0   | -0   | +0   | NaN  | NaN  | -0   | +0   | NaN  | 
    | +inf | +inf | -inf | +inf | -inf | NaN  | NaN  | NaN  | 
@@ -2803,7 +2811,7 @@ Los operadores predefinidos resto se enumeran a continuación. Todos los operado
    |      |      |      |      |      |      |      |      |
    |:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
    |      | + y   | -y   | +0   | -0   | +inf | -inf | NaN  | 
-   | + x   | + z   | + z   | NaN  | NaN  | x    | x    | NaN  | 
+   | +x   | +z   | +z   | NaN  | NaN  | x    | x    | NaN  | 
    | -x   | -z   | -z   | NaN  | NaN  | -x   | -x   | NaN  | 
    | +0   | +0   | +0   | NaN  | NaN  | +0   | +0   | NaN  | 
    | -0   | -0   | -0   | NaN  | NaN  | -0   | -0   | NaN  | 
@@ -3074,7 +3082,7 @@ Operaciones de desplazamiento nunca producen desbordamientos y producen el mismo
 
 Cuando el operando izquierdo de la `>>` operador es de un tipo entero con signo, el operador realiza un desplazamiento aritmético a la derecha, en la que el valor del bit más significativo (el bit de signo) del operando se propaga a las posiciones de bits vacíos de orden superior. Cuando el operando izquierdo de la `>>` operador es de tipo entero sin signo, el operador realiza un desplazamiento lógico directamente en la que las posiciones de bits vacíos de orden superior siempre se establecen en cero. Para realizar la operación contraria del deriva del tipo de operando, se pueden usar conversiones explícitas. Por ejemplo, si `x` es una variable de tipo `int`, la operación `unchecked((int)((uint)x >> y))` realiza un desplazamiento lógico derecha de `x`.
 
-## <a name="relational-and-type-testing-operators"></a>Operadores relacionales y de comprobación de tipos
+## <a name="relational-and-type-testing-operators"></a>Operadores de comprobación de tipos y relacionales
 
 El `==`, `!=`, `<`, `>`, `<=`, `>=`, `is` y `as` se denominan los operadores relacionales y comprobación de tipos.
 

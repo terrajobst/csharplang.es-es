@@ -1,3 +1,11 @@
+---
+ms.openlocfilehash: af7af574814dc04ee3ece0396b7ae5f86b3ec8eb
+ms.sourcegitcommit: 3fc033b6e98ed7ecdf46a85c79b00a3a3ddcf963
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 01/18/2019
+ms.locfileid: "47229780"
+---
 # <a name="classes"></a>Clases
 
 Una clase es una estructura de datos que puede contener miembros de datos (constantes y campos), miembros de función (métodos, propiedades, eventos, indizadores, operadores, constructores de instancias, destructores y constructores estáticos) y tipos anidados. Tipos de clase admiten la herencia, un mecanismo mediante el cual una clase derivada puede extender y especializar una clase base.
@@ -1827,7 +1835,7 @@ Un *fixed_parameter* con un *default_argument* se conoce como un ***parámetro o
 
 Un `ref` o `out` parámetro no puede tener un *default_argument*. El *expresión* en un *default_argument* debe ser uno de los siguientes:
 
-*  un *constant_expression*
+*  a *constant_expression*
 *  una expresión de formato `new S()` donde `S` es un tipo de valor
 *  una expresión de formato `default(S)` donde `S` es un tipo de valor
 
@@ -3677,7 +3685,7 @@ Cuando escriba `object` se especifica como un argumento de tipo para `T`, el seg
 En casos donde no existe una conversión predefinida entre dos tipos, se omiten cualquier conversiones definidas por el usuario entre esos tipos. De manera específica:
 
 *  Si una conversión implícita predefinida ([conversiones implícitas](conversions.md#implicit-conversions)) existe desde tipo `S` al tipo `T`, todos los definidos por el usuario conversiones (implícitas o explícitas) de `S` a `T` se omiten.
-*  Si una conversión explícita predefinida ([las conversiones explícitas](conversions.md#explicit-conversions)) existe desde tipo `S` al tipo `T`, las conversiones explícitas definidas por el usuario de `S` a `T` se omiten. Además:
+*  Si una conversión explícita predefinida ([las conversiones explícitas](conversions.md#explicit-conversions)) existe desde tipo `S` al tipo `T`, las conversiones explícitas definidas por el usuario de `S` a `T` se omiten. Furthermore:
 
 Si `T` es un tipo de interfaz definido por el usuario conversiones implícitas de `S` a `T` se omiten.
 

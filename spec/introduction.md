@@ -1,3 +1,11 @@
+---
+ms.openlocfilehash: ab41a3c99f79c4cc70f7d4720f7e53b91a410859
+ms.sourcegitcommit: 3fc033b6e98ed7ecdf46a85c79b00a3a3ddcf963
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 01/18/2019
+ms.locfileid: "49640904"
+---
 # <a name="introduction"></a>Introducción
 
 C# (pronunciado "si sharp" en inglés) es un lenguaje de programación sencillo, moderno, orientado a objetos y con seguridad de tipos. C# tiene sus raíces en la familia de lenguajes C y le resultará familiar inmediatamente a los programadores de C, C++ y Java. C# está normalizado de ECMA International como el ***ECMA-334*** estándar y por ISO/IEC como el ***ISO/IEC 23270*** estándar. Compilador de Microsoft C# para .NET Framework es una implementación compatible de ambos estándares.
@@ -162,16 +170,16 @@ El procesamiento de caracteres y cadenas en C# utiliza la codificación Unicode.
 En la tabla siguiente se resume los tipos numéricos de C#.
 
 
-| __Categoría__      | __Bits__ | __Type__  | __Intervalo o la misma precisión__ |
+| __Categoría__      | __Bits__ | __Type__  | __Range/Precision__ |
 |-------------------|----------|-----------|---------------------|
-| Entero con signo   | 8        | `sbyte`   | -128... 127 |
-|                   | 16       | `short`   | -32, 768... 32, 767 |
-|                   | 32       | `int`     | -2,147,483, 648 … 2, 147, 483, 647 |
-|                   | 64       | `long`    | -9,223,372,036,854,775, 808... 9 223, 372, 036, 854, 775, 807 |
-| Entero sin signo | 8        | `byte`    | 0... 255 |
-|                   | 16       | `ushort`  | 0... 65.535 |
-|                   | 32       | `uint`    | 0... 4.294.967.295 |
-|                   | 64       | `ulong`   | 0... 18.446.744.073.709.551.615 |
+| Entero con signo   | 8        | `sbyte`   | -128...127 |
+|                   | 16       | `short`   | -32,768...32,767 |
+|                   | 32       | `int`     | -2,147,483,648...2,147,483,647 |
+|                   | 64       | `long`    | -9,223,372,036,854,775,808...9,223,372,036,854,775,807 |
+| Entero sin signo | 8        | `byte`    | 0...255 |
+|                   | 16       | `ushort`  | 0...65,535 |
+|                   | 32       | `uint`    | 0...4,294,967,295 |
+|                   | 64       | `ulong`   | 0...18,446,744,073,709,551,615 |
 | Punto flotante    | 32       | `float`   | 1.5 × 10 ^ −45 y 3,4 × 10 ^ 38, precisión de 7 dígitos |
 |                   | 64       | `double`  | 5.0 × 10 ^ −324 a 1.7 × 10 ^ 308, de 15 dígitos de precisión |
 | Decimal           | 128      | `decimal` | 1.0 × 10 ^ −28 a 7.9 × 10 ^ 28, de 28 dígitos precisión |

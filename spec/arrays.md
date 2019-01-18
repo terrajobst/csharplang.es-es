@@ -1,3 +1,11 @@
+---
+ms.openlocfilehash: 155c1beecddfdfcce2e7948bcb8d6b80428fbd7a
+ms.sourcegitcommit: 3fc033b6e98ed7ecdf46a85c79b00a3a3ddcf963
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 01/18/2019
+ms.locfileid: "47229787"
+---
 # <a name="arrays"></a>Matrices
 
 Una matriz es una estructura de datos que contiene una serie de variables que se accede mediante índices calculados. Las variables contenidas en una matriz, también conocida como elementos de la matriz, son todas del mismo tipo, y este tipo se denomina tipo de elemento de la matriz.

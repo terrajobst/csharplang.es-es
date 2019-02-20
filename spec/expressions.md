@@ -1,11 +1,3 @@
----
-ms.openlocfilehash: 75454072a5137b3044f78bb896317fd88a29e336
-ms.sourcegitcommit: 3fc033b6e98ed7ecdf46a85c79b00a3a3ddcf963
-ms.translationtype: MT
-ms.contentlocale: es-ES
-ms.lasthandoff: 01/18/2019
-ms.locfileid: "49640917"
----
 # <a name="expressions"></a>Expresiones
 
 Una expresión es una secuencia de operadores y operandos. Este capítulo define la sintaxis, el orden de evaluación de operandos y operadores y el significado de las expresiones.
@@ -92,7 +84,7 @@ Las secciones siguientes describen para cada construcción en el lenguaje exacta
 
 ### <a name="types-of-constituent-expressions"></a>Tipos de expresiones constituyentes
 
-Cuando una operación estáticamente está enlazada, el tipo de una expresión que lo constituyen (por ejemplo, un receptor y argumento, un índice o un operando) siempre se considera el tipo de tiempo de compilación de dicha expresión.
+Cuando una operación estáticamente está enlazada, el tipo de una expresión que lo constituyen (por ejemplo, un receptor, un argumento, un índice o un operando) siempre se considera el tipo de tiempo de compilación de dicha expresión.
 
 Cuando una operación se enlaza dinámicamente, se determina el tipo de una expresión constituyente de maneras diferentes según el tipo de tiempo de compilación de la expresión que lo constituyen:
 
@@ -388,7 +380,7 @@ En la tabla siguiente se resume el procesamiento que tiene lugar en las construc
 |                   | `T.E -= value` | El `remove` descriptor de acceso del evento `E` en la clase o struct `T` se invoca. Se produce un error en tiempo de enlace si `E` no es estático. | 
 |                   | `e.E += value` | El `add` descriptor de acceso del evento `E` en la clase, estructura o interfaz dada por el tipo de `e` se invoca con la expresión de instancia `e`. Se produce un error en tiempo de enlace si `E` es estático. | 
 |                   | `e.E -= value` | El `remove` descriptor de acceso del evento `E` en la clase, estructura o interfaz dada por el tipo de `e` se invoca con la expresión de instancia `e`. Se produce un error en tiempo de enlace si `E` es estático. | 
-| Acceso al indizador    | `e[x,y]`       | Se aplica la resolución de sobrecarga para seleccionar el mejor indizador de la clase, estructura o interfaz dada por el tipo de e. El `get` descriptor de acceso del indizador se invoca con la expresión de instancia `e` y la lista de argumentos `(x,y)`. Si el indizador es de solo escritura, se produce un error en tiempo de enlace. | 
+| Acceso a indizador    | `e[x,y]`       | Se aplica la resolución de sobrecarga para seleccionar el mejor indizador de la clase, estructura o interfaz dada por el tipo de e. El `get` descriptor de acceso del indizador se invoca con la expresión de instancia `e` y la lista de argumentos `(x,y)`. Si el indizador es de solo escritura, se produce un error en tiempo de enlace. | 
 |                   | `e[x,y] = value` | Se aplica la resolución de sobrecarga para seleccionar el mejor indizador de la clase, estructura o interfaz dada por el tipo de `e`. El `set` descriptor de acceso del indizador se invoca con la expresión de instancia `e` y la lista de argumentos `(x,y,value)`. Si el indizador es de solo lectura, se produce un error en tiempo de enlace. | 
 | Invocación de operador | `-x`         | Se aplica la resolución de sobrecarga para seleccionar el operador unario mejor en la clase o struct dada por el tipo de `x`. Se invoca el operador seleccionado con la lista de argumentos `(x)`. | 
 |                     | `x + y`      | Se aplica la resolución de sobrecarga para seleccionar el mejor operador binario de las clases o structs proporcionados por los tipos de `x` y `y`. Se invoca el operador seleccionado con la lista de argumentos `(x,y)`. | 
@@ -1448,7 +1440,7 @@ En este caso el compilador clasifica el *element_access* como un valor de tipo `
 
 Si el *primary_no_array_creation_expression* de un *element_access* es un valor de un *array_type*, *element_access* es un acceso de la matriz ([matriz acceso](expressions.md#array-access)). En caso contrario, el *primary_no_array_creation_expression* debe ser una variable o un valor de una clase, struct o tipo de interfaz que tiene uno o más miembros de indizador, en cuyo caso el *element_access* es un acceso de indizador ([acceso al indizador](expressions.md#indexer-access)).
 
-#### <a name="array-access"></a>Acceso a la matriz
+#### <a name="array-access"></a>Acceso a matriz
 
 Para un acceso a la matriz, el *primary_no_array_creation_expression* de la *element_access* debe ser un valor de un *array_type*. Además, el *argument_list* de una matriz no se permite el acceso que contiene los argumentos con nombre. El número de expresiones en el *argument_list* debe ser el mismo que el rango de la *array_type*, y cada expresión debe ser de tipo `int`, `uint`, `long`, `ulong`, o debe poder convertirse implícitamente a uno o varios de estos tipos.
 
@@ -1462,7 +1454,7 @@ El procesamiento en tiempo de ejecución de un acceso a la matriz del formulario
 *  El valor de cada expresión en el *argument_list* se compara con los límites reales de cada dimensión de la instancia de matriz al que hace referencia `P`. Si uno o más valores que están fuera del intervalo, un `System.IndexOutOfRangeException` se inicia y no se ejecuta ningún paso adicional.
 *  Se calcula la ubicación del elemento de matriz especificado por las expresiones de índice, y esta ubicación es el resultado de acceso a la matriz.
 
-#### <a name="indexer-access"></a>Acceso al indizador
+#### <a name="indexer-access"></a>Acceso a indizador
 
 Para un acceso de indizador, el *primary_no_array_creation_expression* de la *element_access* debe ser una variable o un valor de una clase, estructura o tipo de interfaz, y este tipo debe implementar uno o más los indizadores que se aplican con respecto a la *argument_list* de la *element_access*.
 

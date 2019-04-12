@@ -1,10 +1,10 @@
 ---
-ms.openlocfilehash: ab41a3c99f79c4cc70f7d4720f7e53b91a410859
-ms.sourcegitcommit: 3fc033b6e98ed7ecdf46a85c79b00a3a3ddcf963
+ms.openlocfilehash: db10046af5d635b430951679a448e23680b18b87
+ms.sourcegitcommit: a19fac74c01a6c3da67d38b2f79527145d4edcbc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/18/2019
-ms.locfileid: "49640904"
+ms.lasthandoff: 04/09/2019
+ms.locfileid: "59426817"
 ---
 # <a name="introduction"></a>Introducción
 
@@ -141,20 +141,20 @@ En la tabla siguiente proporciona información general del sistema de tipos de C
 
 | __Categoría__    |                 | __Descripción__ |
 |-----------------|-----------------|-----------------|
-| Tipos de valor     | Tipos simples    | Entero con signo: `sbyte`, `short`, `int`,`long` |
-|                 |                 | Entero sin signo: `byte`, `ushort`, `uint`,`ulong` |
+| Tipos de valor     | Tipos simples    | Entero con signo: `sbyte`, `short`, `int`, `long` |
+|                 |                 | Entero sin signo: `byte`, `ushort`, `uint`, `ulong` |
 |                 |                 | Caracteres Unicode: `char` |
 |                 |                 | Punto flotante de IEEE: `float`, `double` |
 |                 |                 | Decimal de alta precisión: `decimal` |
-|                 |                 | Booleano: `bool` |
-|                 | Tipos de enumeración      | Tipos definidos por el usuario con el formato `enum E {...}` |
-|                 | Tipos de estructura    | Tipos definidos por el usuario con el formato `struct S {...}` |
+|                 |                 | Boolean: `bool` |
+|                 | Tipos de enumeración      | Tipos definidos por el usuario del formulario `enum E {...}` |
+|                 | Tipos de estructura    | Tipos definidos por el usuario del formulario `struct S {...}` |
 |                 | Tipos que aceptan valores NULL  | Extensiones de todos los demás tipos de valor con un valor `null` |
 | Tipos de referencia | Tipos de clase     | Clase base definitiva de todos los demás tipos: `object` |
 |                 |                 | Cadenas Unicode: `string` |
-|                 |                 | Tipos definidos por el usuario con el formato `class C {...}` |
-|                 | Tipos de interfaz | Tipos definidos por el usuario con el formato `interface I {...}` |
-|                 | Tipos de matriz     | Unidimensional y multidimensional; por ejemplo, `int[]` y `int[,]` |
+|                 |                 | Tipos definidos por el usuario del formulario `class C {...}` |
+|                 | Tipos de interfaz | Tipos definidos por el usuario del formulario `interface I {...}` |
+|                 | Tipos de matriz     | Unidimensionales y multidimensionales, por ejemplo, `int[]` y `int[,]` |
 |                 | Tipos delegados  | Tipos definidos por el usuario del formulario p. ej. `delegate int  D(...)` |
 
 Los ocho tipos enteros proporcionan compatibilidad con valores de 8, 16, 32 y 64 bits en formato con o sin signo.
@@ -170,7 +170,7 @@ El procesamiento de caracteres y cadenas en C# utiliza la codificación Unicode.
 En la tabla siguiente se resume los tipos numéricos de C#.
 
 
-| __Categoría__      | __Bits__ | __Type__  | __Range/Precision__ |
+| __Categoría__      | __Bits__ | __Tipo__  | __Intervalo o la misma precisión__ |
 |-------------------|----------|-----------|---------------------|
 | Entero con signo   | 8        | `sbyte`   | -128...127 |
 |                   | 16       | `short`   | -32,768...32,767 |
@@ -223,7 +223,7 @@ El sistema de tipos unificado de C# conlleva efectivamente que los tipos de valo
 Hay varios tipos de ***variables*** en C#, entre otras, campos, elementos de matriz, variables locales y parámetros. Las variables representan ubicaciones de almacenamiento, y cada variable tiene un tipo que determina los valores que pueden estar almacenados en la variable, tal como se muestra en la siguiente tabla.
 
 
-| __Tipo de Variable__    | __Contenido posible__ |
+| __Tipo de variable__    | __Contenido posible__ |
 |-------------------------|-----------------------|
 | Tipo de valor distinto a NULL | Un valor de ese tipo exacto |
 | Tipos de valor NULL     | Un valor null o un valor de ese tipo exacto |
@@ -252,9 +252,9 @@ En la tabla siguiente se resume los operadores de C#, la lista de las categoría
 |                                  | `x++`             | Postincremento |
 |                                  | `x--`             | Postdecremento |
 |                                  | `new T(...)`      | Creación de objetos y delegados |
-|                                  | `new T(...){...}` | Creación de objetos con inicializador |
-|                                  | `new {...}`       | Inicializador de objeto anónimo |
-|                                  | `new T[...]`      | Creación de una matriz |
+|                                  | `new T(...){...}` | creación de objetos con inicializador |
+|                                  | `new {...}`       | inicializador de objetos anónimos |
+|                                  | `new T[...]`      | creación de matriz |
 |                                  | `typeof(T)`       | Obtener `System.Type` objeto `T` |
 |                                  | `checked(x)`      | Evaluar expresión en contexto comprobado |
 |                                  | `unchecked(x)`    | Evaluar expresión en contexto no comprobado |
@@ -267,7 +267,7 @@ En la tabla siguiente se resume los operadores de C#, la lista de las categoría
 |                                  | `++x`             | Preincremento |
 |                                  | `--x`             | Predecremento |
 |                                  | `(T)x`            | Convertir explícitamente `x` al tipo `T` |
-|                                  | `await x`         | Esperar asincrónicamente `x` para completar |
+|                                  | `await x`         | esperar asincrónicamente a que finalice `x` |
 | Multiplicativo                   | `x * y`           | Multiplicación |
 |                                  | `x / y`           | División |
 |                                  | `x % y`           | Resto |
@@ -279,19 +279,19 @@ En la tabla siguiente se resume los operadores de C#, la lista de las categoría
 |                                  | `x > y`           | Mayor que |
 |                                  | `x <= y`          | Menor o igual que |
 |                                  | `x >= y`          | Mayor o igual que |
-|                                  | `x is T`          | Devolver `true` si `x` es un `T`, `false` en caso contrario |
+|                                  | `x is T`          | volver a ejecutar `true` si `x` es una `T`, de lo contrario `false` |
 |                                  | `x as T`          | Devolver `x` escrito como `T`, o `null` si `x` no es un `T` |
 | Igualdad                         | `x == y`          | Igual      |
 |                                  | `x != y`          | No igual |
-| AND lógico                      | `x & y`           | Bit a bit entero, AND lógico booleano |
+| AND lógico                      | `x & y`           | AND bit a bit entero, AND lógico booleano |
 | XOR lógico                      | `x ^ y`           | XOR bit a bit entero, XOR lógico booleano |
 | OR lógico                       | <code>x &#124; y</code> | OR bit a bit entero, OR lógico booleano |
 | AND condicional                  | `x && y`          | Se evalúa como `y` solo si `x` es `true` |
 | OR condicional                   | <code>x &#124;&#124; y</code> | Se evalúa como `y` solo si `x` es `false` |
-| Uso combinado de NULL                  | `X ?? y`          | Se evalúa como `y` si `x` es `null`a `x` en caso contrario |
+| Uso combinado de NULL                  | `x ?? y`          | Se evalúa como `y` si `x` es `null`a `x` en caso contrario |
 | Condicional                      | `x ? y : z`       | Se evalúa como `y` si `x` es `true`, `z` si `x` es `false` |
 | Asignación o función anónima | `x = y`           | Asignación |
-|                                  | `x op= y`         | Asignación compuesta; operadores admitidos son `*=` `/=` `%=` `+=` `-=` `<<=` `>>=` `&=` `^=` <code>&#124;=</code> |
+|                                  | `x op= y`         | asignación compuesta; los operadores admitidos son `*=` `/=` `%=` `+=` `-=` `<<=` `>>=` `&=` `^=` <code>&#124;=</code> |
 |                                  | `(T x) => y`      | Función anónima (expresión lambda) |
 
 ## <a name="statements"></a>Instrucciones
@@ -355,7 +355,7 @@ static void Main() {
 }
 ```
 
-__`if` instrucción__
+__`if` statement__
 
 ```csharp
 static void Main(string[] args) {
@@ -369,7 +369,7 @@ static void Main(string[] args) {
 ```
 
 
-__`switch` instrucción__
+__`switch` statement__
 
 ```csharp
 static void Main(string[] args) {
@@ -388,7 +388,7 @@ static void Main(string[] args) {
 }
 ```
 
-__`while` instrucción__
+__`while` statement__
 
 ```csharp
 static void Main(string[] args) {
@@ -401,7 +401,7 @@ static void Main(string[] args) {
 ```
 
 
-__`do` instrucción__
+__`do` statement__
 
 ```csharp
 static void Main() {
@@ -413,7 +413,7 @@ static void Main() {
 }
 ```
 
-__`for` instrucción__
+__`for` statement__
 
 ```csharp
 static void Main(string[] args) {
@@ -423,7 +423,7 @@ static void Main(string[] args) {
 }
 ```
 
-__`foreach` instrucción__
+__`foreach` statement__
 
 ```csharp
 static void Main(string[] args) {
@@ -433,7 +433,7 @@ static void Main(string[] args) {
 }
 ```
 
-__`break` instrucción__
+__`break` statement__
 
 ```csharp
 static void Main() {
@@ -445,7 +445,7 @@ static void Main() {
 }
 ```
 
-__`continue` instrucción__
+__`continue` statement__
 
 ```csharp
 static void Main(string[] args) {
@@ -456,7 +456,7 @@ static void Main(string[] args) {
 }
 ```
 
-__`goto` instrucción__
+__`goto` statement__
 
 ```csharp
 static void Main(string[] args) {
@@ -469,7 +469,7 @@ static void Main(string[] args) {
 }
 ```
 
-__`return` instrucción__
+__`return` statement__
 
 ```csharp
 static int Add(int a, int b) {
@@ -482,7 +482,7 @@ static void Main() {
 }
 ```
 
-__`yield` instrucción__
+__`yield` statement__
 
 ```csharp
 static IEnumerable<int> Range(int from, int to) {
@@ -539,7 +539,7 @@ static void Main() {
 }
 ```
 
-__`lock` instrucción__
+__`lock` statement__
 
 ```csharp
 class Account
@@ -556,7 +556,7 @@ class Account
 }
 ```
 
-__`using` instrucción__
+__`using` statement__
 
 ```csharp
 static void Main() {

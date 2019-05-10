@@ -1,10 +1,10 @@
 ---
-ms.openlocfilehash: 67019511d49a786a5d6edf6fea442f745fc40f3f
-ms.sourcegitcommit: 0a80f26b8e455c4f09843a10e11e29c24d2d922e
+ms.openlocfilehash: 066c300d4c2baa8749e132730ecd48275e2957f7
+ms.sourcegitcommit: 94a3d151c438d34ede1d99de9eb4ebdc07ba4699
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/05/2019
-ms.locfileid: "57347279"
+ms.lasthandoff: 04/25/2019
+ms.locfileid: "64489011"
 ---
 # <a name="expressions"></a>Expresiones
 
@@ -1517,7 +1517,7 @@ En tiempo de enlace, *base_access* expresiones del formulario `base.I` y `base[E
 
 Cuando un *base_access* hace referencia a un miembro de función virtual (método, propiedad o indizador), la determinación de los cuales función miembro que desea invocar en tiempo de ejecución ([comprobación de la resolución de sobrecarga dinámicas de tiempo de compilación ](expressions.md#compile-time-checking-of-dynamic-overload-resolution)) se cambia. El miembro de función que se invoca se determina mediante la búsqueda de la implementación más derivada ([métodos virtuales](classes.md#virtual-methods)) del miembro de función con respecto a `B` (en lugar de en relación con el tipo de tiempo de ejecución de `this`, como es habitual en un acceso no son de base). Por lo tanto, dentro de un `override` de un `virtual` miembro de función, un *base_access* puede usarse para invocar la implementación heredada del miembro de función. Si el miembro de función al que hace referencia un *base_access* es abstracto, se produce un error en tiempo de enlace.
 
-### <a name="postfix-increment-and-decrement-operators"></a>Operadores postfijos de incremento y decremento
+### <a name="postfix-increment-and-decrement-operators"></a>Operadores de incremento y decremento posfijos
 
 ```antlr
 post_increment_expression
@@ -2159,7 +2159,7 @@ Tenga en cuenta que `int` y `System.Int32` son del mismo tipo.
 
 Tenga en cuenta también que el resultado de `typeof(X<>)` no depende del argumento de tipo, pero el resultado de `typeof(X<T>)` does.
 
-### <a name="the-checked-and-unchecked-operators"></a>Los operadores checked y unchecked
+### <a name="the-checked-and-unchecked-operators"></a>Operadores checked y unchecked
 
 El `checked` y `unchecked` operadores se utilizan para controlar la ***contexto de comprobación de desbordamiento*** para conversiones y operaciones aritméticas de tipo integral.
 
@@ -2541,7 +2541,7 @@ E operator ~(E x);
 
 El resultado de evaluar `~x`, donde `x` es una expresión de un tipo de enumeración `E` con un tipo subyacente `U`, es exactamente el mismo que el de evaluar `(E)(~(U)x)`, salvo que la conversión a `E` es siempre se realiza como si se encuentra en un `unchecked` contexto ([los operadores checked y unchecked](expressions.md#the-checked-and-unchecked-operators)).
 
-### <a name="prefix-increment-and-decrement-operators"></a>Prefijo de incremento y decremento de operadores
+### <a name="prefix-increment-and-decrement-operators"></a>Operadores de incremento y decremento prefijos
 
 ```antlr
 pre_increment_expression

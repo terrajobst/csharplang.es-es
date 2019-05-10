@@ -1,10 +1,10 @@
 ---
 ms.openlocfilehash: 72d17175dfb8ef284dce6cf7e5837420fa06f16a
-ms.sourcegitcommit: 3fc033b6e98ed7ecdf46a85c79b00a3a3ddcf963
+ms.sourcegitcommit: 94a3d151c438d34ede1d99de9eb4ebdc07ba4699
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/18/2019
-ms.locfileid: "47229733"
+ms.lasthandoff: 04/25/2019
+ms.locfileid: "64488877"
 ---
 # <a name="structs"></a>Estructuras
 

@@ -1,10 +1,10 @@
 ---
 ms.openlocfilehash: af7af574814dc04ee3ece0396b7ae5f86b3ec8eb
-ms.sourcegitcommit: 3fc033b6e98ed7ecdf46a85c79b00a3a3ddcf963
+ms.sourcegitcommit: 94a3d151c438d34ede1d99de9eb4ebdc07ba4699
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/18/2019
-ms.locfileid: "47229780"
+ms.lasthandoff: 04/25/2019
+ms.locfileid: "64488898"
 ---
 # <a name="classes"></a>Clases
 
@@ -2887,7 +2887,7 @@ Cuando se especifica una propiedad como una propiedad implementada automáticame
 
 Una propiedad automática podría tener opcionalmente un *property_initializer*, que se aplica directamente en el campo de respaldo como un *variable_initializer* ([inicializadores de variables](classes.md#variable-initializers)) .
 
-El ejemplo siguiente:
+En el ejemplo siguiente:
 ```csharp
 public class Point {
     public int X { get; set; } = 0;
@@ -2904,7 +2904,7 @@ public class Point {
 }
 ```
 
-El ejemplo siguiente:
+En el ejemplo siguiente:
 ```csharp
 public class ReadOnlyPoint
 {

@@ -1,3 +1,11 @@
+---
+ms.openlocfilehash: 3232163ed91d9d8bb6b0babf94c4282bfd60976c
+ms.sourcegitcommit: 94a3d151c438d34ede1d99de9eb4ebdc07ba4699
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 04/25/2019
+ms.locfileid: "64488933"
+---
 # <a name="namespaces"></a>Espacios de nombres
 
 Programas de C# se organizan mediante espacios de nombres. Los espacios de nombres se utilizan como un sistema de organización "interno" para un programa y como un sistema de organización "external": una forma de presentar los elementos de programa que se exponen a otros programas.
@@ -34,7 +42,7 @@ class B {}
 
 Las dos unidades de compilación contribuyen al espacio de nombres global único, en este caso declarar dos clases con los nombres completos `A` y `B`. Dado que las dos unidades de compilación contribuyen al mismo espacio de declaración, habría sido un error si cada una contiene una declaración de un miembro con el mismo nombre.
 
-## <a name="namespace-declarations"></a>Declaraciones de espacio de nombres
+## <a name="namespace-declarations"></a>Declaraciones de espacios de nombres
 
 Un *namespace_declaration* consta de la palabra clave `namespace`, seguido de un espacio de nombres y un cuerpo, seguido opcionalmente por un punto y coma.
 

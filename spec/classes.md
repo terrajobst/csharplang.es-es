@@ -1,10 +1,10 @@
 ---
-ms.openlocfilehash: af7af574814dc04ee3ece0396b7ae5f86b3ec8eb
-ms.sourcegitcommit: 94a3d151c438d34ede1d99de9eb4ebdc07ba4699
+ms.openlocfilehash: 917e2f1e196013f85eefbda21fb3d717cc681084
+ms.sourcegitcommit: 09e0ddec3bb6aa99b7340158bbac86a5a8243b43
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/25/2019
-ms.locfileid: "64488898"
+ms.lasthandoff: 05/24/2019
+ms.locfileid: "66193909"
 ---
 # <a name="classes"></a>Clases
 
@@ -1500,7 +1500,7 @@ Para los campos volátiles, técnicas de optimización que reordenan las instruc
 Estas restricciones aseguran que todos los subprocesos observarán las operaciones de escritura volátiles realizadas por cualquier otro subproceso en el orden en que se realizaron. Una implementación compatible no es necesario para proporcionar una ordenación total única de las escrituras volátiles como se muestra en todos los subprocesos de ejecución. El tipo de un campo volátil debe ser uno de los siguientes:
 
 *  Un *reference_type*.
-*  El tipo `byte`, `sbyte`, `short`, `ushort`, `int`, `uint`, `char`, `float`, `bool`, `System.IntPtr`, o` System.UIntPtr`.
+*  El tipo `byte`, `sbyte`, `short`, `ushort`, `int`, `uint`, `char`, `float`, `bool`, `System.IntPtr`, o `System.UIntPtr`.
 *  Un *enum_type* con un tipo de base de enumeración de `byte`, `sbyte`, `short`, `ushort`, `int`, o `uint`.
 
 El ejemplo

@@ -1,10 +1,10 @@
 ---
-ms.openlocfilehash: 9a9baf63b83ae4eb8af0e3b8c65ed3256222f12f
-ms.sourcegitcommit: 94a3d151c438d34ede1d99de9eb4ebdc07ba4699
+ms.openlocfilehash: 201db57d243c9d0e22553366bc653d02e183aa4b
+ms.sourcegitcommit: 09e0ddec3bb6aa99b7340158bbac86a5a8243b43
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/25/2019
-ms.locfileid: "64488890"
+ms.lasthandoff: 05/24/2019
+ms.locfileid: "66193864"
 ---
 # <a name="introduction"></a>Introducción
 
@@ -355,7 +355,7 @@ static void Main() {
 }
 ```
 
-__`if` instrucción__
+__Instrucción `if`__
 
 ```csharp
 static void Main(string[] args) {
@@ -369,7 +369,7 @@ static void Main(string[] args) {
 ```
 
 
-__`switch` instrucción__
+__Instrucción `switch`__
 
 ```csharp
 static void Main(string[] args) {
@@ -388,7 +388,7 @@ static void Main(string[] args) {
 }
 ```
 
-__`while` instrucción__
+__Instrucción `while`__
 
 ```csharp
 static void Main(string[] args) {
@@ -401,7 +401,7 @@ static void Main(string[] args) {
 ```
 
 
-__`do` instrucción__
+__Instrucción `do`__
 
 ```csharp
 static void Main() {
@@ -413,7 +413,7 @@ static void Main() {
 }
 ```
 
-__`for` instrucción__
+__Instrucción `for`__
 
 ```csharp
 static void Main(string[] args) {
@@ -423,7 +423,7 @@ static void Main(string[] args) {
 }
 ```
 
-__`foreach` instrucción__
+__Instrucción `foreach`__
 
 ```csharp
 static void Main(string[] args) {
@@ -433,7 +433,7 @@ static void Main(string[] args) {
 }
 ```
 
-__`break` instrucción__
+__Instrucción `break`__
 
 ```csharp
 static void Main() {
@@ -445,7 +445,7 @@ static void Main() {
 }
 ```
 
-__`continue` instrucción__
+__Instrucción `continue`__
 
 ```csharp
 static void Main(string[] args) {
@@ -456,7 +456,7 @@ static void Main(string[] args) {
 }
 ```
 
-__`goto` instrucción__
+__Instrucción `goto`__
 
 ```csharp
 static void Main(string[] args) {
@@ -469,7 +469,7 @@ static void Main(string[] args) {
 }
 ```
 
-__`return` instrucción__
+__Instrucción `return`__
 
 ```csharp
 static int Add(int a, int b) {
@@ -482,7 +482,7 @@ static void Main() {
 }
 ```
 
-__`yield` instrucción__
+__Instrucción `yield`__
 
 ```csharp
 static IEnumerable<int> Range(int from, int to) {
@@ -539,7 +539,7 @@ static void Main() {
 }
 ```
 
-__`lock` instrucción__
+__Instrucción `lock`__
 
 ```csharp
 class Account
@@ -556,7 +556,7 @@ class Account
 }
 ```
 
-__`using` instrucción__
+__Instrucción `using`__
 
 ```csharp
 static void Main() {
@@ -648,8 +648,7 @@ Pair<int,string> pair = new Pair<int,string> { First = 1, Second = "two" };
 int i = pair.First;     // TFirst is int
 string s = pair.Second; // TSecond is string
 ```
-Un tipo genérico con argumentos de tipo proporcionado, como `Pair<int,string>
-    ` anteriormente, se llama a un tipo construido.
+Un tipo genérico con argumentos de tipo proporcionado, como `Pair<int,string>` anteriormente, se llama a un tipo construido.
 
 ### <a name="base-classes"></a>Clases base
 
@@ -1131,9 +1130,7 @@ C# admite constructores de instancia y estáticos. Un ***constructor de instanci
 
 Un constructor se declara como un método sin ningún tipo de valor devuelto y el mismo nombre que la clase contenedora. Si una declaración de constructor incluye un `static` modificador, declara un constructor estático. De lo contrario, declara un constructor de instancia.
 
-Constructores de instancias se pueden sobrecargar. Por ejemplo, la clase `List<T>
-` declara dos constructores de instancia, una sin parámetros y otra que toma un parámetro `int`. Los constructores de instancia se invocan mediante el operador `new`. Las siguientes instrucciones asignan dos `List<string>
-` con cada uno de los constructores de instancias de la `List` clase.
+Constructores de instancias se pueden sobrecargar. Por ejemplo, la clase `List<T>` declara dos constructores de instancia, una sin parámetros y otra que toma un parámetro `int`. Los constructores de instancia se invocan mediante el operador `new`. Las siguientes instrucciones asignan dos `List<string>` con cada uno de los constructores de instancias de la `List` clase.
 
 ```csharp
 List<string> list1 = new List<string>();
@@ -1151,8 +1148,7 @@ Un `get` descriptor de acceso corresponde a un método sin parámetros con un va
 
 Un `set` descriptor de acceso corresponde a un método con un solo parámetro denominado `value` y ningún tipo de valor devuelto. Cuando se hace referencia a una propiedad como el destino de una asignación o como el operando de `++` o `--`, el `set` descriptor de acceso se invoca con un argumento que proporciona el nuevo valor.
 
-La clase `List<T>
-` declara dos propiedades, `Count` y `Capacity`, que son de solo lectura y de lectura y escritura, respectivamente. El siguiente es un ejemplo de uso de estas propiedades.
+La clase `List<T>` declara dos propiedades, `Count` y `Capacity`, que son de solo lectura y de lectura y escritura, respectivamente. El siguiente es un ejemplo de uso de estas propiedades.
 
 ```csharp
 List<string> names = new List<string>();
@@ -1188,11 +1184,9 @@ Un ***evento*** es un miembro que permite que una clase u objeto proporcionen no
 
 Dentro de una clase que declara un miembro de evento, el evento se comporta como un campo de un tipo delegado (siempre que el evento no sea abstracto y no declare descriptores de acceso). El campo almacena una referencia a un delegado que representa los controladores de eventos que se han agregado al evento. Si no hay controladores de eventos están presentes, el campo es `null`.
 
-La clase `List<T>
-` declara un único miembro de evento llamado `Changed`, lo que indica que se ha agregado un nuevo elemento a la lista. El `Changed` evento es desencadenado por la `OnChanged` método virtual, que primero comprueba si el evento es `null` (lo que significa que no existen controladores). La noción de generar un evento es equivalente exactamente a invocar el delegado representado por el evento; por lo tanto, no hay ninguna construcción especial de lenguaje para generar eventos.
+La clase `List<T>` declara un único miembro de evento llamado `Changed`, lo que indica que se ha agregado un nuevo elemento a la lista. El `Changed` evento es desencadenado por la `OnChanged` método virtual, que primero comprueba si el evento es `null` (lo que significa que no existen controladores). La noción de generar un evento es equivalente exactamente a invocar el delegado representado por el evento; por lo tanto, no hay ninguna construcción especial de lenguaje para generar eventos.
 
-Los clientes reaccionan a los eventos mediante ***controladores de eventos***. Los controladores de eventos se asocian mediante el operador `+=` y se quitan con el operador `-=`. En el ejemplo siguiente se asocia un controlador de eventos con el evento `Changed` de un objeto `List<string>
-`.
+Los clientes reaccionan a los eventos mediante ***controladores de eventos***. Los controladores de eventos se asocian mediante el operador `+=` y se quitan con el operador `-=`. En el ejemplo siguiente se asocia un controlador de eventos con el evento `Changed` de un objeto `List<string>`.
 
 ```csharp
 using System;
@@ -1221,10 +1215,7 @@ Para escenarios avanzados donde se desea controlar el almacenamiento subyacente 
 
 Un ***operador*** es un miembro que define el significado de aplicar un operador de expresión determinado a las instancias de una clase. Se pueden definir tres tipos de operadores: operadores unarios, operadores binarios y operadores de conversión. Todos los operadores se deben declarar como `public` y `static`.
 
-La clase `List<T>
-` declara dos operadores, `operator==` y `operator!=`, y de este modo proporciona un nuevo significado a expresiones que aplican esos operadores a instancias `List`. En concreto, los operadores definen la igualdad de dos `List<T>
-` instancias como la comparación de cada uno de los objetos contenidos con sus `Equals` métodos. En el ejemplo siguiente se usa el operador `==` para comparar dos instancias `List<int>
-`.
+La clase `List<T>` declara dos operadores, `operator==` y `operator!=`, y de este modo proporciona un nuevo significado a expresiones que aplican esos operadores a instancias `List`. En concreto, los operadores definen la igualdad de dos `List<T>` instancias como la comparación de cada uno de los objetos contenidos con sus `Equals` métodos. En el ejemplo siguiente se usa el operador `==` para comparar dos instancias `List<int>`.
 
 ```csharp
 using System;
@@ -1245,9 +1236,7 @@ class Test
 }
 ```
 
-El primer objeto `Console.WriteLine` genera `True` porque las dos listas contienen el mismo número de objetos con los mismos valores en el mismo orden. Si `List<T>
-` no hubiera definido `operator==`, el primer objeto `Console.WriteLine` habría generado `False` porque `a` y `b` hacen referencia a diferentes instancias de `List<int>
-`.
+El primer objeto `Console.WriteLine` genera `True` porque las dos listas contienen el mismo número de objetos con los mismos valores en el mismo orden. Si `List<T>` no hubiera definido `operator==`, el primer objeto `Console.WriteLine` habría generado `False` porque `a` y `b` hacen referencia a diferentes instancias de `List<int>`.
 
 #### <a name="destructors"></a>Destructores
 

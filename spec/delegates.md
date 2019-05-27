@@ -1,10 +1,10 @@
 ---
-ms.openlocfilehash: 08c14d9ef2afe30580f456995066c141653ede92
-ms.sourcegitcommit: 94a3d151c438d34ede1d99de9eb4ebdc07ba4699
+ms.openlocfilehash: 994b22f5375d57cfc4c7537c64345a27ddf3e416
+ms.sourcegitcommit: 09e0ddec3bb6aa99b7340158bbac86a5a8243b43
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/25/2019
-ms.locfileid: "64488982"
+ms.lasthandoff: 05/24/2019
+ms.locfileid: "66193887"
 ---
 # <a name="delegates"></a>Delegados
 
@@ -73,7 +73,7 @@ class B
 }
 ```
 
-Los métodos `A.M1` y `B.M1 `son compatibles con ambos tipos de delegado `D1` y `D2` , puesto que tienen el mismo tipo y lista de parámetros de devolver; sin embargo, estos tipos de delegado son dos tipos diferentes, por lo que no son intercambiables. Los métodos `B.M2`, `B.M3`, y `B.M4` no son compatibles con los tipos de delegado `D1` y `D2`, puesto que tienen diferentes tipos de valor devueltos o listas de parámetros.
+Los métodos `A.M1` y `B.M1` son compatibles con ambos tipos de delegado `D1` y `D2` , puesto que tienen el mismo tipo y lista de parámetros de devolver; sin embargo, estos tipos de delegado son dos tipos diferentes, por lo que no son intercambiables. Los métodos `B.M2`, `B.M3`, y `B.M4` no son compatibles con los tipos de delegado `D1` y `D2`, puesto que tienen diferentes tipos de valor devueltos o listas de parámetros.
 
 Al igual que otras declaraciones de tipo genérico, se deben proporcionar argumentos de tipo para crear un tipo de delegado construido. Los tipos de parámetro y el tipo de valor devuelto de un tipo de delegado construido se crean sustituyendo, para cada parámetro de tipo en la declaración de delegado, el argumento de tipo correspondiente del tipo de delegado construido. El tipo de valor devuelto resultante y los tipos de parámetro se usan para determinar qué métodos son compatibles con un tipo de delegado construido. Por ejemplo:
 

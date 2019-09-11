@@ -1,17 +1,17 @@
 ---
-ms.openlocfilehash: 4e1534fc5523223042df468c4443a6722910543b
-ms.sourcegitcommit: 3fc033b6e98ed7ecdf46a85c79b00a3a3ddcf963
+ms.openlocfilehash: e56caa7b2fabb4b5ade242ec43f4592689e8ba3d
+ms.sourcegitcommit: 7f7fc6e9e195e51b7ff8229aeaa70aa9fbbb63cb
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/18/2019
-ms.locfileid: "47229732"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70876823"
 ---
 <a name="c-language-specification"></a>Especificación del lenguaje C#
 ===========================
 
 __Versión 6__
 
-Se trata de un borrador no oficial, publicado aquí por comodidad. Cuando se envía una propuesta de especificación de C# 6.0 que ECMA (que actualmente está finalizando la 5.0 estándar de C#), se compartirán aquí.
+Este es un borrador no oficial que se publica aquí por comodidad. Cuando se envía una C# propuesta de especificación 6,0 a ECMA, se compartirá aquí.
 
 <!--
 (This document is also available for download: [csharp.pdf](CSharp%20Language%20Specification.pdf?raw=true) and [csharp.docx](CSharp%20Language%20Specification.docx?raw=true))
@@ -111,7 +111,7 @@ Se trata de un borrador no oficial, publicado aquí por comodidad. Cuando se env
     * [Tipos parciales](classes.md#partial-types)
     * [Miembros de clases](classes.md#class-members)
     * [Constantes](classes.md#constants)
-    * [Campos](classes.md#fields)
+    * [Fields](classes.md#fields)
     * [Métodos](classes.md#methods)
     * [Propiedades](classes.md#properties)
     * [Eventos](classes.md#events)

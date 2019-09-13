@@ -1,22 +1,22 @@
 ---
-ms.openlocfilehash: c9f8417dc68153f02ceb72bb1d51f3615f3c4961
-ms.sourcegitcommit: 94a3d151c438d34ede1d99de9eb4ebdc07ba4699
+ms.openlocfilehash: adf81842e3c763c7bbdd3f10bb884dc1207b9099
+ms.sourcegitcommit: 0489cb64b7dfb328813d757f4d447a15b85a5851
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/25/2019
-ms.locfileid: "64488918"
+ms.lasthandoff: 09/11/2019
+ms.locfileid: "70912437"
 ---
 # <a name="documentation-comments"></a>Comentarios de documentación
 
-C# proporciona un mecanismo para que los programadores puedan documentar el código mediante una sintaxis de comentario especial que contiene el texto XML. En los archivos de código fuente, comentarios con un formato determinado pueden usarse para dirigir una herramienta para generar XML desde estos comentarios y los elementos de código fuente que preceden. Los comentarios con esta sintaxis se denominan ***comentarios de documentación***. Debe preceder inmediatamente a un tipo definido por el usuario (por ejemplo, una clase, un delegado o una interfaz) o un miembro (por ejemplo, un campo, evento, propiedad o método). La herramienta de generación de XML se denomina el ***generador de documentación***. (Este generador podría ser, pero no es necesario, el propio compilador de C#). El resultado producido por el generador de documentación se denomina el ***archivo de documentación***. Un archivo de documentación se usa como entrada para un ***Visor de la documentación***; una herramienta diseñada para producir algún tipo de presentación visual de la información de tipo y su documentación asociada.
+C#proporciona un mecanismo para que los programadores documenten su código mediante una sintaxis de comentario especial que contiene texto XML. En los archivos de código fuente, se pueden usar comentarios que tengan un formato determinado para dirigir una herramienta a fin de generar XML a partir de los comentarios y los elementos de código fuente, que preceden. Los comentarios que usan esta sintaxis se denominan ***comentarios de documentación***. Deben preceder inmediatamente a un tipo definido por el usuario (como una clase, un delegado o una interfaz) o un miembro (por ejemplo, un campo, un evento, una propiedad o un método). La herramienta de generación de XML se denomina ***generador de documentación***. (Este generador podría ser, pero no es necesario, el C# propio compilador). La salida generada por el generador de documentación se denomina ***archivo de documentación***. Un archivo de documentación se usa como entrada para un ***visor de documentación***; herramienta diseñada para generar algún tipo de presentación visual de información de tipos y su documentación asociada.
 
-Esta especificación sugiere un conjunto de etiquetas que se usará en los comentarios de documentación, pero no se requiere el uso de estas etiquetas y otras etiquetas se pueden usar si lo desea, se siguen larga las reglas de XML con formato correcto.
+Esta especificación sugiere un conjunto de etiquetas para usar en los comentarios de documentación, pero no se requiere el uso de estas etiquetas, y se pueden usar otras etiquetas si se desea, siempre que se sigan las reglas de XML con el formato correcto.
 
 ## <a name="introduction"></a>Introducción
 
-Comentarios con un formato especial pueden usarse para dirigir una herramienta para generar XML desde estos comentarios y los elementos de código fuente que preceden. Estos comentarios son comentarios de una línea que comienzan con tres barras diagonales (`///`), o delimitado por comentarios que comienzan con una barra diagonal y dos asteriscos (`/**`). Debe preceder inmediatamente a un tipo definido por el usuario (por ejemplo, una clase, un delegado o una interfaz) o un miembro (por ejemplo, un campo, evento, propiedad o método) que hacen referencia los comentarios. Atributo secciones ([especificación de atributos](attributes.md#attribute-specification)) se consideran parte de las declaraciones, por lo que los comentarios de documentación deben preceder a los atributos aplicados a un tipo o miembro.
+Los comentarios que tienen una forma especial se pueden usar para dirigir una herramienta a fin de generar XML a partir de los comentarios y los elementos de código fuente, que preceden. Estos comentarios son comentarios de una sola línea que comienzan con tres barras diagonales (`///`) o comentarios delimitados que empiezan con una barra diagonal y dos estrellas (`/**`). Deben preceder inmediatamente a un tipo definido por el usuario (como una clase, un delegado o una interfaz) o un miembro (como un campo, un evento, una propiedad o un método) que anotan. Las secciones de atributos ([especificación de atributos](attributes.md#attribute-specification)) se consideran parte de las declaraciones, por lo que los comentarios de documentación deben preceder a los atributos aplicados a un tipo o miembro.
 
-__Sintaxis:__
+__Sintáctica__
 
 ```antlr
 single_line_doc_comment
@@ -28,9 +28,9 @@ delimited_doc_comment
     ;
 ```
 
-En un *single_line_doc_comment*, si hay un *espacio en blanco* siguiente carácter el `///` caracteres en cada uno de los *single_line_doc_comment*s adyacentes a la actual *single_line_doc_comment*, a continuación, que *espacio en blanco* carácter no se incluye en la salida XML.
+En un *single_line_doc_comment*, si hay un carácter de *espacio* en blanco `///` después de los caracteres de cada uno de los *single_line_doc_comment*de elementos adyacentes al *single_line_doc_comment*actual, entoncesel carácter de espacio en blanco no se incluye en la salida XML.
 
-En un comentario-delimitados-doc, si el primer carácter que no sean espacios en blanco en la segunda línea es un asterisco y el mismo patrón de caracteres en blanco opcional y un carácter de asterisco se repiten al principio de cada uno de la línea en el comentario-delimitados-doc, a continuación, no se incluyen los caracteres del patrón repetido en la salida XML. El patrón puede incluir caracteres de espacio en blanco después de, así como antes, el carácter de asterisco.
+En un comentario delimitado-doc-comment, si el primer carácter que no es un espacio en blanco de la segunda línea es un asterisco y el mismo patrón de caracteres de espacio en blanco opcionales, y se repite un carácter de asterisco al principio de cada línea dentro del comentario Delimited-doc-comment, después, los caracteres del patrón repetido no se incluyen en la salida XML. El patrón puede incluir caracteres de espacio en blanco después de, así como el carácter de asterisco.
 
 __Ejemplo:__
 
@@ -45,48 +45,48 @@ public class Point
 }
 ```
 
-El texto dentro de los comentarios de documentación debe tener un formato correcto según las reglas de XML (https://www.w3.org/TR/REC-xml). Si el XML está enfermo formado, se genera una advertencia y el archivo de documentación incluirá un comentario que indica que se detectó un error.
+El texto incluido en los comentarios de documentación debe ser correcto de acuerdo con las reglas https://www.w3.org/TR/REC-xml) de XML (. Si el código XML tiene un formato incorrecto, se genera una advertencia y el archivo de documentación contendrá un comentario que indica que se ha detectado un error.
 
-Aunque los desarrolladores son gratuitos crear su propio conjunto de etiquetas, se define un conjunto recomendado de [etiquetas recomendadas](documentation-comments.md#recommended-tags). Algunas de las etiquetas recomendadas tienen significados especiales:
+Aunque los desarrolladores pueden crear su propio conjunto de etiquetas, se define un conjunto recomendado en las [etiquetas recomendadas](documentation-comments.md#recommended-tags). Algunas de las etiquetas recomendadas tienen significados especiales:
 
-*  El `<param>` etiqueta a la que se usa para describir los parámetros. Si se utiliza dicha etiqueta, el generador de documentación debe comprobar que el parámetro especificado existe y que todos los parámetros se describen en los comentarios de documentación. Si se produce un error en dicha comprobación, el generador de documentación emite una advertencia.
-*  El atributo `cref` se puede asociar a cualquier etiqueta para proporcionar una referencia a un elemento de código. El generador de documentación debe comprobar la existencia de este elemento de código. Si se produce un error en la comprobación, el generador de documentación emite una advertencia. Al buscar un nombre que se describe en un `cref` atributo, el generador de documentación debe respetar la visibilidad del espacio de nombres según `using` instrucciones que aparecen en el código fuente. Los elementos de código que son genéricos, la sintaxis genérica normal (es decir, "`List<T>`") no se puede usar porque no genera un XML no válido. Se pueden usar llaves en lugar de corchetes (es decir, "`List{T}`"), o se puede usar la sintaxis de escape XML (es decir, "`List&lt;T&gt;`").
-*  El `<summary>` etiqueta está pensada para usarse con un visor de documentación para mostrar información adicional sobre un tipo o miembro.
-*  El `<include>` tag incluye información de un archivo XML externo.
+*  La `<param>` etiqueta se usa para describir los parámetros. Si se usa una etiqueta de este tipo, el generador de documentación debe comprobar que el parámetro especificado existe y que todos los parámetros se describen en los comentarios de documentación. Si se produce un error en esta comprobación, el generador de documentación emite una advertencia.
+*  El atributo `cref` se puede asociar a cualquier etiqueta para proporcionar una referencia a un elemento de código. El generador de documentación debe comprobar que este elemento de código existe. Si se produce un error en la comprobación, el generador de documentación emite una advertencia. Al buscar un nombre descrito en un `cref` atributo, el generador de documentación debe respetar la visibilidad del espacio de nombres según las instrucciones que `using` aparecen en el código fuente. En el caso de los elementos de código que son genéricos, no se puede`List<T>`usar la sintaxis genérica normal (es decir, "") porque genera XML no válido. Se pueden usar llaves en lugar de corchetes (es decir, "`List{T}`") o se puede usar la sintaxis de escape XML (es decir, "`List&lt;T&gt;`").
+*  La `<summary>` etiqueta está pensada para que la use un visor de documentación para mostrar información adicional sobre un tipo o miembro.
+*  La `<include>` etiqueta incluye información de un archivo XML externo.
 
-Observe que el archivo de documentación no proporciona información completa sobre los tipos y miembros (por ejemplo, no contiene ninguna información de tipos). Para obtener información acerca de un tipo o miembro, el archivo de documentación debe usarse junto con la reflexión en el tipo o miembro reales.
+Observe detenidamente que el archivo de documentación no proporciona información completa sobre el tipo y los miembros (por ejemplo, no contiene ninguna información de tipo). Para obtener esta información sobre un tipo o miembro, el archivo de documentación debe utilizarse junto con la reflexión en el tipo o miembro real.
 
 ## <a name="recommended-tags"></a>Etiquetas recomendadas
 
-El generador de documentación debe aceptar y procesar cualquier etiqueta válida según las reglas de XML. Las siguientes etiquetas proporcionan funcionalidad de uso común en la documentación de usuario. (Por supuesto, otras etiquetas son posibles).
+El generador de documentación debe aceptar y procesar cualquier etiqueta que sea válida de acuerdo con las reglas de XML. Las siguientes etiquetas proporcionan funcionalidad de uso común en la documentación del usuario. (Por supuesto, son posibles otras etiquetas).
 
 
-| __Tag__          | __Sección__                                            | __Propósito__                                            |
+| __Etiqueta__          | __Sección__                                            | __Propósito__                                            |
 |------------------|--------------------------------------------------------|--------------------------------------------------------|
-| `<c>`            | [`<c>`](documentation-comments.md#c)                   | Establecer el texto en una fuente como código                           | 
-| `<code>`         | [`<code>`](documentation-comments.md#code)             | Establezca una o varias líneas de salida de código o programa de origen |
+| `<c>`            | [`<c>`](documentation-comments.md#c)                   | Establecer texto en una fuente similar a la de código                           | 
+| `<code>`         | [`<code>`](documentation-comments.md#code)             | Establecer una o más líneas de código fuente o resultado del programa |
 | `<example>`      | [`<example>`](documentation-comments.md#example)       | Indicar un ejemplo                                    |
-| `<exception>`    | [`<exception>`](documentation-comments.md#exception)   | Identifica las excepciones que puede iniciar un método           |
-| `<include>`      | [`<include>`](documentation-comments.md#include)       | Incluye el XML desde un archivo externo                     |
-| `<list>`         | [`<list>`](documentation-comments.md#list)             | Crear una tabla o lista                                 |
-| `<para>`         | [`<para>`](documentation-comments.md#para)             | Permitir la estructura que se agregarán a texto                   |
-| `<param>`        | [`<param>`](documentation-comments.md#param)           | Describe un parámetro para un método o constructor       |
+| `<exception>`    | [`<exception>`](documentation-comments.md#exception)   | Identifica las excepciones que un método puede producir           |
+| `<include>`      | [`<include>`](documentation-comments.md#include)       | Incluye XML de un archivo externo                     |
+| `<list>`         | [`<list>`](documentation-comments.md#list)             | Crear una lista o una tabla                                 |
+| `<para>`         | [`<para>`](documentation-comments.md#para)             | Permitir agregar estructura a texto                   |
+| `<param>`        | [`<param>`](documentation-comments.md#param)           | Describir un parámetro para un método o constructor       |
 | `<paramref>`     | [`<paramref>`](documentation-comments.md#paramref)     | Identificar que una palabra es un nombre de parámetro               |
-| `<permission>`   | [`<permission>`](documentation-comments.md#permission) | La accesibilidad de seguridad de un miembro de documento        |
-| `<remark>`       | [`<remark>`](documentation-comments.md#remark)         | Describe información adicional sobre un tipo           |
+| `<permission>`   | [`<permission>`](documentation-comments.md#permission) | Documentar la accesibilidad de seguridad de un miembro        |
+| `<remarks>`      | [`<remarks>`](documentation-comments.md#remarks)       | Describir información adicional sobre un tipo           |
 | `<returns>`      | [`<returns>`](documentation-comments.md#returns)       | Describir el valor devuelto de un método                  |
-| `<see>`          | [`<see>`](documentation-comments.md#see)               | Especifique un vínculo                                         |
-| `<seealso>`      | [`<seealso>`](documentation-comments.md#seealso)       | Generar una entrada en Vea también                              |
-| `<summary>`      | [`<summary>`](documentation-comments.md#summary)       | Describir un tipo o miembro de un tipo                  |
+| `<see>`          | [`<see>`](documentation-comments.md#see)               | Especificar un vínculo                                         |
+| `<seealso>`      | [`<seealso>`](documentation-comments.md#seealso)       | Generar una entrada vea también                              |
+| `<summary>`      | [`<summary>`](documentation-comments.md#summary)       | Describir un tipo o un miembro de un tipo                  |
 | `<value>`        | [`<value>`](documentation-comments.md#value)           | Describir una propiedad                                    |
 | `<typeparam>`    |                                                        | Describir un parámetro de tipo genérico                      |
 | `<typeparamref>` |                                                        | Identificar que una palabra es un nombre de parámetro de tipo          |
 
 ### `<c>`
 
-Esta etiqueta ofrece un mecanismo para indicar que un fragmento de texto dentro de una descripción debe establecerse en una fuente como los utilizados para un bloque de código especial. Para las líneas de código real, utilice `<code>` ([`<code>`](documentation-comments.md#code)).
+Esta etiqueta proporciona un mecanismo para indicar que un fragmento de texto dentro de una descripción debe establecerse en una fuente especial, como la que se usa para un bloque de código. Para las líneas de código real, `<code>` use[`<code>`](documentation-comments.md#code)().
 
-__Sintaxis:__
+__Sintáctica__
 
 ```xml
 <c>text</c>
@@ -106,9 +106,9 @@ public class Point
 
 ### `<code>`
 
-Esta etiqueta se usa para establecer una o varias líneas de salida de código o programa de origen en alguna fuente especial. Para pequeños fragmentos de código en texto narrativo, utilice `<c>` ([`<c>`](documentation-comments.md#c)).
+Esta etiqueta se usa para establecer una o más líneas de código fuente o el resultado del programa en alguna fuente especial. Para fragmentos de código pequeños en narrativa, `<c>` use[`<c>`](documentation-comments.md#c)().
 
-__Sintaxis:__
+__Sintáctica__
 
 ```xml
 <code>source code or program output</code>
@@ -136,9 +136,9 @@ public void Translate(int xor, int yor) {
 
 ### `<example>`
 
-Esta etiqueta permite que el código de ejemplo de un comentario, para especificar cómo se puede usar un método u otro miembro de biblioteca. Normalmente, esto también implica la utilización de la etiqueta `<code>` ([`<code>`](documentation-comments.md#code)) también.
+Esta etiqueta permite el código de ejemplo dentro de un comentario, para especificar cómo se puede usar un método u otro miembro de la biblioteca. Normalmente, también implicaría el uso de la etiqueta `<code>` ([`<code>`](documentation-comments.md#code)).
 
-__Sintaxis:__
+__Sintáctica__
 
 ```xml
 <example>description</example>
@@ -146,13 +146,13 @@ __Sintaxis:__
 
 __Ejemplo:__
 
-Consulte `<code>` ([`<code>`](documentation-comments.md#code)) para obtener un ejemplo.
+Vea `<code>` [(`<code>`](documentation-comments.md#code)) para obtener un ejemplo.
 
 ### `<exception>`
 
-Esta etiqueta proporciona una manera de documentar las excepciones que se puede producir un método.
+Esta etiqueta proporciona una manera de documentar las excepciones que un método puede iniciar.
 
-__Sintaxis:__
+__Sintáctica__
 
 ```xml
 <exception cref="member">description</exception>
@@ -160,8 +160,8 @@ __Sintaxis:__
 
 donde
 
-* `member` es el nombre de un miembro. El generador de documentación comprueba si el miembro especificado existe y traduce `member` al nombre de elemento canónico en el archivo de documentación.
-* `description` es una descripción de las circunstancias en que se produce la excepción.
+* `member`es el nombre de un miembro. El generador de documentación comprueba que el miembro dado existe y `member` se convierte en el nombre de elemento canónico en el archivo de documentación.
+* `description`es una descripción de las circunstancias en las que se produce la excepción.
 
 __Ejemplo:__
 
@@ -182,9 +182,9 @@ public class DataBaseOperations
 
 ### `<include>`
 
-Esta etiqueta permite incluir información de un documento XML que es externo al archivo de código fuente. El archivo externo debe ser un documento XML bien formado, y una expresión XPath se aplica a ese documento para especificar qué XML de ese documento para incluir. El `<include>` etiqueta, a continuación, se reemplaza por el XML del documento externo seleccionado.
+Esta etiqueta permite incluir información de un documento XML que es externo al archivo de código fuente. El archivo externo debe ser un documento XML con el formato correcto y se aplica una expresión XPath a ese documento para especificar el XML de ese documento que se va a incluir. A `<include>` continuación, la etiqueta se reemplaza con el XML seleccionado del documento externo.
 
-__Sintaxis:__
+__Sintáctica__
 
 ```
 <include file="filename" path="xpath" />
@@ -192,8 +192,8 @@ __Sintaxis:__
 
 donde
 
-* `filename` es el nombre de archivo de un archivo XML externo. El nombre de archivo se interpreta en relación con el archivo que contiene la etiqueta de inclusión.
-* `xpath` es una expresión XPath que selecciona parte del código XML en el archivo XML externo.
+* `filename`es el nombre de archivo de un archivo XML externo. El nombre de archivo se interpreta en relación con el archivo que contiene la etiqueta include.
+* `xpath`es una expresión XPath que selecciona parte de XML en el archivo XML externo.
 
 __Ejemplo:__
 
@@ -204,7 +204,7 @@ Si el código fuente contiene una declaración como:
 public class IntList { ... }
 ```
 
-y el archivo externo "docs.xml" tuviera el siguiente contenido:
+y el archivo externo "docs. xml" tenía el siguiente contenido:
 
 ```xml
 <?xml version="1.0"?>
@@ -222,7 +222,7 @@ y el archivo externo "docs.xml" tuviera el siguiente contenido:
 </extradoc>
 ```
 
-a continuación, la documentación del misma es el resultado como si el código fuente contenidos:
+a continuación, la misma documentación se genera como si el código fuente incluyera:
 
 ```csharp
 /// <summary>
@@ -233,11 +233,11 @@ public class IntList { ... }
 
 ### `<list>`
 
-Esta etiqueta se utiliza para crear una lista o tabla de elementos. Puede contener un `<listheader>` bloque para definir la fila de encabezado de una tabla o una definición de lista. (Cuando se define una tabla, solo una entrada para `term` en el encabezado debe proporcionarse.)
+Esta etiqueta se usa para crear una lista o una tabla de elementos. Puede contener un `<listheader>` bloque para definir la fila de encabezado de una tabla o de una lista de definiciones. (Al definir una tabla, solo es necesario proporcionar `term` una entrada para en el encabezado).
 
-Cada elemento de la lista se especifica con un `<item>` bloque. Al crear una lista de definiciones, ambos `term` y `description` debe especificarse. Sin embargo, para una tabla, lista con viñetas o lista numerada, solo `description` debe especificarse.
+Cada elemento de la lista se especifica con un `<item>` bloque. Al crear una lista de definiciones, `term` deben `description` especificarse y. Sin embargo, para una tabla, una lista con viñetas o una lista numerada, solo `description` es necesario especificar.
 
-__Sintaxis:__
+__Sintáctica__
 
 ```xml
 <list type="bullet" | "number" | "table">
@@ -259,8 +259,8 @@ __Sintaxis:__
 
 donde
 
-* `term` es el término para definir, cuya definición se encuentra en `description`.
-* `description` es un elemento de viñeta o una lista numerada o la definición de un `term`.
+* `term`es el término que se va a definir, cuya `description`definición está en.
+* `description`es un elemento de una lista con viñetas o numerada, o la definición de `term`un objeto.
 
 __Ejemplo:__
 
@@ -285,9 +285,9 @@ public class MyClass
 
 ### `<para>`
 
-Esta etiqueta es para su uso dentro de otras etiquetas, como `<summary>` ([`<remark>`](documentation-comments.md#remark)) o `<returns>` ([`<returns>`](documentation-comments.md#returns)) y permite agregar al texto de la estructura.
+Esta etiqueta se usa dentro de `<summary>` otras etiquetas, como ([`<remarks>`](documentation-comments.md#remarks)) o `<returns>` ([`<returns>`](documentation-comments.md#returns)), y permite agregar la estructura al texto.
 
-__Sintaxis:__
+__Sintáctica__
 
 ```xml
 <para>content</para>
@@ -309,9 +309,9 @@ public static void Main() {
 
 ### `<param>`
 
-Esta etiqueta se utiliza para describir un parámetro para un método, constructor o indizador.
+Esta etiqueta se usa para describir un parámetro para un método, un constructor o un indizador.
 
-__Sintaxis:__
+__Sintáctica__
 
 ```xml
 <param name="name">description</param>
@@ -319,8 +319,8 @@ __Sintaxis:__
 
 donde
 
-* `name` Es el nombre del parámetro.
-* `description` es una descripción del parámetro.
+* `name`es el nombre del parámetro.
+* `description`es una descripción del parámetro.
 
 __Ejemplo:__
 
@@ -337,9 +337,9 @@ public void Move(int xor, int yor) {
 
 ### `<paramref>`
 
-Esta etiqueta se utiliza para indicar que una palabra es un parámetro. El archivo de documentación se puede procesar para dar formato a este parámetro de alguna manera distinta.
+Esta etiqueta se usa para indicar que una palabra es un parámetro. El archivo de documentación se puede procesar para dar formato a este parámetro de alguna manera distinta.
 
-__Sintaxis:__
+__Sintáctica__
 
 ```xml
 <paramref name="name"/>
@@ -363,9 +363,9 @@ public Point(int xor, int yor) {
 
 ### `<permission>`
 
-Esta etiqueta permite la accesibilidad de seguridad de un miembro que va a documentarse.
+Esta etiqueta permite documentar la accesibilidad de seguridad de un miembro.
 
-__Sintaxis:__
+__Sintáctica__
 
 ```xml
 <permission cref="member">description</permission>
@@ -373,8 +373,8 @@ __Sintaxis:__
 
 donde
 
-* `member` es el nombre de un miembro. El generador de documentación comprueba si el elemento de código dado existe y traduce *miembro* al nombre de elemento canónico en el archivo de documentación.
-* `description` es una descripción del acceso al miembro.
+* `member`es el nombre de un miembro. El generador de documentación comprueba que el elemento de código dado existe y traduce el *miembro* al nombre de elemento canónico en el archivo de documentación.
+* `description`es una descripción del acceso al miembro.
 
 __Ejemplo:__
 
@@ -387,14 +387,14 @@ public static void Test() {
 }
 ```
 
-### `<remark>`
+### `<remarks>`
 
-Esta etiqueta se utiliza para especificar información adicional sobre un tipo. (Use `<summary>` ([`<summary>`](documentation-comments.md#summary)) para describir el propio tipo y los miembros de un tipo.)
+Esta etiqueta se usa para especificar información adicional sobre un tipo. (Use `<summary>` ([`<summary>`](documentation-comments.md#summary)) para describir el tipo en sí y los miembros de un tipo).
 
-__Sintaxis:__
+__Sintáctica__
 
 ```xml
-<remark>description</remark>
+<remarks>description</remarks>
 ```
 
 donde `description` es el texto del comentario.
@@ -404,7 +404,7 @@ __Ejemplo:__
 ```csharp
 /// <summary>Class <c>Point</c> models a point in a 
 /// two-dimensional plane.</summary>
-/// <remark>Uses polar coordinates</remark>
+/// <remarks>Uses polar coordinates</remarks>
 public class Point 
 {
     // ...
@@ -415,7 +415,7 @@ public class Point
 
 Esta etiqueta se utiliza para describir el valor devuelto de un método.
 
-__Sintaxis:__
+__Sintáctica__
 
 ```xml
 <returns>description</returns>
@@ -436,15 +436,15 @@ public override string ToString() {
 
 ### `<see>`
 
-Esta etiqueta permite un vínculo al especificarse dentro del texto. Use `<seealso>` ([`<seealso>`](documentation-comments.md#seealso)) para indicar el texto que va a aparecer en una sección Vea también.
+Esta etiqueta permite especificar un vínculo dentro del texto. Use `<seealso>` [(`<seealso>`](documentation-comments.md#seealso)) para indicar el texto que va a aparecer en una sección Vea también.
 
-__Sintaxis:__
+__Sintáctica__
 
 ```xml
 <see cref="member"/>
 ```
 
-donde `member` es el nombre de un miembro. El generador de documentación comprueba si el elemento de código dado existe y cambia *miembro* al nombre de elemento en el archivo de documentación generado.
+donde `member` es el nombre de un miembro. El generador de documentación comprueba que el elemento de código dado existe y cambia el *miembro* al nombre del elemento en el archivo de documentación generado.
 
 __Ejemplo:__
 
@@ -469,15 +469,15 @@ public void Translate(int xor, int yor) {
 
 ### `<seealso>`
 
-Esta etiqueta permite una entrada que se generará para la sección Vea también. Use `<see>` ([`<see>`](documentation-comments.md#see)) para especificar un vínculo desde dentro del texto.
+Esta etiqueta permite generar una entrada para la sección Vea también. Use `<see>` [(`<see>`](documentation-comments.md#see)) para especificar un vínculo desde dentro del texto.
 
-__Sintaxis:__
+__Sintáctica__
 
 ```xml
 <seealso cref="member"/>
 ```
 
-donde `member` es el nombre de un miembro. El generador de documentación comprueba si el elemento de código dado existe y cambia *miembro* al nombre de elemento en el archivo de documentación generado.
+donde `member` es el nombre de un miembro. El generador de documentación comprueba que el elemento de código dado existe y cambia el *miembro* al nombre del elemento en el archivo de documentación generado.
 
 __Ejemplo:__
 
@@ -493,9 +493,9 @@ public override bool Equals(object o) {
 
 ### `<summary>`
 
-Esta etiqueta se puede usar para describir un tipo o un miembro de un tipo. Use `<remark>` ([`<remark>`](documentation-comments.md#remark)) para describir el propio tipo.
+Esta etiqueta se puede utilizar para describir un tipo o un miembro de un tipo. Use `<remarks>` [(`<remarks>`](documentation-comments.md#remarks)) para describir el propio tipo.
 
-__Sintaxis:__
+__Sintáctica__
 
 ```xml
 <summary>description</summary>
@@ -513,15 +513,15 @@ public Point() : this(0,0) {
 
 ### `<value>`
 
-Esta etiqueta permite que una propiedad para describirse.
+Esta etiqueta permite describir una propiedad.
 
-__Sintaxis:__
+__Sintáctica__
 
 ```xml
 <value>property description</value>
 ```
 
-donde `property description` es una descripción para la propiedad.
+donde `property description` es una descripción de la propiedad.
 
 __Ejemplo:__
 
@@ -536,15 +536,15 @@ public int X
 
 ### `<typeparam>`
 
-Esta etiqueta se utiliza para describir un parámetro de tipo genérico para una clase, struct, interfaz, delegado o método.
+Esta etiqueta se usa para describir un parámetro de tipo genérico para una clase, una estructura, una interfaz, un delegado o un método.
 
-__Sintaxis:__
+__Sintáctica__
 
 ```xml
 <typeparam name="name">description</typeparam>
 ```
 
-donde `name` es el nombre del parámetro de tipo, y `description` es su descripción.
+donde `name` es el nombre del parámetro de tipo y `description` es su descripción.
 
 __Ejemplo:__
 
@@ -558,9 +558,9 @@ public class MyList<T> {
 
 ### `<typeparamref>`
 
-Esta etiqueta se utiliza para indicar que una palabra es un parámetro de tipo. El archivo de documentación se puede procesar para dar formato a este parámetro de tipo de alguna manera distinta.
+Esta etiqueta se usa para indicar que una palabra es un parámetro de tipo. El archivo de documentación se puede procesar para dar formato a este parámetro de tipo de una manera distinta.
 
-__Sintaxis:__
+__Sintáctica__
 
 ```xml
 <typeparamref name="name"/>
@@ -580,44 +580,44 @@ public List<T> FetchData<T>(string query) {
 
 ## <a name="processing-the-documentation-file"></a>Procesar el archivo de documentación
 
-El generador de documentación genera una cadena de identificador para cada elemento en el código fuente que se etiqueta con un comentario de documentación. Esta cadena de identificador identifica de forma única un elemento de origen. Un visor de la documentación puede utilizar una cadena de identificador para identificar el elemento de reflexión o de metadatos correspondiente a la que se aplica la documentación.
+El generador de documentación genera una cadena de identificador para cada elemento del código fuente que se etiqueta con un Comentario de documentación. Esta cadena de identificador identifica de forma única un elemento de origen. Un visor de documentación puede usar una cadena de identificador para identificar el elemento de metadatos/reflexión correspondiente al que se aplica la documentación.
 
-El archivo de documentación no es una representación jerárquica del código fuente; en su lugar, es una lista plana con una cadena de identificador generada para cada elemento.
+El archivo de documentación no es una representación jerárquica del código fuente. en su lugar, es una lista plana con una cadena de identificador generada para cada elemento.
 
-### <a name="id-string-format"></a>Formato de cadena de Id.
+### <a name="id-string-format"></a>Formato de cadena de identificador
 
-El generador de documentación cumple las siguientes reglas cuando genera las cadenas de identificación:
+El generador de documentación observa las siguientes reglas cuando genera las cadenas de identificador:
 
 *  No se coloca espacio en blanco en la cadena.
 
-*  La primera parte de la cadena identifica el tipo de miembro que se documentan a través de un único carácter seguido de dos puntos. Se definen los siguientes tipos de miembros:
+*  La primera parte de la cadena identifica el tipo de miembro que se va a documentar, a través de un solo carácter seguido de un signo de dos puntos. Se definen los siguientes tipos de miembros:
 
    | __Carácter__ | __Descripción__                                             |
    |---------------|-------------------------------------------------------------|
-   | E             | evento                                                       |
+   | E             | Evento                                                       |
    | F             | Campo                                                       |
    | M             | Método (incluidos constructores, destructores y operadores) |
    | N             | Espacio de nombres                                                   |
-   | P             | Propiedad (incluidos indizadores)                               |
-   | T             | Escriba (por ejemplo, la clase, delegado, enumeración, interfaz y struct) |
-   | !             | Cadena de error; el resto de la cadena proporciona información sobre el error. Por ejemplo, el generador de documentación genera información de error para vínculos que no se puede resolver. |
+   | P             | Propiedad (incluidos los indizadores)                               |
+   | T             | Tipo (como clase, delegado, enumeración, interfaz y struct) |
+   | !             | Cadena de error; en el resto de la cadena se proporciona información sobre el error. Por ejemplo, el generador de documentación genera información de error para los vínculos que no se pueden resolver. |
 
-*  La segunda parte de la cadena es el nombre completo del elemento, empezando por la raíz del espacio de nombres. El nombre del elemento, su tipos envolventes y el espacio de nombres están separados por puntos. Si el nombre del elemento ya contiene puntos, éstos se reemplazan por `#(U+0023)` caracteres. (Se supone que ningún elemento tiene este carácter en su nombre.)
-*  Para los métodos y propiedades con argumentos, el argumento de lista se indica a continuación, incluya entre paréntesis. Para aquellos sin argumentos, se omiten los paréntesis. Los argumentos están separados por comas. La codificación de cada argumento es el mismo que una firma de la CLI, como sigue:
-   *  Los argumentos se representan por su nombre de la documentación, que se basa en su nombre completo, puede modificado como sigue:
-      * Argumentos que representan tipos genéricos tienen un anexados `` ` `` carácter (comilla simple) seguido del número de parámetros de tipo
-      * Argumentos que contienen el `out` o `ref` modificador tiene una `@` siguiendo su nombre de tipo. Argumentos pasan por valor o a través de `params` no tienen una ninguna anotación especial.
-      * Argumentos que son matrices se representan como `[lowerbound:size, ... , lowerbound:size]` donde el número de comas es el rango menos 1, y los límites inferiores y el tamaño de cada dimensión, si se conocen, se representan en formato decimal. Si no se especifica un límite inferior ni el tamaño, se omite. Si se omiten el límite inferior y el tamaño de una dimensión determinada, el `:` también se omite. Matrices escalonadas se representan mediante uno `[]` por nivel.
-      * Argumentos que tienen tipos de puntero no es void se representan mediante un `*` después del nombre de tipo. Un puntero void se representa mediante un nombre de tipo de `System.Void`.
-      * Argumentos que hacen referencia a parámetros de tipo genérico que se definen en los tipos se codifican utilizando el `` ` `` carácter (comilla simple) seguido por el índice de base cero del parámetro de tipo.
-      * Argumentos que usan parámetros de tipo genérico definidos en los métodos use un doble-acento grave ``` `` ``` en lugar de la `` ` `` utiliza para los tipos.
-      * Argumentos que hacen referencia a tipos genéricos construidos se codifican utilizando el tipo genérico, seguido de `{`, seguido de una lista separada por comas de argumentos de tipo, seguido de `}`.
+*  La segunda parte de la cadena es el nombre completo del elemento, que empieza en la raíz del espacio de nombres. El nombre del elemento, sus tipos envolventes y su espacio de nombres se separan por puntos. Si el nombre del propio elemento tiene puntos, se reemplazan por `#(U+0023)` caracteres. (Se supone que ningún elemento tiene este carácter en su nombre).
+*  En el caso de los métodos y propiedades con argumentos, la lista de argumentos sigue entre paréntesis. Para aquellos que no tienen argumentos, se omiten los paréntesis. Los argumentos están separados por comas. La codificación de cada argumento es la misma que la firma de la CLI, como se indica a continuación:
+   *  Los argumentos se representan mediante el nombre de la documentación, que se basa en su nombre completo, modificado de la siguiente manera:
+      * Los argumentos que representan tipos genéricos tienen un `` ` `` carácter anexado (acento grave) seguido por el número de parámetros de tipo
+      * Los argumentos que `out` tienen `ref` el modificador o `@` tienen un nombre de tipo siguiente. Los argumentos que se pasan por `params` valor o por Via no tienen ninguna notación especial.
+      * Los argumentos que son matrices se representan como `[lowerbound:size, ... , lowerbound:size]` donde el número de comas es el rango menos uno, y los límites inferiores y el tamaño de cada dimensión, si se conocen, se representan en formato decimal. Si no se especifica un límite inferior o un tamaño, se omite. Si se omiten el límite inferior y el tamaño de una dimensión determinada `:` , también se omite. Las matrices escalonadas se representan en `[]` una por nivel.
+      * Los argumentos que tienen tipos de puntero distintos de void se representan `*` mediante un siguiente nombre de tipo. Un puntero void se representa utilizando un nombre de tipo `System.Void`de.
+      * Los argumentos que hacen referencia a los parámetros de tipo genérico definidos en los tipos se `` ` `` codifican mediante el carácter (acento grave) seguido por el índice de base cero del parámetro de tipo.
+      * Los argumentos que utilizan parámetros de tipo genérico definidos en métodos utilizan un acento ``` `` ``` doble en lugar del utilizado para los `` ` `` tipos.
+      * Los argumentos que hacen referencia a tipos genéricos construidos se codifican utilizando el tipo genérico, `{`seguido de, seguido de una lista separada por comas de argumentos de `}`tipo, seguida de.
 
-### <a name="id-string-examples"></a>Ejemplos de cadenas de identificador
+### <a name="id-string-examples"></a>Ejemplos de cadenas de ID.
 
-Los ejemplos siguientes muestra un fragmento de código C#, junto con la cadena de identificador generada a partir de cada elemento de origen pueden tener un comentario de documentación:
+Los ejemplos siguientes muestran un fragmento de C# código, junto con la cadena de identificador generada a partir de cada elemento de origen capaz de tener un Comentario de documentación:
 
-*  Los tipos se representan mediante su nombre completo, ampliada con información genérica:
+*  Los tipos se representan mediante su nombre completo, ampliados con información genérica:
 
    ```csharp
    enum Color { Red, Blue, Green }
@@ -726,7 +726,7 @@ Los ejemplos siguientes muestra un fragmento de código C#, junto con la cadena 
    "M:Acme.Widget.Finalize"
    ```
 
-*  Métodos.
+*  Modalidades.
 
    ```csharp
    namespace Acme
@@ -796,7 +796,7 @@ Los ejemplos siguientes muestra un fragmento de código C#, junto con la cadena 
    "P:Acme.Widget.Item(System.String,System.Int32)"
    ```
 
-*  eventos.
+*  Ceso.
 
    ```csharp
    namespace Acme
@@ -824,7 +824,7 @@ Los ejemplos siguientes muestra un fragmento de código C#, junto con la cadena 
    "M:Acme.Widget.op_UnaryPlus(Acme.Widget)"
    ```
 
-   El conjunto completo de los nombres de función de operador unario utilizado es como sigue: `op_UnaryPlus`, `op_UnaryNegation`, `op_LogicalNot`, `op_OnesComplement`, `op_Increment`, `op_Decrement`, `op_True`, y `op_False`.
+   El conjunto completo de nombres de función de operador unario se usa `op_UnaryPlus`como se `op_LogicalNot`indica a `op_Increment`continuación `op_Decrement`: `op_True`, `op_UnaryNegation`, `op_False`, `op_OnesComplement`,,, y.
 
 *  Operadores binarios.
 
@@ -840,9 +840,9 @@ Los ejemplos siguientes muestra un fragmento de código C#, junto con la cadena 
    "M:Acme.Widget.op_Addition(Acme.Widget,Acme.Widget)"
    ```
 
-   El conjunto completo de usa los nombres de función de operador binario es como sigue: `op_Addition`, `op_Subtraction`, `op_Multiply`, `op_Division`, `op_Modulus`, `op_BitwiseAnd`, `op_BitwiseOr`, `op_ExclusiveOr`, `op_LeftShift`, `op_RightShift`, `op_Equality`, `op_Inequality`, `op_LessThan`, `op_LessThanOrEqual`, `op_GreaterThan`, y `op_GreaterThanOrEqual`.
+   El conjunto completo de nombres de función de operador binario utilizado es `op_Addition`el `op_Subtraction`siguiente: `op_Division`, `op_Modulus`, `op_BitwiseAnd` `op_Multiply`,, `op_ExclusiveOr`, `op_LeftShift`, `op_RightShift` `op_BitwiseOr`,,,, `op_Equality`, ,,`op_LessThan`, y`op_GreaterThan`. `op_LessThanOrEqual` `op_Inequality` `op_GreaterThanOrEqual`
 
-*  Los operadores de conversión tienen un carácter final "`~`" seguido por el tipo de valor devuelto.
+*  Los operadores de conversión tienen un "`~`" final seguido del tipo de valor devuelto.
 
    ```csharp
    namespace Acme
@@ -860,9 +860,9 @@ Los ejemplos siguientes muestra un fragmento de código C#, junto con la cadena 
 
 ## <a name="an-example"></a>Un ejemplo
 
-### <a name="c-source-code"></a>Código fuente de C#
+### <a name="c-source-code"></a>C#código fuente
 
-El ejemplo siguiente muestra el código fuente de un `Point` clase:
+En el ejemplo siguiente se muestra el código fuente `Point` de una clase:
 
 ```csharp
 namespace Graphics
@@ -1013,7 +1013,7 @@ public class Point
 
 ### <a name="resulting-xml"></a>XML resultante
 
-Este es el resultado producido por un generador de documentación cuando se especifica el código fuente para la clase `Point`, como se muestra anteriormente:
+A continuación se muestra la salida generada por un generador de documentación cuando se proporciona `Point`el código fuente de la clase, mostrado anteriormente:
 
 ```xml
 <?xml version="1.0"?>

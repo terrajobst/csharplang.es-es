@@ -1,10 +1,10 @@
 ---
-ms.openlocfilehash: adf81842e3c763c7bbdd3f10bb884dc1207b9099
-ms.sourcegitcommit: 0489cb64b7dfb328813d757f4d447a15b85a5851
+ms.openlocfilehash: 2026fc1bf9d3576b967cbc2e9a670aa44b7eab3a
+ms.sourcegitcommit: 892af9016b3317a8fae12d195014dc38ba51cf16
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/11/2019
-ms.locfileid: "70912437"
+ms.lasthandoff: 10/01/2019
+ms.locfileid: "71704018"
 ---
 # <a name="documentation-comments"></a>Comentarios de documentación
 
@@ -28,7 +28,7 @@ delimited_doc_comment
     ;
 ```
 
-En un *single_line_doc_comment*, si hay un carácter de *espacio* en blanco `///` después de los caracteres de cada uno de los *single_line_doc_comment*de elementos adyacentes al *single_line_doc_comment*actual, entoncesel carácter de espacio en blanco no se incluye en la salida XML.
+En un *single_line_doc_comment*, si hay un carácter de *espacio en blanco* después del `///` caracteres en cada una de las *single_line_doc_comment*s adyacentes al *single_line_doc_comment*actual, ese *espacio en blanco* el carácter no se incluye en la salida XML.
 
 En un comentario delimitado-doc-comment, si el primer carácter que no es un espacio en blanco de la segunda línea es un asterisco y el mismo patrón de caracteres de espacio en blanco opcionales, y se repite un carácter de asterisco al principio de cada línea dentro del comentario Delimited-doc-comment, después, los caracteres del patrón repetido no se incluyen en la salida XML. El patrón puede incluir caracteres de espacio en blanco después de, así como el carácter de asterisco.
 
@@ -61,7 +61,7 @@ Observe detenidamente que el archivo de documentación no proporciona informaci�
 El generador de documentación debe aceptar y procesar cualquier etiqueta que sea válida de acuerdo con las reglas de XML. Las siguientes etiquetas proporcionan funcionalidad de uso común en la documentación del usuario. (Por supuesto, son posibles otras etiquetas).
 
 
-| __Etiqueta__          | __Sección__                                            | __Propósito__                                            |
+| __Etiqueta__          | __Sección__                                            | __Función__                                            |
 |------------------|--------------------------------------------------------|--------------------------------------------------------|
 | `<c>`            | [`<c>`](documentation-comments.md#c)                   | Establecer texto en una fuente similar a la de código                           | 
 | `<code>`         | [`<code>`](documentation-comments.md#code)             | Establecer una o más líneas de código fuente o resultado del programa |
@@ -186,7 +186,7 @@ Esta etiqueta permite incluir información de un documento XML que es externo al
 
 __Sintáctica__
 
-```
+```xml
 <include file="filename" path="xpath" />
 ```
 
@@ -594,7 +594,7 @@ El generador de documentación observa las siguientes reglas cuando genera las c
 
    | __Carácter__ | __Descripción__                                             |
    |---------------|-------------------------------------------------------------|
-   | E             | Evento                                                       |
+   | E             | evento                                                       |
    | F             | Campo                                                       |
    | M             | Método (incluidos constructores, destructores y operadores) |
    | N             | Espacio de nombres                                                   |

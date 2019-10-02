@@ -1,10 +1,10 @@
 ---
-ms.openlocfilehash: 8bc4bf6310fb8a8457beee167f18d30aaca10a8e
-ms.sourcegitcommit: 7f7fc6e9e195e51b7ff8229aeaa70aa9fbbb63cb
+ms.openlocfilehash: 300d5fc2a2fadd98472d73c122226146605b01dd
+ms.sourcegitcommit: 892af9016b3317a8fae12d195014dc38ba51cf16
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/10/2019
-ms.locfileid: "70876893"
+ms.lasthandoff: 10/01/2019
+ms.locfileid: "71703994"
 ---
 # <a name="introduction"></a>Introducción
 
@@ -36,11 +36,11 @@ class Hello
 ```
 
 Normalmente, los archivos de código fuente de C# tienen la extensión de archivo `.cs`. Suponiendo que el programa "Hola mundo" se almacena en el archivo `hello.cs`, el programa se puede compilar con el compilador de Microsoft C# mediante la línea de comandos.
-```
+```console
 csc hello.cs
 ```
 que genera un ensamblado ejecutable denominado `hello.exe`. La salida generada por esta aplicación cuando se ejecuta es
-```
+```console
 Hello, World
 ```
 
@@ -91,7 +91,7 @@ namespace Acme.Collections
 ```
 declara una clase denominada `Stack` en un espacio de nombres denominado. `Acme.Collections` El nombre completo de esta clase es `Acme.Collections.Stack`. La clase contiene varios miembros: un campo denominado `top`, dos métodos denominados `Push` y `Pop`, y una clase anidada denominada `Entry`. La clase `Entry` contiene además tres miembros: un campo denominado `next`, un campo denominado `data` y un constructor. Suponiendo que el código fuente del ejemplo se almacene en el archivo `acme.cs`, la línea de comandos
 
-```
+```console
 csc /t:library acme.cs
 ```
 compila el ejemplo como una biblioteca (código sin un punto de entrada `Main` y genera un ensamblado denominado `acme.dll`.
@@ -119,12 +119,12 @@ class Test
 ```
 Si el programa se almacena en el archivo `test.cs`, cuando `test.cs` se compila, `acme.dll` se puede hacer referencia al ensamblado mediante la opción `/r` del compilador:
 
-```
+```console
 csc /r:acme.dll test.cs
 ```
 Esto crea un ensamblado ejecutable denominado `test.exe`, que, cuando se ejecuta, produce el resultado:
 
-```
+```console
 100
 10
 1
@@ -170,7 +170,7 @@ El procesamiento de caracteres y cadenas en C# utiliza la codificación Unicode.
 En la tabla siguiente se C#resumen los tipos numéricos de.
 
 
-| __Categoría__      | __Parada__ | __Type__  | __Intervalo/precisión__ |
+| __Categoría__      | __Parada__ | __Tipo__  | __Intervalo/precisión__ |
 |-------------------|----------|-----------|---------------------|
 | Entero con signo   | 8        | `sbyte`   | -128... 127 |
 |                   | 16       | `short`   | -32768... 32, 767 |
@@ -683,7 +683,7 @@ Point a = new Point(10, 20);
 Point b = new Point3D(10, 20, 30);
 ```
 
-### <a name="fields"></a>Fields
+### <a name="fields"></a>Campos
 
 Un campo es una variable que está asociada a una clase o a una instancia de una clase.
 

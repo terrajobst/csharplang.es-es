@@ -1,14 +1,14 @@
 ---
-ms.openlocfilehash: c3b716e6eb331be2ee33fffeb42c1e2406cd3a5c
-ms.sourcegitcommit: 94a3d151c438d34ede1d99de9eb4ebdc07ba4699
+ms.openlocfilehash: 3b142d7dbda8a94a4cf2c973a2e380065dcbf5ee
+ms.sourcegitcommit: 892af9016b3317a8fae12d195014dc38ba51cf16
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/25/2019
-ms.locfileid: "64488756"
+ms.lasthandoff: 10/01/2019
+ms.locfileid: "71703966"
 ---
 # <a name="enums"></a>Enumeraciones
 
-Un ***tipo enum*** es un tipo de valor distinto ([los tipos de valor](types.md#value-types)) que declara un conjunto de constantes con nombre.
+Un ***tipo de enumeración*** es un tipo de valor distinto ([tipos de valor](types.md#value-types)) que declara un conjunto de constantes con nombre.
 
 El ejemplo
 
@@ -21,11 +21,11 @@ enum Color
 }
 ```
 
-declara un tipo de enumeración denominado `Color` con miembros `Red`, `Green`, y `Blue`.
+declara un tipo de enumeración denominado `Color` con miembros `Red`, `Green` y `Blue`.
 
 ## <a name="enum-declarations"></a>Declaraciones de enumeración
 
-Una declaración de enumeración declara un nuevo tipo de enumeración. Una declaración de enumeración comienza con la palabra clave `enum`y define el nombre, accesibilidad, tipo subyacente y los miembros de la enumeración.
+Una declaración de enumeración declara un nuevo tipo de enumeración. Una declaración de enumeración comienza con la palabra clave `enum`, y define el nombre, la accesibilidad, el tipo subyacente y los miembros de la enumeración.
 
 ```antlr
 enum_declaration
@@ -42,7 +42,7 @@ enum_body
     ;
 ```
 
-Cada tipo de enumeración tiene un tipo integral correspondiente denominado el ***tipo subyacente*** del tipo enum. Este tipo subyacente debe ser capaz de representar todos los valores del enumerador definidos en la enumeración. Una declaración de enumeración puede declarar explícitamente un tipo subyacente de `byte`, `sbyte`, `short`, `ushort`, `int`, `uint`, `long` o `ulong`. Tenga en cuenta que `char` no puede usarse como un tipo subyacente. Una declaración de enumeración que no declara explícitamente un tipo subyacente tiene un tipo subyacente de `int`.
+Cada tipo de enumeración tiene un tipo entero correspondiente denominado el tipo ***subyacente*** del tipo de enumeración. Este tipo subyacente debe ser capaz de representar todos los valores de enumerador definidos en la enumeración. Una declaración de enumeración puede declarar explícitamente un tipo subyacente de `byte`, `sbyte`, `short`, `ushort`, `int`, `uint`, `long` o `ulong`. Tenga en cuenta que `char` no se puede usar como un tipo subyacente. Una declaración de enumeración que no declara explícitamente un tipo subyacente tiene un tipo subyacente de `int`.
 
 El ejemplo
 
@@ -55,11 +55,11 @@ enum Color: long
 }
 ```
 
-declara una enumeración con un tipo subyacente de `long`. Un desarrollador puede optar por usar un tipo subyacente de `long`, como en el ejemplo, para habilitar el uso de valores que se encuentran en el intervalo de `long` , pero no en el intervalo de `int`, o para conservar esta opción para el futuro.
+declara una enumeración con un tipo subyacente de `long`. Un programador puede optar por usar un tipo subyacente de `long`, como en el ejemplo, para habilitar el uso de valores que están en el intervalo de `long` pero no en el intervalo de `int`, o para conservar esta opción en el futuro.
 
 ## <a name="enum-modifiers"></a>Modificadores de enumeración
 
-Un *enum_declaration* también puede incluir una secuencia de modificadores de enumeración:
+Un *enum_declaration* puede incluir opcionalmente una secuencia de modificadores de enumeración:
 
 ```antlr
 enum_modifier
@@ -71,13 +71,13 @@ enum_modifier
     ;
 ```
 
-Es un error en tiempo de compilación para el mismo modificador aparezca varias veces en una declaración de enumeración.
+Es un error en tiempo de compilación que el mismo modificador aparezca varias veces en una declaración de enumeración.
 
-Los modificadores de una declaración de enumeración tienen el mismo significado que los de una declaración de clase ([modificadores de clase](classes.md#class-modifiers)). Sin embargo, tenga en cuenta que el `abstract` y `sealed` modificadores no están permitidos en una declaración de enumeración. Las enumeraciones no pueden ser abstractas y no permite la derivación.
+Los modificadores de una declaración de enumeración tienen el mismo significado que los de una declaración de clase ([modificadores de clase](classes.md#class-modifiers)). Tenga en cuenta, sin embargo, que los modificadores `abstract` y `sealed` no se permiten en una declaración de enumeración. Las enumeraciones no pueden ser abstractas y no permiten la derivación.
 
-## <a name="enum-members"></a>Miembros de enumeración
+## <a name="enum-members"></a>Enumerar miembros
 
-El cuerpo de una declaración de tipo de enumeración define a cero o más miembros de enumeración, que son las constantes con nombre del tipo enum. No hay dos miembros de enumeración pueden tener el mismo nombre.
+El cuerpo de una declaración de tipo enum define cero o más miembros de enumeración, que son las constantes con nombre del tipo enum. Dos miembros de enumeración no pueden tener el mismo nombre.
 
 ```antlr
 enum_member_declarations
@@ -89,7 +89,7 @@ enum_member_declaration
     ;
 ```
 
-Cada miembro de enumeración tiene un valor constante asociado. El tipo de este valor es el tipo subyacente de la enumeración contenedora. El valor constante para cada miembro de enumeración debe ser en el intervalo del tipo subyacente para la enumeración. El ejemplo
+Cada miembro de la enumeración tiene un valor constante asociado. El tipo de este valor es el tipo subyacente de la enumeración contenedora. El valor constante para cada miembro de la enumeración debe estar en el intervalo del tipo subyacente de la enumeración. El ejemplo
 
 ```csharp
 enum Color: uint
@@ -100,7 +100,7 @@ enum Color: uint
 }
 ```
 
-se produce un error en tiempo de compilación porque los valores constantes `-1`, `-2`, y `-3` no están en el intervalo del tipo entero subyacente `uint`.
+produce un error en tiempo de compilación porque los valores constantes `-1`, `-2` y `-3` no están en el intervalo del tipo entero subyacente `uint`.
 
 Varios miembros de enumeración pueden compartir el mismo valor asociado. El ejemplo
 
@@ -115,12 +115,12 @@ enum Color
 }
 ```
 
-muestra una enumeración en la que dos miembros-- `Blue` y `Max` --tienen el mismo valor asociado.
+muestra una enumeración en la que dos miembros de enumeración (`Blue` y `Max`) tienen el mismo valor asociado.
 
-El valor asociado de un miembro de enumeración se asigna de forma implícita o explícita. Si la declaración del miembro de enumeración tiene un *constant_expression* inicializador, el valor de esa expresión constante, se convierte implícitamente al tipo subyacente de la enumeración, es el valor del miembro de enumeración asociado. Si la declaración del miembro de enumeración no tiene inicializador, su valor asociado se establece implícitamente, como sigue:
+El valor asociado de un miembro de enumeración se asigna de forma implícita o explícita. Si la declaración del miembro de enumeración tiene un inicializador *constant_expression* , el valor de esa expresión constante, convertido implícitamente en el tipo subyacente de la enumeración, es el valor asociado del miembro de enumeración. Si la declaración del miembro de enumeración no tiene inicializador, su valor asociado se establece implícitamente, como se indica a continuación:
 
-*  Si el miembro de enumeración es el primer miembro de enumeración declarado en el tipo enum, su valor asociado es cero.
-*  En caso contrario, se obtiene el valor del miembro de enumeración asociado aumentando el valor del miembro de enumeración precedente asociado en uno. Este valor aumentado debe estar dentro del intervalo de valores que se puede representar el tipo subyacente, de lo contrario se produce un error en tiempo de compilación.
+*  Si el miembro de la enumeración es el primer miembro de la enumeración declarado en el tipo de enumeración, su valor asociado es cero.
+*  De lo contrario, el valor asociado del miembro de enumeración se obtiene aumentando el valor asociado del miembro de enumeración anterior textualmente en uno. Este aumento de valor debe estar dentro del intervalo de valores que se puede representar mediante el tipo subyacente; de lo contrario, se producirá un error en tiempo de compilación.
 
 El ejemplo
 
@@ -160,21 +160,21 @@ class Test
 }
 ```
 
-Imprime los nombres de miembro de enumeración y sus valores asociados. El resultado es el siguiente:
+imprime los nombres de miembro de enumeración y sus valores asociados. El resultado es el siguiente:
 
-```
+```console
 Red = 0
 Green = 10
 Blue = 11
 ```
 
-por las razones siguientes:
+por los siguientes motivos:
 
-*  el miembro de enumeración `Red` se asigna automáticamente el valor cero (puesto que no tiene inicializador y es el primer miembro de enumeración);
-*  el miembro de enumeración `Green` explícitamente se le asigna el valor `10`;
-*  y el miembro de enumeración `Blue` se asigna automáticamente el valor de una unidad mayor que el miembro que le precede.
+*  al miembro de enumeración `Red` se le asigna automáticamente el valor cero (ya que no tiene inicializador y es el primer miembro de la enumeración);
+*  al miembro de enumeración `Green` se le asigna explícitamente el valor `10`;
+*  Además, al miembro de enumeración `Blue` se le asigna automáticamente el valor uno mayor que el miembro que lo precede textualmente.
 
-El valor asociado de un miembro de enumeración no puede, directa o indirectamente, use el valor de su propio miembro de enumeración asociado. Aparte de esta restricción circularidad, inicializadores de miembro de enumeración pueden llamar libremente a otros inicializadores de miembro de enumeración, independientemente de su posición textual. Dentro de un inicializador de miembro de enumeración, los valores de otros miembros de enumeración siempre se tratan como si tuviera el tipo de su tipo subyacente, por lo que las conversiones no son necesarias cuando se hace referencia a otros miembros de enumeración.
+El valor asociado de un miembro de enumeración no puede, directa ni indirectamente, usar el valor de su propio miembro de enumeración asociado. Aparte de esta restricción de circularidad, los inicializadores de miembros de enumeración pueden hacer referencia libremente a otros inicializadores de miembro de enumeración, independientemente de su posición textual. Dentro de un inicializador de miembro de enumeración, los valores de otros miembros de enumeración siempre se tratan como si tuvieran el tipo de su tipo subyacente, por lo que no es necesario realizar conversiones cuando se hace referencia a otros miembros de enumeración.
 
 El ejemplo
 
@@ -186,22 +186,22 @@ enum Circular
 }
 ```
 
-se produce un error en tiempo de compilación porque las declaraciones de `A` y `B` son circulares. `A` depende de `B` explícitamente, y `B` depende `A` implícitamente.
+produce un error en tiempo de compilación porque las declaraciones de `A` y `B` son circulares. `A` depende de `B` explícitamente y `B` depende de `A` implícitamente.
 
-Los miembros de enumeración son denominados y ámbito de una manera exactamente análoga a los campos dentro de las clases. El ámbito de un miembro de enumeración es el cuerpo de su tipo de enumeración que contiene. Dentro de ese ámbito, pueden hacer referencia a miembros de enumeración por su nombre simple. Desde otro de código, el nombre de un miembro de enumeración debe calificarse con el nombre de su tipo enum. Los miembros de enumeración no tiene ninguna accesibilidad declarada: un miembro de enumeración es accesible si su tipo de enumeración que contiene es accesible.
+Los miembros de enumeración tienen un nombre y tienen el ámbito de una manera exactamente análoga a los campos de las clases. El ámbito de un miembro de enumeración es el cuerpo de su tipo de enumeración contenedor. Dentro de ese ámbito, se puede hacer referencia a los miembros de enumeración por su nombre simple. Desde el resto del código, el nombre de un miembro de enumeración debe estar calificado con el nombre de su tipo de enumeración. Los miembros de enumeración no tienen ninguna accesibilidad declarada: se puede acceder a un miembro de enumeración si se puede tener acceso a su tipo de enumeración contenedor.
 
-## <a name="the-systemenum-type"></a>Tipo System.Enum
+## <a name="the-systemenum-type"></a>Tipo System. Enum
 
-El tipo `System.Enum` es la clase base abstracta de todos los tipos de enumeración (que es distinto del tipo subyacente del tipo enum) y los miembros heredados de `System.Enum` están disponibles en cualquier tipo de enumeración. Una conversión boxing ([conversiones Boxing](types.md#boxing-conversions)) existe desde cualquier tipo de enumeración para `System.Enum`y una conversión unboxing ([Conversiones Unboxing](types.md#unboxing-conversions)) existe desde `System.Enum` a cualquier tipo de enumeración.
+El tipo `System.Enum` es la clase base abstracta de todos los tipos de enumeración (es distinto y diferente del tipo subyacente del tipo de enumeración) y los miembros heredados de `System.Enum` están disponibles en cualquier tipo de enumeración. Existe una conversión boxing ([conversiones boxing](types.md#boxing-conversions)) de cualquier tipo de enumeración a `System.Enum`, y existe una conversión unboxing ([conversiones unboxing](types.md#unboxing-conversions)) de `System.Enum` a cualquier tipo de enumeración.
 
-Tenga en cuenta que `System.Enum` no es un *enum_type*. Se trata de un *class_type* de los cuales *enum_type*se derivan. El tipo `System.Enum` hereda del tipo `System.ValueType` ([System.ValueType el tipo](types.md#the-systemvaluetype-type)), que, a su vez, hereda del tipo `object`. En tiempo de ejecución, un valor de tipo `System.Enum` puede ser `null` o una referencia a un valor con conversión boxing de cualquier tipo de enumeración.
+Tenga en cuenta que `System.Enum` no es una *enum_type*. En su lugar, es un *class_type* del que se derivan todos los *enum_type*. El tipo `System.Enum` hereda del tipo `System.ValueType` ([el tipo System. ValueType](types.md#the-systemvaluetype-type)), que, a su vez, hereda del tipo `object`. En tiempo de ejecución, un valor de tipo `System.Enum` puede ser `null` o una referencia a un valor de conversión boxing de cualquier tipo de enumeración.
 
-## <a name="enum-values-and-operations"></a>Las operaciones y los valores de enumeración
+## <a name="enum-values-and-operations"></a>Valores de enumeración y operaciones
 
-Cada tipo de enumeración define un tipo distinto; una conversión explícita de enumeración ([conversiones explícitas de enumeración](conversions.md#explicit-enumeration-conversions)) es necesaria para convertir entre un tipo de enumeración y un tipo entero, o entre dos tipos de enumeración. El conjunto de valores que puede tomar un tipo de enumeración no está limitado por sus miembros de enumeración. En concreto, cualquier valor del tipo subyacente de una enumeración se puede convertir al tipo enum y es un valor válido distinto de ese tipo de enumeración.
+Cada tipo de enumeración define un tipo distinto; se requiere una conversión de enumeración explícita ([conversiones explícitas de enumeración](conversions.md#explicit-enumeration-conversions)) para realizar la conversión entre un tipo de enumeración y un tipo entero, o entre dos tipos de enumeración. El conjunto de valores que puede tomar un tipo de enumeración no está limitado por sus miembros de enumeración. En concreto, cualquier valor del tipo subyacente de una enumeración se puede convertir al tipo de enumeración y es un valor válido distinto de ese tipo de enumeración.
 
-Miembros de enumeración tienen el tipo de su tipo enum contenedor (excepto dentro de otros inicializadores de miembro de enumeración: vea [miembros de enumeración](enums.md#enum-members)). El valor de un miembro de enumeración declarado en el tipo de enumeración `E` con el valor asociado `v` es `(E)v`.
+Los miembros de enumeración tienen el tipo de su tipo de enumeración contenedor (excepto en otros inicializadores de miembro de enumeración: vea [miembros de enumeración](enums.md#enum-members)). El valor de un miembro de enumeración declarado en el tipo de enumeración `E` con el valor asociado `v` es `(E)v`.
 
-Los siguientes operadores pueden utilizarse en los valores de los tipos de enumeración: `==`, `!=`, `<`, `>`, `<=`, `>=`  ([operadores de comparación de la enumeración](expressions.md#enumeration-comparison-operators)) , binario `+`  ([operador de suma](expressions.md#addition-operator)) y binario `-`  ([operador de resta](expressions.md#subtraction-operator)), `^`, `&` , `|`  ([Operadores lógicos de enumeración](expressions.md#enumeration-logical-operators)), `~`  ([operador de complemento bit a bit](expressions.md#bitwise-complement-operator)), `++` y `--`  ([Operadores postfijos de incremento y decremento](expressions.md#postfix-increment-and-decrement-operators) y [prefijo de incremento y decremento operadores](expressions.md#prefix-increment-and-decrement-operators)).
+Los operadores siguientes se pueden usar en valores de tipos de enumeración: `==`, `!=`, `<`, `>`, `<=`, `>=` @ no__t-6 ([operadores de comparación de enumeración](expressions.md#enumeration-comparison-operators)), Binary `+` @ no__t-9 ([operador de suma](expressions.md#addition-operator)), Binary 1 @ No__ t-12 ([operador de resta](expressions.md#subtraction-operator)), 4, 5, 6 @ no__t-17 ([operadores lógicos de enumeración](expressions.md#enumeration-logical-operators)), 9 @ no__t-20 ([operador de complemento bit a bit](expressions.md#bitwise-complement-operator)), 2 y 3 @ no__t-24 (incremento de[postfijo operadores de decremento y reducción](expressions.md#postfix-increment-and-decrement-operators) y [operadores de incremento y decremento prefijos](expressions.md#prefix-increment-and-decrement-operators).
 
-Cada tipo de enumeración se deriva automáticamente de la clase `System.Enum` (que, a su vez, deriva `System.ValueType` y `object`). Por lo tanto, los métodos heredados y propiedades de esta clase pueden utilizarse en los valores de un tipo enum.
+Cada tipo de enumeración se deriva automáticamente de la clase `System.Enum` (que, a su vez, deriva de `System.ValueType` y `object`). Por lo tanto, los métodos y las propiedades heredados de esta clase se pueden utilizar en los valores de un tipo de enumeración.

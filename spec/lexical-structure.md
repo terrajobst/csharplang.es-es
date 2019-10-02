@@ -1,10 +1,10 @@
 ---
-ms.openlocfilehash: 5fbe0267b5b33b1a24dbdca493d118c576092573
-ms.sourcegitcommit: 7f7fc6e9e195e51b7ff8229aeaa70aa9fbbb63cb
+ms.openlocfilehash: 4676bcd3f0a92260b4e5e20a0aa5b5ec00bf204e
+ms.sourcegitcommit: 892af9016b3317a8fae12d195014dc38ba51cf16
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/10/2019
-ms.locfileid: "70876916"
+ms.lasthandoff: 10/01/2019
+ms.locfileid: "71704073"
 ---
 # <a name="lexical-structure"></a>Estructura léxica
 
@@ -429,8 +429,8 @@ Como cuestión de estilo, se sugiere que "`L`" se use en lugar de "`l`" cuando s
 
 Para permitir que los valores y `int` `long` más pequeños posibles se escriban como literales enteros decimales, existen las dos reglas siguientes:
 
-* Cuando un *decimal_integer_literal* con el valor 2147483648 (2 ^ 31) y no *integer_type_suffix* aparece como el token inmediatamente después de un token de operador unario menos ([operador unario menos](expressions.md#unary-minus-operator)), el resultado es una constante de tipo `int`.con el valor-2147483648 (-2 ^ 31). En todas las demás situaciones, tal *decimal_integer_literal* es de tipo `uint`.
-* Cuando un *decimal_integer_literal* con el valor 9.223.372.036.854.775.808 (2 ^ 63) y no *integer_type_suffix* o *integer_type_suffix* `L` o `l` aparece como el token inmediatamente después de un unario menos token de operador ([operador unario menos](expressions.md#unary-minus-operator)), el resultado es una constante `long` de tipo con el valor-9.223.372.036.854.775.808 (-2 ^ 63). En todas las demás situaciones, tal *decimal_integer_literal* es de tipo `ulong`.
+* Cuando un *decimal_integer_literal* con el valor 2147483648 (2 ^ 31) y no *integer_type_suffix* aparece como el token inmediatamente después de un token de operador unario menos ([operador unario menos](expressions.md#unary-minus-operator)), el resultado es una constante de tipo `int` con el valor-2147483648 (-2 ^ 31). En todas las demás situaciones, tal *decimal_integer_literal* es del tipo `uint`.
+* Cuando un *decimal_integer_literal* con el valor 9.223.372.036.854.775.808 (2 ^ 63) y no *integer_type_suffix* ni *integer_type_suffix* `L` o `l` aparece como el token inmediatamente después de un token de operador unario menos ([ Unario menos operador](expressions.md#unary-minus-operator)), el resultado es una constante de tipo `long` con el valor-9.223.372.036.854.775.808 (-2 ^ 63). En todas las demás situaciones, tal *decimal_integer_literal* es del tipo `ulong`.
 
 #### <a name="real-literals"></a>Literales reales
 
@@ -516,7 +516,7 @@ Una secuencia de escape simple representa una codificación de caracteres Unicod
 |---------------------|--------------------|----------------------|
 | `\'`                | Comilla simple       | `0x0027`             | 
 | `\"`                | Comilla doble       | `0x0022`             | 
-| `\\`| Barra diagonal inversa |`0x005C`             | 
+| `\\`                | Barra diagonal inversa          | `0x005C`             | 
 | `\0`                | Null               | `0x0000`             | 
 | `\a`                | Alerta              | `0x0007`             | 
 | `\b`                | Retroceso          | `0x0008`             | 
@@ -575,7 +575,7 @@ quote_escape_sequence
     ;
 ```
 
-Un carácter que sigue a un carácter de barra`\`diagonal inversa () en un *regular_string_literal_character* debe ser uno de los `'`siguientes `"`caracteres: `0`, `a`, `b` `\`,,, , `f`, `n`, `r`, `t`, `u`, `U`, `x`, `v`. De lo contrario, se produce un error en tiempo de compilación.
+Un carácter que sigue a un carácter de barra diagonal inversa (`\`) en un *regular_string_literal_character* debe ser uno de los siguientes caracteres: `'`, `"`, `\`, `0`, `a`, `b`, `f`, `n`, 0, 1, @no__ t-12, 3, 4, 5. De lo contrario, se produce un error en tiempo de compilación.
 
 El ejemplo
 ```csharp
@@ -782,7 +782,7 @@ single_verbatim_balanced_text_character
 
 Un token de *interpolated_string_literal* se reinterpreta como varios tokens y otros elementos de entrada como se indica a continuación, en el orden de aparición en el *interpolated_string_literal*:
 
-* Las apariciones de lo siguiente se interpretan como tokens individuales independientes: el signo `$` inicial, *interpolated_regular_string_whole*, *interpolated_regular_string_start*, *interpolated_regular_string_mid*, *interpolated_regular_string_end*, *interpolated_verbatim_string_whole*, *interpolated_verbatim_string_start*, *interpolated_verbatim_string_mid* y *interpolated_verbatim_string_end*.
+* Las apariciones de lo siguiente se interpretan como tokens individuales independientes: el signo `$` inicial, *interpolated_regular_string_whole*, *interpolated_regular_string_start*, *interpolated_regular_string_mid*,  *interpolated_regular_string_end*, *interpolated_verbatim_string_whole*, *interpolated_verbatim_string_start*, *interpolated_verbatim_string_mid* y *interpolated_verbatim_string_end*.
 * Las repeticiones de *regular_balanced_text* y *verbatim_balanced_text* entre estas se reprocesan como *input_section* ([análisis léxico](lexical-structure.md#lexical-analysis)) y se reinterpretan como la secuencia resultante de los elementos de entrada. A su vez, pueden incluir tokens literales de cadena interpolados que se van a reinterpretar.
 
 El análisis sintáctico volverá a combinar los tokens en una *interpolated_string_expression* ([cadenas interpoladas](expressions.md#interpolated-strings)).
@@ -1054,13 +1054,13 @@ Como se indica en la sintaxis, las directivas de compilación condicional se deb
 
 Un *pp_conditional* selecciona como máximo una de las *conditional_section*s contenidas para el procesamiento léxico normal:
 
-*  Las *pp_expression*s de las `#if` directivas `#elif` y se `true`evalúan en orden hasta que se produce una. Si una expresión produce `true`, se selecciona el *conditional_section* de la directiva correspondiente.
-*  Si todoslos resultados `false`de pp_expression s y una `#else` Directiva está presente, se selecciona el conditional_section `#else` de la Directiva.
+*  Las *pp_expression*s de las directivas `#if` y `#elif` se evalúan en orden hasta que un produce `true`. Si una expresión produce `true`, se selecciona el *conditional_section* de la directiva correspondiente.
+*  Si todos los *pp_expression*de rendimiento son `false`, y si hay una directiva `#else`, se selecciona el *conditional_section* de la Directiva `#else`.
 *  De lo contrario, no se selecciona ningún *conditional_section* .
 
 El *conditional_section*seleccionado, si existe, se procesa como un *input_section*normal: el código fuente contenido en la sección debe adherirse a la gramática léxica; los tokens se generan a partir del código fuente de la sección. y las directivas de procesamiento previo de la sección tienen los efectos prescritos.
 
-El resto de *conditional_section*s, si los hay, se procesan como *skipped_section*s: excepto en el caso de las directivas de procesamiento previo, el código fuente de la sección no necesita adherirse a la gramática léxica; no se generan tokens a partir del código fuente de la sección; y las directivas de procesamiento previo de la sección deben ser léxicamente correctas, pero no se procesan de otra manera. Dentro de un *conditional_section* que se está procesando como *skipped_section*, cualquier *conditional_section*anidada `#if`(incluida en... `#endif` y`#region`... las construcciones) también se procesan como skipped_section s. `#endregion`
+El resto de *conditional_section*s, si los hay, se procesan como *skipped_section*s: excepto en el caso de las directivas de procesamiento previo, el código fuente de la sección no necesita adherirse a la gramática léxica; no se generan tokens a partir del código fuente de la sección; y las directivas de procesamiento previo de la sección deben ser léxicamente correctas, pero no se procesan de otra manera. Dentro de un *conditional_section* que se está procesando como *skipped_section*, cualquier *conditional_section*anidada (incluida en construcciones `#if`... `#endif` y `#region`... `#endregion` anidadas) también se procesa como *skipped_ secciones*s.
 
 En el ejemplo siguiente se muestra cómo se pueden anidar las directivas de compilación condicional:
 ```csharp
@@ -1115,7 +1115,7 @@ class Hello
 }
 ```
 da como resultado el resultado:
-```
+```console
 hello,
 #if Debug
         world
@@ -1160,7 +1160,7 @@ En el ejemplo:
 
 class Test {...}
 ```
-siempre genera una advertencia ("se requiere una revisión del código antes de la inserción en el repositorio") y genera un error en tiempo de compilación ("una compilación no puede ser Debug and Retail `Retail` ") si se definen los símbolos `Debug` condicionales y. Tenga en cuenta que un *pp_message* puede contener texto arbitrario; en concreto, no es necesario que los tokens sean correctos, tal y como se muestra en la `can't`palabra comilla simple.
+siempre genera una advertencia ("se requiere una revisión del código antes de la inserción en el repositorio") y genera un error en tiempo de compilación ("una compilación no puede ser Debug and Retail `Retail` ") si se definen los símbolos `Debug` condicionales y. Tenga en cuenta que un *pp_message* puede contener texto arbitrario; en concreto, no es necesario que contenga tokens con formato correcto, tal como se muestra en la palabra `can't`.
 
 ### <a name="region-directives"></a>Directivas de región
 
@@ -1180,7 +1180,7 @@ pp_end_region
     ;
 ```
 
-No se adjunta ningún significado semántico a una región; las regiones están pensadas para que las use el programador o las herramientas automatizadas para marcar una sección del código fuente. El mensaje especificado en una `#region` directiva `#endregion` o del mismo modo no tiene ningún significado semántico; simplemente sirve para identificar la región. La `#region` coincidencia `#endregion` y las directivas pueden tener diferentes *pp_message*.
+No se adjunta ningún significado semántico a una región; las regiones están pensadas para que las use el programador o las herramientas automatizadas para marcar una sección del código fuente. El mensaje especificado en una `#region` directiva `#endregion` o del mismo modo no tiene ningún significado semántico; simplemente sirve para identificar la región. La coincidencia de las directivas `#region` y `#endregion` puede tener diferentes *pp_message*.
 
 El procesamiento léxico de una región:
 ```csharp
@@ -1222,13 +1222,13 @@ file_name_character
     ;
 ```
 
-Cuando no `#line` hay directivas presentes, el compilador informa de los números de línea verdaderos y los nombres de archivo de origen en su salida. Al procesar una `#line` Directiva que incluye un *line_indicator* que no `default`es, el compilador trata la línea después de la Directiva con el número de línea especificado (y el nombre de archivo, si se especifica).
+Cuando no `#line` hay directivas presentes, el compilador informa de los números de línea verdaderos y los nombres de archivo de origen en su salida. Al procesar una directiva de @no__t 0 que incluye un *line_indicator* que no es `default`, el compilador trata la línea después de la Directiva con el número de línea y el nombre de archivo especificados, si se especifica.
 
 Una `#line default` Directiva invierte el efecto de todas las directivas de #line anteriores. El compilador notifica la información de línea verdadera para las líneas siguientes `#line` , exactamente como si no se hubieran procesado directivas.
 
 Una `#line hidden` Directiva no tiene ningún efecto en el archivo y los números de línea indicados en los mensajes de error, pero afecta a la depuración de nivel de origen. Al depurar, todas las líneas `#line hidden` entre una directiva y `#line` la Directiva subsiguiente (que `#line hidden`no es) no tienen información de número de línea. Al recorrer el código en el depurador, estas líneas se omitirán por completo.
 
-Tenga en cuenta que un *file_name* difiere de un literal de cadena normal en el que no se procesan los caracteres de escape; el carácter`\`"" simplemente designa un carácter de barra diagonal inversa normal dentro de un *file_name*.
+Tenga en cuenta que un *file_name* difiere de un literal de cadena normal en el que no se procesan los caracteres de escape; el carácter "`\`" simplemente designa un carácter de barra diagonal inversa normal dentro de un *file_name*.
 
 ### <a name="pragma-directives"></a>Directivas pragma
 

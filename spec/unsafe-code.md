@@ -1,30 +1,30 @@
 ---
-ms.openlocfilehash: 90001cf3d48f216787fc65e59166ec57c5d0ca34
-ms.sourcegitcommit: 94a3d151c438d34ede1d99de9eb4ebdc07ba4699
+ms.openlocfilehash: 4faef9a12bdff54fa59a55a0206fa72bda4ea585
+ms.sourcegitcommit: 892af9016b3317a8fae12d195014dc38ba51cf16
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/25/2019
-ms.locfileid: "64488795"
+ms.lasthandoff: 10/01/2019
+ms.locfileid: "71704061"
 ---
 # <a name="unsafe-code"></a>Código no seguro
 
-El núcleo del lenguaje C#, tal como se define en los capítulos anteriores, difiere notablemente de C y C++ en su omisión de punteros como un tipo de datos. En su lugar, C# proporciona referencias y la capacidad para crear objetos que son administrados por un recolector de elementos no utilizados. Este diseño, junto con otras características, hace que C# un lenguaje mucho más seguro que C o C++. En el lenguaje básico C# no es posible tener una variable no inicializada, un puntero "pendiente" o una expresión que indiza una matriz más allá de sus límites. Categorías completas de errores que suelen contaminen C y, por tanto, se eliminan los programas de C++.
+El lenguaje C# principal, tal como se define en los capítulos anteriores, difiere principalmente de C++ C y en su omisión de punteros como un tipo de datos. En su lugar C# , proporciona referencias y la capacidad de crear objetos administrados por un recolector de elementos no utilizados. Este diseño, junto con otras características, proporciona C# un lenguaje mucho más seguro que C C++o. En el lenguaje C# principal, simplemente no es posible tener una variable no inicializada, un puntero "pendiente" o una expresión que indexa una matriz más allá de sus límites. Por lo tanto, se eliminan todas las categorías C++ de errores que normalmente plagan C y programas.
 
-Aunque prácticamente cualquier construcción del tipo de puntero en C o C++ tiene un tipo de referencia equivalente en C#, sin embargo, hay situaciones donde el acceso a los tipos de puntero se convierte en una necesidad. Por ejemplo, interactuar con el sistema operativo subyacente, obtener acceso a un dispositivo asignado a la memoria o implementar un algoritmo puntuales puede no ser posible ni práctico sin acceso a punteros. Para abordar esta necesidad, C# ofrece la posibilidad de escribir ***código no seguro***.
+Aunque prácticamente todas las construcciones de tipo de puntero C++ de C o tienen un tipo C#de referencia homólogo en, sin embargo, hay situaciones en las que el acceso a los tipos de puntero se convierte en una necesidad. Por ejemplo, la interacción con el sistema operativo subyacente, el acceso a un dispositivo asignado a la memoria o la implementación de un algoritmo crítico en el tiempo puede no ser posible ni práctico sin acceso a los punteros. Para satisfacer esta necesidad, C# proporciona la capacidad de escribir ***código no seguro***.
 
-En código no seguro es posible declarar y operar con punteros, realizar conversiones entre los punteros y los tipos enteros, para tomar la dirección de las variables y así sucesivamente. En cierto sentido, escribir código no seguro es muy parecido a escribir código de C dentro de un programa de C#.
+En código no seguro es posible declarar y operar en punteros, para realizar conversiones entre punteros y tipos enteros, para tomar la dirección de las variables, etc. En cierto sentido, escribir código no seguro es muy similar a escribir código de C C# dentro de un programa.
 
-De hecho, el código no seguro es una característica "segura" desde la perspectiva de los desarrolladores y usuarios. Código no seguro debe marcarse con claridad con el modificador `unsafe`, por lo que los desarrolladores no puedan usar características no seguras por accidente, y el motor de ejecución funciona para asegurarse de que no se puede ejecutar código no seguro en un entorno de confianza.
+En realidad, el código no seguro es una característica "segura" desde la perspectiva de los desarrolladores y los usuarios. El código no seguro debe estar claramente marcado con el modificador `unsafe`, por lo que los desarrolladores no pueden usar las características no seguras accidentalmente, y el motor de ejecución funciona para asegurarse de que el código no seguro no se puede ejecutar en un entorno que no es de confianza.
 
 ## <a name="unsafe-contexts"></a>Contextos no seguros
 
-Las características de C# no seguras solo están disponibles en contextos no seguros. Se introduce un contexto no seguro mediante la inclusión de un `unsafe` modificador en la declaración de un tipo o miembro, o bien mediante un *unsafe_statement*:
+Las características no seguras de C# solo están disponibles en contextos no seguros. Un contexto no seguro se introduce mediante la inclusión de un modificador `unsafe` en la declaración de un tipo o miembro, o mediante la utilización de un *unsafe_statement*:
 
-*  Una declaración de clase, struct, interfaz o delegado puede incluir un `unsafe` modificador, en cuyo caso toda la extensión textual de la declaración (incluido el cuerpo de la clase, estructura o interfaz) se considera un contexto no seguro.
-*  Una declaración de un campo, método, propiedad, evento, indizador, operador, constructor de instancia, un destructor o constructor estático puede incluir un `unsafe` modificador, en cuyo caso toda la extensión textual de la declaración del miembro se considera un no seguro contexto.
-*  Un *unsafe_statement* habilita el uso de un contexto no seguro dentro de un *bloque*. Toda la extensión textual del asociado *bloque* se considera un contexto no seguro.
+*  Una declaración de una clase, un struct, una interfaz o un delegado puede incluir un modificador `unsafe`, en cuyo caso toda la extensión textual de esa declaración de tipos (incluido el cuerpo de la clase, el struct o la interfaz) se considera un contexto no seguro.
+*  Una declaración de un campo, un método, una propiedad, un evento, un indexador, un operador, un constructor de instancia, un destructor o un constructor estático puede incluir un modificador `unsafe`, en cuyo caso toda la extensión textual de dicha declaración de miembro se considera un contexto no seguro.
+*  Un *unsafe_statement* habilita el uso de un contexto no seguro dentro de un *bloque*. Toda la extensión textual del *bloque* asociado se considera un contexto no seguro.
 
-Las producciones gramaticales asociados se muestran a continuación.
+A continuación se muestran las producciones de gramática asociadas.
 
 ```antlr
 class_modifier_unsafe
@@ -106,7 +106,7 @@ public unsafe struct Node
 }
 ```
 
-el `unsafe` modificador especificado en la declaración de estructura hace que toda la extensión textual de la declaración de struct para convertirse en un contexto no seguro. Por lo tanto, es posible declarar el `Left` y `Right` campos de un tipo de puntero. El ejemplo anterior también podría escribirse
+el modificador `unsafe` especificado en la declaración de estructura hace que toda la extensión textual de la declaración del struct se convierta en un contexto no seguro. Por lo tanto, es posible declarar los campos `Left` y `Right` para que sean de un tipo de puntero. También se puede escribir el ejemplo anterior.
 
 ```csharp
 public struct Node
@@ -117,9 +117,9 @@ public struct Node
 }
 ```
 
-En este caso, el `unsafe` modificadores en declaraciones de campo, hacer que estas declaraciones se consideren contextos no seguros.
+Aquí, los modificadores `unsafe` en las declaraciones de campo hacen que esas declaraciones se consideren contextos no seguros.
 
-Aparte de establecer un contexto no seguro, lo que permite el uso de tipos de puntero, el `unsafe` modificador no tiene ningún efecto en un tipo o miembro. En el ejemplo
+Además de establecer un contexto no seguro, lo que permite el uso de tipos de puntero, el modificador `unsafe` no tiene ningún efecto en un tipo o miembro. En el ejemplo
 
 ```csharp
 public class A
@@ -139,9 +139,9 @@ public class B: A
 }
 ```
 
-el `unsafe` modificador en el `F` método `A` simplemente hace que la extensión textual del `F` para convertirse en un contexto no seguro en el que se pueden usar las características del lenguaje no seguras. En el reemplazo de `F` en `B`, no es necesario volver a especificar la `unsafe` modificador--a menos que, por supuesto, el `F` método `B` sí necesita tener acceso a características no seguras.
+el modificador `unsafe` en el método `F` de `A` hace que la extensión textual de `F` se convierta en un contexto no seguro en el que se pueden usar las características no seguras del lenguaje. En la invalidación de `F` en `B`, no hay necesidad de volver a especificar el modificador `unsafe`, a menos que, por supuesto, el método `F` en `B` necesite tener acceso a características no seguras.
 
-La situación es ligeramente diferente de un tipo de puntero es parte de la firma del método
+La situación es ligeramente diferente cuando un tipo de puntero forma parte de la Signatura del método.
 
 ```csharp
 public unsafe class A
@@ -155,11 +155,11 @@ public class B: A
 }
 ```
 
-En este caso, porque `F`de firma incluye un tipo de puntero, solo se puede escribir en un contexto no seguro. Sin embargo, el contexto no seguro se puede introducir convirtiendo toda la clase no seguro, como sucede en `A`, o mediante la inclusión de un `unsafe` modificador en la declaración de método, como es el caso en `B`.
+Aquí, dado que la firma de `F` incluye un tipo de puntero, solo se puede escribir en un contexto no seguro. Sin embargo, el contexto no seguro se puede introducir haciendo que la clase completa sea no segura, como sucede en `A`, o incluyendo un modificador `unsafe` en la declaración del método, como es el caso de `B`.
 
 ## <a name="pointer-types"></a>Tipos de puntero
 
-En un contexto no seguro, un *tipo* ([tipos](types.md)) puede ser un *tipo_de_puntero* , así como un *value_type* o un *reference_type* . Sin embargo, un *tipo_de_puntero* también se puede usar en un `typeof` expresión ([expresiones de creación de objeto anónimo](expressions.md#anonymous-object-creation-expressions)) fuera de un contexto no seguro como tal uso no es seguro.
+En un contexto no seguro, un *tipo* ([tipos](types.md)) puede ser un *pointer_type* , así como un *value_type* o un *reference_type*. Sin embargo, un *pointer_type* también se puede usar en una expresión `typeof` ([expresiones de creación de objetos anónimos](expressions.md#anonymous-object-creation-expressions)) fuera de un contexto no seguro, ya que dicho uso no es seguro.
 
 ```antlr
 type_unsafe
@@ -167,7 +167,7 @@ type_unsafe
     ;
 ```
 
-Un *tipo_de_puntero* se escribe como un *unmanaged_type* o la palabra clave `void`, seguido de un `*` token:
+Un *pointer_type* se escribe como una *unmanaged_type* o la palabra clave `void`, seguida de un token `*`:
 
 ```antlr
 pointer_type
@@ -180,50 +180,50 @@ unmanaged_type
     ;
 ```
 
-El tipo especificado antes del `*` en un puntero de tipo se denomina el ***tipo referente*** del tipo de puntero. Representa el tipo de la variable a la que apunta un valor del tipo de puntero.
+El tipo especificado antes del `*` en un tipo de puntero se denomina ***tipo referente*** del tipo de puntero. Representa el tipo de la variable a la que apunta un valor del tipo de puntero.
 
-A diferencia de las referencias (valores de tipos de referencia), punteros no se realiza el seguimiento por el recolector de elementos no utilizados, el recolector de elementos no utilizados no tiene conocimiento de los punteros y los datos a los que señalan. Por este motivo, un puntero no se permite para que apunte a una referencia o a una estructura que contenga referencias, y debe ser el tipo referente de un puntero un *unmanaged_type*.
+A diferencia de las referencias (valores de tipos de referencia), el recolector de elementos no utilizados no realiza un seguimiento de los punteros; el recolector de elementos no utilizados no tiene conocimiento de los punteros y los datos a los que apuntan. Por esta razón, no se permite que un puntero señale a una referencia o a un struct que contenga referencias, y el tipo referente de un puntero debe ser un *unmanaged_type*.
 
-Un *unmanaged_type* es cualquier tipo que no sea un *reference_type* o tipo construido y no contiene *reference_type* o construye los campos de tipo en cualquier nivel de anidamiento. En otras palabras, un *unmanaged_type* es uno de los siguientes:
+Un *unmanaged_type* es cualquier tipo que no sea un tipo *reference_type* o construido y que no contenga campos de tipo *reference_type* o construido en ningún nivel de anidamiento. En otras palabras, un *unmanaged_type* es uno de los siguientes:
 
-*  `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `float`, `double`, `decimal`, o `bool`.
+*  `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `float`, 0, 1 o 2.
 *  Cualquier *enum_type*.
-*  Cualquier *tipo_de_puntero*.
-*  Ninguno definido por el usuario *struct_type* que no es un tipo construido y contiene los campos de *unmanaged_type*s solo.
+*  Cualquier *pointer_type*.
+*  Cualquier *struct_type* definido por el usuario que no sea un tipo construido y solo contenga campos de *unmanaged_type*s.
 
-La regla intuitiva para mezclar punteros y referencias es que pueden contener punteros referentes de las referencias (objetos), pero referentes de punteros no pueden contener referencias.
+La regla intuitiva para la combinación de punteros y referencias es que los referentes de referencias (objetos) pueden contener punteros, pero los referentes de punteros no pueden contener referencias.
 
-En la tabla siguiente figuran algunos ejemplos de tipos de puntero:
+En la tabla siguiente se proporcionan algunos ejemplos de tipos de puntero:
 
 | __Ejemplo__ | __Descripción__                               |
 |-------------|-----------------------------------------------|
-| `byte*`     | puntero a `byte`                             |
-| `char*`     | puntero a `char`                             |
-| `int**`     | Puntero a puntero a `int`                   |
+| `byte*`     | Puntero a `byte`                             |
+| `char*`     | Puntero a `char`                             |
+| `int**`     | Puntero al puntero a `int`                   |
 | `int*[]`    | Matriz unidimensional de punteros a `int` |
 | `void*`     | Puntero a un tipo desconocido                       |
 
-Para una implementación determinada, todos los tipos de puntero deben tener el mismo tamaño y la representación.
+Para una implementación determinada, todos los tipos de puntero deben tener el mismo tamaño y representación.
 
-A diferencia de C y C++, cuando se declaran varios punteros en la misma declaración, en C# el `*` se escribe junto con el tipo subyacente únicamente, no como una puntuación de prefijo en cada nombre de puntero. Por ejemplo
+A diferencia de C C++y, cuando se declaran varios punteros en la misma C# declaración, en el `*` se escribe junto con el tipo subyacente, no como un signo de puntuación de prefijo en cada nombre de puntero. Por ejemplo
 
 ```csharp
 int* pi, pj;    // NOT as int *pi, *pj;
 ```
 
-El valor de un puntero de tipo `T*` representa la dirección de una variable de tipo `T`. El operador de direccionamiento indirecto del puntero `*` ([direccionamiento indirecto del puntero](unsafe-code.md#pointer-indirection)) puede utilizarse para tener acceso a esta variable. Por ejemplo, dada una variable `P` typu `int*`, la expresión `*P` denota el `int` se encontró en la dirección contenida en la variable `P`.
+El valor de un puntero que tiene el tipo `T*` representa la dirección de una variable de tipo `T`. El operador de direccionamiento indirecto de puntero `*` ([direccionamiento indirecto del puntero](unsafe-code.md#pointer-indirection)) se puede usar para tener acceso a esta variable. Por ejemplo, dada una variable `P` de tipo `int*`, la expresión `*P` denota la variable `int` que se encuentra en la dirección contenida en `P`.
 
-Al igual que una referencia de objeto, puede ser un puntero `null`. Aplicar el operador de direccionamiento indirecto a un `null` puntero da como resultado un comportamiento definido por la implementación. Un puntero con el valor `null` viene dado por todos los bits cero.
+Al igual que una referencia de objeto, un puntero puede ser `null`. Si se aplica el operador de direccionamiento indirecto a un puntero `null`, se producirá un comportamiento definido por la implementación. Un puntero con valor `null` se representa mediante All-bits-cero.
 
-El `void*` tipo representa un puntero a un tipo desconocido. Dado que el tipo referente es desconocido, no se puede aplicar el operador de direccionamiento indirecto a un puntero de tipo `void*`, ni puede realizarse ninguna operación aritmética en un puntero. Sin embargo, un puntero de tipo `void*` puede convertirse a cualquier otro tipo de puntero (y viceversa).
+El tipo `void*` representa un puntero a un tipo desconocido. Dado que el tipo referente es desconocido, el operador de direccionamiento indirecto no se puede aplicar a un puntero de tipo `void*`, ni se puede realizar ninguna operación aritmética en dicho puntero. Sin embargo, un puntero de tipo `void*` se puede convertir a cualquier otro tipo de puntero (y viceversa).
 
-Tipos de puntero son una categoría de tipos independiente. A diferencia de los tipos de referencia y tipos de valor, tipos de puntero no heredan de `object` y no existe ninguna conversión entre tipos de puntero y `object`. En concreto, la conversión boxing y unboxing ([conversiones Boxing y unboxing](types.md#boxing-and-unboxing)) no son compatibles con punteros. Sin embargo, se permiten las conversiones entre diferentes tipos de puntero y entre tipos de puntero y los tipos enteros. Esto se describe en [conversiones de puntero](unsafe-code.md#pointer-conversions).
+Los tipos de puntero son una categoría independiente de tipos. A diferencia de los tipos de referencia y los tipos de valor, los tipos de puntero no heredan de `object` y no existen conversiones entre los tipos de puntero y `object`. En concreto, no se admiten las conversiones boxing y unboxing ([conversión boxing y unboxing](types.md#boxing-and-unboxing)) para los punteros. Sin embargo, se permiten conversiones entre diferentes tipos de puntero y entre tipos de puntero y tipos enteros. Esto se describe en [conversiones de puntero](unsafe-code.md#pointer-conversions).
 
-Un *tipo_de_puntero* no se puede usar como un argumento de tipo ([construye los tipos](types.md#constructed-types)) e inferencia ([inferencia de tipo](expressions.md#type-inference)) se produce un error en las llamadas de método genérico que habría deduce un tipo de argumento sea un tipo de puntero.
+Un *pointer_type* no se puede usar como un argumento de tipo ([tipos construidos](types.md#constructed-types)) y se produce un error en la inferencia de tipos ([inferencia de tipos](expressions.md#type-inference)) en las llamadas de método genérico que habrían deducido un argumento de tipo para que sea un tipo de puntero.
 
-Un *tipo_de_puntero* puede utilizarse como el tipo de un campo volátil ([campos volátiles](classes.md#volatile-fields)).
+Un *pointer_type* se puede usar como el tipo de un campo volátil ([campos volátiles](classes.md#volatile-fields)).
 
-Aunque se pueden pasar punteros como `ref` o `out` parámetros, si lo hace, por lo que puede provocar un comportamiento indefinido, ya que el puntero puede bien establecerse para que apunte a una variable local que ya no existe cuando se devuelve el método llamado, o el objeto fijo para la TI usa para apuntar, ya no es fijo. Por ejemplo:
+Aunque los punteros se pueden pasar como parámetros `ref` o `out`, hacerlo puede provocar un comportamiento indefinido, ya que el puntero se puede establecer para que apunte a una variable local que ya no existe cuando el método llamado devuelve o al objeto fijo al que se ha utilizado para apuntar , ya no se ha corregido. Por ejemplo:
 
 ```csharp
 using System;
@@ -257,7 +257,7 @@ class Test
 }
 ```
 
-Un método puede devolver un valor de algún tipo, y ese tipo puede ser un puntero. Por ejemplo, cuando recibe un puntero a una secuencia contigua de `int`s, número de elementos de la secuencia y algunos otros `int` valor, el método siguiente devuelve la dirección de ese valor en la secuencia, si se produce una coincidencia; de lo contrario, devuelve `null`:
+Un método puede devolver un valor de algún tipo y ese tipo puede ser un puntero. Por ejemplo, cuando se proporciona un puntero a una secuencia contigua de `int`s, el recuento de elementos de esa secuencia y otros valores `int`, el método siguiente devuelve la dirección de ese valor en esa secuencia, si se produce una coincidencia; en caso contrario, devuelve `null`:
 
 ```csharp
 unsafe static int* Find(int* pi, int size, int value) {
@@ -270,58 +270,58 @@ unsafe static int* Find(int* pi, int size, int value) {
 }
 ```
 
-En un contexto no seguro, existen varias construcciones para operar con punteros:
+En un contexto no seguro, hay varias construcciones disponibles para trabajar en punteros:
 
-*  El `*` operador puede usarse para realizar el direccionamiento indirecto del puntero ([direccionamiento indirecto del puntero](unsafe-code.md#pointer-indirection)).
-*  El `->` operador puede utilizarse para tener acceso a un miembro de un struct a través de un puntero ([acceso a miembros de puntero](unsafe-code.md#pointer-member-access)).
-*  El `[]` operador puede utilizarse para indizar un puntero ([acceso de elemento de puntero](unsafe-code.md#pointer-element-access)).
-*  El `&` operador se puede utilizar para obtener la dirección de una variable ([el operador address-of](unsafe-code.md#the-address-of-operator)).
-*  El `++` y `--` operadores pueden utilizarse para incrementar y disminuir punteros ([puntero incremento y decremento](unsafe-code.md#pointer-increment-and-decrement)).
-*  El `+` y `-` operadores se pueden utilizar para realizar la aritmética de puntero ([aritmética de puntero](unsafe-code.md#pointer-arithmetic)).
-*  El `==`, `!=`, `<`, `>`, `<=`, y `=>` operadores pueden utilizarse para comparar punteros ([comparación de punteros](unsafe-code.md#pointer-comparison)).
-*  El `stackalloc` operador se puede utilizar para asignar memoria de la pila de llamadas ([búferes de tamaño fijo](unsafe-code.md#fixed-size-buffers)).
-*  El `fixed` instrucción puede usarse para fijar temporalmente una variable se puede obtener su dirección ([la instrucción fixed](unsafe-code.md#the-fixed-statement)).
+*  El operador `*` se puede usar para realizar la direccionamiento indirecto del puntero ([direccionamiento indirecto del puntero](unsafe-code.md#pointer-indirection)).
+*  El operador `->` se puede usar para tener acceso a un miembro de un struct a través de un puntero ([acceso a miembros de puntero](unsafe-code.md#pointer-member-access)).
+*  El operador `[]` se puede usar para indizar un puntero ([acceso al elemento de puntero](unsafe-code.md#pointer-element-access)).
+*  El operador `&` se puede usar para obtener la dirección de una variable ([el operador Address-of](unsafe-code.md#the-address-of-operator)).
+*  Los operadores `++` y `--` se pueden usar para aumentar y disminuir punteros ([incremento y decremento del puntero](unsafe-code.md#pointer-increment-and-decrement)).
+*  Los operadores `+` y `-` se pueden usar para realizar aritmética de punteros ([aritmética de puntero](unsafe-code.md#pointer-arithmetic)).
+*  Los operadores `==`, `!=`, `<`, `>`, `<=` y `=>` se pueden usar para comparar los punteros ([comparación de punteros](unsafe-code.md#pointer-comparison)).
+*  El operador `stackalloc` se puede usar para asignar memoria de la pila de llamadas ([búferes de tamaño fijo](unsafe-code.md#fixed-size-buffers)).
+*  La instrucción `fixed` se puede usar para corregir temporalmente una variable para que se pueda obtener su dirección ([la instrucción Fixed](unsafe-code.md#the-fixed-statement)).
 
 ## <a name="fixed-and-moveable-variables"></a>Variables fijas y móviles
 
-El operador address-of ([el operador address-of](unsafe-code.md#the-address-of-operator)) y el `fixed` instrucción ([la instrucción fixed](unsafe-code.md#the-fixed-statement)) dividen las variables en dos categorías: ***Se ha corregido variables*** y ***variables móviles***.
+El operador Address-of ([el operador Address-of](unsafe-code.md#the-address-of-operator)) y la instrucción `fixed` ([instrucción Fixed](unsafe-code.md#the-fixed-statement)) dividen las variables en dos categorías: ***Variables fijas*** y ***variables móviles***.
 
-Variables fijas residen en ubicaciones de almacenamiento que se ven afectadas por la operación del recolector de elementos no utilizados. (Ejemplos de variables fijas incluyen variables locales, parámetros de valor y las variables creadas por desreferenciar punteros). Por otro lado, variables móviles residen en ubicaciones de almacenamiento que están sujetos a reubicación o eliminación por el recolector de elementos no utilizados. (Ejemplos de variables móviles incluyen campos de objetos y elementos de matrices).
+Las variables fijas residen en ubicaciones de almacenamiento que no se ven afectadas por el funcionamiento del recolector de elementos no utilizados. (Algunos ejemplos de variables fijas incluyen variables locales, parámetros de valor y variables creadas mediante punteros de desreferencia). Por otro lado, las variables móviles residen en ubicaciones de almacenamiento que están sujetas a reubicación o eliminación por parte del recolector de elementos no utilizados. (Ejemplos de variables móviles incluyen campos en objetos y elementos de matrices).
 
-El `&` operador ([el operador address-of](unsafe-code.md#the-address-of-operator)) permite obtener la dirección de una variable fija sin restricciones. Sin embargo, dado que una variable móvil está sujeta a reubicación o eliminación por el recolector de elementos no utilizados, la dirección de una variable móvil solo se puede obtener mediante una `fixed` instrucción ([la instrucción fixed](unsafe-code.md#the-fixed-statement)) y esa dirección solo es válido durante el tiempo que dure que `fixed` instrucción.
+El operador `&` ([el operador Address-of](unsafe-code.md#the-address-of-operator)) permite obtener la dirección de una variable fija sin restricciones. Sin embargo, dado que una variable móvil está sujeta a la reubicación o eliminación por parte del recolector de elementos no utilizados, la dirección de una variable móvil solo se puede obtener mediante una instrucción `fixed` ([la instrucción Fixed](unsafe-code.md#the-fixed-statement)) y esa dirección solo es válida para el duración de esa instrucción @no__t 2.
 
-En términos precisos, una variable fija es uno de los siguientes:
+En términos precisos, una variable fija es una de las siguientes:
 
-*  Una variable resultante de un *simple_name* ([nombres simples](expressions.md#simple-names)) que hace referencia a una variable local o un parámetro de valor, a menos que la variable capturada por una función anónima.
-*  Una variable resultante de un *member_access* ([acceso a miembros](expressions.md#member-access)) del formulario `V.I`, donde `V` es una variable fija de un *struct_type*.
-*  Una variable resultante de un *pointer_indirection_expression* ([direccionamiento indirecto del puntero](unsafe-code.md#pointer-indirection)) del formulario `*P`, un *pointer_member_access* ([Acceso a miembros de puntero](unsafe-code.md#pointer-member-access)) del formulario `P->I`, o un *pointer_element_access* ([acceso de elemento de puntero](unsafe-code.md#pointer-element-access)) del formulario `P[E]`.
+*  Variable resultante de un *simple_name* ([nombres simples](expressions.md#simple-names)) que hace referencia a una variable local o un parámetro de valor, a menos que una función anónima Capture la variable.
+*  Variable resultante de un *member_access* ([acceso a miembros](expressions.md#member-access)) con el formato `V.I`, donde `V` es una variable fija de un *struct_type*.
+*  Una variable resultante de un *pointer_indirection_expression* ([direccionamiento indirecto del puntero](unsafe-code.md#pointer-indirection)) con el formato `*P`, un *pointer_member_access* ([acceso a miembros de puntero](unsafe-code.md#pointer-member-access)) con el formato `P->I` o un *pointer_element_access* ( [Acceso a elementos de puntero](unsafe-code.md#pointer-element-access)) del formulario `P[E]`.
 
 Todas las demás variables se clasifican como variables móviles.
 
-Tenga en cuenta que un campo estático se clasifica como una variable móvil. Tenga en cuenta también que un `ref` o `out` parámetro se clasifica como una variable móvil, incluso si el argumento proporcionado para el parámetro es una variable fija. Por último, tenga en cuenta que una variable generada por desreferencia un puntero siempre se clasifica como una variable fija.
+Tenga en cuenta que un campo estático se clasifica como una variable móvil. Tenga en cuenta también que un parámetro `ref` o `out` se clasifica como una variable móvil, incluso si el argumento especificado para el parámetro es una variable fija. Por último, tenga en cuenta que una variable generada al desreferenciar un puntero siempre se clasifica como una variable fija.
 
 ## <a name="pointer-conversions"></a>Conversiones de puntero
 
-En un contexto no seguro, el conjunto de conversiones implícitas disponibles ([conversiones implícitas](conversions.md#implicit-conversions)) se extiende para incluir las siguientes conversiones implícitas de puntero:
+En un contexto no seguro, el conjunto de conversiones implícitas disponibles ([conversiones implícitas](conversions.md#implicit-conversions)) se extiende para incluir las siguientes conversiones de puntero implícitas:
 
-*  Desde cualquier *tipo_de_puntero* al tipo `void*`.
-*  Desde el `null` literal a cualquier *tipo_de_puntero*.
+*  De cualquier *pointer_type* al tipo `void*`.
+*  Del literal `null` a cualquier *pointer_type*.
 
-Además, en un contexto no seguro, el conjunto de conversiones explícitas disponibles ([las conversiones explícitas](conversions.md#explicit-conversions)) se extiende para incluir las siguientes conversiones explícitas de puntero:
+Además, en un contexto no seguro, el conjunto de conversiones explícitas disponibles ([conversiones explícitas](conversions.md#explicit-conversions)) se extiende para incluir las siguientes conversiones de puntero explícitas:
 
-*  Desde cualquier *tipo_de_puntero* a cualquier otro *tipo_de_puntero*.
-*  Desde `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, o `ulong` a cualquier *tipo_de_puntero*.
-*  Desde cualquier *tipo_de_puntero* a `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, o `ulong`.
+*  De cualquier *pointer_type* a cualquier otro *pointer_type*.
+*  Desde `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long` o `ulong` a cualquier *pointer_type*.
+*  De cualquier *pointer_type* a `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long` o `ulong`.
 
 Por último, en un contexto no seguro, el conjunto de conversiones implícitas estándar ([conversiones implícitas estándar](conversions.md#standard-implicit-conversions)) incluye la siguiente conversión de puntero:
 
-*  Desde cualquier *tipo_de_puntero* al tipo `void*`.
+*  De cualquier *pointer_type* al tipo `void*`.
 
-Conversiones entre los dos tipos de puntero nunca cambian el valor de puntero real. En otras palabras, una conversión de un tipo de puntero a la otra tiene ningún efecto en la dirección subyacente dada por el puntero.
+Las conversiones entre dos tipos de puntero nunca cambian el valor del puntero real. En otras palabras, una conversión de un tipo de puntero a otro no tiene ningún efecto en la dirección subyacente proporcionada por el puntero.
 
-Cuando un tipo de puntero se convierte a otro, si aún no está correctamente alineado para el tipo al que apunta el puntero resultante, el comportamiento es indefinido si se desreferencia el resultado. En general, el concepto "correctamente alineado" es transitivo: si un puntero al tipo `A` está correctamente alineado para que un puntero al tipo `B`, que, a su vez, está correctamente alineado para que un puntero al tipo `C`, a continuación, un puntero a tipo `A`está correctamente alineado para que un puntero al tipo `C`.
+Cuando un tipo de puntero se convierte en otro, si el puntero resultante no está alineado correctamente para el tipo señalado, el comportamiento es indefinido si se desreferencia el resultado. En general, el concepto "correctamente alineado" es transitivo: Si un puntero al tipo `A` está alineado correctamente para un puntero al tipo `B`, que, a su vez, está alineado correctamente para un puntero al tipo `C`, un puntero al tipo `A` se alinea correctamente para un puntero al tipo `C`.
 
-Tenga en cuenta lo siguiente en el que se tiene acceso a una variable de un tipo determinado a través de un puntero a un tipo diferente:
+Considere el siguiente caso en el que se tiene acceso a una variable con un tipo a través de un puntero a un tipo diferente:
 
 ```csharp
 char c = 'A';
@@ -332,7 +332,7 @@ int i = *pi;         // undefined
 *pi = 123456;        // undefined
 ```
 
-Cuando un tipo de puntero se convierte en un puntero a byte, el resultado apunta al byte dirigido más bajo de la variable. Incrementos sucesivos del resultado, hasta alcanzar el tamaño de la variable, dan como resultado punteros a los bytes restantes de esa variable. Por ejemplo, el siguiente método muestra cada uno de los ocho bytes en un valor doble como un valor hexadecimal:
+Cuando un tipo de puntero se convierte en un puntero a byte, el resultado apunta al byte más bajo direccionable de la variable. Los incrementos sucesivos del resultado, hasta el tamaño de la variable, proporcionan punteros a los bytes restantes de esa variable. Por ejemplo, el siguiente método muestra cada uno de los ocho bytes en un tipo Double como un valor hexadecimal:
 
 ```csharp
 using System;
@@ -351,26 +351,26 @@ class Test
 }
 ```
 
-Por supuesto, el resultado producido depende endian.
+Por supuesto, la salida generada depende de modos endian.
 
-Las asignaciones entre los punteros y los enteros son definido por la implementación. Sin embargo, en 32 * y arquitecturas de CPU de 64 bits con un espacio de direcciones lineales, conversiones de punteros a o desde tipos integrales normalmente se comportan exactamente igual que las conversiones de `uint` o `ulong` valores, respectivamente, a o desde esos tipos integrales.
+Las asignaciones entre punteros y enteros están definidas por la implementación. Sin embargo, en las arquitecturas de CPU de 32 * y 64 bits con un espacio de direcciones lineal, las conversiones de punteros a o desde tipos enteros normalmente se comportan exactamente igual que las conversiones de los valores `uint` o `ulong`, respectivamente, a o desde esos tipos enteros.
 
 ### <a name="pointer-arrays"></a>Matrices de puntero
 
-En un contexto no seguro, se pueden construir matrices de punteros. Sólo algunas de las conversiones que se aplican a otros tipos de matriz se permiten en las matrices de puntero:
+En un contexto no seguro, se pueden construir matrices de punteros. En las matrices de puntero solo se permiten algunas de las conversiones que se aplican a otros tipos de matriz:
 
-*  La conversión implícita de referencia ([conversiones implícitas de referencia](conversions.md#implicit-reference-conversions)) desde cualquier *array_type* a `System.Array` y las interfaces que implementa también se aplica a las matrices de puntero. Sin embargo, cualquier intento de obtener acceso a los elementos de matriz a través de `System.Array` o las interfaces que implementa, se producirán una excepción en tiempo de ejecución, como tipos de puntero no son convertibles a `object`.
-*  Las conversiones de referencia de implícitas y explícitas ([conversiones implícitas de referencia](conversions.md#implicit-reference-conversions), [conversiones explícitas de referencia](conversions.md#explicit-reference-conversions)) de un tipo de matriz unidimensional `S[]` a `System.Collections.Generic.IList<T>` y sus interfaces base genéricos nunca se aplican a las matrices de puntero, ya que los tipos de puntero no se puede usar como argumentos de tipo y no hay ninguna conversión entre tipos de puntero a tipos que no son de puntero.
-*  La conversión de referencia explícita ([conversiones explícitas de referencia](conversions.md#explicit-reference-conversions)) desde `System.Array` y las interfaces que implementa a cualquier *array_type* se aplica a las matrices de puntero.
-*  Las conversiones de referencia explícita ([conversiones explícitas de referencia](conversions.md#explicit-reference-conversions)) desde `System.Collections.Generic.IList<S>` y sus interfaces base a un tipo de matriz unidimensional `T[]` nunca se aplica a las matrices de puntero, ya que no pueden ser tipos de puntero usar como argumentos de tipo y no hay ninguna conversión entre tipos de puntero a tipos que no son de puntero.
+*  La conversión de referencia implícita ([conversiones de referencia implícita](conversions.md#implicit-reference-conversions)) de cualquier *array_type* a `System.Array` y las interfaces que implementa también se aplican a las matrices de punteros. Sin embargo, cualquier intento de obtener acceso a los elementos de la matriz a través de `System.Array` o las interfaces que implementa producirá una excepción en tiempo de ejecución, ya que los tipos de puntero no se pueden convertir a `object`.
+*  Las conversiones de referencia implícitas y explícitas (conversiones de[referencia implícita](conversions.md#implicit-reference-conversions), [conversiones de referencia explícitas](conversions.md#explicit-reference-conversions)) de un tipo de matriz unidimensional `S[]` a `System.Collections.Generic.IList<T>` y sus interfaces base genéricas nunca se aplican a las matrices de punteros. Dado que los tipos de puntero no se pueden usar como argumentos de tipo y no hay conversiones de tipos de puntero en tipos que no son de puntero.
+*  La conversión de referencia explícita ([conversiones de referencia explícita](conversions.md#explicit-reference-conversions)) de `System.Array` y las interfaces que implementa en cualquier *array_type* se aplican a las matrices de punteros.
+*  Las conversiones de referencia explícitas ([conversiones de referencia explícita](conversions.md#explicit-reference-conversions)) de `System.Collections.Generic.IList<S>` y sus interfaces base a un tipo de matriz unidimensional `T[]` nunca se aplican a las matrices de puntero, ya que los tipos de puntero no se pueden usar como argumentos de tipo y hay no hay conversiones de tipos de puntero a tipos que no sean de puntero.
 
-Estas restricciones indican que la expansión para el `foreach` instrucción a través de las matrices se describe en [la instrucción foreach](statements.md#the-foreach-statement) no se puede aplicar a las matrices de puntero. En su lugar, una instrucción foreach del formulario
+Estas restricciones implican que la expansión de la instrucción `foreach` sobre las matrices descritas en [la instrucción foreach](statements.md#the-foreach-statement) no se puede aplicar a las matrices de punteros. En su lugar, una instrucción foreach con el formato
 
 ```csharp
 foreach (V v in x) embedded_statement
 ```
 
-donde el tipo de `x` es un tipo de matriz del formulario `T[,,...,]`, `N` es el número de dimensiones menos 1 y `T` o `V` es un tipo de puntero, se expande con bucles for anidados como sigue:
+donde el tipo de `x` es un tipo de matriz con el formato `T[,,...,]`, @no__t 2 es el número de dimensiones menos 1 y `T` o `V` es un tipo de puntero, se expande mediante bucles for anidados como se indica a continuación:
 
 ```csharp
 {
@@ -385,13 +385,13 @@ donde el tipo de `x` es un tipo de matriz del formulario `T[,,...,]`, `N` es el 
 }
 ```
 
-Las variables `a`, `i0`, `i1`,..., `iN` no está visible o accesible a `x` o *embedded_statement* o cualquier otro código fuente del programa. La variable `v` es de solo lectura en la instrucción incrustada. Si no hay una conversión explícita ([conversiones de puntero](unsafe-code.md#pointer-conversions)) desde `T` (el tipo de elemento) para `V`, se genera un error y no se toma ningún paso adicional. Si `x` tiene el valor `null`, un `System.NullReferenceException` se produce en tiempo de ejecución.
+Las variables `a`, `i0`, `i1`,..., `iN` no están visibles o son accesibles para `x` o el *embedded_statement* o cualquier otro código fuente del programa. La variable `v` es de solo lectura en la instrucción insertada. Si no hay una conversión explícita ([conversiones de puntero](unsafe-code.md#pointer-conversions)) de `T` (el tipo de elemento) a `V`, se genera un error y no se realiza ningún paso más. Si `x` tiene el valor `null`, se `System.NullReferenceException` produce una excepción en tiempo de ejecución.
 
 ## <a name="pointers-in-expressions"></a>Punteros en expresiones
 
-En un contexto no seguro, una expresión puede producir un resultado de un tipo de puntero, pero fuera de un contexto no seguro es un error en tiempo de compilación para una expresión de un tipo de puntero. En términos precisos, fuera de un contexto no seguro durante la compilación se produce un error si cualquier *simple_name* ([nombres simples](expressions.md#simple-names)), *member_access* ([acceso a miembros ](expressions.md#member-access)), *invocation_expression* ([expresiones de invocación](expressions.md#invocation-expressions)), o *element_access* ([acceso de elemento](expressions.md#element-access)) es un tipo de puntero.
+En un contexto no seguro, una expresión puede producir un resultado de un tipo de puntero, pero fuera de un contexto no seguro, es un error en tiempo de compilación para que una expresión sea de un tipo de puntero. En términos precisos, fuera de un contexto no seguro, se produce un error en tiempo de compilación si *simple_name* ([nombres simples](expressions.md#simple-names)), *member_access* ([acceso a miembros](expressions.md#member-access)), *invocation_expression* ([expresiones de invocación](expressions.md#invocation-expressions)) o  *element_access* ([acceso a elementos](expressions.md#element-access)) es de un tipo de puntero.
 
-En un contexto no seguro, el *primary_no_array_creation_expression* ([expresiones primarias](expressions.md#primary-expressions)) y *unary_expression* ([losoperadoresunarios](expressions.md#unary-operators)) producciones permiten las siguientes construcciones adicionales:
+En un contexto no seguro, las producciones *primary_no_array_creation_expression* ([expresiones primarias](expressions.md#primary-expressions)) y *unary_expression* ([operadores unarios](expressions.md#unary-operators)) permiten las siguientes construcciones adicionales:
 
 ```antlr
 primary_no_array_creation_expression_unsafe
@@ -406,11 +406,11 @@ unary_expression_unsafe
     ;
 ```
 
-Estas construcciones se describen en las secciones siguientes. La prioridad y asociatividad de los operadores no seguros está implícito en la gramática.
+Estas construcciones se describen en las secciones siguientes. La gramática implica la prioridad y la asociatividad de los operadores no seguros.
 
-### <a name="pointer-indirection"></a>Direccionamiento indirecto del puntero
+### <a name="pointer-indirection"></a>Direccionamiento indirecto de puntero
 
-Un *pointer_indirection_expression* consta de un asterisco (`*`) seguido por un *unary_expression*.
+Un *pointer_indirection_expression* consta de un asterisco (`*`) seguido de un *unary_expression*.
 
 ```antlr
 pointer_indirection_expression
@@ -418,17 +418,17 @@ pointer_indirection_expression
     ;
 ```
 
-El operador unario `*` operador denota el direccionamiento indirecto del puntero y se utiliza para obtener la variable a la que señala un puntero. El resultado de evaluar `*P`, donde `P` es una expresión de un tipo de puntero `T*`, es una variable de tipo `T`. Es un error en tiempo de compilación para aplicar el operador unario `*` operador en una expresión de tipo `void*` o en una expresión que no sea de un tipo de puntero.
+El operador unario `*` denota el direccionamiento indirecto del puntero y se usa para obtener la variable a la que señala un puntero. El resultado de evaluar `*P`, donde `P` es una expresión de un tipo de puntero `T*`, es una variable de tipo `T`. Es un error en tiempo de compilación aplicar el operador unario `*` a una expresión de tipo `void*` o a una expresión que no es de un tipo de puntero.
 
-El efecto de aplicar el operador unario `*` operador para un `null` puntero está definido por la implementación. En concreto, no hay ninguna garantía de que esta operación produce un `System.NullReferenceException`.
+El efecto de aplicar el operador unario `*` a un puntero `null` está definido por la implementación. En concreto, no hay ninguna garantía de que esta operación produzca una `System.NullReferenceException`.
 
-Si se ha asignado un valor no válido para el puntero, el comportamiento de unario `*` operador no está definido. Entre los valores no válidos para desreferenciar un puntero unario `*` operadores tienen una dirección incorrectamente alineada para el tipo señalado (vea el ejemplo de [conversiones de puntero](unsafe-code.md#pointer-conversions)) y la dirección de una variable después de la final de su duración.
+Si se ha asignado un valor no válido al puntero, el comportamiento del operador unario `*` es indefinido. Entre los valores no válidos para desreferenciar un puntero por el operador unario `*` hay una dirección alineada incorrectamente para el tipo señalado (vea el ejemplo de [conversiones de puntero](unsafe-code.md#pointer-conversions)) y la dirección de una variable después del final de su período de duración.
 
-Para fines de análisis de asignación definitiva, una variable producida al evaluar una expresión de formato `*P` se considera asignado inicialmente ([variables asignadas inicialmente](variables.md#initially-assigned-variables)).
+A efectos del análisis de asignación definitiva, una variable generada al evaluar una expresión con el formato `*P` se considera asignada inicialmente ([variables asignadas inicialmente](variables.md#initially-assigned-variables)).
 
 ### <a name="pointer-member-access"></a>Acceso a miembros de puntero
 
-Un *pointer_member_access* consta de un *primary_expression*, seguido de un "`->`" símbolo (token), seguido de un *identificador* y un opcional*type_argument_list*.
+Un *pointer_member_access* consta de un *primary_expression*, seguido de un token "`->`", seguido de un *identificador* y un *type_argument_list*opcional.
 
 ```antlr
 pointer_member_access
@@ -436,9 +436,9 @@ pointer_member_access
     ;
 ```
 
-En un acceso de miembro de puntero del formulario `P->I`, `P` debe ser una expresión de un tipo de puntero distinto `void*`, y `I` debe denotar un miembro accesible del tipo al que `P` puntos.
+En un acceso de miembro de puntero con el formato `P->I`, `P` debe ser una expresión de un tipo de puntero distinto de `void*` y `I` debe indicar un miembro accesible del tipo al que `P` puntos.
 
-Un acceso de miembro de puntero de la forma `P->I` se evalúa exactamente como `(*P).I`. Para obtener una descripción del operador de direccionamiento indirecto del puntero (`*`), consulte [direccionamiento indirecto del puntero](unsafe-code.md#pointer-indirection). Para obtener una descripción del operador de acceso a miembros (`.`), consulte [acceso a miembros](expressions.md#member-access).
+Un acceso de miembro de puntero con el formato `P->I` se evalúa exactamente como `(*P).I`. Para obtener una descripción del operador de direccionamiento indirecto de puntero (`*`), vea [direccionamiento indirecto del puntero](unsafe-code.md#pointer-indirection). Para obtener una descripción del operador de acceso a miembros (`.`), consulte [acceso a miembros](expressions.md#member-access).
 
 En el ejemplo
 
@@ -469,7 +469,7 @@ class Test
 }
 ```
 
-el `->` operador se usa para tener acceso a campos e invocar un método de un struct a través de un puntero. Dado que la operación `P->I` equivale exactamente a `(*P).I`, el `Main` método podría igual de bien se han escrito:
+el operador `->` se utiliza para tener acceso a los campos e invocar un método de un struct a través de un puntero. Dado que la operación `P->I` es precisamente equivalente a `(*P).I`, el método `Main` podría haberse escrito igualmente correctamente:
 
 ```csharp
 class Test
@@ -486,9 +486,9 @@ class Test
 }
 ```
 
-### <a name="pointer-element-access"></a>Acceso de elemento de puntero
+### <a name="pointer-element-access"></a>Acceso a elementos de puntero
 
-Un *pointer_element_access* consta de un *primary_no_array_creation_expression* seguido de una expresión encerrada entre "`[`"y"`]`".
+Un *pointer_element_access* consta de un *primary_no_array_creation_expression* seguido de una expresión encerrada en "`[`" y "`]`".
 
 ```antlr
 pointer_element_access
@@ -496,9 +496,9 @@ pointer_element_access
     ;
 ```
 
-En un acceso de elemento de puntero de la forma `P[E]`, `P` debe ser una expresión de un tipo de puntero distinto `void*`, y `E` debe ser una expresión que se puede convertir implícitamente a `int`, `uint`, `long`, o `ulong`.
+En un elemento de puntero el acceso del formulario `P[E]`, `P` debe ser una expresión de un tipo de puntero distinto de `void*` y `E` debe ser una expresión que se pueda convertir implícitamente a `int`, `uint`, `long` o `ulong`.
 
-Un acceso de elemento de puntero de la forma `P[E]` se evalúa exactamente como `*(P + E)`. Para obtener una descripción del operador de direccionamiento indirecto del puntero (`*`), consulte [direccionamiento indirecto del puntero](unsafe-code.md#pointer-indirection). Para obtener una descripción del operador de suma de puntero (`+`), consulte [aritmética de puntero](unsafe-code.md#pointer-arithmetic).
+Un acceso de elemento de puntero del formulario `P[E]` se evalúa exactamente como `*(P + E)`. Para obtener una descripción del operador de direccionamiento indirecto de puntero (`*`), vea [direccionamiento indirecto del puntero](unsafe-code.md#pointer-indirection). Para obtener una descripción del operador de adición de puntero (`+`), vea [aritmética de punteros](unsafe-code.md#pointer-arithmetic).
 
 En el ejemplo
 
@@ -514,7 +514,7 @@ class Test
 }
 ```
 
-un acceso de elemento de puntero se usa para inicializar el búfer de caracteres en un `for` bucle. Dado que la operación `P[E]` equivale exactamente a `*(P + E)`, en el ejemplo se podría igual de bien se han escrito:
+un acceso de elemento de puntero se usa para inicializar el búfer de caracteres en un bucle @no__t 0. Dado que la operación `P[E]` es precisamente equivalente a `*(P + E)`, el ejemplo se podría haber escrito igualmente correctamente:
 
 ```csharp
 class Test
@@ -528,11 +528,11 @@ class Test
 }
 ```
 
-El operador de acceso de elemento de puntero no comprueba fuera de los límites de errores y el comportamiento al obtener acceso a un fuera de los límites elemento no está definido. Esto es lo mismo que C y C++.
+El operador de acceso a elementos de puntero no comprueba los errores fuera de los límites y el comportamiento cuando el acceso a un elemento fuera de los límites es indefinido. Es lo mismo que C y C++.
 
-### <a name="the-address-of-operator"></a>El operador address-of
+### <a name="the-address-of-operator"></a>Operador Address-of
 
-Un *addressof_expression* consta de una y comercial (`&`) seguido por un *unary_expression*.
+Un *addressof_expression* consta de un símbolo de y comercial (`&`) seguido de un *unary_expression*.
 
 ```antlr
 addressof_expression
@@ -540,9 +540,9 @@ addressof_expression
     ;
 ```
 
-Dada una expresión `E` que es de un tipo `T` y se clasifica como una variable fija ([fijos y variables móviles](unsafe-code.md#fixed-and-moveable-variables)), la construcción `&E` calcula la dirección de la variable proporcionada por `E`. El tipo del resultado es `T*` y se clasifica como un valor. Se produce un error de tiempo de compilación si `E` no está clasificado como una variable, si `E` se clasifica como una variable local de solo lectura, o si `E` denota una variable móvil. En el último caso, una instrucción fixed ([la instrucción fixed](unsafe-code.md#the-fixed-statement)) se puede usar para "corregir" temporalmente la variable antes de obtener su dirección. Como se indicó en [acceso a miembros](expressions.md#member-access), fuera de un constructor de instancia o un constructor estático de una clase o estructura que define un `readonly` campo, dicho campo se considera un valor, no una variable. Por lo tanto, no se pueden tomar su dirección. De forma similar, no se pueden tomar la dirección de una constante.
+Dada una expresión `E`, que es de un tipo `T` y se clasifica como una variable fija ([variables fijas y móviles](unsafe-code.md#fixed-and-moveable-variables)), la construcción `&E` calcula la dirección de la variable proporcionada por `E`. El tipo del resultado es `T*` y se clasifica como un valor. Se produce un error en tiempo de compilación si `E` no está clasificado como una variable, si `E` está clasificado como una variable local de solo lectura, o si `E` denota una variable móvil. En el último caso, se puede usar una instrucción fixed ([la instrucción Fixed](unsafe-code.md#the-fixed-statement)) para "corregir" temporalmente la variable antes de obtener su dirección. Como se indica en [acceso a miembros](expressions.md#member-access), fuera de un constructor de instancia o un constructor estático para una estructura o clase que define un campo `readonly`, ese campo se considera un valor, no una variable. Como tal, no se puede tomar su dirección. Del mismo modo, no se puede tomar la dirección de una constante.
 
-El `&` operador no requiere que esté asignado definitivamente, pero después su argumento una `&` operación, la variable al que se aplica el operador se considera asignada definitivamente en la ruta de acceso de ejecución en el que se produce la operación. Es responsabilidad del programador asegurarse de que la inicialización correcta de la variable en realidad tienen lugar en esta situación.
+El operador `&` no requiere que el argumento esté asignado definitivamente, pero después de una operación `&`, la variable a la que se aplica el operador se considera definitivamente asignada en la ruta de acceso de ejecución en la que se produce la operación. Es responsabilidad del programador asegurarse de que la inicialización correcta de la variable realmente se realiza en esta situación.
 
 En el ejemplo
 
@@ -562,26 +562,26 @@ class Test
 }
 ```
 
-`i` se considera asignado definitivamente siguiendo el `&i` operación utilizada para inicializar `p`. La asignación a `*p` vigente inicializa `i`, pero la inclusión de esta inicialización es responsabilidad del programador y no se producirá ningún error de tiempo de compilación si se quitó la asignación.
+`i` se considera definitivamente asignada después de la operación `&i` que se usa para inicializar `p`. La asignación a `*p` en vigor inicializa `i`, pero la inclusión de esta inicialización es responsabilidad del programador y no se produciría ningún error en tiempo de compilación si se quitase la asignación.
 
-Las reglas de asignación definitiva para el `&` operador existe tal que se puede evitar la inicialización redundante de variables locales. Por ejemplo, muchas de las API externas toman un puntero a una estructura que se rellena mediante la API. Las llamadas a estas API suelen pasan la dirección de una variable local, y sin la regla, se requeriría una inicialización redundante de la variable.
+Las reglas de asignación definitiva para el operador `&` existen para evitar la inicialización redundante de variables locales. Por ejemplo, muchas API externas toman un puntero a una estructura que se rellena mediante la API. Las llamadas a estas API normalmente pasan la dirección de una variable de struct local y sin la regla, sería necesaria la inicialización redundante de la variable de estructura.
 
-### <a name="pointer-increment-and-decrement"></a>Puntero incremento y decremento
+### <a name="pointer-increment-and-decrement"></a>Incremento y decremento de puntero
 
-En un contexto no seguro, el `++` y `--` operadores ([operadores postfijos de incremento y decremento](expressions.md#postfix-increment-and-decrement-operators) y [prefijo de incremento y decremento operadores](expressions.md#prefix-increment-and-decrement-operators)) se pueden aplicar a puntero las variables de todos los tipos excepto `void*`. Por lo tanto, para cada tipo de puntero `T*`, implícitamente se definen los siguientes operadores:
+En un contexto no seguro, los operadores `++` y `--` (operadores de[incremento y decremento de sufijo](expressions.md#postfix-increment-and-decrement-operators) y [operadores de incremento y decremento de prefijo](expressions.md#prefix-increment-and-decrement-operators)) se pueden aplicar a las variables de puntero de todos los tipos excepto `void*`. Por lo tanto, para cada tipo de puntero `T*`, se definen implícitamente los siguientes operadores:
 
 ```csharp
 T* operator ++(T* x);
 T* operator --(T* x);
 ```
 
-Los operadores producen los mismos resultados que `x + 1` y `x - 1`, respectivamente ([aritmética de puntero](unsafe-code.md#pointer-arithmetic)). En otras palabras, para una variable de puntero de tipo `T*`, el `++` operador agrega `sizeof(T)` a la dirección contenida en la variable y el `--` operador resta `sizeof(T)` desde la dirección contenida en la variable.
+Los operadores producen los mismos resultados que `x + 1` y `x - 1`, respectivamente ([aritmética de puntero](unsafe-code.md#pointer-arithmetic)). En otras palabras, para una variable de puntero de tipo `T*`, el operador `++` agrega `sizeof(T)` a la dirección contenida en la variable y el operador `--` resta `sizeof(T)` de la dirección incluida en la variable.
 
-Si un puntero de incremento o decremento operación desborda el dominio del tipo de puntero, el resultado es definido por la implementación, pero no se producen excepciones.
+Si una operación de incremento o decremento de puntero desborda el dominio del tipo de puntero, el resultado se define en la implementación, pero no se genera ninguna excepción.
 
 ### <a name="pointer-arithmetic"></a>Aritmética de puntero
 
-En un contexto no seguro, el `+` y `-` operadores ([operador de suma](expressions.md#addition-operator) y [operador de resta](expressions.md#subtraction-operator)) se pueden aplicar a los valores de todos los tipos de puntero excepto `void*`. Por lo tanto, para cada tipo de puntero `T*`, implícitamente se definen los siguientes operadores:
+En un contexto no seguro, los operadores `+` y `-` (operador de[suma](expressions.md#addition-operator) y [resta](expressions.md#subtraction-operator)) se pueden aplicar a los valores de todos los tipos de puntero excepto `void*`. Por lo tanto, para cada tipo de puntero `T*`, se definen implícitamente los siguientes operadores:
 
 ```csharp
 T* operator +(T* x, int y);
@@ -602,9 +602,9 @@ T* operator -(T* x, ulong y);
 long operator -(T* x, T* y);
 ```
 
-Dada una expresión `P` de un tipo de puntero `T*` y una expresión `N` typu `int`, `uint`, `long`, o `ulong`, las expresiones `P + N` y `N + P` calcular el valor de puntero de tipo `T*` resultante de agregar `N * sizeof(T)` a la dirección proporcionada por `P`. Del mismo modo, la expresión `P - N` calcula el valor de puntero de tipo `T*` que da como resultado de restar `N * sizeof(T)` desde la dirección proporcionada por `P`.
+Dada una expresión `P` de un tipo de puntero `T*` y una expresión @no__t 2 de tipo `int`, `uint`, `long` o `ulong`, las expresiones `P + N` y `N + P` calculan el valor de puntero de tipo `T*` que es el resultado de agregar 0 a la dirección proporcionado por 1. Del mismo modo, la expresión `P - N` calcula el valor de puntero de tipo `T*` que es el resultado de restar `N * sizeof(T)` de la dirección proporcionada por `P`.
 
-Dadas dos expresiones, `P` y `Q`, de un tipo de puntero `T*`, la expresión `P - Q` calcula la diferencia entre las direcciones proporcionadas por `P` y `Q` y, a continuación, divide la diferencia por `sizeof(T)`. El tipo del resultado siempre es `long`. De hecho, `P - Q` se calcula como `((long)(P) - (long)(Q)) / sizeof(T)`.
+Dadas dos expresiones, `P` y `Q`, de un tipo de puntero `T*`, la expresión `P - Q` calcula la diferencia entre las direcciones proporcionadas por `P` y `Q` y, a continuación, divide esa diferencia por `sizeof(T)`. El tipo del resultado es siempre `long`. En efecto, `P - Q` se calcula como `((long)(P) - (long)(Q)) / sizeof(T)`.
 
 Por ejemplo:
 
@@ -625,18 +625,18 @@ class Test
 }
 ```
 
-lo que genera el resultado:
+que genera el resultado:
 
-```
+```console
 p - q = -14
 q - p = 14
 ```
 
-Si una operación aritmética de puntero desborda el dominio del tipo de puntero, el resultado se trunca de forma definido por la implementación, pero no se producen excepciones.
+Si una operación aritmética de puntero desborda el dominio del tipo de puntero, el resultado se trunca en un modo definido por la implementación, pero no se genera ninguna excepción.
 
 ### <a name="pointer-comparison"></a>Comparación de punteros
 
-En un contexto no seguro, el `==`, `!=`, `<`, `>`, `<=`, y `=>` operadores ([operadores de comprobación de tipos y relacionales](expressions.md#relational-and-type-testing-operators)) se pueden aplicar a los valores de todos los tipos de puntero. Los operadores de comparación de puntero son:
+En un contexto no seguro, los operadores `==`, `!=`, `<`, `>`, `<=` y `=>` ([operadores relacionales y de prueba de tipos](expressions.md#relational-and-type-testing-operators)) se pueden aplicar a los valores de todos los tipos de puntero. Los operadores de comparación de punteros son:
 
 ```csharp
 bool operator ==(void* x, void* y);
@@ -647,11 +647,11 @@ bool operator <=(void* x, void* y);
 bool operator >=(void* x, void* y);
 ```
 
-Ya existe una conversión implícita de cualquier tipo de puntero a la `void*` se puedan comparar el tipo, los operandos de cualquier tipo de puntero mediante estos operadores. Los operadores de comparación comparan las direcciones proporcionadas por los dos operandos, como si fueran enteros sin signo.
+Dado que existe una conversión implícita de cualquier tipo de puntero al tipo `void*`, se pueden comparar los operandos de cualquier tipo de puntero mediante estos operadores. Los operadores de comparación comparan las direcciones proporcionadas por los dos operandos como si fueran enteros sin signo.
 
 ### <a name="the-sizeof-operator"></a>El operador sizeof
 
-El `sizeof` operador devuelve el número de bytes ocupados por una variable de un tipo determinado. El tipo como operando para `sizeof` debe ser un *unmanaged_type* ([tipos de puntero](unsafe-code.md#pointer-types)).
+El operador `sizeof` devuelve el número de bytes ocupados por una variable de un tipo determinado. El tipo especificado como operando para `sizeof` debe ser un *unmanaged_type* ([tipos de puntero](unsafe-code.md#pointer-types)).
 
 ```antlr
 sizeof_expression
@@ -659,7 +659,7 @@ sizeof_expression
     ;
 ```
 
-El resultado de la `sizeof` operador es un valor de tipo `int`. Predefinidos para determinados tipos, el `sizeof` operador produce un valor constante, como se muestra en la tabla siguiente.
+El resultado del operador `sizeof` es un valor de tipo `int`. Para determinados tipos predefinidos, el operador `sizeof` produce un valor constante, tal como se muestra en la tabla siguiente.
 
 
 | __Expresión__   | __Resultado__ |
@@ -677,17 +677,17 @@ El resultado de la `sizeof` operador es un valor de tipo `int`. Predefinidos par
 | `sizeof(double)` | `8`        |
 | `sizeof(bool)`   | `1`        |
 
-Para los demás tipos, el resultado de la `sizeof` operador define la implementación y se clasifica como un valor, no como una constante.
+En el caso de todos los demás tipos, el resultado del operador `sizeof` está definido por la implementación y se clasifica como un valor, no como una constante.
 
 No se especifica el orden en que los miembros se empaquetan en un struct.
 
-Para la alineación, puede haber relleno al principio de una estructura, dentro de una estructura y al final de la estructura sin nombre. El contenido de los bits utilizados como relleno es indeterminado.
+A efectos de alineación, puede haber un relleno sin nombre al principio de un struct, dentro de un struct y al final de la estructura. El contenido de los bits usados como relleno es indeterminado.
 
 Cuando se aplica a un operando que tiene el tipo de estructura, el resultado es el número total de bytes en una variable de ese tipo, incluido el relleno.
 
-## <a name="the-fixed-statement"></a>La instrucción fixed
+## <a name="the-fixed-statement"></a>Instrucción Fixed
 
-En un contexto no seguro, el *embedded_statement* ([instrucciones](statements.md)) producción permite una construcción adicional, la `fixed` instrucción, que se utiliza una variable móvil "corregir" que su dirección permanece constante para la duración de la instrucción.
+En un contexto no seguro, la producción de *embedded_statement* ([instrucciones](statements.md)) permite una construcción adicional, la instrucción `fixed`, que se usa para "corregir" una variable móvil de modo que su dirección permanece constante mientras dure la instrucción. .
 
 ```antlr
 fixed_statement
@@ -708,20 +708,20 @@ fixed_pointer_initializer
     ;
 ```
 
-Cada *fixed_pointer_declarator* declara una variable local de la dada *tipo_de_puntero* e inicializa la variable local con la dirección calculada por el correspondiente *fixed_ pointer_initializer*. Una variable local declarada en un `fixed` es accesible en cualquier instrucción *fixed_pointer_initializer*s que se producen a la derecha de la declaración de variable y, en el *embedded_statement* de la `fixed` instrucción. Una variable local declarada por un `fixed` instrucción se considera de solo lectura. Se produce un error de tiempo de compilación si la instrucción incrustada intenta modificar esta variable local (a través de la asignación o el `++` y `--` operadores) o pasarla como un `ref` o `out` parámetro.
+Cada *fixed_pointer_declarator* declara una variable local del *pointer_type* determinado e inicializa esa variable local con la dirección calculada por el *fixed_pointer_initializer*correspondiente. Una variable local declarada en una instrucción `fixed` es accesible en cualquier *fixed_pointer_initializer*que se produzca a la derecha de la declaración de la variable y en el *embedded_statement* de la instrucción `fixed`. Una variable local declarada por una instrucción `fixed` se considera de solo lectura. Se produce un error en tiempo de compilación si la instrucción incrustada intenta modificar esta variable local (a través de la asignación o los operadores `++` y `--`) o pasarla como un parámetro `ref` o `out`.
 
 Un *fixed_pointer_initializer* puede ser uno de los siguientes:
 
-*  El token "`&`" seguido por un *variable_reference* ([reglas precisas para determinar la asignación definitiva](variables.md#precise-rules-for-determining-definite-assignment)) a una variable móvil ([fijos y variables móviles](unsafe-code.md#fixed-and-moveable-variables)) de un tipo no administrado `T`, siempre que el tipo `T*` es implícitamente convertible al tipo de puntero proporcionado el `fixed` instrucción. En este caso, el inicializador calcula la dirección de la variable dada, y se garantiza que la variable va a permanecer en una dirección fija durante la duración de la `fixed` instrucción.
-*  Una expresión de un *array_type* con elementos de un tipo no administrado `T`, siempre que el tipo `T*` es implícitamente convertible al tipo de puntero proporcionado el `fixed` instrucción. En este caso, el inicializador calcula la dirección del primer elemento de la matriz, y se garantiza que toda la matriz permanecerá en una dirección fija durante el tiempo que dure la `fixed` instrucción. Si la expresión de matriz es null o si la matriz tiene cero elementos, el inicializador calcula un igual de dirección a cero.
-*  Una expresión de tipo `string`, siempre que el tipo `char*` es implícitamente convertible al tipo de puntero proporcionado el `fixed` instrucción. En este caso, el inicializador calcula la dirección del primer carácter en la cadena y se garantiza que toda la cadena permanecerá en una dirección fija durante el tiempo que dure la `fixed` instrucción. El comportamiento de la `fixed` instrucción se define en la implementación si la expresión de cadena es null.
-*  Un *simple_name* o *member_access* que hace referencia a un miembro de búfer de tamaño fijo de una variable móvil, siempre que el tipo del miembro de búfer de tamaño fijo es implícitamente convertible al tipo de puntero proporcionado en el `fixed` instrucción. En este caso, el inicializador calcula un puntero al primer elemento del búfer de tamaño fijo ([búferes de tamaño fijo en expresiones](unsafe-code.md#fixed-size-buffers-in-expressions)), y se garantiza que el búfer de tamaño fijo permanecerá en una dirección fija durante el tiempo que dure la `fixed`instrucción.
+*  El token "`&`" seguido de un *variable_reference* ([reglas precisas para determinar la asignación definitiva](variables.md#precise-rules-for-determining-definite-assignment)) a una variable móvil ([variables fijas y móviles](unsafe-code.md#fixed-and-moveable-variables)) de un tipo no administrado `T`, siempre que el tipo `T*` sea se pueden convertir implícitamente al tipo de puntero proporcionado en la instrucción `fixed`. En este caso, el inicializador calcula la dirección de la variable especificada y se garantiza que la variable permanece en una dirección fija mientras dure la instrucción `fixed`.
+*  Una expresión de un *array_type* con elementos de un tipo no administrado `T`, siempre que el tipo `T*` sea implícitamente convertible al tipo de puntero proporcionado en la instrucción `fixed`. En este caso, el inicializador calcula la dirección del primer elemento de la matriz y se garantiza que toda la matriz permanece en una dirección fija mientras dure la instrucción `fixed`. Si la expresión de matriz es null o si la matriz tiene cero elementos, el inicializador calcula una dirección igual a cero.
+*  Expresión de tipo `string`, siempre que el tipo `char*` sea implícitamente convertible al tipo de puntero proporcionado en la instrucción `fixed`. En este caso, el inicializador calcula la dirección del primer carácter de la cadena y se garantiza que toda la cadena permanece en una dirección fija mientras dure la instrucción `fixed`. El comportamiento de la instrucción `fixed` está definido por la implementación si la expresión de cadena es NULL.
+*  Un *simple_name* o *member_access* que hace referencia a un miembro de búfer de tamaño fijo de una variable móvil, siempre que el tipo del miembro de búfer de tamaño fijo se pueda convertir implícitamente al tipo de puntero proporcionado en la instrucción `fixed`. En este caso, el inicializador calcula un puntero al primer elemento del búfer de tamaño fijo ([búferes de tamaño fijo en expresiones](unsafe-code.md#fixed-size-buffers-in-expressions)) y se garantiza que el búfer de tamaño fijo permanece en una dirección fija mientras dure la instrucción `fixed`.
 
-Para cada dirección calculada por un *fixed_pointer_initializer* el `fixed` instrucción garantiza que la variable al que hace referencia la dirección no está sujeta a reubicación o eliminación por el recolector de elementos no utilizados para la duración de la `fixed` instrucción. Por ejemplo, si la dirección calculada por un *fixed_pointer_initializer* hace referencia a un campo de un objeto o un elemento de una instancia de matriz, el `fixed` instrucción garantiza que la instancia del objeto contenedor no se reubica o eliminado durante la vigencia de la instrucción.
+Para cada dirección calculada por un *fixed_pointer_initializer* , la instrucción `fixed` garantiza que la variable a la que hace referencia la dirección no esté sujeta a reubicación o eliminación por parte del recolector de elementos no utilizados mientras dure la instrucción `fixed`. Por ejemplo, si la dirección calculada por un *fixed_pointer_initializer* hace referencia a un campo de un objeto o un elemento de una instancia de matriz, la instrucción `fixed` garantiza que la instancia del objeto contenedor no se reubique o se elimine durante el duración de la instrucción.
 
-Es responsabilidad del programador garantizar que los punteros crean por `fixed` instrucciones no permanecen tras la ejecución de esas instrucciones. Por ejemplo, cuando punteros crean por `fixed` instrucciones se pasan a las API externas, es responsabilidad del programador asegurarse de que las API no retienen memoria de estos punteros.
+Es responsabilidad del programador garantizar que los punteros creados por @no__t instrucciones-0 no sobreviven más allá de la ejecución de esas instrucciones. Por ejemplo, cuando se pasan punteros creados por @no__t instrucciones-0 a las API externas, es responsabilidad del programador asegurarse de que las API no conservan memoria de estos punteros.
 
-Objetos fijos pueden provocar la fragmentación del montón (porque no se pueden mover). Por ese motivo, se deben corregir los objetos solo cuando sea absolutamente necesario y, a continuación, solo por el menor tiempo posible.
+Los objetos fijos pueden provocar la fragmentación del montón (porque no se pueden moverse). Por ese motivo, los objetos deben corregirse solo cuando sea absolutamente necesario y solo para la cantidad de tiempo más corta posible.
 
 El ejemplo
 
@@ -748,11 +748,11 @@ class Test
 }
 ```
 
-muestra varios usos de la `fixed` instrucción. La primera instrucción fija y obtiene la dirección de un campo estático, la segunda instrucción fija y obtiene la dirección de un campo de instancia y la tercera instrucción fija y obtiene la dirección de un elemento de matriz. En cada caso habría sido un error usar el normal `&` operador dado que las variables se clasifican como variables móviles.
+muestra varios usos de la instrucción `fixed`. La primera instrucción corrige y obtiene la dirección de un campo estático, la segunda instrucción corrige y obtiene la dirección de un campo de instancia, y la tercera instrucción corrige y obtiene la dirección de un elemento de matriz. En cada caso, se habría producido un error al usar el operador `&` normal, ya que todas las variables se clasifican como variables móviles.
 
-El cuarto `fixed` instrucción en el ejemplo anterior genera un resultado similar a la tercera.
+La cuarta instrucción `fixed` del ejemplo anterior genera un resultado similar al tercero.
 
-En este ejemplo de la `fixed` instrucción usa `string`:
+En este ejemplo de la instrucción `fixed` se usa `string`:
 
 ```csharp
 class Test
@@ -773,7 +773,7 @@ class Test
 }
 ```
 
-En un contexto no seguro se almacenan los elementos de la matriz de matrices unidimensionales en orden creciente de índice, empezando por el índice `0` y terminando con el índice `Length - 1`. Para matrices multidimensionales, la matriz se almacenan los elementos que aumentan en primer lugar, los índices de la dimensión situada más a continuación, la próxima deja la dimensión, y así sucesivamente hacia la izquierda. Dentro de un `fixed` instrucción que obtiene un puntero `p` a una instancia de matriz `a`, los valores de puntero que abarcan desde `p` a `p + a.Length - 1` representan las direcciones de los elementos de la matriz. Del mismo modo, las variables que van desde `p[0]` a `p[a.Length - 1]` representan los elementos de matriz real. Dada la manera en que se almacenan las matrices, se puede tratar una matriz de cualquier dimensión como si fuese lineal.
+En un contexto no seguro, los elementos de las matrices unidimensionales se almacenan en un orden de índice creciente, empezando por index `0` y terminando por index `Length - 1`. En el caso de las matrices multidimensionales, los elementos de matriz se almacenan de forma que los índices de la dimensión situada más a la derecha aumenten primero, después la dimensión izquierda siguiente y así sucesivamente hacia la izquierda. Dentro de una instrucción `fixed` que obtiene un puntero `p` a una instancia de matriz `a`, los valores de puntero que van desde `p` hasta `p + a.Length - 1` representan direcciones de los elementos de la matriz. Del mismo modo, las variables que van desde `p[0]` hasta `p[a.Length - 1]` representan los elementos reales de la matriz. Dado el modo en que se almacenan las matrices, podemos tratar una matriz de cualquier dimensión como si fuera lineal.
 
 Por ejemplo:
 
@@ -801,9 +801,9 @@ class Test
 }
 ```
 
-lo que genera el resultado:
+que genera el resultado:
 
-```
+```console
 [0,0,0] =  0 [0,0,1] =  1 [0,0,2] =  2 [0,0,3] =  3
 [0,1,0] =  4 [0,1,1] =  5 [0,1,2] =  6 [0,1,3] =  7
 [0,2,0] =  8 [0,2,1] =  9 [0,2,2] = 10 [0,2,3] = 11
@@ -830,7 +830,7 @@ class Test
 }
 ```
 
-un `fixed` instrucción se utiliza para resolver una matriz para que su dirección se puede pasar a un método que toma un puntero.
+una instrucción `fixed` se usa para corregir una matriz, por lo que su dirección se puede pasar a un método que toma un puntero.
 
 En el ejemplo:
 
@@ -863,21 +863,21 @@ class Test
 }
 ```
 
-una instrucción fixed se utiliza para resolver un búfer de tamaño fijo de un struct para que su dirección puede usarse como un puntero.
+una instrucción Fixed se usa para corregir un búfer de tamaño fijo de una estructura, por lo que su dirección se puede usar como puntero.
 
-Un `char*` valor generado mediante la corrección de una instancia de cadena siempre apunta a una cadena terminada en null. Dentro de una instrucción fixed que obtiene un puntero `p` a una instancia de cadena `s`, los valores de puntero que abarcan desde `p` a `p + s.Length - 1` representan las direcciones de los caracteres en la cadena y el valor de puntero `p + s.Length` siempre apunta a un carácter nulo (el carácter con el valor `'\0'`).
+Un valor `char*` generado al corregir una instancia de cadena siempre apunta a una cadena terminada en NULL. Dentro de una instrucción Fixed que obtiene un puntero `p` a una instancia de cadena `s`, los valores de puntero que van desde `p` hasta `p + s.Length - 1` representan direcciones de los caracteres de la cadena y el valor de puntero `p + s.Length` siempre apunta a un carácter nulo (el carácter con valor `'\0'`).
 
-Modificación de objetos de tipo administrado mediante punteros fijos puede tener como resultado un comportamiento indefinido. Por ejemplo, dado que las cadenas son inmutables, es responsabilidad del programador asegurarse de que no se modifican los caracteres que se hace referencia a un puntero a una cadena fija.
+La modificación de objetos de tipo administrado a través de punteros fijos puede tener como resultado un comportamiento indefinido. Por ejemplo, dado que las cadenas son inmutables, es responsabilidad del programador asegurarse de que los caracteres a los que hace referencia un puntero a una cadena fija no se modifican.
 
-La terminación null automática de cadenas es especialmente conveniente al llamar a las API externas que esperan cadenas de "estilo C". Sin embargo, tenga en cuenta que una instancia de la cadena puede contener caracteres null. Si existen dichos caracteres null, la cadena aparecerá truncada cuando se trata como terminada en null `char*`.
+La terminación automática de las cadenas es especialmente útil cuando se llama a las API externas que esperan cadenas de "estilo C". Sin embargo, tenga en cuenta que se permite que una instancia de cadena contenga caracteres nulos. Si estos caracteres nulos están presentes, la cadena aparecerá truncada cuando se trate como una `char*` terminada en NULL.
 
 ## <a name="fixed-size-buffers"></a>Búferes de tamaño fijo
 
-Búferes de tamaño fijo se utilizan para declarar matrices en línea de "Estilo C" como miembros de estructuras y son útiles principalmente para interactuar con las API no administradas.
+Los búferes de tamaño fijo se usan para declarar matrices en línea de "estilo C" como miembros de Structs y son principalmente útiles para interactuar con las API no administradas.
 
 ### <a name="fixed-size-buffer-declarations"></a>Declaraciones de búfer de tamaño fijo
 
-Un ***búfer de tamaño fijo*** es un miembro que representa el almacenamiento para un búfer de longitud fija de variables de un tipo determinado. Una declaración de búfer de tamaño fijo introduce uno o varios búferes de tamaño fijo de un tipo de elemento especificado. Búferes de tamaño fijo solo se permiten en declaraciones de estructura y solo puede aparecer en contextos no seguros ([contextos no seguros](unsafe-code.md#unsafe-contexts)).
+Un ***búfer de tamaño fijo*** es un miembro que representa el almacenamiento para un búfer de longitud fija de variables de un tipo determinado. Una declaración de búfer de tamaño fijo introduce uno o más búferes de tamaño fijo de un tipo de elemento determinado. Los búferes de tamaño fijo solo se permiten en declaraciones de struct y solo se pueden producir en contextos no seguros ([contextos no seguros](unsafe-code.md#unsafe-contexts)).
 
 ```antlr
 struct_member_declaration_unsafe
@@ -906,17 +906,17 @@ fixed_size_buffer_declarator
     ;
 ```
 
-Una declaración de búfer de tamaño fijo puede incluir un conjunto de atributos ([atributos](attributes.md)), un `new` modificador ([modificadores](classes.md#modifiers)), una combinación válida de los cuatro modificadores de acceso ([tipo parámetros y restricciones](classes.md#type-parameters-and-constraints)) y un `unsafe` modificador ([contextos no seguros](unsafe-code.md#unsafe-contexts)). Los atributos y modificadores se aplican a todos los miembros declarados en la declaración del búfer de tamaño fijo. Es un error para el mismo modificador aparezca varias veces en una declaración de búfer de tamaño fijo.
+Una declaración de búfer de tamaño fijo puede incluir un conjunto de atributos ([atributos](attributes.md)), un modificador `new` ([Modificadores](classes.md#modifiers)), una combinación válida de los cuatro modificadores de acceso ([parámetros de tipo y restricciones](classes.md#type-parameters-and-constraints)) y un modificador `unsafe` ([Unsafe contextos](unsafe-code.md#unsafe-contexts)). Los atributos y modificadores se aplican a todos los miembros declarados por la declaración de búfer de tamaño fijo. Es un error que el mismo modificador aparezca varias veces en una declaración de búfer de tamaño fijo.
 
-No se permite una declaración de búfer de tamaño fijo para incluir el `static` modificador.
+No se permite una declaración de búfer de tamaño fijo para incluir el modificador `static`.
 
-El tipo de elemento de búfer de una declaración de búfer de tamaño fijo especifica el tipo de elemento de los búferes introducidos por la declaración. El tipo de elemento de búfer debe ser uno de los tipos predefinidos `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `float`, `double`, o `bool`.
+El tipo de elemento de búfer de una declaración de búfer de tamaño fijo especifica el tipo de elemento de los búferes introducidos por la declaración. El tipo de elemento de búfer debe ser uno de los tipos predefinidos `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `float`, 0 o 1.
 
-El tipo de elemento de búfer es seguido por una lista de declaradores de búfer de tamaño fijo, cada uno de los cuales incluye a un nuevo miembro. Un declarador de búfer de tamaño fijo consta de un identificador que designa el miembro, seguido de una expresión constante entre `[` y `]` tokens. La expresión constante denota el número de elementos en el miembro introducidos por esa declarador de búfer de tamaño fijo. El tipo de la expresión constante debe ser implícitamente convertible al tipo `int`, y el valor debe ser un entero positivo distinto de cero.
+El tipo de elemento de búfer va seguido de una lista de declaradores de búfer de tamaño fijo, cada uno de los cuales incorpora un nuevo miembro. Un declarador de búfer de tamaño fijo consta de un identificador que denomina al miembro, seguido de una expresión constante encerrada en `[` y `]` tokens. La expresión constante denota el número de elementos del miembro introducido por ese declarador de búfer de tamaño fijo. El tipo de la expresión constante se debe poder convertir implícitamente al tipo `int`, y el valor debe ser un entero positivo distinto de cero.
 
-Se garantiza que los elementos de un búfer de tamaño fijo se disponen secuencialmente en la memoria.
+Se garantiza que los elementos de un búfer de tamaño fijo se organizan secuencialmente en la memoria.
 
-Una declaración de búfer de tamaño fijo que declara varios búferes de tamaño fijo es equivalente a varias declaraciones de una declaración de búfer de tamaño fijo solo con los mismos atributos y tipos de elemento. Por ejemplo
+Una declaración de búfer de tamaño fijo que declara varios búferes de tamaño fijo es equivalente a varias declaraciones de una única declaración de búfer de tamaño fijo con los mismos atributos y tipos de elemento. Por ejemplo
 
 ```csharp
 unsafe struct A
@@ -938,22 +938,22 @@ unsafe struct A
 
 ### <a name="fixed-size-buffers-in-expressions"></a>Búferes de tamaño fijo en expresiones
 
-Búsqueda de miembros ([operadores](expressions.md#operators)) de un tamaño fijo, miembro de búfer procede exactamente igual que la búsqueda de miembros de un campo.
+La búsqueda de miembros ([operadores](expressions.md#operators)) de un miembro de búfer de tamaño fijo continúa exactamente como la búsqueda de miembros de un campo.
 
-Se puede hacer referencia a un búfer de tamaño fijo en una expresión que utiliza un *simple_name* ([inferencia](expressions.md#type-inference)) o un *member_access* ([comprobación de tiempo de compilación la resolución de sobrecarga dinámica](expressions.md#compile-time-checking-of-dynamic-overload-resolution)).
+Se puede hacer referencia a un búfer de tamaño fijo en una expresión usando *simple_name* ([inferencia de tipo](expressions.md#type-inference)) o *member_access* ([comprobación en tiempo de compilación de la resolución dinámica de sobrecarga](expressions.md#compile-time-checking-of-dynamic-overload-resolution)).
 
-Cuando se hace referencia a un miembro de búfer de tamaño fijo como un nombre simple, el efecto es el mismo que un acceso de miembro del formulario `this.I`, donde `I` es el miembro de búfer de tamaño fijo.
+Cuando se hace referencia a un miembro de búfer de tamaño fijo como un nombre simple, el efecto es el mismo que un acceso a miembro del formulario `this.I`, donde `I` es el miembro de búfer de tamaño fijo.
 
-En un acceso de miembro del formulario `E.I`si `E` es de un tipo struct y una búsqueda de miembros de `I` en que el tipo de estructura identifica un miembro de tamaño fijo, a continuación, `E.I` es evalúa y clasifica como sigue:
+En un acceso de miembro con el formato `E.I`, si `E` es de un tipo de struct y una búsqueda de miembro de `I` en ese tipo de estructura identifica un miembro de tamaño fijo, entonces `E.I` se evalúa como se indica a continuación:
 
-*  Si la expresión `E.I` no se produce en un contexto no seguro, se produce un error de tiempo de compilación.
-*  Si `E` se clasifica como un valor, se produce un error de tiempo de compilación.
-*  De lo contrario, si `E` es una variable móvil ([fijos y variables móviles](unsafe-code.md#fixed-and-moveable-variables)) y la expresión `E.I` no es un *fixed_pointer_initializer* ([fijo instrucción](unsafe-code.md#the-fixed-statement)), se produce un error de tiempo de compilación.
-*  En caso contrario, `E` hace referencia a una variable fija y el resultado de la expresión es un puntero al primer elemento del miembro de búfer de tamaño fijo `I` en `E`. El resultado es de tipo `S*`, donde `S` es el tipo de elemento de `I`y se clasifica como un valor.
+*  Si la expresión `E.I` no se produce en un contexto no seguro, se produce un error en tiempo de compilación.
+*  Si `E` se clasifica como un valor, se produce un error en tiempo de compilación.
+*  De lo contrario, si `E` es una variable móvil ([variables fijas y móviles](unsafe-code.md#fixed-and-moveable-variables)) y la expresión `E.I` no es *fixed_pointer_initializer* ([la instrucción Fixed](unsafe-code.md#the-fixed-statement)), se produce un error en tiempo de compilación.
+*  De lo contrario, `E` hace referencia a una variable fija y el resultado de la expresión es un puntero al primer elemento del miembro de búfer de tamaño fijo `I` en `E`. El resultado es de tipo `S*`, donde `S` es el tipo de elemento de `I` y se clasifica como un valor.
 
-Pueden tener acceso a los elementos subsiguientes del búfer de tamaño fijo con operaciones de puntero desde el primer elemento. A diferencia de tener acceso a las matrices, acceso a los elementos de un búfer de tamaño fijo es una operación no segura y no está activada de intervalo.
+Se puede tener acceso a los elementos subsiguientes del búfer de tamaño fijo mediante operaciones de puntero desde el primer elemento. A diferencia del acceso a las matrices, el acceso a los elementos de un búfer de tamaño fijo es una operación no segura y no se comprueba el intervalo.
 
-El ejemplo siguiente declara y utiliza una estructura con un miembro de búfer de tamaño fijo.
+En el ejemplo siguiente se declara y se utiliza un struct con un miembro de búfer de tamaño fijo.
 
 ```csharp
 unsafe struct Font
@@ -982,13 +982,13 @@ class Test
 
 ### <a name="definite-assignment-checking"></a>Comprobación de asignación definitiva
 
-Búferes de tamaño fijo no están sujetos a comprobación de asignación definitiva ([asignación definitiva](variables.md#definite-assignment)), y se omiten los miembros de búfer de tamaño fijo para los fines de comprobación de las variables de tipo de estructura de asignación definitiva.
+Los búferes de tamaño fijo no están sujetos a la comprobación de asignación definitiva ([asignación definitiva](variables.md#definite-assignment)) y los miembros de búfer de tamaño fijo se omiten para la comprobación de asignación definitiva de variables de tipo struct.
 
-Cuando la variable de estructura contenedora más externo de un miembro de búfer de tamaño fijo es una variable estática, una variable de instancia de una instancia de clase o un elemento de matriz, los elementos del búfer de tamaño fijo se inicializan automáticamente en sus valores predeterminados ([Los valores predeterminados](variables.md#default-values)). En todos los demás casos, el contenido inicial de un búfer de tamaño fijo es indefinido.
+Cuando la variable de estructura contenedora más externa de un miembro de búfer de tamaño fijo es una variable estática, una variable de instancia de una instancia de clase o un elemento de matriz, los elementos del búfer de tamaño fijo se inicializan automáticamente con sus valores predeterminados ([valor predeterminado). valores](variables.md#default-values)). En todos los demás casos, el contenido inicial de un búfer de tamaño fijo es indefinido.
 
-## <a name="stack-allocation"></a>Asignación de pila
+## <a name="stack-allocation"></a>Asignación de la pila
 
-En un contexto no seguro, una declaración de variable local ([declaraciones de variable Local](statements.md#local-variable-declarations)) puede incluir un inicializador de asignación de pila que asigne memoria de la pila de llamadas.
+En un contexto no seguro, una declaración de variable local ([declaraciones de variables locales](statements.md#local-variable-declarations)) puede incluir un inicializador de asignación de pila que asigna memoria de la pila de llamadas.
 
 ```antlr
 local_variable_initializer_unsafe
@@ -1000,15 +1000,15 @@ stackalloc_initializer
     ;
 ```
 
-El *unmanaged_type* indica el tipo de los elementos que se almacenarán en la ubicación recién asignada, y el *expresión* indica el número de estos elementos. En conjunto, estos especifican el tamaño de asignación necesarios. Puesto que el tamaño de una asignación de pila no puede ser negativo, es un error en tiempo de compilación para especificar el número de elementos como un *constant_expression* que se evalúa como un valor negativo.
+*Unmanaged_type* indica el tipo de los elementos que se almacenarán en la ubicación recién asignada y la *expresión* indica el número de estos elementos. En conjunto, estos especifican el tamaño de asignación requerido. Dado que el tamaño de una asignación de pila no puede ser negativo, se trata de un error en tiempo de compilación para especificar el número de elementos como *constant_expression* que se evalúa como un valor negativo.
 
-Un inicializador de asignación de pila del formulario `stackalloc T[E]` requiere `T` sea un tipo no administrado ([tipos de puntero](unsafe-code.md#pointer-types)) y `E` sea una expresión de tipo `int`. La construcción asigna `E * sizeof(T)` bytes a partir de la llamada de la pila y devuelve un puntero de tipo `T*`, en el bloque recién asignado. Si `E` es un valor negativo, el comportamiento es indefinido. Si `E` es cero, a continuación, no se realiza ninguna asignación, y el puntero devuelto está definido por la implementación. Si no hay suficiente memoria disponible para asignar un bloque de tamaño determinado, un `System.StackOverflowException` se produce.
+Un inicializador de asignación de pila con el formato `stackalloc T[E]` requiere que `T` sea un tipo no administrado ([tipos de puntero](unsafe-code.md#pointer-types)) y que `E` sea una expresión de tipo `int`. La construcción asigna `E * sizeof(T)` bytes de la pila de llamadas y devuelve un puntero de tipo `T*` al bloque recién asignado. Si `E` es un valor negativo, el comportamiento es indefinido. Si `E` es cero, no se realiza ninguna asignación y el puntero devuelto está definido por la implementación. Si no hay suficiente memoria disponible para asignar un bloque del tamaño determinado, se produce una `System.StackOverflowException`.
 
-El contenido de la memoria recién asignada es indefinido.
+El contenido de la memoria recién asignada está sin definir.
 
-No se permiten inicializadores de asignación de pila en `catch` o `finally` bloques ([la instrucción try](statements.md#the-try-statement)).
+No se permiten inicializadores de asignación de pila en los bloques `catch` o `finally` ([la instrucción try](statements.md#the-try-statement)).
 
-No hay ninguna manera de liberar explícitamente la memoria asignada mediante `stackalloc`. Todos los bloques de memoria asignado a la pila creados durante la ejecución de un miembro de función se descartan automáticamente cuando se devuelve ese miembro de función. Esto corresponde a la `alloca` (función), una extensión que se suelen encontrar en las implementaciones de C y C++.
+No hay ninguna manera de liberar explícitamente la memoria asignada mediante `stackalloc`. Todos los bloques de memoria asignados a la pila creados durante la ejecución de un miembro de función se descartan automáticamente cuando se devuelve ese miembro de función. Esto corresponde a la función `alloca`, una extensión que se encuentra normalmente en C++ C y las implementaciones.
 
 En el ejemplo
 
@@ -1038,11 +1038,11 @@ class Test
 }
 ```
 
-un `stackalloc` inicializador se utiliza en el `IntToString` método para asignar un búfer de 16 caracteres en la pila. El búfer se descarta automáticamente cuando el método devuelve.
+se usa un inicializador `stackalloc` en el método `IntToString` para asignar un búfer de 16 caracteres en la pila. El búfer se descarta automáticamente cuando el método vuelve.
 
 ## <a name="dynamic-memory-allocation"></a>Asignación de memoria dinámica
 
-Excepto para el `stackalloc` operador, C# no proporciona construcciones predefinidas para la administración de memoria de elementos no utilizados no recopilado. Dichos servicios normalmente proporciona bibliotecas de clases auxiliares o importar directamente desde el sistema operativo subyacente. Por ejemplo, el `Memory` clase siguiente muestra cómo se pueden tener acceso a las funciones del montón de un sistema operativo subyacente de C#:
+Excepto en el caso del operador @no__t- C# 0, no proporciona construcciones predefinidas para administrar la memoria de recolección de elementos no utilizados. Estos servicios se proporcionan normalmente mediante bibliotecas de clases auxiliares o importados directamente desde el sistema operativo subyacente. Por ejemplo, la clase `Memory` siguiente ilustra cómo se puede tener acceso a las funciones del montón de un sistema operativo subyacente C#desde:
 
 ```csharp
 using System;
@@ -1120,7 +1120,7 @@ public unsafe class Memory
 }
 ```
 
-Un ejemplo que utiliza el `Memory` clase se indica a continuación:
+A continuación se muestra un ejemplo en el que se usa la clase `Memory`:
 
 ```csharp
 class Test
@@ -1142,4 +1142,4 @@ class Test
 }
 ```
 
-El ejemplo asigna 256 bytes de memoria a través de `Memory.Alloc` e inicializa el bloque de memoria con valores entre 0 y 255. A continuación, asigna una matriz de bytes de 256 elementos y utiliza `Memory.Copy` para copiar el contenido del bloque de memoria en la matriz de bytes. Por último, se libera el bloque de memoria mediante `Memory.Free` y salida en la consola el contenido de la matriz de bytes.
+En el ejemplo se asignan 256 bytes de memoria a través de `Memory.Alloc` e inicializa el bloque de memoria con valores que aumentan de 0 a 255. A continuación, asigna una matriz de bytes de elemento 256 y usa `Memory.Copy` para copiar el contenido del bloque de memoria en la matriz de bytes. Por último, el bloque de memoria se libera usando `Memory.Free` y el contenido de la matriz de bytes se genera en la consola.

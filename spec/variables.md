@@ -1,22 +1,22 @@
 ---
-ms.openlocfilehash: ff285fc202d14c2060c5f005c319c7886458a168
-ms.sourcegitcommit: 8152182f0a477cb3082e625b607262cc459a17f3
+ms.openlocfilehash: a01cf9387b8dc47de036bf0bd1496c19a441d81c
+ms.sourcegitcommit: 7f7fc6e9e195e51b7ff8229aeaa70aa9fbbb63cb
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 05/23/2019
-ms.locfileid: "66174236"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70876798"
 ---
-# <a name="variables"></a>Variables
+# <a name="variables"></a>variables
 
-Las variables representan ubicaciones de almacenamiento. Cada variable tiene un tipo que determina qué valores se pueden almacenar en la variable. C# es un lenguaje con seguridad de tipos y el compilador de C# garantiza que los valores almacenados en variables siempre son del tipo adecuado. El valor de una variable se puede cambiar mediante una asignación o mediante el uso de la `++` y `--` operadores.
+Las variables representan ubicaciones de almacenamiento. Cada variable tiene un tipo que determina qué valores se pueden almacenar en la variable. C#es un lenguaje con seguridad de tipos y el C# compilador garantiza que los valores almacenados en variables siempre son del tipo adecuado. El valor de una variable se puede cambiar a través de la asignación o mediante `++` el `--` uso de los operadores y.
 
-Debe ser una variable ***asignado definitivamente*** ([asignación definitiva](variables.md#definite-assignment)) antes de que se puede obtener su valor.
+Una variable debe estar ***asignada definitivamente*** ([asignación definitiva](variables.md#definite-assignment)) antes de que se pueda obtener su valor.
 
-Como se describe en las secciones siguientes, las variables son ***asignado inicialmente*** o ***inicialmente sin asignar***. Una variable asignada inicialmente tiene un valor inicial bien definido y siempre se considera asignado definitivamente. Una variable no asignada inicialmente no tiene ningún valor inicial. Para que una variable no asignada inicialmente se considera asignado definitivamente en una determinada ubicación, se debe producir una asignación a la variable en cada ruta de acceso de ejecución posibles que dan lugar a esa ubicación.
+Tal y como se describe en las secciones siguientes, las variables se ***asignan inicialmente*** o no se ***asignan inicialmente***. Una variable asignada inicialmente tiene un valor inicial bien definido y siempre se considera asignada definitivamente. Una variable no asignada inicialmente no tiene ningún valor inicial. Para que una variable no asignada inicialmente se considere asignada definitivamente en una determinada ubicación, se debe realizar una asignación a la variable en todas las rutas de acceso de ejecución posibles que conducen a esa ubicación.
 
 ## <a name="variable-categories"></a>Categorías de variables
 
-C# define siete categorías de variables: variables estáticas, variables de instancia, elementos de matriz, parámetros de valor, los parámetros de referencia, parámetros de salida y variables locales. Las secciones siguientes describen cada una de estas categorías.
+C#define siete categorías de variables: variables estáticas, variables de instancia, elementos de matriz, parámetros de valor, parámetros de referencia, parámetros de salida y variables locales. En las secciones siguientes se describe cada una de estas categorías.
 
 En el ejemplo
 ```csharp
@@ -31,137 +31,137 @@ class A
     }
 }
 ```
-`x` es una variable estática, `y` es una variable de instancia, `v[0]` es un elemento de matriz, `a` es un parámetro de valor, `b` es un parámetro de referencia, `c` es un parámetro de salida, y `i` es una variable local.
+`x`es una variable estática, `y` es una variable de instancia `v[0]` , es un elemento de `a` matriz, es un parámetro `b` de valor, es un `c` parámetro de referencia, es un `i` parámetro de salida y es una variable local. .
 
 ### <a name="static-variables"></a>Variables estáticas
 
-Un campo declarado con el `static` modificador se denomina un ***variable estática***. Una variable estática entra en existencia antes de la ejecución del constructor estático ([constructores estáticos](classes.md#static-constructors)) para su tipo contenedor y deja de existir cuando deja de existir el dominio de aplicación asociado.
+Un campo declarado con el `static` modificador se denomina ***variable estática***. Una variable estática se produce antes de la ejecución del constructor estático ([constructores estáticos](classes.md#static-constructors)) para su tipo contenedor y deja de existir cuando el dominio de aplicación asociado deja de existir.
 
-El valor inicial de una variable estática es el valor predeterminado ([los valores predeterminados](variables.md#default-values)) del tipo de variable.
+El valor inicial de una variable estática es el valor predeterminado ([valores predeterminados](variables.md#default-values)) del tipo de la variable.
 
-Para fines de comprobación de asignación definitiva, una variable estática se considera asignado inicialmente.
+A efectos de la comprobación de asignación definitiva, se considera que una variable estática está asignada inicialmente.
 
 ### <a name="instance-variables"></a>Variables de instancia
 
-Un campo declarado sin el `static` modificador se denomina un ***variable de instancia***.
+Un campo declarado sin el `static` modificador se denomina ***variable de instancia***.
 
 #### <a name="instance-variables-in-classes"></a>Variables de instancia en clases
 
-Una variable de instancia de una clase entra en existencia cuando se crea una nueva instancia de esa clase y deja de existir cuando no hay ninguna referencia a esa instancia y se ha ejecutado el destructor de la instancia (si existe).
+Una variable de instancia de una clase se produce cuando se crea una nueva instancia de esa clase y deja de existir cuando no hay ninguna referencia a esa instancia y se ha ejecutado el destructor de la instancia (si existe).
 
-El valor inicial de una variable de instancia de una clase es el valor predeterminado ([los valores predeterminados](variables.md#default-values)) del tipo de variable.
+El valor inicial de una variable de instancia de una clase es el valor predeterminado ([valores predeterminados](variables.md#default-values)) del tipo de la variable.
 
-Con el fin de comprobación de asignación definitiva, una variable de instancia de una clase se considera asignado inicialmente.
+Con el fin de comprobar la asignación definitiva, se considera que una variable de instancia de una clase está asignada inicialmente.
 
-#### <a name="instance-variables-in-structs"></a>Variables de instancia en structs
+#### <a name="instance-variables-in-structs"></a>Variables de instancia en Structs
 
-Una variable de instancia de una estructura tiene exactamente la misma duración que la variable de estructura a la que pertenece. En otras palabras, cuando una variable de tipo struct entra en la existencia o deja de existir, lo hacer demasiado de las variables de instancia de la estructura.
+Una variable de instancia de un struct tiene exactamente la misma duración que la variable de estructura a la que pertenece. En otras palabras, cuando una variable de un tipo struct entra en existencia o deja de existir, también se realizan las variables de instancia de la estructura.
 
-El estado de asignación inicial de una variable de instancia de una estructura es el mismo que el de la variable de estructura. En otras palabras, cuando una variable de estructura se considera asignada inicialmente, lo son demasiado sus variables de instancia, y cuando una variable de estructura se considera inicialmente sin asignar, sus variables de instancia del mismo modo están asignados.
+El estado de asignación inicial de una variable de instancia de una estructura es el mismo que el de la variable de estructura contenedora. En otras palabras, cuando se considera que una variable de estructura está asignada inicialmente, también se consideran variables de instancia y, cuando una variable de struct se considera inicialmente sin asignar, sus variables de instancia también se desasignan.
 
 ### <a name="array-elements"></a>Elementos de matriz
 
-Los elementos de una matriz nazcan cuando se crea una instancia de matriz y dejan de existir cuando no hay referencias a esa instancia de matriz.
+Los elementos de una matriz se componen cuando se crea una instancia de matriz y dejan de existir cuando no hay ninguna referencia a esa instancia de la matriz.
 
-El valor inicial de cada uno de los elementos de una matriz es el valor predeterminado ([los valores predeterminados](variables.md#default-values)) del tipo de los elementos de matriz.
+El valor inicial de cada uno de los elementos de una matriz es el valor predeterminado ([valores predeterminados](variables.md#default-values)) del tipo de los elementos de la matriz.
 
-Con el fin de comprobación de asignación definitiva, un elemento de matriz se considera asignado inicialmente.
+Con el fin de comprobar la asignación definitiva, se considera que un elemento de la matriz está asignado inicialmente.
 
 ### <a name="value-parameters"></a>Parámetros de valor
 
-Un parámetro declarado sin un `ref` o `out` modificador es un ***parámetro value***.
+Un parámetro declarado sin un `ref` modificador o `out` es un ***parámetro de valor***.
 
-Un parámetro de valor entra en existencia al invocar el miembro de función (método, constructor de instancia, operador o descriptor de acceso) o una función anónima al que pertenece el parámetro y se inicializa con el valor del argumento especificado en la invocación. Un parámetro de valor normalmente deja de existir cuando se devuelve el miembro de función o función anónima. Sin embargo, si el valor del parámetro se captura mediante una función anónima ([expresiones de función anónima](expressions.md#anonymous-function-expressions)), su duración se extiende al menos hasta que el delegado o árbol de expresión que se crea a partir de esa función anónima es apto para colección de elementos no utilizados.
+Un parámetro de valor se basa en la invocación del miembro de función (método, constructor de instancia, descriptor de acceso o operador) o función anónima a la que pertenece el parámetro, y se inicializa con el valor del argumento proporcionado en la invocación. Normalmente, un parámetro de valor deja de existir cuando se devuelve el miembro de función o la función anónima. Sin embargo, si el parámetro de valor se captura mediante una función anónima ([expresiones de función anónima](expressions.md#anonymous-function-expressions)), su tiempo de vida se extiende al menos hasta que el delegado o el árbol de expresión creado a partir de esa función anónima sea válido para la recolección de elementos no utilizados.
 
-Con el fin de comprobación de asignación definitiva, un parámetro de valor se considera asignado inicialmente.
+Con el fin de comprobar la asignación definitiva, se considera que un parámetro de valor está asignado inicialmente.
 
 ### <a name="reference-parameters"></a>Parámetros de referencia
 
-Un parámetro declarado con un `ref` modificador es un ***hacer referencia al parámetro***.
+Un parámetro declarado con un `ref` modificador es un ***parámetro de referencia***.
 
-Un parámetro de referencia no crea una nueva ubicación de almacenamiento. En su lugar, un parámetro de referencia representa la misma ubicación de almacenamiento que la variable especificada como argumento en el miembro de función o la invocación de función anónima. Por lo tanto, el valor de un parámetro de referencia es siempre el mismo que la variable subyacente.
+Un parámetro de referencia no crea una nueva ubicación de almacenamiento. En su lugar, un parámetro de referencia representa la misma ubicación de almacenamiento que la variable proporcionada como argumento en el miembro de función o la invocación de la función anónima. Por lo tanto, el valor de un parámetro de referencia es siempre el mismo que el de la variable subyacente.
 
-Se aplican las siguientes reglas de asignación definitiva a los parámetros de referencia. Tenga en cuenta las distintas reglas de los parámetros de salida que se describe en [parámetros de salida](variables.md#output-parameters).
+Las siguientes reglas de asignación definitiva se aplican a los parámetros de referencia. Tenga en cuenta las diferentes reglas para los parámetros de salida que se describen en [parámetros de salida](variables.md#output-parameters).
 
-*  Una variable debe asignarlo definitivamente ([asignación definitiva](variables.md#definite-assignment)) antes de que se puede pasar como un parámetro de referencia en una invocación de función miembro o un delegado.
-*  Dentro de un miembro de función o función anónima, un parámetro de referencia se considera asignado inicialmente.
+*  Una variable debe estar asignada definitivamente ([asignación definitiva](variables.md#definite-assignment)) antes de que se pueda pasar como un parámetro de referencia en un miembro de función o una invocación de delegado.
+*  Dentro de un miembro de función o una función anónima, se considera que un parámetro de referencia está asignado inicialmente.
 
-Dentro de un método de instancia o un descriptor de acceso de instancia de un tipo de estructura, el `this` palabra clave se comporta exactamente como un parámetro de referencia de tipo struct ([este acceso](expressions.md#this-access)).
+Dentro de un método de instancia o un descriptor de acceso `this` de instancia de un tipo de estructura, la palabra clave se comporta exactamente como un parámetro de referencia del tipo de estructura ([este acceso](expressions.md#this-access)).
 
 ### <a name="output-parameters"></a>Parámetros de salida
 
 Un parámetro declarado con un `out` modificador es un ***parámetro de salida***.
 
-Un parámetro de salida no crea una nueva ubicación de almacenamiento. En su lugar, un parámetro de salida representa la misma ubicación de almacenamiento que la variable especificada como argumento en la invocación de función miembro o un delegado. Por lo tanto, el valor de un parámetro de salida es siempre el mismo que la variable subyacente.
+Un parámetro de salida no crea una nueva ubicación de almacenamiento. En su lugar, un parámetro de salida representa la misma ubicación de almacenamiento que la variable proporcionada como argumento en la invocación del miembro de función o delegado. Por lo tanto, el valor de un parámetro de salida es siempre el mismo que el de la variable subyacente.
 
-Se aplican las siguientes reglas de asignación definitiva a los parámetros de salida. Tenga en cuenta las distintas reglas de los parámetros de referencia se describe en [hacen referencia a parámetros](variables.md#reference-parameters).
+Las siguientes reglas de asignación definitiva se aplican a los parámetros de salida. Tenga en cuenta las diferentes reglas para los parámetros de referencia descritos en [parámetros de referencia](variables.md#reference-parameters).
 
-*  Una variable no debe estar asignada definitivamente antes de que se puede pasar como un parámetro de salida en un miembro de función o la invocación de delegado.
-*  Tras la finalización normal de una invocación de miembro o un delegado de función, cada variable que se pasó como un parámetro de salida se considera asignado en esa ruta de acceso de ejecución.
-*  Dentro de un miembro de función o función anónima, un parámetro de salida se considera inicialmente sin asignar.
-*  Cada parámetro de salida de un miembro de función o función anónima debe asignarlo definitivamente ([asignación definitiva](variables.md#definite-assignment)) antes de la función miembro o función anónima vuelve con normalidad.
+*  No es necesario asignar definitivamente una variable antes de que se pueda pasar como parámetro de salida en un miembro de función o en una invocación de delegado.
+*  Tras la finalización normal de una invocación de un miembro de función o delegado, cada variable que se pasó como parámetro de salida se considera asignada en esa ruta de acceso de ejecución.
+*  Dentro de un miembro de función o una función anónima, un parámetro de salida se considera inicialmente sin asignar.
+*  Todos los parámetros de salida de un miembro de función o de una función anónima deben estar asignados definitivamente ([asignación definitiva](variables.md#definite-assignment)) antes de que el miembro de función o la función anónima devuelvan normalmente.
 
-Dentro de un constructor de instancia de un tipo de estructura, el `this` palabra clave se comporta exactamente como un parámetro de salida de tipo struct ([este acceso](expressions.md#this-access)).
+Dentro de un constructor de instancia de un tipo de `this` estructura, la palabra clave se comporta exactamente como un parámetro de salida del tipo de estructura ([este acceso](expressions.md#this-access)).
 
 ### <a name="local-variables"></a>Variables locales
 
-Un ***variable local*** se declara mediante un *local_variable_declaration*, lo que puede producirse en un *bloque*, un *for_statement*, un *switch_statement* o un *using_statement*; o por un *foreach_statement* o un *specific_catch_clause* para un *try_statement*.
+Una ***variable local*** está declarada por un *local_variable_declaration*, que puede producirse en un *bloque*, *for_Statement*, *switch_statement* o *using_statement*; o bien, *foreach_statement* o *specific_catch_clause* para un *try_statement*.
 
-La duración de una variable local es la parte de la ejecución del programa durante el cual almacenamiento garantiza que se va a reservar para él. Esta duración se extiende al menos desde la entrada en el *bloque*, *for_statement*, *switch_statement*, *using_statement*, *foreach_statement*, o *specific_catch_clause* con el que está asociado, hasta la ejecución de ese *bloque*, *for_statement*, *switch_statement*, *using_statement*, *foreach_statement*, o *specific_catch_clause* extremos de ninguna manera. (Escriba un texto delimitado *bloque* o llamar a un método se suspende, pero no finaliza, la ejecución del elemento actual *bloque*, *for_statement*, *switch_statement* , *using_statement*, *foreach_statement*, o *specific_catch_clause*.) Si se captura la variable local mediante una función anónima ([capturan las variables externas](expressions.md#captured-outer-variables)), su duración se extiende al menos hasta que el árbol de expresión o delegado creado a partir de la función anónima, junto con cualquier otro objeto que vienen a referencia a la variable capturada, son aptas para la recolección.
+La duración de una variable local es la parte de la ejecución del programa durante la que se garantiza que el almacenamiento está reservado para ella. Esta duración extiende al menos una entrada en el *bloque*, *for_Statement*, *switch_statement*, *using_statement*, *foreach_statement*o *specific_catch_clause* con el que está asociada, hasta que la ejecución de ese *bloque*, *for_Statement*, *switch_statement*, *using_statement*, *foreach_statement*o *specific_catch_clause* finaliza de forma alguna. (Si se escribe un *bloque* incluido o se llama a un método, se suspende, pero no finaliza, la ejecución del *bloque*actual, *for_Statement*, *switch_statement*, *using_statement*, *foreach_statement*o *specific_ catch_clause*). Si una función anónima captura la variable local ([variables externas capturadas](expressions.md#captured-outer-variables)), su duración se extiende al menos hasta que el delegado o árbol de expresión creado a partir de la función anónima, junto con cualquier otro objeto que se refiere a la la variable capturada, es válida para la recolección de elementos no utilizados.
 
-Si el elemento primario *bloque*, *for_statement*, *switch_statement*, *using_statement*, *foreach_statement*, o *specific_catch_clause* se escribe de forma recursiva, se crea una nueva instancia de la variable local cada hora y su *local_variable_initializer*, si existe, se evalúa. cada vez.
+Si el *bloque*primario, *for_Statement*, *switch_statement*, *using_statement*, *foreach_statement*o *specific_catch_clause* se escribe de forma recursiva, se crea una nueva instancia de la variable local. la hora y su *local_variable_initializer*, si existe, se evalúan cada vez.
 
-Una variable local introducida por un *local_variable_declaration* no se inicializa automáticamente y, por tanto, no tiene ningún valor predeterminado. Con el fin de comprobación de asignación definitiva, una variable local introducidos por un *local_variable_declaration* se considera inicialmente sin asignar. Un *local_variable_declaration* puede incluir un *local_variable_initializer*, en cuyo caso la variable se considera asignada definitivamente solo después de la expresión de inicialización ([ Las instrucciones de declaración](variables.md#declaration-statements)).
+Una variable local introducida por un *local_variable_declaration* no se inicializa automáticamente y, por tanto, no tiene ningún valor predeterminado. Con el fin de comprobar la asignación definitiva, una variable local introducida por una *local_variable_declaration* se considera inicialmente sin asignar. Un *local_variable_declaration* puede incluir un *local_variable_initializer*, en cuyo caso la variable se considera definitivamente asignada solo después de la expresión de inicialización ([instrucciones de declaración](variables.md#declaration-statements)).
 
-Dentro del ámbito de una variable local introducido por un *local_variable_declaration*, es un error en tiempo de compilación para hacer referencia a la variable local en una posición textual que precede a su *local_variable_declarator*. Si la declaración de variable local es implícita ([declaraciones de variable Local](statements.md#local-variable-declarations)), también es un error hacer referencia a la variable dentro de su *local_variable_declarator*.
+Dentro del ámbito de una variable local introducida por un *local_variable_declaration*, se trata de un error en tiempo de compilación para hacer referencia a esa variable local en una posición textual que precede a su *local_variable_declarator*. Si la declaración de variable local es implícita ([declaraciones de variables locales](statements.md#local-variable-declarations)), también es un error hacer referencia a la variable dentro de su *local_variable_declarator*.
 
-Una variable local introducida por un *foreach_statement* o un *specific_catch_clause* se considera asignado definitivamente en todo su ámbito.
+Una variable local introducida por un *foreach_statement* o un *specific_catch_clause* se considera definitivamente asignada en todo el ámbito.
 
-La duración real de una variable local es depende de la implementación. Por ejemplo, un compilador puede determinar estáticamente que solo se usa una variable local en un bloque de una pequeña parte de ese bloque. Con este análisis, el compilador podría generar código que es el resultado en el almacenamiento de la variable tiene una duración más corta que su bloque contenedor.
+La duración real de una variable local depende de la implementación. Por ejemplo, un compilador puede determinar estáticamente que una variable local de un bloque solo se usa para una pequeña parte de ese bloque. Con este análisis, el compilador podría generar código que hace que el almacenamiento de la variable tenga una duración más corta que el bloque contenedor.
 
-El almacenamiento al que hace referencia una variable de referencia local se reclama independientemente de la duración de esa variable de referencia local ([administración de memoria automática](basic-concepts.md#automatic-memory-management)).
+El almacenamiento al que se hace referencia mediante una variable de referencia local se recupera independientemente de la duración de esa variable de referencia local ([Administración automática de memoria](basic-concepts.md#automatic-memory-management)).
 
 ## <a name="default-values"></a>Valores predeterminados
 
-Las siguientes categorías de variables se inicializan automáticamente en sus valores predeterminados:
+Las siguientes categorías de variables se inicializan automáticamente con sus valores predeterminados:
 
 *  Variables estáticas.
 *  Variables de instancia de instancias de clase.
-*  Elementos de la matriz.
+*  Elementos de matriz.
 
-El valor predeterminado de una variable depende del tipo de la variable y se determina como sigue:
+El valor predeterminado de una variable depende del tipo de la variable y se determina de la manera siguiente:
 
-*  Para una variable de un *value_type*, el valor predeterminado es el mismo que el valor calculado por el *value_type*del constructor predeterminado ([constructores predeterminados](types.md#default-constructors)).
-*  Para una variable de un *reference_type*, el valor predeterminado es `null`.
+*  En el caso de una variable de *value_type*, el valor predeterminado es el mismo que el valor calculado por el constructor predeterminado del *value_type*([constructores predeterminados](types.md#default-constructors)).
+*  En el caso de una variable de *reference_type*, el valor `null`predeterminado es.
 
-Inicialización de los valores predeterminados normalmente se consigue haciendo que el Administrador de memoria o el recolector de elementos no utilizados inicializar la memoria para todos los bits cero antes de está asignada para su uso. Por este motivo, es conveniente utilizar todos los bits cero para representar la referencia nula.
+Normalmente, la inicialización en los valores predeterminados se realiza al hacer que el administrador de memoria o el recolector de elementos no utilizados inicialicen la memoria para todos los bits cero antes de que se asignen para su uso. Por esta razón, es conveniente usar All-bits-cero para representar la referencia nula.
 
 ## <a name="definite-assignment"></a>Asignación definitiva
 
-En una ubicación especificada en el código ejecutable de un miembro de función, una variable se dice que ***asignado definitivamente*** si el compilador puede probar, mediante un análisis de flujo estático concreto ([reglas precisas para determinar definitiva asignación](variables.md#precise-rules-for-determining-definite-assignment)), que la variable se ha inicializado automáticamente o ha sido el destino de al menos una asignación. De manera informal se ha indicado, las reglas de asignación definitiva son:
+En una ubicación determinada del código ejecutable de un miembro de función, se dice que una variable está ***asignada definitivamente*** si el compilador puede demostrar, mediante un análisis de flujo estático determinado ([reglas precisas para determinar la asignación definitiva](variables.md#precise-rules-for-determining-definite-assignment)), que la variable se ha inicializado automáticamente o ha sido el destino de al menos una asignación. De manera informativa, las reglas de asignación definitiva son las siguientes:
 
-*  Una variable asignada inicialmente ([variables asignadas inicialmente](variables.md#initially-assigned-variables)) siempre se considera asignado definitivamente.
-*  Una variable no asignada inicialmente ([inicialmente sin asignar variables](variables.md#initially-unassigned-variables)) se considera asignado definitivamente en una ubicación determinada si todas las rutas de ejecución posibles que llevan a esa ubicación contengan al menos uno de los siguientes:
-    * Una asignación simple ([asignación Simple](expressions.md#simple-assignment)) en el que la variable es el operando izquierdo.
-    * Una expresión de invocación ([expresiones de invocación](expressions.md#invocation-expressions)) o una expresión de creación de objeto ([expresiones de creación de objeto](expressions.md#object-creation-expressions)) que pasa la variable como un parámetro de salida.
-    * Para una variable local, una declaración de variable local ([declaraciones de variable Local](statements.md#local-variable-declarations)) que incluye un inicializador de variable.
+*  Una variable asignada inicialmente ([variables asignadas inicialmente](variables.md#initially-assigned-variables)) siempre se considera asignada definitivamente.
+*  Una variable no asignada inicialmente ([variables inicialmente sin asignar](variables.md#initially-unassigned-variables)) se considera definitivamente asignada en una ubicación determinada si todas las rutas de acceso de ejecución posibles que conducen a esa ubicación contienen al menos uno de los siguientes:
+    * Asignación simple ([asignación simple](expressions.md#simple-assignment)) en la que la variable es el operando izquierdo.
+    * Una expresión de invocación ([expresiones de invocación](expressions.md#invocation-expressions)) o una expresión de creación de objetos ([expresiones de creación de objetos](expressions.md#object-creation-expressions)) que pasa la variable como parámetro de salida.
+    * En el caso de una variable local, es una declaración de variable local ([declaraciones de variables locales](statements.md#local-variable-declarations)) que incluye un inicializador de variable.
 
-La especificación formal subyacente a las reglas informales anteriores se describe en [variables asignadas inicialmente](variables.md#initially-assigned-variables), [inicialmente sin asignar variables](variables.md#initially-unassigned-variables), y [reglas precisas para determinar asignación definitiva](variables.md#precise-rules-for-determining-definite-assignment).
+La especificación formal subyacente a las reglas informal anteriores se describe en [variables asignadas inicialmente](variables.md#initially-assigned-variables), [variables inicialmente sin asignar](variables.md#initially-unassigned-variables)y [reglas precisas para determinar la asignación definitiva](variables.md#precise-rules-for-determining-definite-assignment).
 
-Los Estados de asignación definitiva de variables de instancia de un *struct_type* variable se realiza un seguimiento individual y también colectivo. En adicionales a las reglas anteriores, las reglas siguientes se aplican a *struct_type* variables y sus variables de instancia:
+El seguimiento de los Estados de asignación definitiva de las variables de instancia de una variable *struct_type* se realiza de forma individual y colectiva. Además de las reglas anteriores, las siguientes reglas se aplican a las variables *struct_type* y sus variables de instancia:
 
-*  Una variable de instancia se considera asignada definitivamente si lo contiene *struct_type* variable se considera asignado definitivamente.
-*  Un *struct_type* variable se considera asignado definitivamente si cada uno de sus variables de instancia se considera asignado definitivamente.
+*  Una variable de instancia se considera asignada definitivamente si su variable *struct_type* que contiene se considera asignada definitivamente.
+*  Una variable *struct_type* se considera asignada definitivamente si cada una de sus variables de instancia se considera definitivamente asignada.
 
-Asignación definitiva es un requisito en los contextos siguientes:
+La asignación definitiva es un requisito en los contextos siguientes:
 
-*  Una variable debe estar asignada definitivamente en cada ubicación donde se obtiene su valor. Esto garantiza que nunca se producen valores no definidos. Se considera la aparición de una variable en una expresión para obtener el valor de la variable, excepto cuando
+*  Una variable debe estar asignada definitivamente en cada ubicación donde se obtiene su valor. Esto garantiza que nunca se produzcan valores sin definir. La aparición de una variable en una expresión se considera que obtiene el valor de la variable, excepto cuando
     * la variable es el operando izquierdo de una asignación simple,
-    * la variable se pasa como parámetro de salida, o
-    * la variable es un *struct_type* variable y se produce como el operando izquierdo de un acceso de miembro.
-*  Una variable debe estar asignada definitivamente en cada ubicación donde se pasa como un parámetro de referencia. Esto garantiza que el miembro de función que se invoca puede tener en cuenta el parámetro de referencia asignado inicialmente.
-*  Todos los parámetros de salida de un miembro de función deben asignarlo definitivamente en cada ubicación donde se devuelve el miembro de función (a través de un `return` instrucción o a través de la ejecución llega al final del cuerpo de miembro de función). Esto garantiza que los miembros de función no devuelven valores no definidos en los parámetros de salida, lo que permite al compilador que considere la posibilidad de una invocación de miembros de función que toma una variable como un parámetro de salida equivalente a una asignación a la variable.
-*  El `this` variable de un *struct_type* constructor de instancia debe asignarlo definitivamente en cada ubicación donde se devuelve ese constructor de instancia.
+    * la variable se pasa como parámetro de salida, o bien
+    * la variable es una variable *struct_type* y se produce como operando izquierdo de un acceso de miembro.
+*  Una variable debe estar asignada definitivamente en cada ubicación en la que se pasa como parámetro de referencia. Esto garantiza que el miembro de función que se invoca puede considerar el parámetro de referencia asignado inicialmente.
+*  Todos los parámetros de salida de un miembro de función deben asignarse definitivamente en cada ubicación en la que el miembro `return` de función devuelva (a través de una instrucción o a través de la ejecución hasta el final del cuerpo del miembro de función). Esto garantiza que los miembros de función no devuelven valores no definidos en los parámetros de salida, lo que permite al compilador considerar una invocación de miembro de función que toma una variable como parámetro de salida equivalente a una asignación a la variable.
+*  La `this` variable de un constructor de instancia *struct_type* debe estar asignada definitivamente en cada ubicación en la que el constructor de instancia devuelva.
 
 ### <a name="initially-assigned-variables"></a>Variables asignadas inicialmente
 
@@ -169,115 +169,115 @@ Las siguientes categorías de variables se clasifican como asignadas inicialment
 
 *  Variables estáticas.
 *  Variables de instancia de instancias de clase.
-*  Variables de instancia de variables de estructura asignadas inicialmente.
-*  Elementos de la matriz.
+*  Variables de instancia de las variables de struct asignadas inicialmente.
+*  Elementos de matriz.
 *  Parámetros de valor.
 *  Parámetros de referencia.
-*  Las variables declaradas en un `catch` cláusula o `foreach` instrucción.
+*  Variables declaradas `catch` en una cláusula `foreach` o instrucción.
 
 ### <a name="initially-unassigned-variables"></a>Variables inicialmente sin asignar
 
-Las siguientes categorías de variables se clasifican como inicialmente sin asignar:
+Las siguientes categorías de variables se clasifican como sin asignar inicialmente:
 
-*  Variables de instancia de struct inicialmente sin asignar variables.
-*  Parámetros de salida, incluida la `this` variable de constructores de instancia de struct.
-*  Las variables locales, excepto los declarados en un `catch` cláusula o `foreach` instrucción.
+*  Variables de instancia de variables de estructura inicialmente sin asignar.
+*  Parámetros de salida, incluida `this` la variable de constructores de instancia de struct.
+*  Variables locales, excepto las declaradas `catch` en una cláusula `foreach` o una instrucción.
 
 ### <a name="precise-rules-for-determining-definite-assignment"></a>Reglas precisas para determinar la asignación definitiva
 
-Con el fin de determinar que cada variable utilizada se asigna definitivamente, el compilador debe usar un proceso que es equivalente a la descrita en esta sección.
+Con el fin de determinar que cada variable usada está asignada definitivamente, el compilador debe utilizar un proceso equivalente al descrito en esta sección.
 
-El compilador procesa el cuerpo de cada miembro de función que tiene una o más variables inicialmente sin asignar. Para cada variable inicialmente sin asignar *v*, el compilador determina un ***estado de asignación definitiva*** para *v* en cada uno de los siguientes puntos en el miembro de función:
+El compilador procesa el cuerpo de cada miembro de función que tiene una o varias variables sin asignar inicialmente. Para *cada variable de*inicial sin asignar, el compilador determina un ***Estado de asignación definitiva*** para *v* en cada uno de los siguientes puntos del miembro de función:
 
 *  Al principio de cada instrucción
-*  En el punto final ([puntos finales y alcance](statements.md#end-points-and-reachability)) de cada instrucción
+*  En el punto final ([puntos de conexión y disponibilidad](statements.md#end-points-and-reachability)) de cada instrucción
 *  En cada arco que transfiere el control a otra instrucción o al punto final de una instrucción
 *  Al principio de cada expresión
 *  Al final de cada expresión
 
 El estado de asignación definitiva de *v* puede ser:
 
-*  Asigna definitivamente. Indica que todos los flujos de control posibles en este punto, *v* se ha asignado un valor.
-*  No asignado definitivamente. El estado de una variable al final de una expresión de tipo `bool`, el estado de una variable que no se ha asignado definitivamente mayo (pero no necesariamente) se dividen en uno de los subestados siguientes:
-    * Se asigna definitivamente después de una expresión es true. Este estado indica que *v* se asigna definitivamente si la expresión booleana se evalúa como true, pero no se asigna necesariamente si la expresión booleana se evalúa como false.
-    * Se asigna definitivamente después de una expresión es false. Este estado indica que *v* se asigna definitivamente si la expresión booleana se evalúa como false, pero no se asigna necesariamente si la expresión booleana se evalúa como true.
+*  Definitivamente asignada. Esto indica que en todos los flujos de control posibles hasta este punto, se ha asignado un valor a *v* .
+*  No asignado definitivamente. Para el estado de una variable al final de una expresión de tipo `bool`, el estado de una variable que no está asignado definitivamente puede ser uno de los siguientes subestados:
+    * Se asigna definitivamente después de la expresión true. Este estado indica que *v* se asigna definitivamente si la expresión booleana se evalúa como true, pero no se asigna necesariamente si la expresión booleana se evalúa como false.
+    * Se asigna definitivamente después de la expresión false. Este estado indica que *v* se asigna definitivamente si la expresión booleana se evalúa como false, pero no se asigna necesariamente si la expresión booleana se evalúa como true.
 
-Las siguientes reglas determinan cómo el estado de una variable *v* viene determinada en cada ubicación.
+Las siguientes reglas rigen cómo se determina el estado de una variable *v* en cada ubicación.
 
 #### <a name="general-rules-for-statements"></a>Reglas generales para las instrucciones
 
-*  *v* no se asigna definitivamente al principio de un cuerpo de función miembro.
+*  *v* no se asigna definitivamente al principio del cuerpo de un miembro de función.
 *  *v* se asigna definitivamente al principio de cualquier instrucción inalcanzable.
-*  El estado de asignación definitiva de *v* al principio de cualquier otra instrucción se determina comprobando el estado de asignación definitiva de *v* en todas las transferencias de flujo de control que tienen como destino el principio de la que instrucción. Si (y sólo si) *v* se asigna definitivamente en todas estas transferencias de flujo de control, a continuación, *v* se asigna definitivamente al principio de la instrucción. El conjunto de transferencias de flujo de control posibles se determina en la misma manera que el alcance de la instrucción de comprobación ([puntos finales y alcance](statements.md#end-points-and-reachability)).
-*  El estado de asignación definitiva de *v* en el punto final de un bloque, `checked`, `unchecked`, `if`, `while`, `do`, `for`, `foreach`, `lock`, `using`, o `switch` viene determinado por la comprobación del estado de asignación definitiva de *v* en todas las transferencias de flujo de control que tienen como destino el punto final de esa instrucción. Si *v* se asigna definitivamente en todas estas transferencias de flujo de control, a continuación, *v* se asigna definitivamente en el punto final de la instrucción. En caso contrario, *v* no se asigna definitivamente en el punto final de la instrucción. El conjunto de transferencias de flujo de control posibles se determina en la misma manera que el alcance de la instrucción de comprobación ([puntos finales y alcance](statements.md#end-points-and-reachability)).
+*  El estado de asignación definitiva de *v* al principio de cualquier otra instrucción se determina comprobando el estado de asignación definitiva de *v* en todas las transferencias de flujo de control que tienen como destino el inicio de la instrucción. Si (y solo si) *v* se asigna definitivamente en todas estas transferencias de flujo de control, entonces *v* se asigna definitivamente al principio de la instrucción. El conjunto de posibles transferencias de flujo de control se determina de la misma manera que para comprobar la disponibilidad de la instrucción (puntos de conexión[y disponibilidad](statements.md#end-points-and-reachability)).
+*  El estado de asignación definitiva de *v* en el punto final de un bloque, `checked`, `unchecked`, `if`, `while`, `do`, `for`, `foreach` `lock`,, `using`o `switch`la instrucción se determina comprobando el estado de asignación definitiva de *v* en todas las transferencias de flujo de control que tienen como destino el punto final de la instrucción. Si *v* se asigna definitivamente en todas estas transferencias de flujo de control, entonces *v* se asigna definitivamente en el punto final de la instrucción. Casos *v* no se asigna definitivamente en el punto final de la instrucción. El conjunto de posibles transferencias de flujo de control se determina de la misma manera que para comprobar la disponibilidad de la instrucción (puntos de conexión[y disponibilidad](statements.md#end-points-and-reachability)).
 
-#### <a name="block-statements-checked-and-unchecked-statements"></a>Instrucciones de bloque checked y unchecked
+#### <a name="block-statements-checked-and-unchecked-statements"></a>Instrucciones de bloqueo, comprobadas y no comprobadas
 
-El estado de asignación definitiva de *v* en el control de transferencia de la primera instrucción de la lista de instrucciones en el bloque (o al punto final del bloque, si la lista de instrucciones está vacía) es el mismo que la instrucción de asignación definitiva de *v* antes del bloque, `checked`, o `unchecked` instrucción.
+El estado de asignación definitiva de *v* en la transferencia de control a la primera instrucción de la lista de instrucciones en el bloque (o al punto final del bloque, si la lista de instrucciones está vacía) es igual que la instrucción de asignación definitiva de *v* antes del bloque. instrucción `checked`, o `unchecked` .
 
 #### <a name="expression-statements"></a>Instrucciones de expresión
 
 Para una instrucción de expresión *stmt* que consta de la expresión *expr*:
 
 *  *v* tiene el mismo estado de asignación definitiva al principio de *expr* como al principio de *stmt*.
-*  Si *v* si asigna definitivamente al final de *expr*, se asigna definitivamente en el punto final de *stmt*; en caso contrario, no se asigna definitivamente en el punto final de *stmt*.
+*  Si *se* asigna definitivamente al final de *expr*, se asigna definitivamente en el punto final de *stmt*; casos no se asigna definitivamente en el punto final de *stmt*.
 
 #### <a name="declaration-statements"></a>Instrucciones de declaración
 
-*  Si *stmt* es una instrucción de declaración sin inicializadores, a continuación, *v* tiene el mismo estado de asignación definitiva en el punto final de *stmt* como al principio de *stmt*.
-*  Si *stmt* es una instrucción de declaración con inicializadores, a continuación, el estado de asignación definitiva para *v* se determina como si *stmt* eran una lista de instrucciones, con una asignación instrucción para cada declaración con un inicializador (en el orden de declaración).
+*  Si *stmt* es una instrucción de declaración sin inicializadores, *v* tiene el mismo estado de asignación definitiva en el punto final de *stmt* que al principio de *stmt*.
+*  Si *stmt* es una instrucción de declaración con inicializadores, el estado de asignación definitiva para *v* se determina como si *stmt* fuera una lista de instrucciones, con una instrucción de asignación para cada declaración con un inicializador (en el orden de Declaración).
 
-#### <a name="if-statements"></a>Si las instrucciones
+#### <a name="if-statements"></a>Instrucciones if
 
-Para un `if` instrucción *stmt* del formulario:
+Para una `if` instrucción *stmt* de la forma:
 ```csharp
 if ( expr ) then_stmt else else_stmt
 ```
 
 *  *v* tiene el mismo estado de asignación definitiva al principio de *expr* como al principio de *stmt*.
-*  Si *v* se asigna definitivamente al final de *expr*, a continuación, se asigna definitivamente en la transferencia de flujo de control a *then_stmt* y cualquiera *else_stmt*  o para el punto de conexión de *stmt* si no hay ninguna cláusula else.
-*  Si *v* tiene el estado "asignado definitivamente después de una expresión true" al final de *expr*, a continuación, se asigna definitivamente en la transferencia de flujo de control a *then_stmt*y no asignado definitivamente en la transferencia de flujo de control como *else_stmt* o para el punto de conexión de *stmt* si no hay ninguna cláusula else.
-*  Si *v* tiene el estado "asignado definitivamente después de una expresión false" al final de *expr*, a continuación, se asigna definitivamente en la transferencia de flujo de control a *else_stmt*y no se asigna definitivamente en la transferencia de flujo de control a *then_stmt*. Se asigna definitivamente en el punto final de *stmt* solo si se asigna definitivamente en el punto final de *then_stmt*.
-*  En caso contrario, *v* no se considera asignado definitivamente en la transferencia de flujo de control como el *then_stmt* o *else_stmt*, o para el punto de conexión de  *stmt* si no hay ninguna cláusula else.
+*  Si *v* se asigna definitivamente al final de *expr*, se asigna definitivamente en la transferencia de flujo de control a *then_stmt* y a *else_stmt* o al punto final de *stmt* si no hay ninguna cláusula ELSE.
+*  Si *v* tiene el estado "definitivamente asignado después de una expresión true" al final de *expr*, se asigna definitivamente en la transferencia del flujo de control a *then_stmt*y no se asigna definitivamente en la transferencia del flujo de control a *else_ stmt* o al punto final de *stmt* si no hay ninguna cláusula ELSE.
+*  Si *v* tiene el estado "definitivamente asignado después de la expresión false" al final de *expr*, se asigna definitivamente en la transferencia del flujo de control a *else_stmt*y no se asigna definitivamente en la transferencia del flujo de control a *then_stmt* . Se asigna definitivamente en el punto final de *stmt* si y solo si se asigna definitivamente en el punto final de *then_stmt*.
+*  De lo contrario, se considera que *v* no está asignado definitivamente en la transferencia de flujo de control a *then_stmt* o *else_stmt*, o al punto final de *stmt* si no hay ninguna cláusula ELSE.
 
 #### <a name="switch-statements"></a>Instrucciones switch
 
-En un `switch` instrucción *stmt* con una expresión de control *expr*:
+En una `switch` instrucción *stmt* con una expresión de control *expr*:
 
 *  El estado de asignación definitiva de *v* al principio de *expr* es el mismo que el estado de *v* al principio de *stmt*.
-*  El estado de asignación definitiva de *v* transferencia a una lista de instrucciones switch puede obtener acceso al bloque en el flujo de control es el mismo que el estado de asignación definitiva de *v* al final de *expr*.
+*  El estado de asignación definitiva de *v* en la lista de transferencias de flujo de control a una lista de instrucciones del bloque switch es igual que el estado de asignación definitiva de *v* al final de *expr*.
 
-#### <a name="while-statements"></a>Instrucciones while
+#### <a name="while-statements"></a>While (instrucciones)
 
-Para un `while` instrucción *stmt* del formulario:
+Para una `while` instrucción *stmt* de la forma:
 ```csharp
 while ( expr ) while_body
 ```
 
 *  *v* tiene el mismo estado de asignación definitiva al principio de *expr* como al principio de *stmt*.
-*  Si *v* se asigna definitivamente al final de *expr*, a continuación, se asigna definitivamente en la transferencia de flujo de control a *while_body* y para el punto final de  *stmt*.
-*  Si *v* tiene el estado "asignado definitivamente después de una expresión true" al final de *expr*, a continuación, se asigna definitivamente en la transferencia de flujo de control a *while_body*, pero no se asigna definitivamente en el punto final de *stmt*.
-*  Si *v* tiene el estado "asignado definitivamente después de una expresión false" al final de *expr*, a continuación, se asigna definitivamente en la transferencia de flujo de control para el punto final de *stmt* , pero no asignado definitivamente en la transferencia de flujo de control a *while_body*.
+*  Si *v* se asigna definitivamente al final de *expr*, se asigna definitivamente en la transferencia de flujo de control a *while_body* y al punto final de *stmt*.
+*  Si *v* tiene el estado "definitivamente asignado después de una expresión true" al final de *expr*, se asigna definitivamente en la transferencia del flujo de control a *while_body*, pero no se asigna definitivamente en el punto final de *stmt*.
+*  Si *v* tiene el estado "definitivamente asignado después de la expresión false" al final de *expr*, se asigna definitivamente en la transferencia del flujo de control al punto final de *stmt*, pero no se asigna definitivamente en la transferencia del flujo de control a *While _body*.
 
-#### <a name="do-statements"></a>Siga las instrucciones
+#### <a name="do-statements"></a>Do (instrucciones)
 
-Para un `do` instrucción *stmt* del formulario:
+Para una `do` instrucción *stmt* de la forma:
 ```csharp
 do do_body while ( expr ) ;
 ```
 
-*  *v* tiene el mismo estado de asignación definitiva en la transferencia de flujo de control desde el principio del *stmt* a *do_body* como al principio de *stmt*.
+*  *v* tiene el mismo estado de asignación definitiva en la transferencia del flujo de control desde el principio de *stmt* a *do_body* como al principio de *stmt*.
 *  *v* tiene el mismo estado de asignación definitiva al principio de *expr* como en el punto final de *do_body*.
-*  Si *v* se asigna definitivamente al final de *expr*, a continuación, se asigna definitivamente en la transferencia de flujo de control para el punto final de *stmt*.
-*  Si *v* tiene el estado "asignado definitivamente después de una expresión false" al final de *expr*, a continuación, se asigna definitivamente en la transferencia de flujo de control para el punto final de *stmt* .
+*  Si *v* se asigna definitivamente al final de *expr*, se asigna definitivamente en la transferencia del flujo de control al punto final de *stmt*.
+*  Si *v* tiene el estado "definitivamente asignado después de la expresión false" al final de *expr*, se asigna definitivamente en la transferencia del flujo de control al punto final de *stmt*.
 
-#### <a name="for-statements"></a>Para las instrucciones
+#### <a name="for-statements"></a>Instrucciones for
 
-Asignación definitiva buscando un `for` instrucción del formulario:
+Comprobación de asignación definitiva para una `for` instrucción de la forma:
 ```csharp
 for ( for_initializer ; for_condition ; for_iterator ) embedded_statement
 ```
-se realiza como si hubiera escrito la instrucción:
+se realiza como si se hubiera escrito la instrucción:
 ```csharp
 {
     for_initializer ;
@@ -288,45 +288,45 @@ se realiza como si hubiera escrito la instrucción:
 }
 ```
 
-Si el *for_condition* se omite de la `for` instrucción y, a continuación, la evaluación de asignación definitiva continúa como si *for_condition* se reemplazaron con `true` en la expansión anterior .
+Si *for_condition* se omite en la instrucción `for` , la evaluación de la asignación definitiva continúa como si *for_condition* se reemplazara por `true` en la expansión anterior.
 
-#### <a name="break-continue-and-goto-statements"></a>Break, continue y las instrucciones goto
+#### <a name="break-continue-and-goto-statements"></a>Instrucciones break, continue y Goto
 
-El estado de asignación definitiva de *v* en la transferencia de flujo de control causada por un `break`, `continue`, o `goto` instrucción es el mismo que el estado de asignación definitiva de *v* en el a partir de la instrucción.
+El estado de asignación definitiva de *v* en la transferencia de flujo de control provocada `continue`por una `goto` `break`instrucción, o es igual que el estado de asignación definitiva de *v* al principio de la instrucción.
 
-#### <a name="throw-statements"></a>Throw (instrucciones)
+#### <a name="throw-statements"></a>Instrucciones Throw
 
-Para una instrucción *stmt* del formulario
+Para una instrucción *stmt* con el formato
 ```csharp
 throw expr ;
 ```
 
-El estado de asignación definitiva de *v* al principio de *expr* es el mismo que el estado de asignación definitiva de *v* al principio de *stmt*.
+El estado de asignación definitiva de *v* al principio de *expr* es igual que el estado de asignación definitiva de *v* al principio de *stmt*.
 
-#### <a name="return-statements"></a>Instrucciones return
+#### <a name="return-statements"></a>Instrucciones Return
 
-Para una instrucción *stmt* del formulario
+Para una instrucción *stmt* con el formato
 ```csharp
 return expr ;
 ```
 
-*  El estado de asignación definitiva de *v* al principio de *expr* es el mismo que el estado de asignación definitiva de *v* al principio de *stmt*.
-*  Si *v* es un parámetro output, a continuación, se debe asignarlo definitivamente cualquiera:
-    * una vez *expr*
-    * o al final de la `finally` block de un `try` - `finally` o `try` - `catch` - `finally` que rodea el `return` instrucción.
+*  El estado de asignación definitiva de *v* al principio de *expr* es igual que el estado de asignación definitiva de *v* al principio de *stmt*.
+*  Si *v* es un parámetro de salida, se debe asignar definitivamente:
+    * después de *expr*
+    * o `finally` al final del bloque de`catch` o queincluye`try` la`return` instrucción. - `try` - `finally` - `finally`
 
-Para una instrucción stmt del formulario:
+Para una instrucción stmt de la forma:
 ```csharp
 return ;
 ```
 
-*  Si *v* es un parámetro output, a continuación, se debe asignarlo definitivamente cualquiera:
-    * before *stmt*
-    * o al final de la `finally` block de un `try` - `finally` o `try` - `catch` - `finally` que rodea el `return` instrucción.
+*  Si *v* es un parámetro de salida, se debe asignar definitivamente:
+    * antes de *stmt*
+    * o `finally` al final del bloque de`catch` o queincluye`try` la`return` instrucción. - `try` - `finally` - `finally`
 
 #### <a name="try-catch-statements"></a>Instrucciones try-catch
 
-Para una instrucción *stmt* del formulario:
+Para una instrucción *stmt* de la forma:
 ```csharp
 try try_block
 catch(...) catch_block_1
@@ -338,24 +338,24 @@ catch(...) catch_block_n
 *  El estado de asignación definitiva de *v* al principio de *catch_block_i* (para cualquier *i*) es el mismo que el estado de asignación definitiva de *v*al principio de *stmt*.
 *  El estado de asignación definitiva de *v* en el punto final de *stmt* está asignado definitivamente si (y sólo si) *v* se asigna definitivamente en el punto final de  *try_block* y cada *catch_block_i* (para cada *i* de 1 a *n*).
 
-#### <a name="try-finally-statements"></a>Instrucciones try-finally
+#### <a name="try-finally-statements"></a>Try-finally (instrucciones)
 
-Para un `try` instrucción *stmt* del formulario:
+Para una `try` instrucción *stmt* de la forma:
 ```csharp
 try try_block finally finally_block
 ```
 
 *  El estado de asignación definitiva de *v* al principio de *try_block* es el mismo que el estado de asignación definitiva de *v* al principio de *stmt*.
-*  El estado de asignación definitiva de *v* al principio de *finally_block* es el mismo que el estado de asignación definitiva de *v* al principio de *stmt* .
-*  El estado de asignación definitiva de *v* en el punto final de *stmt* está asignado definitivamente si (y sólo si) al menos uno de los siguientes es true:
+*  El estado de asignación definitiva de *v* al principio de *finally_block* es el mismo que el estado de asignación definitiva de *v* al principio de *stmt*.
+*  El estado de asignación definitiva de *v* en el punto final de *stmt* se asigna definitivamente si (y solo si) se cumple al menos una de las siguientes condiciones:
     * *v* se asigna definitivamente en el punto final de *try_block*
     * *v* se asigna definitivamente en el punto final de *finally_block*
 
-Si una transferencia de flujo de control (por ejemplo, un `goto` instrucción) se realiza alguna que comienza en *try_block*y termina fuera de *try_block*, a continuación, *v* también es considera asignado definitivamente en esa transferencia de flujo de control si *v* se asigna definitivamente en el punto final de *finally_block*. (Esta condición no es exclusiva: si *v* se asigna definitivamente por otra razón en esta transferencia de flujo de control, a continuación, se considera asignado definitivamente.)
+Si se realiza una transferencia de flujo de control ( `goto` por ejemplo, una instrucción) que comienza dentro de *try_block*y finaliza fuera de *try_block*, también se considera que *v* está asignado definitivamente en esa transferencia de flujo de control si *v* es se asigna definitivamente en el extremo de *finally_block*. (Esto no es solo si, si *v* se asigna definitivamente por otro motivo en esta transferencia de flujo de control, todavía se considera asignada definitivamente).
 
 #### <a name="try-catch-finally-statements"></a>Instrucciones try-catch-finally
 
-Análisis de asignación definitiva para un `try` - `catch` - `finally` instrucción del formulario:
+Análisis de asignación definitiva para una `try` - `catch` - instrucción delaforma:`finally`
 ```csharp
 try try_block
 catch(...) catch_block_1
@@ -363,7 +363,7 @@ catch(...) catch_block_1
 catch(...) catch_block_n
 finally *finally_block*
 ```
-se realiza como si la instrucción fuera un `try` - `finally` instrucción envolvente un `try` - `catch` instrucción:
+se realiza como si la instrucción fuera una `try` - `try` - `finally` instrucción que incluye una `catch` instrucción:
 ```csharp
 try {
     try try_block
@@ -374,7 +374,7 @@ try {
 finally finally_block
 ```
 
-En el ejemplo siguiente se muestra cómo los diferentes bloques de un `try` instrucción ([la instrucción try](statements.md#the-try-statement)) afectan a la asignación definitiva.
+En el ejemplo siguiente se muestra cómo los distintos bloques `try` de una instrucción ([la instrucción try](statements.md#the-try-statement)) afectan a la asignación definitiva.
 ```csharp
 class A
 {
@@ -408,27 +408,27 @@ class A
 
 #### <a name="foreach-statements"></a>Instrucciones foreach
 
-Para un `foreach` instrucción *stmt* del formulario:
+Para una `foreach` instrucción *stmt* de la forma:
 ```csharp
 foreach ( type identifier in expr ) embedded_statement
 ```
 
 *  El estado de asignación definitiva de *v* al principio de *expr* es el mismo que el estado de *v* al principio de *stmt*.
-*  El estado de asignación definitiva de *v* en la transferencia de flujo de control a *embedded_statement* o hasta el punto final de *stmt* es el mismo que el estado de *v* al final de *expr*.
+*  El estado de asignación definitiva de *v* en la transferencia de flujo de control a *embedded_statement* o al punto final de *stmt* es el mismo que el estado de *v* al final de *expr*.
 
-#### <a name="using-statements"></a>Las instrucciones using
+#### <a name="using-statements"></a>Instrucciones Using
 
-Para un `using` instrucción *stmt* del formulario:
+Para una `using` instrucción *stmt* de la forma:
 ```csharp
 using ( resource_acquisition ) embedded_statement
 ```
 
 *  El estado de asignación definitiva de *v* al principio de *resource_acquisition* es el mismo que el estado de *v* al principio de *stmt*.
-*  El estado de asignación definitiva de *v* en la transferencia de flujo de control a *embedded_statement* es el mismo que el estado de *v* al final de *resource_ adquisición*.
+*  El estado de asignación definitiva de *v* en la transferencia de flujo de control a *embedded_statement* es el mismo que el estado de *v* al final de *resource_acquisition*.
 
-#### <a name="lock-statements"></a>Instrucciones de bloqueo
+#### <a name="lock-statements"></a>Lock (instrucciones)
 
-Para un `lock` instrucción *stmt* del formulario:
+Para una `lock` instrucción *stmt* de la forma:
 ```csharp
 lock ( expr ) embedded_statement
 ```
@@ -436,75 +436,75 @@ lock ( expr ) embedded_statement
 *  El estado de asignación definitiva de *v* al principio de *expr* es el mismo que el estado de *v* al principio de *stmt*.
 *  El estado de asignación definitiva de *v* en la transferencia de flujo de control a *embedded_statement* es el mismo que el estado de *v* al final de *expr*.
 
-#### <a name="yield-statements"></a>Instrucciones yield
+#### <a name="yield-statements"></a>Yield (instrucciones)
 
-Para un `yield return` instrucción *stmt* del formulario:
+Para una `yield return` instrucción *stmt* de la forma:
 ```csharp
 yield return expr ;
 ```
 
 *  El estado de asignación definitiva de *v* al principio de *expr* es el mismo que el estado de *v* al principio de *stmt*.
 *  El estado de asignación definitiva de *v* al final de *stmt* es el mismo que el estado de *v* al final de *expr*.
-*  Un `yield break` instrucción no tiene ningún efecto sobre el estado de asignación definitiva.
+*  Una `yield break` instrucción no tiene ningún efecto en el estado de asignación definitiva.
 
-#### <a name="general-rules-for-simple-expressions"></a>Reglas generales para las expresiones simples
+#### <a name="general-rules-for-simple-expressions"></a>Reglas generales para expresiones simples
 
-La siguiente regla se aplica a estos tipos de expresiones: literales ([literales](expressions.md#literals)), nombres simples ([nombres simples](expressions.md#simple-names)), expresiones de acceso a miembro ([acceso a miembros](expressions.md#member-access)), las expresiones de acceso base no indizada ([Base acceso](expressions.md#base-access)), `typeof` expresiones ([el operador typeof](expressions.md#the-typeof-operator)), expresiones de valor predeterminado ([expresiones de valor predeterminado ](expressions.md#default-value-expressions)) y `nameof` expresiones ([expresiones Nameof](expressions.md#nameof-expressions)).
+La siguiente regla se aplica a estos tipos de expresiones: literales ([literales](expressions.md#literals)), nombres simples ([nombres simples](expressions.md#simple-names)), expresiones de acceso a miembros ([acceso a miembros](expressions.md#member-access)), expresiones de acceso base no indizadas ([acceso base](expressions.md#base-access)) `typeof`.expresiones ([el operador typeof](expressions.md#the-typeof-operator)), expresiones de valor predeterminado ([expresiones de valor predeterminado](expressions.md#default-value-expressions)) `nameof` y expresiones ([nombre de expresiones](expressions.md#nameof-expressions)).
 
-*  El estado de asignación definitiva de *v* al final de este tipo de expresión es el mismo que el estado de asignación definitiva de *v* al principio de la expresión.
+*  El estado de asignación definitiva de *v* al final de dicha expresión es el mismo que el estado de asignación definitiva de *v* al principio de la expresión.
 
 #### <a name="general-rules-for-expressions-with-embedded-expressions"></a>Reglas generales para expresiones con expresiones incrustadas
 
-Las reglas siguientes se aplican a estos tipos de expresiones: las expresiones entre paréntesis ([las expresiones entre paréntesis](expressions.md#parenthesized-expressions)), las expresiones de acceso de elemento ([acceso de elemento](expressions.md#element-access)) base, obtener acceso a las expresiones con indexación ([Base acceso](expressions.md#base-access)), aumentar y disminuir las expresiones ([operadores postfijos de incremento y decremento](expressions.md#postfix-increment-and-decrement-operators), [prefijo de incremento y decremento operadores](expressions.md#prefix-increment-and-decrement-operators)), las expresiones de conversión ([expresiones de conversión](expressions.md#cast-expressions)), unario `+`, `-`, `~`, `*` expresiones, binarias `+`, `-`, `*`, `/`, `%`, `<<`, `>>`, `<`, `<=`, `>`, `>=`, `==`, `!=`, `is`, `as`, `&`, `|`, `^` expresiones ([operadores aritméticos](expressions.md#arithmetic-operators), [operadores de desplazamiento](expressions.md#shift-operators), [operadores de comprobación de tipos y relacionales](expressions.md#relational-and-type-testing-operators) [Operadores lógicos](expressions.md#logical-operators)), compuesta de expresiones de asignación ([asignación compuesta](expressions.md#compound-assignment)), `checked` y `unchecked` expresiones ([checked y unchecked operadores](expressions.md#the-checked-and-unchecked-operators)), además de las expresiones de creación de matriz y un delegado ([el operador new](expressions.md#the-new-operator)).
+Las siguientes reglas se aplican a estos tipos de expresiones: expresiones entre paréntesis ([expresiones entre paréntesis](expressions.md#parenthesized-expressions)), expresiones de acceso a elementos ([acceso a elementos](expressions.md#element-access)), expresiones de acceso base con indexación ([acceso base](expressions.md#base-access)), incremento y Expresiones de decremento ([operadores de incremento y decremento](expressions.md#postfix-increment-and-decrement-operators) [postfijo, operadores de incremento y decremento de prefijo](expressions.md#prefix-increment-and-decrement-operators)), expresiones de conversión ([expresiones de conversión](expressions.md#cast-expressions)), `+` unario, `-`, `~`, expresiones `*`, `+` binario, `-`, `*`, `/`, `%`, `<<`, `>>`, `<`, `<=`, `>`, `>=`, `==`, `!=`, `is`, `as`, `&`, `|`, expresiones `^` ([operadores aritméticos](expressions.md#arithmetic-operators), [operadores de desplazamiento](expressions.md#shift-operators), [operadores relacionales y de pruebas de tipos](expressions.md#relational-and-type-testing-operators), [operadores lógicos](expressions.md#logical-operators)), expresiones de asignación de compuestos ([asignación de compuestos](expressions.md#compound-assignment)), `checked` y expresiones `unchecked` ([operadores comprobados y sin comprobar](expressions.md#the-checked-and-unchecked-operators)), más matrices y delegado Expresiones de creación ([operador New](expressions.md#the-new-operator)).
 
-Cada una de estas expresiones tiene uno o más subexpresiones que se evalúan incondicionalmente en un orden fijo. Por ejemplo, el archivo binario `%` operador evalúa el lado izquierdo del operador y, después, en el lado derecho. Una operación de indización evalúa la expresión indizada y, a continuación, evalúa cada una de las expresiones de índice, en orden de izquierda a derecha. Para una expresión *expr*, que tiene las subexpresiones *e1, e2,..., eN*, evaluada en ese orden:
+Cada una de estas expresiones tiene una o más subexpresiones que se evalúan de forma incondicional en un orden fijo. Por ejemplo, el operador `%` binario evalúa el lado izquierdo del operador y, a continuación, el lado derecho. Una operación de indización evalúa la expresión indizada y, a continuación, evalúa cada una de las expresiones de índice, en orden de izquierda a derecha. En el caso de una expresión *expr*, que tiene subexpresiones *E1, E2,...,* en, evaluadas en ese orden:
 
-*  El estado de asignación definitiva de *v* al principio de *e1* es el mismo que el estado de asignación definitiva al principio de *expr*.
+*  El estado de asignación definitiva de *v* al principio de *E1* es el mismo que el estado de asignación definitiva al principio de *expr*.
 *  El estado de asignación definitiva de *v* al principio de *ei* (*i* mayor que uno) es el mismo que el estado de asignación definitiva al final de la subexpresión anterior.
-*  El estado de asignación definitiva de *v* al final de *expr* es el mismo que el estado de asignación definitiva al final de *eN*
+*  El estado de asignación definitiva de *v* al final de *expr* es el mismo que el estado de asignación definitiva al final de *en*
 
-#### <a name="invocation-expressions-and-object-creation-expressions"></a>Expresiones de invocación y expresiones de creación de objeto
+#### <a name="invocation-expressions-and-object-creation-expressions"></a>Expresiones de invocación y expresiones de creación de objetos
 
-Para una expresión de invocación *expr* del formulario:
+Para *una expresión de invocación de la* forma:
 ```csharp
 primary_expression ( arg1 , arg2 , ... , argN )
 ```
-o una expresión de creación de objeto del formulario:
+o una expresión de creación de objeto con el formato:
 ```csharp
 new type ( arg1 , arg2 , ... , argN )
 ```
 
-*  Para una expresión de invocación, el estado de asignación definitiva de *v* antes *primary_expression* es el mismo que el estado de *v* antes *expr*.
-*  Para una expresión de invocación, el estado de asignación definitiva de *v* antes *arg1* es el mismo que el estado de *v* después *primary_expression*.
-*  Para una expresión de creación de objeto, el estado de asignación definitiva de *v* antes *arg1* es el mismo que el estado de *v* antes *expr*.
-*  Para cada argumento *argi*, el estado de asignación definitiva de *v* después *argi* viene determinada por las reglas de expresión normales, se omitirá cualquier `ref` o `out`modificadores.
+*  En el caso de una expresión de invocación, el estado de asignación definitiva de *v* antes de *primary_expression* es el mismo que el estado de *v* antes de *expr*.
+*  En el caso de una expresión de invocación, el estado de asignación definitiva de *v* antes de *arg1* es el mismo que el estado de *v* después de *primary_expression*.
+*  En el caso de una expresión de creación de objeto, el estado de asignación definitiva de *v* antes de *arg1* es el mismo que el estado de *v* antes de *expr*.
+*  Para cada argumento *Argi*, el estado de asignación definitiva de *v* después de *Argi* viene determinado por las reglas de la expresión normal, `ref` omitiendo `out` los modificadores o.
 *  Para cada argumento *argi* para cualquier *i* mayor que uno, el estado de asignación definitiva de *v* antes *argi* es el mismo que el estado de *v* después de la anterior *arg*.
-*  Si la variable *v* se pasa como un `out` argumento (es decir, un argumento del formulario `out v`) en cualquiera de los argumentos y, a continuación, el estado de *v* después *expr* se ha asignado definitivamente. En caso contrario, el estado de *v* después *expr* es el mismo que el estado de *v* después *argN*.
-*  Inicializadores de matriz ([expresiones de creación de matriz](expressions.md#array-creation-expressions)), inicializadores de objeto ([inicializadores de objeto](expressions.md#object-initializers)), los inicializadores de colección ([inicializadores de colección](expressions.md#collection-initializers)) y los inicializadores de objeto anónimo ([expresiones de creación de objeto anónimo](expressions.md#anonymous-object-creation-expressions)), el estado de asignación definitiva viene determinada por la expansión que estas construcciones se definen en términos de.
+*  Si la variable *v* se `out` pasa como argumento (es decir, un argumento con el `out v`formato) en cualquiera de los argumentos, el estado de *v* después de la *expresión* se asigna definitivamente. Casos el estado de *v* después de *expr* es el mismo que el estado de *v* después de *argn*.
+*  Para inicializadores de matriz ([expresiones de creación de matriz](expressions.md#array-creation-expressions)), inicializadores de objeto ([inicializadores de objeto](expressions.md#object-initializers)), inicializadores de colección ([inicializadores de colección](expressions.md#collection-initializers)) e inicializadores de objeto anónimos (creación de[objetos anónimos Expresiones](expressions.md#anonymous-object-creation-expressions)), el estado de asignación definitiva viene determinado por la expansión en la que se definen estas construcciones en términos de.
 
-#### <a name="simple-assignment-expressions"></a>Expresiones de asignación simple
+#### <a name="simple-assignment-expressions"></a>Expresiones de asignación simples
 
-Para una expresión *expr* del formulario `w = expr_rhs`:
+Para una expresión *expr* con el formato `w = expr_rhs`:
 
-*  El estado de asignación definitiva de *v* antes *expr_rhs* es el mismo que el estado de asignación definitiva de *v* antes *expr*.
-*  El estado de asignación definitiva de *v* después *expr* viene determinada por:
-   * Si *w* es la misma variable como *v*, a continuación, el estado de asignación definitiva de *v* después *expr* se asigna definitivamente.
-   * En caso contrario, si la asignación se produce dentro del constructor de instancia de un tipo de estructura, si *w* es un acceso de propiedad que designa una propiedad implementada automáticamente *P* en la instancia que se está construyendo y *v* es el campo de respaldo oculto de *P*, a continuación, el estado de asignación definitiva de *v* después *expr* definitivamente asignado.
-   * En caso contrario, el estado de asignación definitiva de *v* después *expr* es el mismo que el estado de asignación definitiva de *v* después *expr_rhs*.
+*  El estado de asignación definitiva de *v* antes de *expr_rhs* es el mismo que el estado de asignación definitiva de *v* antes de *expr*.
+*  El estado de asignación definitiva de *v* después de *expr* viene determinado por:
+   * Si *w* es la misma variable que *v*, se asigna definitivamente el estado de asignación definitiva de *v* después de *expr* .
+   * De lo contrario, si la asignación se produce en el constructor de instancia de un tipo de estructura, si *w* es un acceso de propiedad que designa una propiedad implementada automáticamente *P* en la instancia que se está construyendo y *v* es el campo de respaldo oculto de *P*, después se asigna definitivamente el estado de asignación definitiva de *v* después de *expr* .
+   * De lo contrario, el estado de asignación definitiva de *v* después de *expr* es el mismo que el estado de asignación definitiva de *v* después de *expr_rhs*.
 
-#### <a name="-conditional-and-expressions"></a>& & (AND condicional) expresiones
+#### <a name="-conditional-and-expressions"></a>Expresiones de & & (condicional AND)
 
-Para una expresión *expr* del formulario `expr_first && expr_second`:
+Para una expresión *expr* con el formato `expr_first && expr_second`:
 
-*  El estado de asignación definitiva de *v* antes *expr_first* es el mismo que el estado de asignación definitiva de *v* antes *expr*.
-*  El estado de asignación definitiva de *v* antes *expr_second* se asigna definitivamente si el estado de *v* después *expr_first* sea asignado definitivamente o "asignado definitivamente después de una expresión true". En caso contrario, no se asigna definitivamente.
-*  El estado de asignación definitiva de *v* después *expr* viene determinada por:
-    * Si *expr_first* es una expresión constante con el valor `false`, a continuación, el estado de asignación definitiva de *v* después *expr* es igual que la asignación definitiva estado de *v* después *expr_first*.
-    * De lo contrario, si el estado de *v* después *expr_first* se asigna definitivamente, a continuación, el estado de *v* después *expr* se asigna definitivamente.
-    * De lo contrario, si el estado de *v* después *expr_second* se asigna definitivamente y el estado de *v* después *expr_first* "definitivamente asignado después de una expresión false", entonces el estado de *v* después *expr* se asigna definitivamente.
-    * De lo contrario, si el estado de *v* después *expr_second* se asigna definitivamente o "asignado definitivamente después de una expresión true", entonces el estado de *v* después  *Expr* es "asignado definitivamente después de una expresión true".
-    * De lo contrario, si el estado de *v* después *expr_first* es "asignado definitivamente después de una expresión false" y el estado de *v* después *expr_second* es "asignado definitivamente después de una expresión false", entonces el estado de *v* después *expr* es "asignado definitivamente después de una expresión false".
-    * En caso contrario, el estado de *v* después *expr* no se ha asignado definitivamente.
+*  El estado de asignación definitiva de *v* antes de *expr_first* es el mismo que el estado de asignación definitiva de *v* antes de *expr*.
+*  El estado de asignación definitiva de *v* antes de que *expr_second* se asigne definitivamente si el estado de *v* después de *expr_first* se asigna definitivamente o "se asigna definitivamente después de una expresión true". De lo contrario, no se asigna definitivamente.
+*  El estado de asignación definitiva de *v* después de *expr* viene determinado por:
+    * Si *expr_first* es una expresión constante con el valor `false`, el estado de asignación definitiva de *v* después de *expr* es igual que el estado de asignación definitiva de *v* después de *expr_first*.
+    * De lo contrario, si el estado de *v* después de *expr_first* se asigna definitivamente, el estado de *v* después de la *expresión* se asigna definitivamente.
+    * De lo contrario, si el estado de *v* después de *expr_second* está asignado definitivamente, y el estado de *v* después de *expr_first* es "definitivamente asignado después de la expresión false", el estado de *v* después de *expr* es definitivamente. vuelve.
+    * De lo contrario, si el estado de *v* después de *expr_second* se asigna definitivamente o "se asigna definitivamente después de una expresión true", el estado de *v* después de *expr* es "definitivamente asignado después de una expresión true".
+    * De lo contrario, si el estado de *v* después de *expr_first* es "definitivamente asignado después de la expresión false" y el estado de *v* después de *expr_second* es "definitivamente asignado después de la expresión false", el estado de *v* después *de expr* es "definitivamente asignada después de la expresión false".
+    * De lo contrario, el estado de *v* después de *expr* no se asigna definitivamente.
 
 En el ejemplo
 ```csharp
@@ -522,21 +522,21 @@ class A
     }
 }
 ```
-la variable `i` se considera asignado definitivamente en una de las instrucciones incrustadas de una `if` instrucción pero no en el otro. En el `if` instrucción en el método `F`, la variable `i` se asigna definitivamente en la primera instrucción incrustada porque la ejecución de la expresión `(i = y)` siempre precede a la ejecución de esta instrucción incrustada. En cambio, la variable `i` no se asigna definitivamente en la segunda instrucción incrustada, ya que `x >= 0` podría dar como resultado false, lo que resulta en la variable `i` sin asignar.
+la variable `i` se considera asignada definitivamente en una de las instrucciones incrustadas `if` de una instrucción, pero no en la otra. En la `if` instrucción de método `F`, la variable `i` se asigna definitivamente en la primera instrucción incrustada porque la ejecución de `(i = y)` la expresión siempre precede a la ejecución de esta instrucción incrustada. Por el contrario, la `i` variable no está asignada definitivamente en la segunda instrucción incrustada, puesto `x >= 0` que podría haber probado false, `i` lo que da lugar a que se Desasigne la variable.
 
-#### <a name="-conditional-or-expressions"></a>|| (OR condicional) expresiones
+#### <a name="-conditional-or-expressions"></a>|| expresiones (condicionales OR)
 
-Para una expresión *expr* del formulario `expr_first || expr_second`:
+Para una expresión *expr* con el formato `expr_first || expr_second`:
 
-*  El estado de asignación definitiva de *v* antes *expr_first* es el mismo que el estado de asignación definitiva de *v* antes *expr*.
-*  El estado de asignación definitiva de *v* antes *expr_second* se asigna definitivamente si el estado de *v* después *expr_first* sea asignado definitivamente o "asignado definitivamente después de una expresión false". En caso contrario, no se asigna definitivamente.
-*  La instrucción de asignación definitiva de *v* después *expr* viene determinada por:
-    * Si *expr_first* es una expresión constante con el valor `true`, a continuación, el estado de asignación definitiva de *v* después *expr* es igual que la asignación definitiva estado de *v* después *expr_first*.
-    * De lo contrario, si el estado de *v* después *expr_first* se asigna definitivamente, a continuación, el estado de *v* después *expr* se asigna definitivamente.
-    * De lo contrario, si el estado de *v* después *expr_second* se asigna definitivamente y el estado de *v* después *expr_first* "definitivamente asignado después de una expresión true", entonces el estado de *v* después *expr* se asigna definitivamente.
-    * De lo contrario, si el estado de *v* después *expr_second* se asigna definitivamente o "asignado definitivamente después de una expresión false", entonces el estado de *v* después *expr* es "asignado definitivamente después de una expresión false".
-    * De lo contrario, si el estado de *v* después *expr_first* es "asignado definitivamente después de una expresión true" y el estado de *v* después *expr_second*es "asignado definitivamente después de una expresión true", entonces el estado de *v* después *expr* es "asignado definitivamente después de una expresión true".
-    * En caso contrario, el estado de *v* después *expr* no se ha asignado definitivamente.
+*  El estado de asignación definitiva de *v* antes de *expr_first* es el mismo que el estado de asignación definitiva de *v* antes de *expr*.
+*  El estado de asignación definitiva de *v* antes de que *expr_second* se asigne definitivamente si el estado de *v* después de *expr_first* se asigna definitivamente o "se asigna definitivamente después de la expresión false". De lo contrario, no se asigna definitivamente.
+*  La instrucción de asignación definitiva de *v* después de *expr* viene determinada por:
+    * Si *expr_first* es una expresión constante con el valor `true`, el estado de asignación definitiva de *v* después de *expr* es igual que el estado de asignación definitiva de *v* después de *expr_first*.
+    * De lo contrario, si el estado de *v* después de *expr_first* se asigna definitivamente, el estado de *v* después de la *expresión* se asigna definitivamente.
+    * De lo contrario, si el estado de *v* después de *expr_second* se asigna definitivamente, y el estado de *v* después de *expr_first* es "definitivamente asignado después de una expresión true", el estado de *v* después de *expr* es definitivamente. vuelve.
+    * De lo contrario, si el estado de *v* después de *expr_second* se asigna definitivamente o "se asigna definitivamente después de la expresión false", el estado de *v* después de *expr* es "definitivamente asignado después de la expresión false".
+    * De lo contrario, si el estado de *v* después de *expr_first* es "definitivamente asignado después de una expresión true" y el estado de *v* después de *expr_second* es "definitivamente asignado después de una expresión true", el estado de *v* después de *expr* está "definitivamente asignada después de una expresión true".
+    * De lo contrario, el estado de *v* después de *expr* no se asigna definitivamente.
 
 En el ejemplo
 ```csharp
@@ -554,52 +554,52 @@ class A
     }
 }
 ```
-la variable `i` se considera asignado definitivamente en una de las instrucciones incrustadas de una `if` instrucción pero no en el otro. En el `if` instrucción en el método `G`, la variable `i` se asigna definitivamente en la segunda instrucción incrustada porque la ejecución de la expresión `(i = y)` siempre precede a la ejecución de esta instrucción incrustada. En cambio, la variable `i` no se asigna definitivamente en la primera instrucción incrustada, ya que `x >= 0` podría dar como resultado true, lo que resulta en la variable `i` sin asignar.
+la variable `i` se considera asignada definitivamente en una de las instrucciones incrustadas `if` de una instrucción, pero no en la otra. En la `if` instrucción de método `G`, la variable `i` se asigna definitivamente en la segunda instrucción incrustada porque la ejecución de `(i = y)` la expresión siempre precede a la ejecución de esta instrucción incrustada. Por el contrario, la `i` variable no está asignada definitivamente en la primera instrucción incrustada, ya `x >= 0` que es posible que se haya `i` probado como true, lo que da lugar a que se Desasigne la variable.
 
 #### <a name="-logical-negation-expressions"></a>! expresiones (negación lógica)
 
-Para una expresión *expr* del formulario `! expr_operand`:
+Para una expresión *expr* con el formato `! expr_operand`:
 
-*  El estado de asignación definitiva de *v* antes *expr_operand* es el mismo que el estado de asignación definitiva de *v* antes *expr*.
-*  El estado de asignación definitiva de *v* después *expr* viene determinada por:
-    * Si el estado de *v* después * expr_operand * se asigna definitivamente, a continuación, el estado de *v* después *expr* se asigna definitivamente.
-    * Si el estado de *v* después * expr_operand * no es asigna definitivamente, a continuación, el estado de *v* después *expr* no se ha asignado definitivamente.
-    * Si el estado de *v* después * expr_operand * es "asignado definitivamente después de una expresión false", entonces el estado de *v* después *expr* es "asignado definitivamente después true expresión".
-    * Si el estado de *v* después * expr_operand * es "asignado definitivamente después de una expresión true", entonces el estado de *v* después *expr* es "asignado definitivamente después false expresión".
+*  El estado de asignación definitiva de *v* antes de *expr_operand* es el mismo que el estado de asignación definitiva de *v* antes de *expr*.
+*  El estado de asignación definitiva de *v* después de *expr* viene determinado por:
+    * Si el estado de *v* después de * expr_operand * se asigna definitivamente, el estado de *v* después de la *expresión* se asigna definitivamente.
+    * Si el estado de *v* después de * expr_operand * no se asigna definitivamente, el estado de *v* después de *expr* no se asigna definitivamente.
+    * Si el estado de *v* después de * expr_operand * es "definitivamente asignado después de la expresión false", el estado de *v* después de *expr* es "definitivamente asignado después de una expresión true".
+    * Si el estado de *v* después de * expr_operand * es "definitivamente asignado después de una expresión true", el estado de *v* después de *expr* es "definitivamente asignado después de la expresión false".
 
-#### <a name="-null-coalescing-expressions"></a>?? expresiones (uso combinado de null)
+#### <a name="-null-coalescing-expressions"></a>?? expresiones (uso combinado de NULL)
 
-Para una expresión *expr* del formulario `expr_first ?? expr_second`:
+Para una expresión *expr* con el formato `expr_first ?? expr_second`:
 
-*  El estado de asignación definitiva de *v* antes *expr_first* es el mismo que el estado de asignación definitiva de *v* antes *expr*.
-*  El estado de asignación definitiva de *v* antes *expr_second* es el mismo que el estado de asignación definitiva de *v* después *expr_first*.
-*  La instrucción de asignación definitiva de *v* después *expr* viene determinada por:
-    * Si *expr_first* es una expresión constante ([expresiones constantes](expressions.md#constant-expressions)) con valor null, entonces el estado de *v* después *expr* es igual que el estado de *v* después *expr_second*.
-*  En caso contrario, el estado de *v* después *expr* es el mismo que el estado de asignación definitiva de *v* después *expr_first*.
+*  El estado de asignación definitiva de *v* antes de *expr_first* es el mismo que el estado de asignación definitiva de *v* antes de *expr*.
+*  El estado de asignación definitiva de *v* antes de *expr_second* es el mismo que el estado de asignación definitiva de *v* después de *expr_first*.
+*  La instrucción de asignación definitiva de *v* después de *expr* viene determinada por:
+    * Si *expr_first* es una expresión constante ([expresiones constantes](expressions.md#constant-expressions)) con valor null, el estado de *v* después de *expr* es el mismo que el estado de *v* después de *expr_second*.
+*  De lo contrario, el estado de *v* después de *expr* es el mismo que el estado de asignación definitiva de *v* después de *expr_first*.
 
-#### <a name="-conditional-expressions"></a>?: (condicionales) expresiones
+#### <a name="-conditional-expressions"></a>expresiones?: (condicionales)
 
-Para una expresión *expr* del formulario `expr_cond ? expr_true : expr_false`:
+Para una expresión *expr* con el formato `expr_cond ? expr_true : expr_false`:
 
-*  El estado de asignación definitiva de *v* antes *expr_cond* es el mismo que el estado de *v* antes *expr*.
-*  El estado de asignación definitiva de *v* antes *expr_true* se asigna definitivamente solo si uno de los siguientes contiene:
-    * *expr_cond* es una expresión constante con el valor `false`
-    * el estado de *v* después *expr_cond* se asigna definitivamente o "asignado definitivamente después de una expresión true".
-*  El estado de asignación definitiva de *v* antes *expr_false* se asigna definitivamente solo si uno de los siguientes contiene:
-    * *expr_cond* es una expresión constante con el valor `true`
-*  el estado de *v* después *expr_cond* se asigna definitivamente o "asignado definitivamente después de una expresión false".
-*  El estado de asignación definitiva de *v* después *expr* viene determinada por:
-    * Si *expr_cond* es una expresión constante ([expresiones constantes](expressions.md#constant-expressions)) con el valor `true` , a continuación, el estado de *v* después *expr* es el mismo que el estado de *v* después *expr_true*.
-    * De lo contrario, si *expr_cond* es una expresión constante ([expresiones constantes](expressions.md#constant-expressions)) con el valor `false` , a continuación, el estado de *v* después *expr* es el mismo que el estado de *v* después *expr_false*.
-    * De lo contrario, si el estado de *v* después *expr_true* se asigna definitivamente y el estado de *v* después *expr_false* definitivamente asigna, a continuación, el estado de *v* después *expr* se asigna definitivamente.
-    * En caso contrario, el estado de *v* después *expr* no se ha asignado definitivamente.
+*  El estado de asignación definitiva de *v* antes de *expr_cond* es el mismo que el estado de *v* antes de *expr*.
+*  El estado de asignación definitiva de *v* antes de *expr_true* se asigna definitivamente solo si se cumple una de las siguientes opciones:
+    * *expr_cond* es una expresión constante con el valor`false`
+    * el estado de *v* después de *expr_cond* se asigna definitivamente o "definitivamente se asigna después de una expresión true".
+*  El estado de asignación definitiva de *v* antes de *expr_false* se asigna definitivamente solo si se cumple una de las siguientes opciones:
+    * *expr_cond* es una expresión constante con el valor`true`
+*  el estado de *v* después de *expr_cond* se asigna definitivamente o "se asigna definitivamente después de la expresión false".
+*  El estado de asignación definitiva de *v* después de *expr* viene determinado por:
+    * Si *expr_cond* es una expresión constante ([expresiones constantes](expressions.md#constant-expressions)) con valor `true` , el estado de *v* después de *expr* es el mismo que el estado de *v* después de *expr_true*.
+    * De lo contrario, si *expr_cond* es una expresión constante ([expresiones constantes](expressions.md#constant-expressions)) `false` con valor, el estado de *v* después de *expr* es el mismo que el estado de *v* después de *expr_false*.
+    * De lo contrario, si el estado de *v* después de *expr_true* se asigna definitivamente y el estado de *v* después de *expr_false* se asigna definitivamente, el estado de *v* *después de* la asignación definitivamente se asigna.
+    * De lo contrario, el estado de *v* después de *expr* no se asigna definitivamente.
 
 #### <a name="anonymous-functions"></a>Funciones anónimas
 
-Para un *lambda_expression* o *anonymous_method_expression* *expr* con un cuerpo (ya sea *bloque* o *expresión* ) *cuerpo*:
+Para una *expresión* *lambda_expression* o *anonymous_method_expression* con un cuerpo ( *bloque* o *expresión*) *cuerpo*:
 
-*  El estado de asignación definitiva de una variable externa *v* antes *cuerpo* es el mismo que el estado de *v* antes *expr*. Es decir, el estado de asignación definitiva de variables externas se hereda el contexto de la función anónima.
-*  El estado de asignación definitiva de una variable externa *v* después *expr* es el mismo que el estado de *v* antes *expr*.
+*  El estado de asignación definitiva de una variable externa *v* antes del *cuerpo* es el mismo que el estado de *v* antes de *expr*. Es decir, el estado de asignación definitiva de las variables externas se hereda del contexto de la función anónima.
+*  El estado de asignación definitiva de una variable externa *v* después de *expr* es igual que el estado de *v* antes de *expr*.
 
 El ejemplo
 ```csharp
@@ -615,7 +615,7 @@ void F() {
     DoWork(f);
 }
 ```
-genera un error en tiempo de compilación desde `max` no se ha asignado definitivamente donde se declara la función anónima. El ejemplo
+genera un error en tiempo de compilación `max` , ya que no se asigna definitivamente donde se declara la función anónima. El ejemplo
 ```csharp
 delegate void D();
 
@@ -629,11 +629,11 @@ void F() {
     Console.WriteLine(n);
 }
 ```
-También genera un error en tiempo de compilación desde la asignación a `n` en la función anónima no tiene ningún efecto sobre el estado de asignación definitiva de `n` fuera de la función anónima.
+también genera un error en tiempo de compilación, ya que `n` la asignación a en la función anónima no tiene ningún efecto en el estado `n` de asignación definitiva de fuera de la función anónima.
 
 ## <a name="variable-references"></a>Referencias de variables
 
-Un *variable_reference* es un *expresión* que se clasifica como una variable. Un *variable_reference* denota una ubicación de almacenamiento que se puede acceder tanto para capturar el valor actual y para almacenar un nuevo valor.
+Un *variable_reference* es una *expresión* que se clasifica como una variable. Un *variable_reference* denota una ubicación de almacenamiento a la que se puede tener acceso para obtener el valor actual y para almacenar un nuevo valor.
 
 ```antlr
 variable_reference
@@ -641,9 +641,9 @@ variable_reference
     ;
 ```
 
-En C y C++, un *variable_reference* se conoce como un *lvalue*.
+En C y C++, una *variable_reference* se conoce como *lvalue*.
 
-## <a name="atomicity-of-variable-references"></a>Atomicidad de las referencias de variables
+## <a name="atomicity-of-variable-references"></a>Atomicidad de referencias de variables
 
-Lecturas y escrituras de los siguientes tipos de datos son atómicas: `bool`, `char`, `byte`, `sbyte`, `short`, `ushort`, `uint`, `int`, `float`y tipos de referencia. Además, las lecturas y escrituras de los tipos de enumeración con un tipo subyacente de la lista anterior son también atómicas. Lecturas y escrituras de otros tipos, incluidos `long`, `ulong`, `double`, y `decimal`, así como los tipos definidos por el usuario, no se garantiza que sea atómica. Aparte de las funciones de biblioteca destinadas para dicho propósito, hay ninguna garantía de atomic lectura-modificación-escritura, como en el caso de incremento o decremento.
+Las lecturas y escrituras de los siguientes tipos de datos son `bool`atómicas `byte`: `sbyte`, `short` `char`,, `uint`, `int`, `float` `ushort`,,, y los tipos de referencia. Además, las operaciones de lectura y escritura de tipos de enumeración con un tipo subyacente en la lista anterior también son atómicas. No se garantiza que las lecturas y escrituras `long`de `ulong`otros tipos, `decimal`incluidos,, `double`y, así como los tipos definidos por el usuario, sean atómicos. Aparte de las funciones de biblioteca diseñadas para ese propósito, no hay ninguna garantía de lectura-modificación-escritura atómica, como en el caso de incremento o decremento.
 

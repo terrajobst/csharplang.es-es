@@ -17,18 +17,18 @@ Una expresión se clasifica de las siguientes formas:
 *  Un valor. Todos los valores tienen un tipo asociado.
 *  Una variable. Cada variable tiene un tipo asociado, es decir, el tipo declarado de la variable.
 *  Espacio de nombres. Una expresión con esta clasificación solo puede aparecer como la parte izquierda de un *member_access* ([acceso a miembros](expressions.md#member-access)). En cualquier otro contexto, una expresión clasificada como un espacio de nombres produce un error en tiempo de compilación.
-*  Un tipo. Una expresión con esta clasificación solo puede aparecer como el lado izquierdo de un *member_access* ([acceso a miembros](expressions.md#member-access)) o como un operando para el operador `as` ([el operador as](expressions.md#the-as-operator)), el operador `is` ([el operador is](expressions.md#the-is-operator)) o el @no operador __t-6 ([operador typeof](expressions.md#the-typeof-operator)). En cualquier otro contexto, una expresión clasificada como un tipo genera un error en tiempo de compilación.
-*  Un grupo de métodos, que es un conjunto de métodos sobrecargados que resultan de una búsqueda de miembros ([búsqueda de miembros](expressions.md#member-lookup)). Un grupo de métodos puede tener una expresión de instancia asociada y una lista de argumentos de tipo asociada. Cuando se invoca un método de instancia, el resultado de evaluar la expresión de instancia se convierte en la instancia representada por `this` ([este acceso](expressions.md#this-access)). Se permite un grupo de métodos en un *invocation_expression* ([expresiones de invocación](expressions.md#invocation-expressions)), un *delegate_creation_expression* (expresiones de[creación de delegado](expressions.md#delegate-creation-expressions)) y como el lado izquierdo de un operador is y puede ser implícitamente se convierte en un tipo de delegado compatible ([conversiones de grupo de métodos](conversions.md#method-group-conversions)). En cualquier otro contexto, una expresión clasificada como grupo de métodos produce un error en tiempo de compilación.
+*  Un tipo. Una expresión con esta clasificación solo puede aparecer como el lado izquierdo de un *member_access* ([acceso a miembros](expressions.md#member-access)) o como un operando para el operador de `as` ([el operador as](expressions.md#the-as-operator)), el operador de `is` ([operador is](expressions.md#the-is-operator)) o el operador de `typeof` ([operador typeof](expressions.md#the-typeof-operator)). En cualquier otro contexto, una expresión clasificada como un tipo genera un error en tiempo de compilación.
+*  Un grupo de métodos, que es un conjunto de métodos sobrecargados que resultan de una búsqueda de miembros ([búsqueda de miembros](expressions.md#member-lookup)). Un grupo de métodos puede tener una expresión de instancia asociada y una lista de argumentos de tipo asociada. Cuando se invoca un método de instancia, el resultado de evaluar la expresión de instancia se convierte en la instancia representada por `this` ([este acceso](expressions.md#this-access)). Se permite un grupo de métodos en *un invocation_expression* ([expresiones de invocación](expressions.md#invocation-expressions)), un *delegate_creation_expression* (expresiones de[creación de delegado](expressions.md#delegate-creation-expressions)) y como el lado izquierdo de un operador is y se puede convertir implícitamente en un tipo de delegado compatible ([conversiones de grupo de métodos](conversions.md#method-group-conversions)). En cualquier otro contexto, una expresión clasificada como grupo de métodos produce un error en tiempo de compilación.
 *  Un literal null. Una expresión con esta clasificación se puede convertir implícitamente a un tipo de referencia o a un tipo que acepta valores NULL.
 *  Una función anónima. Una expresión con esta clasificación se puede convertir implícitamente en un tipo de delegado compatible o un tipo de árbol de expresión.
 *  Un acceso de propiedad. Cada acceso de propiedad tiene un tipo asociado, es decir, el tipo de la propiedad. Además, un acceso de propiedad puede tener una expresión de instancia asociada. Cuando se invoca un descriptor de acceso (el bloque `get` o `set`) de una propiedad de instancia, el resultado de evaluar la expresión de instancia se convierte en la instancia representada por `this` ([este acceso](expressions.md#this-access)).
 *  Un acceso de evento. Cada acceso a eventos tiene un tipo asociado, es decir, el tipo del evento. Además, un acceso a eventos puede tener una expresión de instancia asociada. Un acceso a eventos puede aparecer como el operando izquierdo de los operadores `+=` y `-=` ([asignación de eventos](expressions.md#event-assignment)). En cualquier otro contexto, una expresión clasificada como acceso de evento produce un error en tiempo de compilación.
-*  Un acceso de indexador. Cada acceso de indexador tiene un tipo asociado, es decir, el tipo de elemento del indexador. Además, un acceso de indexador tiene una expresión de instancia asociada y una lista de argumentos asociada. Cuando se invoca un descriptor de acceso (el bloque `get` o `set`) de un acceso de indexador, el resultado de evaluar la expresión de instancia se convierte en la instancia representada por `this` ([este acceso](expressions.md#this-access)) y el resultado de la evaluación de la lista de argumentos se convierte en el lista de parámetros de la invocación.
-*  Relación. Esto sucede cuando la expresión es una invocación de un método con un tipo de valor devuelto de `void`. Una expresión clasificada como Nothing solo es válida en el contexto de *statement_expression* ([instrucciones de expresión](statements.md#expression-statements)).
+*  Un acceso de indexador. Cada acceso de indexador tiene un tipo asociado, es decir, el tipo de elemento del indexador. Además, un acceso de indexador tiene una expresión de instancia asociada y una lista de argumentos asociada. Cuando se invoca un descriptor de acceso (el `get` o el bloque `set`) de un acceso de indexador, el resultado de evaluar la expresión de instancia se convierte en la instancia representada por `this` ([este acceso](expressions.md#this-access)) y el resultado de la evaluación de la lista de argumentos se convierte en la lista de parámetros de la invocación.
+*  Nada. Esto sucede cuando la expresión es una invocación de un método con un tipo de valor devuelto de `void`. Una expresión clasificada como Nothing solo es válida en el contexto de una *statement_expression* ([instrucciones de expresión](statements.md#expression-statements)).
 
 El resultado final de una expresión nunca es un espacio de nombres, tipo, grupo de métodos o acceso a eventos. En su lugar, como se indicó anteriormente, estas categorías de expresiones son construcciones intermedias que solo se permiten en determinados contextos.
 
-Un acceso de propiedad o de indexador siempre se reclasifica como un valor realizando una invocación del *descriptor* de acceso get o del *descriptor*de acceso set. El descriptor de acceso concreto viene determinado por el contexto de la propiedad o del indexador: Si el acceso es el destino de una asignación, se invoca al *descriptor* de acceso set para asignar un nuevo valor ([asignación simple](expressions.md#simple-assignment)). De lo contrario, el *descriptor de acceso get* se invoca para obtener el valor actual ([valores de las expresiones](expressions.md#values-of-expressions)).
+Un acceso de propiedad o de indexador siempre se reclasifica como un valor realizando una invocación del *descriptor* de acceso get o del *descriptor*de acceso set. El descriptor de acceso concreto viene determinado por el contexto de la propiedad o el acceso del indexador: Si el acceso es el destino de una asignación, se invoca al *descriptor* de acceso set para asignar un nuevo valor ([asignación simple](expressions.md#simple-assignment)). De lo contrario, el *descriptor de acceso get* se invoca para obtener el valor actual ([valores de las expresiones](expressions.md#values-of-expressions)).
 
 ### <a name="values-of-expressions"></a>Valores de las expresiones
 
@@ -36,7 +36,7 @@ En última instancia, la mayoría de las construcciones que implican una expresi
 
 *  El valor de una variable es simplemente el valor almacenado actualmente en la ubicación de almacenamiento identificada por la variable. Una variable se debe considerar definitivamente asignada ([asignación definitiva](variables.md#definite-assignment)) antes de que se pueda obtener su valor o, de lo contrario, se producirá un error en tiempo de compilación.
 *  El valor de una expresión de acceso de propiedad se obtiene invocando el *descriptor* de acceso get de la propiedad. Si la propiedad no tiene un *descriptor de acceso get*, se produce un error en tiempo de compilación. De lo contrario, se realiza una invocación de miembro de función ([comprobación en tiempo de compilación de la resolución dinámica de sobrecarga](expressions.md#compile-time-checking-of-dynamic-overload-resolution)) y el resultado de la invocación se convierte en el valor de la expresión de acceso de propiedad.
-*  El valor de una expresión de acceso de indexador se obtiene al invocar el *descriptor* de acceso get del indexador. Si el indizador no tiene ningún *descriptor de acceso get*, se produce un error en tiempo de compilación. De lo contrario, se realiza una invocación de miembro de función ([comprobación en tiempo de compilación de la resolución dinámica de sobrecarga](expressions.md#compile-time-checking-of-dynamic-overload-resolution)) con la lista de argumentos asociada a la expresión de acceso del indexador y el resultado de la invocación se convierte en el valor del acceso del indexador. Expresiones.
+*  El valor de una expresión de acceso de indexador se obtiene al invocar el *descriptor* de acceso get del indexador. Si el indizador no tiene ningún *descriptor de acceso get*, se produce un error en tiempo de compilación. De lo contrario, se realiza una invocación de un miembro de función ([comprobación en tiempo de compilación de la resolución dinámica de sobrecarga](expressions.md#compile-time-checking-of-dynamic-overload-resolution)) con la lista de argumentos asociada a la expresión de acceso del indizador y el resultado de la invocación se convierte en el valor de la expresión de acceso del indexador.
 
 ## <a name="static-and-dynamic-binding"></a>Enlace estático y dinámico
 
@@ -44,7 +44,7 @@ El proceso de determinar el significado de una operación basándose en el tipo 
 
 En C# el significado de una operación se suele determinar en tiempo de compilación, en función del tipo en tiempo de compilación de sus expresiones constituyentes. Del mismo modo, si una expresión contiene un error, el compilador detecta el error y lo emite. Este enfoque se conoce como ***enlace estático***.
 
-Sin embargo, si una expresión es una expresión dinámica (es decir, tiene el tipo `dynamic`), esto indica que cualquier enlace en el que participe debería basarse en su tipo en tiempo de ejecución (es decir, el tipo real del objeto que denota en tiempo de ejecución) en lugar de en el tipo en el que se encuentra. tiempo de compilación. Por consiguiente, el enlace de esta operación se aplaza hasta el momento en que se ejecuta la operación durante la ejecución del programa. Esto se conoce como ***enlace dinámico***.
+Sin embargo, si una expresión es una expresión dinámica (es decir, tiene el tipo `dynamic`), esto indica que cualquier enlace en el que participe debería basarse en su tipo en tiempo de ejecución (es decir, el tipo real del objeto que denota en tiempo de ejecución) en lugar del tipo que tiene en tiempo de compilación. Por consiguiente, el enlace de esta operación se aplaza hasta el momento en que se ejecuta la operación durante la ejecución del programa. Esto se conoce como ***enlace dinámico***.
 
 Cuando una operación está enlazada dinámicamente, el compilador realiza poca o ninguna comprobación. En su lugar, si se produce un error en el enlace en tiempo de ejecución, los errores se registran como excepciones en tiempo de ejecución.
 
@@ -52,12 +52,12 @@ Las siguientes operaciones en C# están sujetas al enlace:
 
 *  Acceso a miembros: `e.M`
 *  Invocación de método: `e.M(e1, ..., eN)`
-*  Invocación de delegado: `e(e1, ..., eN)`
+*  Invocación de delegado:`e(e1, ..., eN)`
 *  Acceso a elementos: `e[e1, ..., eN]`
 *  Creación de objetos: `new C(e1, ..., eN)`
-*  Operadores unarios sobrecargados: `+`, `-`, @no__t 2, `~`, `++`, `--`, `true`, `false`
-*  Operadores binarios sobrecargados: `+`, `-`, @no__t 2, `/`, `%`, `&`, `&&`, `|`, `||`, `??`, 0, 1, 2, 3, 4, 5, 6, 7, 8
-*  Operadores de asignación: `=`, `+=`, @no__t 2, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, 0
+*  Operadores unarios sobrecargados: `+`, `-`, `!`, `~`, `++`, `--`, `true`, `false`
+*  Operadores binarios sobrecargados: `+`, `-`, `*`, `/`, `%`, `&`, `&&`, `|`, `||`, `??`, `^`, `<<`, `>>`, `==`,`!=`, `>`, `<`, `>=`, `<=`
+*  Operadores de asignación: `=`, `+=`, `-=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=``<<=`, `>>=`
 *  Conversiones implícitas y explícitas
 
 Cuando no hay ninguna expresión dinámica implicada, C# el valor predeterminado es enlace estático, lo que significa que los tipos en tiempo de compilación de las expresiones constituyentes se usan en el proceso de selección. Sin embargo, cuando una de las expresiones constituyentes de las operaciones enumeradas anteriormente es una expresión dinámica, la operación se enlaza dinámicamente.
@@ -78,7 +78,7 @@ Console.WriteLine(d);  // dynamic binding to Console.WriteLine(int)
 
 Las dos primeras llamadas se enlazan estáticamente: la sobrecarga de `Console.WriteLine` se selecciona en función del tipo en tiempo de compilación de su argumento. Por lo tanto, el tiempo de enlace es el tiempo de compilación.
 
-La tercera llamada está enlazada dinámicamente: la sobrecarga de `Console.WriteLine` se selecciona en función del tipo en tiempo de ejecución de su argumento. Esto sucede porque el argumento es una expresión dinámica (su tipo en tiempo de compilación es `dynamic`). Por lo tanto, el tiempo de enlace para la tercera llamada es en tiempo de ejecución.
+La tercera llamada está enlazada dinámicamente: la sobrecarga de `Console.WriteLine` se selecciona en función del tipo en tiempo de ejecución de su argumento. Esto sucede porque el argumento es una expresión dinámica: su tipo en tiempo de compilación es `dynamic`. Por lo tanto, el tiempo de enlace para la tercera llamada es en tiempo de ejecución.
 
 ### <a name="dynamic-binding"></a>Enlace dinámico
 
@@ -96,7 +96,7 @@ Cuando una operación se enlaza estáticamente, el tipo de una expresión consti
 
 Cuando una operación se enlaza de forma dinámica, el tipo de una expresión constituyente se determina de maneras diferentes en función del tipo en tiempo de compilación de la expresión constituyente:
 
-*  Se considera que una expresión constitutiva del tipo en tiempo de compilación `dynamic` tiene el tipo del valor real al que se evalúa la expresión en tiempo de ejecución.
+*  Una expresión constituyente del tipo en tiempo de compilación `dynamic` se considera que tiene el tipo del valor real al que se evalúa la expresión en tiempo de ejecución.
 *  Expresión constituyente cuyo tipo en tiempo de compilación es un parámetro de tipo se considera que tiene el tipo al que está enlazado el parámetro de tipo en tiempo de ejecución.
 *  De lo contrario, se considera que la expresión Constituyente tiene su tipo en tiempo de compilación.
 
@@ -108,17 +108,17 @@ Hay tres tipos de operadores:
 
 *  Operadores unarios. Los operadores unarios toman un operando y usan la notación de prefijo (como `--x`) o la notación de postfijo (como `x++`).
 *  Operadores binarios. Los operadores binarios toman dos operandos y todos usan notación infija (como `x + y`).
-*  Operador ternario. Solo existe un operador ternario, `?:`; toma tres operandos y usa la notación de infijo (`c ? x : y`).
+*  Operador ternario. Solo existe un operador ternario, `?:`,. toma tres operandos y usa la notación de infijo (`c ? x : y`).
 
 El orden de evaluación de los operadores de una expresión viene determinado por la ***prioridad*** y la ***asociatividad*** de los operadores ([precedencia y asociatividad](expressions.md#operator-precedence-and-associativity)de los operadores).
 
-Los operandos de una expresión se evalúan de izquierda a derecha. Por ejemplo, en `F(i) + G(i++) * H(i)`, se llama al método `F` utilizando el valor anterior de `i`; a continuación, se llama al método `G` con el valor anterior de `i`, y, por último, se llama al método `H` con el nuevo valor de `i`. Esto es independiente de la prioridad de operador y no está relacionada con ella.
+Los operandos de una expresión se evalúan de izquierda a derecha. Por ejemplo, en `F(i) + G(i++) * H(i)`, se llama al método `F` utilizando el valor anterior de `i`, a continuación, se llama al método `G` con el valor anterior de `i`, y, por último, se llama al método `H` con el nuevo valor de `i`. Esto es independiente de la prioridad de operador y no está relacionada con ella.
 
 Algunos operadores se pueden ***sobrecargar***. La sobrecarga de operadores permite especificar implementaciones de operador definidas por el usuario para las operaciones donde uno o ambos operandos son de una clase definida por el usuario o un tipo de estructura ([sobrecarga de operadores](expressions.md#operator-overloading)).
 
 ### <a name="operator-precedence-and-associativity"></a>Prioridad y asociatividad de los operadores
 
-Cuando una expresión contiene varios operadores, la ***precedencia*** de los operadores controla el orden en que se evalúan los operadores individuales. Por ejemplo, la expresión `x + y * z` se evalúa como `x + (y * z)` porque el operador `*` tiene mayor precedencia que el operador `+` binario. La prioridad de un operador se establece mediante la definición de su producción de gramática asociada. Por ejemplo, un *additive_expression* consta de una secuencia de *multiplicative_expression*s separada por los operadores @no__t 2 o `-`, lo que permite a los operadores @no__t 4 y `-` una menor prioridad que los `*`, `/` y @no__ operadores t-8.
+Cuando una expresión contiene varios operadores, la ***precedencia*** de los operadores controla el orden en que se evalúan los operadores individuales. Por ejemplo, la expresión `x + y * z` se evalúa como `x + (y * z)` porque el operador de `*` tiene mayor precedencia que el operador binario `+`. La prioridad de un operador se establece mediante la definición de su producción de gramática asociada. Por ejemplo, un *additive_expression* se compone de una secuencia de *multiplicative_expression*s separadas por `+` o `-` operadores, lo que permite a los operadores `+` y `-` menor prioridad que los operadores `*`, `/`y `%`.
 
 En la tabla siguiente se resumen todos los operadores en orden de prioridad, de mayor a menor:
 
@@ -149,23 +149,23 @@ La precedencia y la asociatividad pueden controlarse mediante paréntesis. Por e
 
 ### <a name="operator-overloading"></a>Sobrecarga de operadores
 
-Todos los operadores unarios y binarios tienen implementaciones predefinidas que están disponibles automáticamente en cualquier expresión. Además de las implementaciones predefinidas, las implementaciones definidas por el usuario se pueden introducir incluyendo declaraciones `operator` en clases y Structs ([operadores](classes.md#operators)). Las implementaciones de operador definidas por el usuario siempre tienen prioridad sobre las implementaciones de operadores predefinidas: Solo cuando no existan implementaciones de operadores definidos por el usuario aplicables, se tendrán en cuenta las implementaciones de operadores predefinidas, como se describe en resolución de sobrecargas de operador [unario](expressions.md#unary-operator-overload-resolution) y [resolución de sobrecarga de operadores binarios](expressions.md#binary-operator-overload-resolution).
+Todos los operadores unarios y binarios tienen implementaciones predefinidas que están disponibles automáticamente en cualquier expresión. Además de las implementaciones predefinidas, las implementaciones definidas por el usuario se pueden introducir incluyendo declaraciones `operator` en clases y Structs ([operadores](classes.md#operators)). Las implementaciones de operador definidas por el usuario siempre tienen prioridad sobre las implementaciones de operadores predefinidas: solo cuando no existan implementaciones de operadores definidos por el usuario aplicables, se tendrán en cuenta las implementaciones de operadores predefinidas, como se describe en resolución de sobrecargas de operador [unario](expressions.md#unary-operator-overload-resolution) y [resolución de sobrecarga de operadores binarios](expressions.md#binary-operator-overload-resolution).
 
 Los ***operadores unarios sobrecargables*** son:
 ```csharp
 +   -   !   ~   ++   --   true   false
 ```
 
-Aunque `true` y `false` no se usan explícitamente en expresiones (y, por consiguiente, no se incluyen en la tabla de precedencia en la [precedencia y asociatividad](expressions.md#operator-precedence-and-associativity)de los operadores), se consideran operadores porque se invocan en varias expresiones. contextos: Expresiones booleanas ([Expresiones booleanas](expressions.md#boolean-expressions)) y expresiones que implican al operador condicional ([operador condicional](expressions.md#conditional-operator)) y operadores lógicos condicionales ([operadores lógicos condicionales](expressions.md#conditional-logical-operators)).
+Aunque `true` y `false` no se utilizan explícitamente en expresiones (y, por consiguiente, no se incluyen en la tabla de precedencia en la [precedencia y asociatividad](expressions.md#operator-precedence-and-associativity)de los operadores), se consideran operadores, ya que se invocan en varios contextos de expresión: Expresiones booleanas ([Expresiones booleanas](expressions.md#boolean-expressions)) y expresiones que implican el operador condicional ([operador condicional](expressions.md#conditional-operator)) y operadores lógicos[condicionales](expressions.md#conditional-logical-operators).
 
 Los ***operadores binarios sobrecargables*** son:
 ```csharp
 +   -   *   /   %   &   |   ^   <<   >>   ==   !=   >   <   >=   <=
 ```
 
-Solo se pueden sobrecargar los operadores enumerados anteriormente. En concreto, no es posible sobrecargar el acceso a miembros, la invocación de métodos o los `=`, `&&`, `||`, `??`, `?:`, `=>`, `checked`, `unchecked`, `new`, `typeof`, 0, 1 y 2.
+Solo se pueden sobrecargar los operadores enumerados anteriormente. En concreto, no es posible sobrecargar el acceso a miembros, la invocación de métodos o los operadores `=`, `&&`, `||`, `??`, `?:`, `=>`, `checked`, `unchecked`, `new`, `typeof`, `default`, `as`y `is`.
 
-Cuando se sobrecarga un operador binario, el operador de asignación correspondiente, si lo hay, también se sobrecarga de modo implícito. Por ejemplo, una sobrecarga de Operator `*` también es una sobrecarga de Operator `*=`. Esto se describe con más detalle en [asignación compuesta](expressions.md#compound-assignment). Tenga en cuenta que el operador de asignación (`=`) no se puede sobrecargar. Una asignación siempre realiza una copia simple de bits de un valor en una variable.
+Cuando se sobrecarga un operador binario, el operador de asignación correspondiente, si lo hay, también se sobrecarga de modo implícito. Por ejemplo, una sobrecarga de Operator `*` también es una sobrecarga de `*=`de operador. Esto se describe con más detalle en [asignación compuesta](expressions.md#compound-assignment). Tenga en cuenta que no se puede sobrecargar el operador de asignación (`=`). Una asignación siempre realiza una copia simple de bits de un valor en una variable.
 
 Las operaciones de conversión, como `(T)x`, se sobrecargan proporcionando conversiones definidas por el usuario ([conversiones definidas por el usuario](conversions.md#user-defined-conversions)).
 
@@ -182,7 +182,7 @@ En las expresiones, se hace referencia a los operadores mediante la notación de
 
 Las declaraciones de operador definidas por el usuario siempre requieren que al menos uno de los parámetros sea del tipo de clase o estructura que contiene la declaración de operador. Por lo tanto, no es posible que un operador definido por el usuario tenga la misma firma que un operador predefinido.
 
-Las declaraciones de operador definidas por el usuario no pueden modificar la sintaxis, la precedencia o la asociatividad de un operador. Por ejemplo, el operador `/` siempre es un operador binario, siempre tiene el nivel de prioridad especificado en [precedencia y asociatividad](expressions.md#operator-precedence-and-associativity)de los operadores y siempre es asociativo a la izquierda.
+Las declaraciones de operador definidas por el usuario no pueden modificar la sintaxis, la precedencia o la asociatividad de un operador. Por ejemplo, el operador `/` siempre es un operador binario, siempre tiene el nivel de precedencia especificado en [precedencia y asociatividad](expressions.md#operator-precedence-and-associativity)de los operadores y siempre es asociativo a la izquierda.
 
 Aunque es posible que un operador definido por el usuario realice cualquier cálculo, se desaconsejan las implementaciones que generan resultados distintos de los que se esperaban de forma intuitiva. Por ejemplo, una implementación de `operator ==` debe comparar los dos operandos para determinar si son iguales y devolver un resultado `bool` adecuado.
 
@@ -190,34 +190,34 @@ Las descripciones de operadores individuales en [expresiones primarias](expressi
 
 ### <a name="unary-operator-overload-resolution"></a>Resolución de sobrecarga del operador unario
 
-Una operación con el formato `op x` o `x op`, donde `op` es un operador unario sobrecargable y `x` es una expresión de tipo `X`, se procesa como se indica a continuación:
+Una operación con el formato `op x` o `x op`, donde `op` es un operador unario sobrecargable y `x` es una expresión de tipo `X`, se procesa de la siguiente manera:
 
-*  El conjunto de operadores candidatos definidos por el usuario que proporciona `X` para la operación `operator op(x)` se determina mediante las reglas de los [operadores candidatos definidos por el usuario](expressions.md#candidate-user-defined-operators).
-*  Si el conjunto de operadores definidos por el usuario candidatos no está vacío, se convierte en el conjunto de operadores candidatos para la operación. De lo contrario, las implementaciones unaria predefinidas `operator op`, incluidos sus formatos de elevación, se convierten en el conjunto de operadores candidatos para la operación. Las implementaciones predefinidas de un operador determinado se especifican en la descripción del operador ([expresiones primarias](expressions.md#primary-expressions) y [operadores unarios](expressions.md#unary-operators)).
-*  Las reglas de resolución de sobrecarga de la [resolución de sobrecarga](expressions.md#overload-resolution) se aplican al conjunto de operadores candidatos para seleccionar el mejor operador con respecto a la lista de argumentos `(x)`, y este operador se convierte en el resultado del proceso de resolución de sobrecarga. Si la resolución de sobrecarga no selecciona un solo operador mejor, se produce un error en tiempo de enlace.
+*  El conjunto de operadores candidatos definidos por el usuario que proporciona `X` para la operación `operator op(x)` se determina mediante las reglas de los [operadores candidatos definidos](expressions.md#candidate-user-defined-operators)por el usuario.
+*  Si el conjunto de operadores definidos por el usuario candidatos no está vacío, se convierte en el conjunto de operadores candidatos para la operación. De lo contrario, las implementaciones de `operator op` unaria predefinidas, incluidos sus formatos de elevación, se convierten en el conjunto de operadores candidatos para la operación. Las implementaciones predefinidas de un operador determinado se especifican en la descripción del operador ([expresiones primarias](expressions.md#primary-expressions) y [operadores unarios](expressions.md#unary-operators)).
+*  Las reglas de resolución de sobrecarga de la [resolución de sobrecarga](expressions.md#overload-resolution) se aplican al conjunto de operadores candidatos para seleccionar el mejor operador con respecto a la lista de argumentos `(x)`y este operador se convierte en el resultado del proceso de resolución de sobrecarga. Si la resolución de sobrecarga no selecciona un solo operador mejor, se produce un error en tiempo de enlace.
 
 ### <a name="binary-operator-overload-resolution"></a>Resolución de sobrecarga del operador binario
 
-Una operación con el formato `x op y`, donde `op` es un operador binario sobrecargable, @no__t 2 es una expresión de tipo `X` y `y` es una expresión de tipo `Y`, se procesa de la siguiente manera:
+Una operación con el formato `x op y`, donde `op` es un operador binario sobrecargable, `x` es una expresión de tipo `X`y `y` es una expresión de tipo `Y`, se procesa de la siguiente manera:
 
-*  Se determina el conjunto de operadores candidatos definidos por el usuario que proporciona `X` y `Y` para la operación `operator op(x,y)`. El conjunto consta de la Unión de los operadores candidatos proporcionados por `X` y los operadores candidatos proporcionados por `Y`, cada uno de los cuales se determina mediante las reglas de los [operadores candidatos definidos](expressions.md#candidate-user-defined-operators)por el usuario. Si `X` y `Y` son del mismo tipo, o si `X` y `Y` se derivan de un tipo base común, los operadores de candidatos compartidos solo se producen en el conjunto combinado una vez.
-*  Si el conjunto de operadores definidos por el usuario candidatos no está vacío, se convierte en el conjunto de operadores candidatos para la operación. De lo contrario, las implementaciones `operator op` binarias predefinidas, incluidas sus formas de elevación, se convierten en el conjunto de operadores candidatos para la operación. Las implementaciones predefinidas de un operador determinado se especifican en la descripción del operador ([operadores aritméticos](expressions.md#arithmetic-operators) a través de [operadores lógicos condicionales](expressions.md#conditional-logical-operators)). En el caso de los operadores de enumeración y delegado predefinidos, los únicos operadores considerados son los definidos por un tipo de delegado o de enumeración que es el tipo en tiempo de enlace de uno de los operandos.
-*  Las reglas de resolución de sobrecarga de la [resolución de sobrecarga](expressions.md#overload-resolution) se aplican al conjunto de operadores candidatos para seleccionar el mejor operador con respecto a la lista de argumentos `(x,y)`, y este operador se convierte en el resultado del proceso de resolución de sobrecarga. Si la resolución de sobrecarga no selecciona un solo operador mejor, se produce un error en tiempo de enlace.
+*  Se determina el conjunto de operadores candidatos definidos por el usuario proporcionados por `X` y `Y` para el `operator op(x,y)` de la operación. El conjunto consta de la Unión de los operadores candidatos proporcionados por `X` y los operadores candidatos proporcionados por `Y`, cada uno de los cuales se determina mediante las reglas de los [operadores candidatos definidos](expressions.md#candidate-user-defined-operators)por el usuario. Si `X` y `Y` son del mismo tipo, o si `X` y `Y` derivan de un tipo base común, los operadores candidatos compartidos solo se producen en el conjunto combinado una vez.
+*  Si el conjunto de operadores definidos por el usuario candidatos no está vacío, se convierte en el conjunto de operadores candidatos para la operación. De lo contrario, las implementaciones de `operator op` binarias predefinidas, incluidas sus formas de elevación, se convierten en el conjunto de operadores candidatos para la operación. Las implementaciones predefinidas de un operador determinado se especifican en la descripción del operador ([operadores aritméticos](expressions.md#arithmetic-operators) a través de [operadores lógicos condicionales](expressions.md#conditional-logical-operators)). En el caso de los operadores de enumeración y delegado predefinidos, los únicos operadores considerados son los definidos por un tipo de delegado o de enumeración que es el tipo en tiempo de enlace de uno de los operandos.
+*  Las reglas de resolución de sobrecarga de la [resolución de sobrecarga](expressions.md#overload-resolution) se aplican al conjunto de operadores candidatos para seleccionar el mejor operador con respecto a la lista de argumentos `(x,y)`y este operador se convierte en el resultado del proceso de resolución de sobrecarga. Si la resolución de sobrecarga no selecciona un solo operador mejor, se produce un error en tiempo de enlace.
 
 ### <a name="candidate-user-defined-operators"></a>Operadores candidatos definidos por el usuario
 
-Dado un tipo `T` y una operación `operator op(A)`, donde `op` es un operador sobrecargable y `A` es una lista de argumentos, el conjunto de operadores candidatos definidos por el usuario proporcionados por `T` para `operator op(A)` se determina de la manera siguiente:
+Dado un tipo `T` y una operación `operator op(A)`, donde `op` es un operador sobrecargable y `A` es una lista de argumentos, el conjunto de operadores definidos por el usuario candidatos proporcionados por `T` para `operator op(A)` se determina de la siguiente manera:
 
-*  Determine el tipo `T0`. Si `T` es un tipo que acepta valores NULL, `T0` es su tipo subyacente, de lo contrario `T0` es igual a `T`.
-*  Para todas las declaraciones de `operator op` en `T0` y todas las formas de elevación de estos operadores, si al menos un operador es aplicable ([miembro de función aplicable](expressions.md#applicable-function-member)) con respecto a la lista de argumentos `A`, el conjunto de operadores candidatos está formado por todos estos operadores aplicables en `T0`.
-*  De lo contrario, si `T0` es `object`, el conjunto de operadores candidatos está vacío.
-*  De lo contrario, el conjunto de operadores candidatos proporcionado por `T0` es el conjunto de operadores candidatos que proporciona la clase base directa de `T0`, o la clase base efectiva de `T0` si `T0` es un parámetro de tipo.
+*  Determine el tipo `T0`. Si `T` es un tipo que acepta valores NULL, `T0` es su tipo subyacente; de lo contrario, `T0` es igual a `T`.
+*  Para todas las declaraciones de `operator op` de `T0` y todas las formas de elevación de estos operadores, si al menos un operador es aplicable ([miembro de función aplicable](expressions.md#applicable-function-member)) con respecto a la lista de argumentos `A`, el conjunto de operadores candidatos está formado por todos los operadores aplicables en `T0`.
+*  De lo contrario, si se `object``T0`, el conjunto de operadores candidatos está vacío.
+*  De lo contrario, el conjunto de operadores candidatos proporcionado por `T0` es el conjunto de operadores candidatos proporcionados por la clase base directa de `T0`, o la clase base efectiva de `T0` si `T0` es un parámetro de tipo.
 
 ### <a name="numeric-promotions"></a>Promociones numéricas
 
 La promoción numérica consiste en realizar automáticamente determinadas conversiones implícitas de los operandos de los operadores binarios y unarios predefinidos. La promoción numérica no es un mecanismo distinto, sino un efecto de aplicar la resolución de sobrecarga a los operadores predefinidos. La promoción numérica específicamente no afecta a la evaluación de operadores definidos por el usuario, aunque se pueden implementar operadores definidos por el usuario para mostrar efectos similares.
 
-Como ejemplo de promoción numérica, tenga en cuenta las implementaciones predefinidas del operador `*` binario:
+Como ejemplo de promoción numérica, tenga en cuenta las implementaciones predefinidas del operador binario `*`:
 
 ```csharp
 int operator *(int x, int y);
@@ -229,38 +229,38 @@ double operator *(double x, double y);
 decimal operator *(decimal x, decimal y);
 ```
 
-Cuando se aplican las reglas de resolución de sobrecarga ([resolución de sobrecarga](expressions.md#overload-resolution)) a este conjunto de operadores, el efecto es seleccionar el primero de los operadores para los que existen conversiones implícitas desde los tipos de operando. Por ejemplo, para la operación `b * s`, donde `b` es un @no__t 2 y `s` es una `short`, la resolución de sobrecarga selecciona `operator *(int,int)` como el mejor operador. Por lo tanto, el efecto es que `b` y `s` se convierten a `int` y el tipo del resultado es `int`. Del mismo modo, para la operación `i * d`, donde `i` es una `int` y `d` es una `double`, la resolución de sobrecarga selecciona `operator *(double,double)` como el mejor operador.
+Cuando se aplican las reglas de resolución de sobrecarga ([resolución de sobrecarga](expressions.md#overload-resolution)) a este conjunto de operadores, el efecto es seleccionar el primero de los operadores para los que existen conversiones implícitas desde los tipos de operando. Por ejemplo, para la operación `b * s`, donde `b` es un `byte` y `s` es una `short`, la resolución de sobrecarga selecciona `operator *(int,int)` como el mejor operador. Por lo tanto, el efecto es que `b` y `s` se convierten en `int`y el tipo del resultado es `int`. Del mismo modo, para la operación `i * d`, donde `i` es un `int` y `d` es una `double`, la resolución de sobrecarga selecciona `operator *(double,double)` como el mejor operador.
 
 #### <a name="unary-numeric-promotions"></a>Promociones numéricas unarias
 
-La promoción numérica unaria se produce para los operandos de los operadores unarios predefinidos `+`, `-` y `~`. La promoción numérica unaria simplemente consiste en convertir operandos de tipo `sbyte`, `byte`, @no__t 2, `ushort` o `char` al tipo `int`. Además, para el operador unario `-`, la promoción numérica unaria convierte los operandos del tipo `uint` al tipo `long`.
+La promoción numérica unaria se produce para los operandos de los operadores `+`, `-``~` y unario predefinidos. La promoción numérica unaria simplemente consiste en convertir operandos de tipo `sbyte`, `byte`, `short`, `ushort`o `char` en el tipo `int`. Además, para el operador unario `-`, la promoción numérica unaria convierte operandos de tipo `uint` al tipo `long`.
 
 #### <a name="binary-numeric-promotions"></a>Promociones numéricas binarias
 
-La promoción numérica binaria se produce para los operandos de los valores predefinidos `+`, `-`, `*`, `/`, `%`, `&`, `|`, `^`, `==`, `!=`, 0, 1, 2 y 3 operadores binarios. La promoción numérica binaria convierte implícitamente ambos operandos en un tipo común que, en el caso de los operadores no relacionales, también se convierte en el tipo de resultado de la operación. La promoción numérica binaria consiste en aplicar las siguientes reglas, en el orden en que aparecen aquí:
+La promoción numérica binaria se produce para los operandos de los `+`predefinidos, `-`, `*`, `/`, `%`, `&`, `|`, `^`, `==`, `!=`, `>`, `<`, `>=`y `<=` operadores binarios. La promoción numérica binaria convierte implícitamente ambos operandos en un tipo común que, en el caso de los operadores no relacionales, también se convierte en el tipo de resultado de la operación. La promoción numérica binaria consiste en aplicar las siguientes reglas, en el orden en que aparecen aquí:
 
 *  Si alguno de los operandos es de tipo `decimal`, el otro operando se convierte al tipo `decimal`, o se produce un error en tiempo de enlace si el otro operando es de tipo `float` o `double`.
 *  De lo contrario, si alguno de los operandos es de tipo `double`, el otro operando se convierte al tipo `double`.
 *  De lo contrario, si alguno de los operandos es de tipo `float`, el otro operando se convierte al tipo `float`.
-*  De lo contrario, si alguno de los operandos es de tipo `ulong`, el otro operando se convierte al tipo `ulong`, o se produce un error en tiempo de enlace si el otro operando es de tipo `sbyte`, `short`, `int` o `long`.
+*  De lo contrario, si alguno de los operandos es de tipo `ulong`, el otro operando se convierte al tipo `ulong`, o se produce un error en tiempo de enlace si el otro operando es de tipo `sbyte`, `short`, `int`o `long`.
 *  De lo contrario, si alguno de los operandos es de tipo `long`, el otro operando se convierte al tipo `long`.
-*  De lo contrario, si alguno de los operandos es de tipo `uint` y el otro operando es de tipo `sbyte`, `short` o `int`, ambos operandos se convierten al tipo `long`.
+*  De lo contrario, si alguno de los operandos es de tipo `uint` y el otro operando es de tipo `sbyte`, `short`o `int`, ambos operandos se convierten al tipo `long`.
 *  De lo contrario, si alguno de los operandos es de tipo `uint`, el otro operando se convierte al tipo `uint`.
 *  De lo contrario, ambos operandos se convierten al tipo `int`.
 
-Tenga en cuenta que la primera regla no permite ninguna operación que mezcle el tipo `decimal` con los tipos `double` y `float`. La regla sigue el hecho de que no hay conversiones implícitas entre el tipo `decimal` y los tipos `double` y `float`.
+Tenga en cuenta que la primera regla no permite ninguna operación que mezcle el tipo de `decimal` con los tipos `double` y `float`. La regla sigue el hecho de que no hay conversiones implícitas entre el tipo `decimal` y los tipos `double` y `float`.
 
-Tenga en cuenta también que no es posible que un operando sea de tipo `ulong` cuando el otro operando es de un tipo entero con signo. La razón es que no existe ningún tipo entero que pueda representar el intervalo completo de `ulong`, así como los tipos enteros con signo.
+Tenga en cuenta también que no es posible que un operando sea de tipo `ulong` cuando el otro operando es de un tipo entero con signo. La razón es que no existe ningún tipo entero que pueda representar el intervalo completo de `ulong` así como los tipos enteros con signo.
 
 En los dos casos anteriores, se puede usar una expresión de conversión para convertir explícitamente un operando en un tipo que sea compatible con el otro operando.
 
-En el ejemplo
+en el ejemplo
 ```csharp
 decimal AddPercent(decimal x, double percent) {
     return x * (1.0 + percent / 100.0);
 }
 ```
-se produce un error en tiempo de enlace porque un `decimal` no se puede multiplicar por `double`. El error se resuelve convirtiendo explícitamente el segundo operando en `decimal`, como se indica a continuación:
+se produce un error en tiempo de enlace porque un `decimal` no se puede multiplicar por un `double`. El error se resuelve convirtiendo explícitamente el segundo operando en `decimal`, como se indica a continuación:
 
 ```csharp
 decimal AddPercent(decimal x, double percent) {
@@ -278,7 +278,7 @@ Los ***operadores de elevación*** permiten a los operadores predefinidos y defi
     +  ++  -  --  !  ~
     ```
 
-    existe una forma de elevación de un operador si el operando y los tipos de resultado son tipos de valor que no aceptan valores NULL. La forma de elevación se construye agregando un único modificador `?` a los tipos de operando y de resultado. El operador de elevación genera un valor NULL si el operando es NULL. De lo contrario, el operador de elevación desencapsula el operando, aplica el operador subyacente y ajusta el resultado.
+    existe una forma de elevación de un operador si el operando y los tipos de resultado son tipos de valor que no aceptan valores NULL. La forma de elevación se construye agregando un único modificador de `?` al operando y a los tipos de resultado. El operador de elevación genera un valor NULL si el operando es NULL. De lo contrario, el operador de elevación desencapsula el operando, aplica el operador subyacente y ajusta el resultado.
 
 *   Para los operadores binarios
 
@@ -286,7 +286,7 @@ Los ***operadores de elevación*** permiten a los operadores predefinidos y defi
     +  -  *  /  %  &  |  ^  <<  >>
     ```
 
-    existe una forma de elevación de un operador si el operando y los tipos de resultado son todos tipos de valor que no aceptan valores NULL. La forma de elevación se construye agregando un único modificador `?` a cada operando y tipo de resultado. El operador de elevación genera un valor NULL si uno o los dos operandos son NULL (una excepción son los operadores `&` y `|` del tipo `bool?`, como se describe en [operadores lógicos booleanos](expressions.md#boolean-logical-operators)). De lo contrario, el operador de elevación desencapsula los operandos, aplica el operador subyacente y ajusta el resultado.
+    existe una forma de elevación de un operador si el operando y los tipos de resultado son todos tipos de valor que no aceptan valores NULL. La forma de elevación se construye agregando un único modificador de `?` a cada operando y tipo de resultado. El operador de elevación genera un valor NULL si uno o los dos operandos son NULL (una excepción son los operadores `&` y `|` del tipo `bool?`, como se describe en [operadores lógicos booleanos](expressions.md#boolean-logical-operators)). De lo contrario, el operador de elevación desencapsula los operandos, aplica el operador subyacente y ajusta el resultado.
 
 *   Para los operadores de igualdad
 
@@ -294,7 +294,7 @@ Los ***operadores de elevación*** permiten a los operadores predefinidos y defi
     ==  !=
     ```
 
-    existe una forma de elevación de un operador si los tipos de operando son tipos de valor que no aceptan valores NULL y si el tipo de resultado es `bool`. La forma de elevación se construye agregando un único modificador `?` a cada tipo de operando. El operador de elevación considera que dos valores NULL son iguales y un valor NULL es distinto de cualquier valor distinto de NULL. Si ambos operandos no son NULL, el operador de elevación desencapsula los operandos y aplica el operador subyacente para generar el resultado `bool`.
+    existe una forma de elevación de un operador si los tipos de operando son tipos de valor que no aceptan valores NULL y si el tipo de resultado es `bool`. La forma de elevación se construye agregando un único modificador de `?` a cada tipo de operando. El operador de elevación considera que dos valores NULL son iguales y un valor NULL es distinto de cualquier valor distinto de NULL. Si los dos operandos no son NULL, el operador de elevación desencapsula los operandos y aplica el operador subyacente para generar el `bool` resultado.
 
 *   Para los operadores relacionales
 
@@ -302,30 +302,30 @@ Los ***operadores de elevación*** permiten a los operadores predefinidos y defi
     <  >  <=  >=
     ```
 
-    existe una forma de elevación de un operador si los tipos de operando son tipos de valor que no aceptan valores NULL y si el tipo de resultado es `bool`. La forma de elevación se construye agregando un único modificador `?` a cada tipo de operando. El operador de elevación produce el valor `false` si uno o los dos operandos son NULL. De lo contrario, el operador de elevación desencapsula los operandos y aplica el operador subyacente para generar el resultado `bool`.
+    existe una forma de elevación de un operador si los tipos de operando son tipos de valor que no aceptan valores NULL y si el tipo de resultado es `bool`. La forma de elevación se construye agregando un único modificador de `?` a cada tipo de operando. El operador de elevación produce el valor `false` si uno o los dos operandos son NULL. De lo contrario, el operador de elevación desencapsula los operandos y aplica el operador subyacente para generar el `bool` resultado.
 
 ## <a name="member-lookup"></a>Búsqueda de miembros
 
-Una búsqueda de miembros es el proceso por el que se determina el significado de un nombre en el contexto de un tipo. Una búsqueda de miembros se puede producir como parte de la evaluación de *simple_name* ([nombres simples](expressions.md#simple-names)) o de *member_access* ([acceso a miembros](expressions.md#member-access)) en una expresión. Si *simple_name* o *member_access* se produce como *primary_expression* de un *invocation_expression* (invocaciones de[método](expressions.md#method-invocations)), se dice que el miembro se invoca.
+Una búsqueda de miembros es el proceso por el que se determina el significado de un nombre en el contexto de un tipo. Una búsqueda de miembros se puede producir como parte de la evaluación de una *simple_name* ([nombres simples](expressions.md#simple-names)) o un *member_access* ([acceso a miembros](expressions.md#member-access)) en una expresión. Si el *simple_name* o *member_access* se produce como *primary_expression* de un *invocation_expression* (invocaciones de[método](expressions.md#method-invocations)), se dice que el miembro se invoca.
 
 Si un miembro es un método o un evento, o si es una constante, un campo o una propiedad de un tipo de delegado ([delegados](delegates.md)) o del tipo `dynamic` ([el tipo dinámico](types.md#the-dynamic-type)), se dice que el miembro es *invocable*.
 
 La búsqueda de miembros considera no solo el nombre de un miembro, sino también el número de parámetros de tipo que tiene el miembro y si el miembro es accesible. En lo que respecta a la búsqueda de miembros, los métodos genéricos y los tipos genéricos anidados tienen el número de parámetros de tipo indicado en sus declaraciones respectivas y todos los demás miembros tienen parámetros de tipo cero.
 
-Una búsqueda de miembro de un nombre @ no__t-0 con parámetros `K` @ no__t-2Type en un tipo @ no__t-3 se procesa de la manera siguiente:
+Una búsqueda de miembro de un nombre `N` con `K`parámetros de tipo  en un tipo `T` se procesa de la siguiente manera:
 
-*  En primer lugar, se determina un conjunto de miembros accesibles denominados @ no__t-0:
-    * Si `T` es un parámetro de tipo, el conjunto es la Unión de los conjuntos de miembros accesibles denominados @ no__t-1 en cada uno de los tipos especificados como restricción principal o restricción secundaria ([restricciones de parámetro de tipo](classes.md#type-parameter-constraints)) para @ no__t-3, junto con el conjunto de miembros accesibles denominados @ no__t-4 en `object`.
-    * De lo contrario, el conjunto se compone de todos los miembros accesibles ([acceso a miembros](basic-concepts.md#member-access)) denominados @ no__t-1 en @ no__t-2, incluidos los miembros heredados y los miembros accesibles denominados @ no__t-3 en `object`. Si `T` es un tipo construido, el conjunto de miembros se obtiene sustituyendo los argumentos de tipo tal y como se describe en [miembros de tipos construidos](classes.md#members-of-constructed-types). Los miembros que incluyen un modificador `override` se excluyen del conjunto.
-*  Después, si `K` es cero, se quitan todos los tipos anidados cuyas declaraciones incluyen parámetros de tipo. Si `K` no es cero, se quitan todos los miembros con un número diferente de parámetros de tipo. Tenga en cuenta que cuando `K` es cero, no se quitan los métodos que tienen parámetros de tipo, ya que el proceso de inferencia de tipos ([inferencia de tipos](expressions.md#type-inference)) podría inferir los argumentos de tipo.
+*  En primer lugar, se determina un conjunto de miembros accesibles denominados `N`:
+    * Si `T` es un parámetro de tipo, el conjunto es la Unión de los conjuntos de miembros accesibles denominados `N` en cada uno de los tipos especificados como restricción principal o restricción secundaria ([restricciones de parámetro de tipo](classes.md#type-parameter-constraints)) para `T`, junto con el conjunto de miembros accesibles denominado `N` en `object`.
+    * De lo contrario, el conjunto se compone de todos los miembros accesibles ([acceso a miembros](basic-concepts.md#member-access)) denominados `N` en `T`, incluidos los miembros heredados y los miembros accesibles denominados `N` en `object`. Si `T` es un tipo construido, el conjunto de miembros se obtiene sustituyendo los argumentos de tipo tal y como se describe en [miembros de tipos construidos](classes.md#members-of-constructed-types). Los miembros que incluyen un modificador `override` se excluyen del conjunto.
+*  A continuación, si `K` es cero, se quitan todos los tipos anidados cuyas declaraciones incluyen parámetros de tipo. Si `K` no es cero, se quitan todos los miembros con un número diferente de parámetros de tipo. Tenga en cuenta que cuando `K` es cero, no se quitan los métodos que tienen parámetros de tipo, ya que el proceso de inferencia de tipos ([inferencia de tipos](expressions.md#type-inference)) podría inferir los argumentos de tipo.
 *  Después, si se *invoca*el miembro, todos los miembros que no sean de*invocable* se quitarán del conjunto.
-*  Después, los miembros que están ocultos por otros miembros se quitan del conjunto. Para cada miembro `S.M` del conjunto, donde `S` es el tipo en el que se declara el miembro @ no__t-2, se aplican las reglas siguientes:
-    * Si `M` es una constante, un campo, una propiedad, un evento o un miembro de enumeración, todos los miembros declarados en un tipo base de `S` se quitan del conjunto.
-    * Si `M` es una declaración de tipos, todos los tipos no que se declaran en un tipo base de `S` se quitan del conjunto y todas las declaraciones de tipos con el mismo número de parámetros de tipo que `M` declarados en un tipo base de `S` se quitan del conjunto.
+*  Después, los miembros que están ocultos por otros miembros se quitan del conjunto. Para cada miembro `S.M` del conjunto, donde `S` es el tipo en el que se declara el miembro `M`, se aplican las siguientes reglas:
+    * Si `M` es un miembro de constante, campo, propiedad, evento o enumeración, todos los miembros declarados en un tipo base de `S` se quitan del conjunto.
+    * Si `M` es una declaración de tipos, todos los tipos que no sean declarados en un tipo base de `S` se quitan del conjunto y todas las declaraciones de tipos con el mismo número de parámetros de tipo que `M` declarados en un tipo base de `S` se quitan del conjunto.
     * Si `M` es un método, todos los miembros que no son de método declarados en un tipo base de `S` se quitan del conjunto.
-*  Después, los miembros de interfaz que están ocultos por miembros de clase se quitan del conjunto. Este paso solo tiene efecto si `T` es un parámetro de tipo y `T` tiene una clase base efectiva distinta de `object` y un conjunto de interfaces efectivo no vacío ([restricciones de parámetro de tipo](classes.md#type-parameter-constraints)). Para cada miembro `S.M` del conjunto, donde `S` es el tipo en el que se declara el miembro `M`, se aplican las reglas siguientes si `S` es una declaración de clase distinta de `object`:
+*  Después, los miembros de interfaz que están ocultos por miembros de clase se quitan del conjunto. Este paso solo tiene efecto si `T` es un parámetro de tipo y `T` tiene una clase base efectiva distinta de `object` y un conjunto de interfaces efectivo no vacío ([restricciones de parámetro de tipo](classes.md#type-parameter-constraints)). Por cada miembro `S.M` del conjunto, donde `S` es el tipo en el que se declara el miembro `M`, se aplican las reglas siguientes si `S` es una declaración de clase distinta de `object`:
     * Si `M` es una constante, un campo, una propiedad, un evento, un miembro de enumeración o una declaración de tipos, todos los miembros declarados en una declaración de interfaz se quitan del conjunto.
-    * Si `M` es un método, todos los miembros que no sean de método declarados en una declaración de interfaz se quitan del conjunto, y todos los métodos con la misma signatura que `M` declarados en una declaración de interfaz se quitan del conjunto.
+    * Si `M` es un método, todos los miembros que no son de método declarados en una declaración de interfaz se quitan del conjunto y todos los métodos con la misma signatura que `M` declarados en una declaración de interfaz se quitan del conjunto.
 *  Por último, si se han quitado los miembros ocultos, se determina el resultado de la búsqueda:
     * Si el conjunto está formado por un único miembro que no es un método, este miembro es el resultado de la búsqueda.
     * De lo contrario, si el conjunto solo contiene métodos, este grupo de métodos es el resultado de la búsqueda.
@@ -337,13 +337,13 @@ Para búsquedas de miembros en tipos que no sean de tipo e interfaces, y búsque
 
 En lo que respecta a la búsqueda de miembros, se considera que un tipo `T` tiene los siguientes tipos base:
 
-*  Si `T` es `object`, `T` no tiene tipo base.
-*  Si `T` es un *enum_type*, los tipos base de `T` son los tipos de clase `System.Enum`, `System.ValueType` y `object`.
-*  Si `T` es un *struct_type*, los tipos base de `T` son los tipos de clase `System.ValueType` y `object`.
-*  Si `T` es un *class_type*, los tipos base de `T` son las clases base de `T`, incluido el tipo de clase `object`.
-*  Si `T` es un *interface_type*, los tipos base de `T` son las interfaces base de `T` y el tipo de clase `object`.
-*  Si `T` es un *array_type*, los tipos base de `T` son los tipos de clase `System.Array` y `object`.
-*  Si `T` es un *delegate_type*, los tipos base de `T` son los tipos de clase `System.Delegate` y `object`.
+*  Si `T` es `object`, `T` no tiene ningún tipo base.
+*  Si `T` es una *enum_type*, los tipos base de `T` son los tipos de clase `System.Enum`, `System.ValueType`y `object`.
+*  Si `T` es una *struct_type*, los tipos base de `T` son los tipos de clase `System.ValueType` y `object`.
+*  Si `T` es una *class_type*, los tipos base de `T` son las clases base de `T`, incluido el tipo de clase `object`.
+*  Si `T` es una *interface_type*, los tipos base de `T` son las interfaces base de `T` y el tipo de clase `object`.
+*  Si `T` es una *array_type*, los tipos base de `T` son los tipos de clase `System.Array` y `object`.
+*  Si `T` es una *delegate_type*, los tipos base de `T` son los tipos de clase `System.Delegate` y `object`.
 
 ## <a name="function-members"></a>Miembros de función
 
@@ -351,7 +351,7 @@ Los miembros de función son miembros que contienen instrucciones ejecutables. L
 
 *  Métodos
 *  Propiedades
-*  Events
+*  Eventos
 *  Indizadores
 *  Operadores definidos por el usuario
 *  Constructores de instancias
@@ -368,44 +368,44 @@ Las invocaciones de métodos, indizadores, operadores y constructores de instanc
 
 Una vez que se ha identificado un miembro de función determinado en tiempo de enlace, posiblemente a través de la resolución de sobrecarga, el proceso real en tiempo de ejecución de la invocación del miembro de función se describe en la [comprobación en tiempo de compilación de la resolución de sobrecarga dinámica](expressions.md#compile-time-checking-of-dynamic-overload-resolution).
 
-En la tabla siguiente se resume el procesamiento que tiene lugar en construcciones que implican las seis categorías de miembros de función que se pueden invocar explícitamente. En la tabla, `e`, `x`, `y` y `value` indican expresiones clasificadas como variables o valores, `T` indica una expresión clasificada como un tipo, `F` es el nombre simple de un método y `P` es el nombre simple de una propiedad.
+En la tabla siguiente se resume el procesamiento que tiene lugar en construcciones que implican las seis categorías de miembros de función que se pueden invocar explícitamente. En la tabla, `e`, `x`, `y`y `value` indican expresiones clasificadas como variables o valores, `T` indica una expresión clasificada como un tipo, `F` es el nombre simple de un método y `P` es el nombre simple de una propiedad.
 
 
 | __Construir__     | __Ejemplo__    | __Descripción__ |
 |-------------------|----------------|-----------------|
-| Invocación del método. | `F(x,y)`       | Se aplica la resolución de sobrecarga para seleccionar el mejor método `F` en la clase contenedora o struct. El método se invoca con la lista de argumentos `(x,y)`. Si el método no es `static`, la expresión de instancia es `this`. | 
-|                   | `T.F(x,y)`     | Se aplica la resolución de sobrecarga para seleccionar el mejor método `F` en la clase o struct `T`. Se produce un error en tiempo de enlace si el método no es `static`. El método se invoca con la lista de argumentos `(x,y)`. | 
-|                   | `e.F(x,y)`     | La resolución de sobrecarga se aplica para seleccionar el mejor método F en la clase, estructura o interfaz dada por el tipo de `e`. Se produce un error en tiempo de enlace si el método es `static`. El método se invoca con la expresión de instancia `e` y la lista de argumentos `(x,y)`. | 
-| Property Access   | `P`            | Se invoca al descriptor de acceso `get` de la propiedad `P` en la clase o estructura contenedora. Se produce un error en tiempo de compilación si `P` es de solo escritura. Si `P` no es `static`, la expresión de instancia es @no__t 2. | 
-|                   | `P = value`    | El descriptor de acceso `set` de la propiedad `P` en la clase o estructura contenedora se invoca con la lista de argumentos `(value)`. Se produce un error en tiempo de compilación si `P` es de solo lectura. Si `P` no es `static`, la expresión de instancia es @no__t 2. | 
-|                   | `T.P`          | Se invoca al descriptor de acceso `get` de la propiedad `P` en la clase o struct `T`. Se produce un error en tiempo de compilación si `P` no es `static` o si `P` es de solo escritura. | 
-|                   | `T.P = value`  | El descriptor de acceso `set` de la propiedad `P` de la clase o estructura `T` se invoca con la lista de argumentos `(value)`. Se produce un error en tiempo de compilación si `P` no es `static` o si `P` es de solo lectura. | 
-|                   | `e.P`          | El descriptor de acceso `get` de la propiedad `P` en la clase, estructura o interfaz proporcionada por el tipo de `e` se invoca con la expresión de instancia `e`. Se produce un error en tiempo de enlace si `P` es `static` o si `P` es de solo escritura. | 
-|                   | `e.P = value`  | El descriptor de acceso `set` de la propiedad `P` en la clase, estructura o interfaz proporcionada por el tipo de `e` se invoca con la expresión de instancia `e` y la lista de argumentos `(value)`. Se produce un error en tiempo de enlace si `P` es `static` o si `P` es de solo lectura. | 
-| Acceso a eventos      | `E += value`   | Se invoca al descriptor de acceso `add` del evento `E` en la clase o estructura contenedora. Si `E` no es static, la expresión de instancia es `this`. | 
-|                   | `E -= value`   | Se invoca al descriptor de acceso `remove` del evento `E` en la clase o estructura contenedora. Si `E` no es static, la expresión de instancia es `this`. | 
-|                   | `T.E += value` | Se invoca al descriptor de acceso `add` del evento `E` en la clase o struct `T`. Se produce un error en tiempo de enlace si `E` no es estático. | 
-|                   | `T.E -= value` | Se invoca al descriptor de acceso `remove` del evento `E` en la clase o struct `T`. Se produce un error en tiempo de enlace si `E` no es estático. | 
-|                   | `e.E += value` | El descriptor de acceso `add` del evento `E` en la clase, estructura o interfaz proporcionada por el tipo de `e` se invoca con la expresión de instancia `e`. Se produce un error en tiempo de enlace si `E` es estático. | 
-|                   | `e.E -= value` | El descriptor de acceso `remove` del evento `E` en la clase, estructura o interfaz proporcionada por el tipo de `e` se invoca con la expresión de instancia `e`. Se produce un error en tiempo de enlace si `E` es estático. | 
-| Acceso a indizador    | `e[x,y]`       | La resolución de sobrecarga se aplica para seleccionar el mejor indexador en la clase, estructura o interfaz dada por el tipo de e. El descriptor de acceso `get` del indexador se invoca con la expresión de instancia `e` y la lista de argumentos `(x,y)`. Se produce un error en tiempo de enlace si el indizador es de solo escritura. | 
-|                   | `e[x,y] = value` | La resolución de sobrecarga se aplica para seleccionar el mejor indexador en la clase, estructura o interfaz que proporciona el tipo de `e`. El descriptor de acceso `set` del indexador se invoca con la expresión de instancia `e` y la lista de argumentos `(x,y,value)`. Se produce un error en tiempo de enlace si el indizador es de solo lectura. | 
+| Invocación del método. | `F(x,y)`       | Se aplica la resolución de sobrecarga para seleccionar el mejor método `F` en la clase o estructura contenedora. El método se invoca con la lista de argumentos `(x,y)`. Si no se `static`el método, la expresión de instancia se `this`. | 
+|                   | `T.F(x,y)`     | Se aplica la resolución de sobrecarga para seleccionar el mejor método `F` en el `T`de clase o estructura. Se produce un error en tiempo de enlace si no se `static`el método. El método se invoca con la lista de argumentos `(x,y)`. | 
+|                   | `e.F(x,y)`     | La resolución de sobrecarga se aplica para seleccionar el mejor método F en la clase, estructura o interfaz dada por el tipo de `e`. Se produce un error en tiempo de enlace si se `static`el método. El método se invoca con la expresión de instancia `e` y la lista de argumentos `(x,y)`. | 
+| Property Access   | `P`            | Se invoca al descriptor de acceso `get` del `P` de propiedad en la clase o estructura contenedora. Se produce un error en tiempo de compilación si `P` es de solo escritura. Si `P` no se `static`, la expresión de instancia se `this`. | 
+|                   | `P = value`    | El descriptor de acceso `set` del `P` de propiedad en la clase o estructura contenedora se invoca con la lista de argumentos `(value)`. Se produce un error en tiempo de compilación si `P` es de solo lectura. Si `P` no se `static`, la expresión de instancia se `this`. | 
+|                   | `T.P`          | Descriptor de acceso `get` del `P` de propiedad en la clase o struct `T` se invoca. Se produce un error en tiempo de compilación si `P` no es `static` o si `P` es de solo escritura. | 
+|                   | `T.P = value`  | El descriptor de acceso `set` del `P` de propiedad en la clase o struct `T` se invoca con la lista de argumentos `(value)`. Se produce un error en tiempo de compilación si no se `static` `P` o si `P` es de solo lectura. | 
+|                   | `e.P`          | El descriptor de acceso `get` del `P` de propiedad en la clase, estructura o interfaz proporcionada por el tipo de `e` se invoca con la expresión de instancia `e`. Se produce un error en tiempo de enlace si se `static` `P` o si `P` es de solo escritura. | 
+|                   | `e.P = value`  | El descriptor de acceso `set` del `P` de propiedad en la clase, estructura o interfaz proporcionada por el tipo de `e` se invoca con la expresión de instancia `e` y la lista de argumentos `(value)`. Se produce un error en tiempo de enlace si se `static` `P` o si `P` es de solo lectura. | 
+| Acceso a eventos      | `E += value`   | Se invoca al descriptor de acceso `add` del `E` de eventos en la clase o estructura contenedora. Si `E` no es estático, la expresión de instancia se `this`. | 
+|                   | `E -= value`   | Se invoca al descriptor de acceso `remove` del `E` de eventos en la clase o estructura contenedora. Si `E` no es estático, la expresión de instancia se `this`. | 
+|                   | `T.E += value` | Descriptor de acceso `add` del `E` de eventos de la clase o estructura `T` se invoca. Se produce un error en tiempo de enlace si `E` no es estático. | 
+|                   | `T.E -= value` | Descriptor de acceso `remove` del `E` de eventos de la clase o estructura `T` se invoca. Se produce un error en tiempo de enlace si `E` no es estático. | 
+|                   | `e.E += value` | El descriptor de acceso `add` del `E` de eventos de la clase, estructura o interfaz proporcionada por el tipo de `e` se invoca con la expresión de instancia `e`. Se produce un error en tiempo de enlace si `E` es estático. | 
+|                   | `e.E -= value` | El descriptor de acceso `remove` del `E` de eventos de la clase, estructura o interfaz proporcionada por el tipo de `e` se invoca con la expresión de instancia `e`. Se produce un error en tiempo de enlace si `E` es estático. | 
+| Acceso a indizador    | `e[x,y]`       | La resolución de sobrecarga se aplica para seleccionar el mejor indexador en la clase, estructura o interfaz dada por el tipo de e. El descriptor de acceso `get` del indexador se invoca con el `e` de expresión de instancia y la lista de argumentos `(x,y)`. Se produce un error en tiempo de enlace si el indizador es de solo escritura. | 
+|                   | `e[x,y] = value` | La resolución de sobrecarga se aplica para seleccionar el mejor indexador en la clase, estructura o interfaz proporcionada por el tipo de `e`. El descriptor de acceso `set` del indexador se invoca con el `e` de expresión de instancia y la lista de argumentos `(x,y,value)`. Se produce un error en tiempo de enlace si el indizador es de solo lectura. | 
 | Invocación de operador | `-x`         | La resolución de sobrecarga se aplica para seleccionar el mejor operador unario en la clase o el struct proporcionado por el tipo de `x`. El operador seleccionado se invoca con la lista de argumentos `(x)`. | 
 |                     | `x + y`      | La resolución de sobrecarga se aplica para seleccionar el mejor operador binario en las clases o Structs que proporcionan los tipos de `x` y `y`. El operador seleccionado se invoca con la lista de argumentos `(x,y)`. | 
-| Invocación del constructor de instancia | `new T(x,y)` | La resolución de sobrecarga se aplica para seleccionar el mejor constructor de instancia en la clase o struct `T`. Se invoca el constructor de instancia con la lista de argumentos `(x,y)`. | 
+| Invocación del constructor de instancia | `new T(x,y)` | La resolución de sobrecarga se aplica para seleccionar el mejor constructor de instancia en la clase o el struct `T`. Se invoca el constructor de instancia con la lista de argumentos `(x,y)`. | 
 
 ### <a name="argument-lists"></a>Listas de argumentos
 
 Cada invocación de miembro de función y delegado incluye una lista de argumentos que proporciona valores reales o referencias de variable para los parámetros del miembro de función. La sintaxis para especificar la lista de argumentos de una invocación de miembros de función depende de la categoría de miembros de función:
 
-*  En el caso de constructores de instancia, métodos, indexadores y delegados, los argumentos se especifican como *argument_list*, como se describe a continuación. En el caso de los indizadores, al invocar el descriptor de acceso `set`, la lista de argumentos incluye también la expresión especificada como operando derecho del operador de asignación.
+*  En el caso de los constructores de instancias, los métodos, los indizadores y los delegados, los argumentos se especifican como un *argument_list*, como se describe a continuación. En el caso de los indizadores, al invocar el descriptor de acceso `set`, la lista de argumentos incluye también la expresión especificada como operando derecho del operador de asignación.
 *  En el caso de las propiedades, la lista de argumentos está vacía al invocar el descriptor de acceso `get` y se compone de la expresión especificada como operando derecho del operador de asignación al invocar el descriptor de acceso `set`.
 *  En el caso de los eventos, la lista de argumentos se compone de la expresión especificada como operando derecho del operador `+=` o `-=`.
 *  En el caso de los operadores definidos por el usuario, la lista de argumentos se compone del operando único del operador unario o de los dos operandos del operador binario.
 
 Los argumentos de las propiedades ([propiedades](classes.md#properties)), los eventos ([eventos](classes.md#events)) y los operadores definidos por el usuario ([operadores](classes.md#operators)) siempre se pasan como parámetros de valor ([parámetros de valor](classes.md#value-parameters)). Los argumentos de los indizadores ([indizadores](classes.md#indexers)) siempre se pasan como parámetros de valor ([parámetros de valor](classes.md#value-parameters)) o como matrices de parámetros (matrices de[parámetros](classes.md#parameter-arrays)). Los parámetros de referencia y de salida no se admiten para estas categorías de miembros de función.
 
-Los argumentos de una invocación de constructor de instancia, método, indexador o delegado se especifican como *argument_list*:
+Los argumentos de una invocación de constructor de instancia, método, indexador o delegado se especifican como un *argument_list*:
 
 ```antlr
 argument_list
@@ -427,12 +427,12 @@ argument_value
     ;
 ```
 
-Un *argument_list* consta de uno o más *argumentos*, separados por comas. Cada argumento consta de un *argument_name* opcional seguido de un *argument_value*. Un *argumento* con un *argument_name* se conoce como argumento con ***nombre***, mientras que un *argumento* sin *argument_name* es un ***argumento posicional***. Es un error que un argumento posicional aparezca después de un argumento con nombre en un *argument_list*.
+Una *argument_list* está formada por uno o más *argumentos*, separados por comas. Cada argumento consta de un *argument_name* opcional seguido de un *argument_value*. Un *argumento* con un *argument_name* se conoce como argumento con ***nombre***, mientras que un *argumento sin* una *argument_name* es un ***argumento posicional***. Es un error que un argumento posicional aparezca después de un argumento con nombre en un *argument_list*.
 
-*Argument_value* puede adoptar uno de los siguientes formatos:
+El *argument_value* puede adoptar uno de los siguientes formatos:
 
 *  Una *expresión*, que indica que el argumento se pasa como parámetro de valor ([parámetros de valor](classes.md#value-parameters)).
-*  La palabra clave `ref` seguida de una *variable_reference* ([referencias de variable](variables.md#variable-references)), que indica que el argumento se pasa como parámetro de referencia (parámetros de[referencia](classes.md#reference-parameters)). Una variable debe estar asignada definitivamente ([asignación definitiva](variables.md#definite-assignment)) antes de que se pueda pasar como un parámetro de referencia. La palabra clave `out` seguida de una *variable_reference* ([referencias de variable](variables.md#variable-references)), que indica que el argumento se pasa como parámetro de salida (parámetros de[salida](classes.md#output-parameters)). Una variable se considera asignada definitivamente ([asignación definitiva](variables.md#definite-assignment)) después de una invocación de miembro de función en la que se pasa la variable como parámetro de salida.
+*  La palabra clave `ref` seguido de un *variable_reference* ([referencias de variable](variables.md#variable-references)), que indica que el argumento se pasa como parámetro de referencia (parámetros de[referencia](classes.md#reference-parameters)). Una variable debe estar asignada definitivamente ([asignación definitiva](variables.md#definite-assignment)) antes de que se pueda pasar como un parámetro de referencia. La palabra clave `out` seguido de un *variable_reference* ([referencias de variable](variables.md#variable-references)), que indica que el argumento se pasa como parámetro de salida (parámetros de[salida](classes.md#output-parameters)). Una variable se considera asignada definitivamente ([asignación definitiva](variables.md#definite-assignment)) después de una invocación de miembro de función en la que se pasa la variable como parámetro de salida.
 
 #### <a name="corresponding-parameters"></a>Parámetros correspondientes
 
@@ -449,7 +449,7 @@ La posición de un argumento o parámetro se define como el número de argumento
 
 Los parámetros correspondientes para los argumentos de miembro de función se establecen de la siguiente manera:
 
-*  Argumentos de *argument_list* de constructores de instancia, métodos, indizadores y delegados:
+*  Argumentos en el *argument_list* de constructores de instancia, métodos, indizadores y delegados:
     * Un argumento posicional en el que se produce un parámetro fijo en la misma posición en la lista de parámetros corresponde a ese parámetro.
     * Un argumento posicional de un miembro de función con una matriz de parámetros invocada en su forma normal corresponde a la matriz de parámetros, que debe aparecer en la misma posición en la lista de parámetros.
     * Argumento posicional de un miembro de función con una matriz de parámetros invocada en su forma expandida, donde no se produce ningún parámetro fijo en la misma posición en la lista de parámetros, corresponde a un elemento de la matriz de parámetros.
@@ -469,7 +469,7 @@ Durante el procesamiento en tiempo de ejecución de una invocación de miembro d
 Los métodos, indizadores y constructores de instancias pueden declarar su parámetro situado más a la derecha para que sea una matriz de parámetros ([matrices de parámetros](classes.md#parameter-arrays)). Estos miembros de función se invocan en su forma normal o en su forma expandida, en función de cuál sea aplicable ([miembro de función aplicable](expressions.md#applicable-function-member)):
 
 *  Cuando se invoca un miembro de función con una matriz de parámetros en su forma normal, el argumento dado para la matriz de parámetros debe ser una expresión única que se pueda convertir implícitamente ([conversiones implícitas](conversions.md#implicit-conversions)) al tipo de matriz de parámetros. En este caso, la matriz de parámetros actúa exactamente como un parámetro de valor.
-*  Cuando un miembro de función con una matriz de parámetros se invoca en su forma expandida, la invocación debe especificar cero o más argumentos posicionales para la matriz de parámetros, donde cada argumento es una expresión que se pueda convertir implícitamente ([conversiones implícitas ](conversions.md#implicit-conversions)) al tipo de elemento de la matriz de parámetros. En este caso, la invocación crea una instancia del tipo de matriz de parámetros con una longitud que corresponde al número de argumentos, inicializa los elementos de la instancia de la matriz con los valores de argumento especificados y usa la instancia de matriz recién creada como el actual. argument.
+*  Cuando se invoca un miembro de función con una matriz de parámetros en su forma expandida, la invocación debe especificar cero o más argumentos posicionales para la matriz de parámetros, donde cada argumento es una expresión que es convertible implícitamente ([conversiones implícitas](conversions.md#implicit-conversions)) al tipo de elemento de la matriz de parámetros. En este caso, la invocación crea una instancia del tipo de matriz de parámetros con una longitud que corresponde al número de argumentos, inicializa los elementos de la instancia de la matriz con los valores de argumento especificados y usa la instancia de matriz recién creada como el actual. argument.
 
 Las expresiones de una lista de argumentos siempre se evalúan en el orden en que se escriben. Por lo tanto, el ejemplo
 ```csharp
@@ -492,7 +492,7 @@ x = 0, y = 1, z = 2
 x = 4, y = -1, z = 3
 ```
 
-Las reglas de covarianza de matriz ([covarianza de matriz](arrays.md#array-covariance)) permiten que un valor de un tipo de matriz `A[]` sea una referencia a una instancia de un tipo de matriz `B[]`, siempre que exista una conversión de referencia implícita de `B` a `A`. Debido a estas reglas, cuando se pasa un elemento de matriz de un *reference_type* como parámetro de referencia o de salida, se requiere una comprobación en tiempo de ejecución para asegurarse de que el tipo de elemento real de la matriz es idéntico al del parámetro. En el ejemplo
+Las reglas de covarianza de matriz ([covarianza de matriz](arrays.md#array-covariance)) permiten que un valor de un tipo de matriz `A[]` sea una referencia a una instancia de un tipo de matriz `B[]`, siempre que exista una conversión de referencia implícita de `B` a `A`. Debido a estas reglas, cuando un elemento de matriz de un *reference_type* se pasa como parámetro de referencia o de salida, se requiere una comprobación en tiempo de ejecución para asegurarse de que el tipo de elemento real de la matriz es idéntico al del parámetro. en el ejemplo
 ```csharp
 class Test
 {
@@ -506,7 +506,7 @@ class Test
     }
 }
 ```
-la segunda invocación de `F` hace que se inicie una `System.ArrayTypeMismatchException` porque el tipo de elemento real de `b` es `string` y no `object`.
+la segunda invocación de `F` provoca que se inicie una `System.ArrayTypeMismatchException` porque el tipo de elemento real de `b` está `string` y no `object`.
 
 Cuando se invoca un miembro de función con una matriz de parámetros en su forma expandida, la invocación se procesa exactamente como si se hubiera insertado una expresión de creación de matriz con un inicializador de matriz ([expresiones de creación de matriz](expressions.md#array-creation-expressions)) alrededor de los parámetros expandidos. Por ejemplo, dada la declaración
 ```csharp
@@ -558,9 +558,9 @@ Si el número de argumentos proporcionado es diferente del número de parámetro
 Tr M<X1,...,Xn>(T1 x1, ..., Tm xm)
 ```
 
-Con una llamada al método con el formato `M(E1...Em)`, la tarea de inferencia de tipos es buscar argumentos de tipo únicos `S1...Sn` para cada uno de los parámetros de tipo `X1...Xn` para que la llamada `M<S1...Sn>(E1...Em)` sea válida.
+Con una llamada al método del formulario `M(E1...Em)` la tarea de inferencia de tipos es buscar argumentos de tipo únicos `S1...Sn` para cada uno de los parámetros de tipo `X1...Xn` para que el `M<S1...Sn>(E1...Em)` de llamada sea válido.
 
-Durante el proceso de inferencia, cada parámetro de tipo `Xi` se *fija* en un tipo determinado `Si` o sin *corregir* con un conjunto de *límites*asociado. Cada uno de los límites es algún tipo `T`. Inicialmente, cada variable de tipo `Xi` se desfija con un conjunto vacío de límites.
+Durante el proceso de inferencia de cada parámetro de tipo `Xi` se *fija* en un tipo determinado `Si` o sin *corregir* con un conjunto de *límites*asociado. Cada uno de los límites es algún tipo `T`. Inicialmente, cada variable de tipo `Xi` se desfija con un conjunto vacío de límites.
 
 La inferencia de tipos tiene lugar en fases. Cada fase intentará deducir los argumentos de tipo para obtener más variables de tipo basadas en los resultados de la fase anterior. La primera fase realiza algunas inferencias iniciales de límites, mientras que en la segunda fase se corrigen las variables de tipo a tipos específicos y se deducen más límites. Es posible que la segunda fase se repita varias veces.
 
@@ -570,9 +570,9 @@ La inferencia de tipos tiene lugar en fases. Cada fase intentará deducir los ar
 
 Para cada uno de los argumentos de método `Ei`:
 
-*   Si `Ei` es una función anónima, se realiza una *inferencia de tipo de parámetro explícita* ([inferencias de tipos de parámetros explícitos](expressions.md#explicit-parameter-type-inferences)) de `Ei` a `Ti`.
-*   De lo contrario, si `Ei` tiene un tipo `U` y `xi` es un parámetro de valor, se establece una *inferencia de límite inferior* *entre* @no__t *-5 y* `Ti`.
-*   De lo contrario, si `Ei` tiene un tipo `U` y `xi` es un parámetro `ref` o `out`, se realiza una *inferencia exacta* *de* `U` *a* `Ti`.
+*   Si `Ei` es una función anónima, se realiza una *inferencia de tipo de parámetro explícita* ([inferencias de tipos de parámetros explícitos](expressions.md#explicit-parameter-type-inferences)) de `Ei` a `Ti`
+*   De lo contrario, si `Ei` tiene un tipo `U` y `xi` es un parámetro de valor, se realiza una *inferencia con un límite inferior* *de* `U` *a* `Ti`.
+*   De lo contrario, si `Ei` tiene un tipo `U` y `xi` es un `ref` o `out` parámetro, se realiza una *inferencia exacta* *desde* `U` *a* `Ti`.
 *   De lo contrario, no se realiza ninguna inferencia para este argumento.
 
 
@@ -580,77 +580,77 @@ Para cada uno de los argumentos de método `Ei`:
 
 La segunda fase continúa como sigue:
 
-*   Todas las variables de tipo sin *corregir* `Xi` que no *dependen de* ([dependencia](expressions.md#dependence)) cualquier `Xj` son fijas ([corrigiendo](expressions.md#fixing)).
-*   Si no existen estas variables de tipo, todas las variables de tipo sin *corregir* `Xi` son *fijas* para las que se mantienen:
+*   Todas las variables de tipo sin *corregir* `Xi` que no *dependen de* ([dependencia](expressions.md#dependence)) cualquier `Xj` se corrigen ([corrigiendo](expressions.md#fixing)).
+*   Si no existen estas variables de tipo, todas las variables de tipo sin *corregir* `Xi` son *fijas* para las que se retienen todas las siguientes:
     *   Hay al menos una variable de tipo `Xj` que depende de `Xi`
     *   `Xi` tiene un conjunto de límites no vacío
 *   Si no existe ninguna variable de tipo y hay variables de tipo sin *corregir* , se produce un error en la inferencia de tipos.
 *   De lo contrario, si no existen más variables de tipo sin *corregir* , la inferencia de tipos se realiza correctamente.
-*   De lo contrario, para todos los argumentos `Ei` con el tipo de parámetro correspondiente `Ti`, donde los *tipos de salida* ([tipos de salida](expressions.md#output-types)) contienen variables de tipo no *fijas* `Xj` pero los *tipos de entrada* ([tipos de entrada](expressions.md#input-types)) no,  *la inferencia de tipo de salida* ([inferencias de tipo de salida](expressions.md#output-type-inferences)) se realiza *de* 1 *a* 3. A continuación, se repite la segunda fase.
+*   De lo contrario, para todos los argumentos `Ei` con el tipo de parámetro correspondiente `Ti` donde los *tipos de salida* ([tipos de salida](expressions.md#output-types)) contienen variables de tipo sin *fixed* `Xj` pero los *tipos de entrada* (tipos de[entrada](expressions.md#input-types)) no, se realiza una *inferencia de tipo de salida* ([inferencias de tipo de salida](expressions.md#output-type-inferences)) *de* `Ei` *a* `Ti`. A continuación, se repite la segunda fase.
 
 #### <a name="input-types"></a>Tipos de entrada
 
-Si `E` es un grupo de métodos o una función anónima con tipo implícito y `T` es un tipo de delegado o un tipo de árbol de expresión, todos los tipos de parámetro de `T` son *tipos de entrada* de `E` *con el tipo* `T`.
+Si `E` es un grupo de métodos o una función anónima con tipo implícito y `T` es un tipo de delegado o un tipo de árbol de expresión, todos los tipos de parámetro de `T` son *tipos de entrada* de `E` con `T`de *tipo* .
 
 ####  <a name="output-types"></a>Tipos de salida
 
-Si `E` es un grupo de métodos o una función anónima y `T` es un tipo de delegado o un tipo de árbol de expresión, el tipo de valor devuelto de `T` es un *tipo de salida de* `E` *con el tipo* `T`.
+Si `E` es un grupo de métodos o una función anónima y `T` es un tipo de delegado o un tipo de árbol de expresión, el tipo de valor devuelto de `T` es un *tipo de salida de* `E` *con `T`de tipo* .
 
 #### <a name="dependence"></a>Dependencia
 
-Una variable de tipo sin *corregir* `Xi` *depende directamente de* una variable de tipo sin Fixed `Xj` si para algún argumento `Ek` con el tipo `Tk` `Xj` se produce en un *tipo de entrada* de `Ek` con el tipo `Tk` y 0 se produce en una  *tipo de salida* de 2 con el tipo 3.
+Una variable de tipo sin *fixed* `Xi` *depende directamente de* una variable de tipo sin Fixed `Xj` si para algunos `Ek` de argumento con el tipo `Tk` `Xj` se produce en un *tipo de entrada* de `Ek` con `Tk` de tipo y `Xi` tiene lugar en un tipo de *salida* de `Ek` con `Tk`de tipo.
 
-`Xj` *depende de* `Xi` si `Xj` *depende directamente de* `Xi` o si `Xi` *depende directamente de* `Xk` y `Xk` *depende de* 1. Por lo tanto, "depende de" es el cierre transitivo pero no reflexivo de "depende directamente de".
+`Xj` *depende de* `Xi` si `Xj` depende *directamente de* `Xi` o si `Xi` *depende directamente de* `Xk` y `Xk` *depende de* `Xj`. Por lo tanto, "depende de" es el cierre transitivo pero no reflexivo de "depende directamente de".
 
 #### <a name="output-type-inferences"></a>Inferencias de tipos de salida
 
 Una *inferencia de tipo de salida* se realiza *desde* una expresión `E` *a* un tipo `T` de la siguiente manera:
 
-*  Si `E` es una función anónima con el tipo de valor devuelto inferido `U` ([tipo de valor devuelto deducido](expressions.md#inferred-return-type)) y `T` es un tipo de delegado o un tipo de árbol de expresión con el tipo de valor devuelto `Tb`, una *inferencia de límite inferior* ([inferencias de límite inferior](expressions.md#lower-bound-inferences)) se realiza *desde* `U` *a* 0.
-*  De lo contrario, si `E` es un grupo de métodos y `T` es un tipo de delegado o un tipo de árbol de expresión con tipos de parámetro `T1...Tk` y el tipo de valor devuelto `Tb`, y la resolución de sobrecarga de `E` con los tipos `T1...Tk` produce un único método con el tipo de valor devuelto `U` , una *inferencia de límite inferior* se realiza *de* `U` *a* 1.
-*  De lo contrario, si `E` es una expresión con el tipo `U`, se realiza una *inferencia de enlace inferior* *entre* `U` *y* `T`.
+*  Si `E` es una función anónima con el tipo de valor devuelto inferido `U` ([tipo de valor](expressions.md#inferred-return-type)devuelto deducido) y `T` es un tipo de delegado o un tipo de árbol de expresión con el tipo de valor devuelto `Tb`, se realiza una *inferencia de límite inferior* ([inferencias con límite inferior](expressions.md#lower-bound-inferences)) *de* `U` *a* `Tb`.
+*  De lo contrario, si `E` es un grupo de métodos y `T` es un tipo de delegado o un tipo de árbol de expresión con tipos de parámetro `T1...Tk` y `Tb`de tipo de valor devuelto, y la resolución de sobrecarga de `E` con los tipos `T1...Tk` produce un único método con el tipo de valor devuelto `U`, se realiza una *inferencia con un límite inferior* *desde* `U` *a* `Tb`.
+*  De lo contrario, si `E` es una expresión con el tipo `U`, se realiza una *inferencia de enlace inferior* *desde* `U` *a* `T`.
 *  De lo contrario, no se realiza ninguna inferencia.
 
 #### <a name="explicit-parameter-type-inferences"></a>Inferencias explícitas de tipos de parámetros
 
-Una *inferencia de tipo de parámetro explícita* se realiza a *partir de* una expresión `E` *a* un tipo `T` de la siguiente manera:
+Se realiza una *inferencia de tipo de parámetro explícita* *desde* una expresión `E` *a* un tipo `T` de la siguiente manera:
 
 *  Si `E` es una función anónima con tipo explícito con tipos de parámetro `U1...Uk` y `T` es un tipo de delegado o un tipo de árbol de expresión con tipos de parámetro `V1...Vk`, para cada `Ui` se realiza una *inferencia exacta* ([inferencias exactas](expressions.md#exact-inferences)) *desde* `Ui`  *hasta* el `Vi` correspondiente
 
 #### <a name="exact-inferences"></a>Inferencias exactas
 
-Una *inferencia exacta* *de* un tipo `U` *a* un tipo `V` se realiza de la manera siguiente:
+Una *inferencia exacta* *de* un tipo `U` *a* un tipo `V` se realiza de la siguiente manera:
 
-*  Si `V` es uno de los @no__t *fijos* -2, se agrega `U` al conjunto de límites exactos para `Xi`.
+*  Si `V` es una de las `Xi` sin *corregir* , `U` se agrega al conjunto de límites exactos para `Xi`.
 
 *  De lo contrario, establece `V1...Vk` y `U1...Uk` se determinan comprobando si se aplica cualquiera de los casos siguientes:
 
    *  `V` es un tipo de matriz `V1[...]` y `U` es un tipo de matriz `U1[...]` del mismo rango
    *  `V` es el tipo `V1?` y `U` es el tipo `U1?`
-   *  `V` es un tipo construido `C<V1...Vk>`and `U` es un tipo construido `C<U1...Uk>`
+   *  `V` es un tipo construido `C<V1...Vk>`y `U` es un tipo construido `C<U1...Uk>`
 
-   Si se aplica cualquiera de estos casos, se realiza una *inferencia exacta* *desde* cada `Ui` *hasta* el `Vi` correspondiente.
+   Si se aplica cualquiera de estos casos, se realiza una *inferencia exacta* *desde* cada `Ui` *hasta* el `Vi`correspondiente.
 
 *  En caso contrario, no se realiza ninguna inferencia.
 
 #### <a name="lower-bound-inferences"></a>Inferencias con límite inferior
 
-Una *inferencia de límite inferior* *desde* un tipo `U` *a* un tipo `V` se realiza de la manera siguiente:
+Una *inferencia de límite inferior* *desde* un tipo `U` *a* un tipo `V` se realiza de la siguiente manera:
 
-*  Si `V` es uno de los @no__t *fijos* -2, `U` se agrega al conjunto de límites inferiores para `Xi`.
-*  De lo contrario, si `V` es el tipo `V1?`and `U` es el tipo `U1?`, se realiza una inferencia de límite inferior entre `U1` y `V1`.
+*  Si `V` es una de las `Xi` sin *corregir* , `U` se agrega al conjunto de límites inferiores para `Xi`.
+*  De lo contrario, si `V` es el tipo `V1?`y `U` es el tipo `U1?`, se realiza una inferencia de límite inferior desde `U1` a `V1`.
 *  De lo contrario, establece `U1...Uk` y `V1...Vk` se determinan comprobando si se aplica cualquiera de los casos siguientes:
    *  `V` es un tipo de matriz `V1[...]` y `U` es un tipo de matriz `U1[...]` (o un parámetro de tipo cuyo tipo base efectivo es `U1[...]`) del mismo rango
-   *  `V` es uno de `IEnumerable<V1>`, `ICollection<V1>` o `IList<V1>` y `U` es un tipo de matriz unidimensional `U1[]` (o un parámetro de tipo cuyo tipo base efectivo es `U1[]`)
-   *  `V` es un tipo de clase, struct, interfaz o delegado construido `C<V1...Vk>` y hay un tipo único @no__t 2, de modo que `U` (o, si `U` es un parámetro de tipo, su clase base efectiva o cualquier miembro de su conjunto de interfaz efectivo) es idéntico a , hereda de (directa o indirectamente) o implementa (directa o indirectamente) `C<U1...Uk>`.
+   *  `V` es una de `IEnumerable<V1>`, `ICollection<V1>` o `IList<V1>` y `U` es un tipo de matriz unidimensional `U1[]`(o un parámetro de tipo cuyo tipo base efectivo es `U1[]`)
+   *  `V` es un tipo de clase, estructura, interfaz o delegado construido `C<V1...Vk>` y hay un tipo único `C<U1...Uk>` tal que `U` (o, si `U` es un parámetro de tipo, su clase base efectiva o cualquier miembro de su conjunto de interfaz efectivo) es idéntico a, hereda de (directa o indirectamente) o implementa (directa o indirectamente) `C<U1...Uk>`.
 
-      (La restricción de unicidad significa que en la interfaz de Case `C<T> {} class U: C<X>, C<Y> {}`, no se produce ninguna inferencia al deducir de `U` a `C<T>` porque `U1` podría ser `X` o `Y`).
+      (La restricción de unicidad significa que, en el caso de la interfaz `C<T> {} class U: C<X>, C<Y> {}`, no se produce ninguna inferencia al deducir de `U` a `C<T>` porque `U1` podría ser `X` o `Y`).
 
-   Si se aplica cualquiera de estos casos, se realiza una inferencia *de* cada `Ui` al `Vi` correspondiente, como *se* indica a continuación:
+   Si se aplica cualquiera de estos casos, se realiza una inferencia *desde* cada `Ui` *al* `Vi` correspondiente de la manera siguiente:
 
    *  Si no se sabe que `Ui` es un tipo de referencia, se realiza una *inferencia exacta* .
    *  De lo contrario, si `U` es un tipo de matriz, se realiza una *inferencia de límite inferior* .
-   *  De lo contrario, si `V` es `C<V1...Vk>`, la inferencia depende del parámetro de tipo i-ésima de `C`:
+   *  De lo contrario, si se `C<V1...Vk>` `V`, la inferencia depende del parámetro de tipo i-ésima de `C`:
       *  Si es covariante, se realiza una *inferencia de límite inferior* .
       *  Si es contravariante, se realiza una *inferencia enlazada en el límite superior* .
       *  Si es invariable, se realiza una *inferencia exacta* .
@@ -658,50 +658,50 @@ Una *inferencia de límite inferior* *desde* un tipo `U` *a* un tipo `V` se real
 
 #### <a name="upper-bound-inferences"></a>Inferencias de límite superior
 
-Una *inferencia de enlace superior* *desde* un tipo `U` *a* un tipo `V` se realiza de la manera siguiente:
+Una *inferencia de enlace superior* *desde* un tipo `U` *a* un tipo `V` se realiza de la siguiente manera:
 
-*  Si `V` es uno de los @no__t *fijos* -2, se agrega `U` al conjunto de límites superiores para `Xi`.
+*  Si `V` es una de las `Xi` sin *corregir* , `U` se agrega al conjunto de límites superiores para `Xi`.
 *  De lo contrario, establece `V1...Vk` y `U1...Uk` se determinan comprobando si se aplica cualquiera de los casos siguientes:
    *  `U` es un tipo de matriz `U1[...]` y `V` es un tipo de matriz `V1[...]` del mismo rango
-   *  `U` es uno de `IEnumerable<Ue>`, `ICollection<Ue>` o `IList<Ue>` y `V` es un tipo de matriz unidimensional `Ve[]`
+   *  `U` es una de `IEnumerable<Ue>`, `ICollection<Ue>` o `IList<Ue>` y `V` es un tipo de matriz unidimensional `Ve[]`
    *  `U` es el tipo `U1?` y `V` es el tipo `V1?`
-   *  `U` es una clase construida, una estructura, una interfaz o un tipo de delegado `C<U1...Uk>` y `V` es una clase, estructura, interfaz o tipo de delegado que es idéntico a, hereda de (directa o indirectamente) o implementa (directa o indirectamente) un tipo único `C<V1...Vk>`
+   *  `U` es una clase, una estructura, una interfaz o un tipo de delegado construido `C<U1...Uk>` y `V` es una clase, estructura, interfaz o tipo de delegado que es idéntico a, hereda de (directa o indirectamente) o implementa (directa o indirectamente) un tipo único `C<V1...Vk>`
 
       (La restricción de unicidad significa que, si tenemos `interface C<T>{} class V<Z>: C<X<Z>>, C<Y<Z>>{}`, no se realiza ninguna inferencia al deducir de `C<U1>` a `V<Q>`. Las inferencias no se realizan desde `U1` a `X<Q>` o `Y<Q>`).
 
-   Si se aplica cualquiera de estos casos, se realiza una inferencia *de* cada `Ui` al `Vi` correspondiente, como *se* indica a continuación:
+   Si se aplica cualquiera de estos casos, se realiza una inferencia *desde* cada `Ui` *al* `Vi` correspondiente de la manera siguiente:
    *  Si no se sabe que `Ui` es un tipo de referencia, se realiza una *inferencia exacta* .
    *  De lo contrario, si `V` es un tipo de matriz, se realiza una *inferencia de límite superior* .
-   *  De lo contrario, si `U` es `C<U1...Uk>`, la inferencia depende del parámetro de tipo i-ésima de `C`:
+   *  De lo contrario, si se `C<U1...Uk>` `U`, la inferencia depende del parámetro de tipo i-ésima de `C`:
       *  Si es covariante, se realiza una *inferencia enlazada en el límite superior* .
       *  Si es contravariante, se realiza una *inferencia de límite inferior* .
       *  Si es invariable, se realiza una *inferencia exacta* .
 *  De lo contrario, no se realiza ninguna inferencia.   
 
-#### <a name="fixing"></a>Corregir
+#### <a name="fixing"></a>Corrección de
 
-Una variable de tipo sin *corregir* `Xi` con un conjunto de límites se *fija* de la siguiente manera:
+Una variable de tipo sin *fixed* `Xi` con un conjunto de límites se *fija* de la siguiente manera:
 
 *  El conjunto de *tipos candidatos* `Uj` comienza como el conjunto de todos los tipos del conjunto de límites de `Xi`.
-*  A continuación, examinaremos cada límite de `Xi`: Para cada @no__t de enlace exacto de `Xi`, todos los tipos `Uj` que no sean idénticos a `U` se quitan del conjunto de candidatos. Para cada límite inferior `U` de `Xi` todos los tipos `Uj` a los que *no* se ha quitado una conversión implícita de `U` se quitan del conjunto de candidatos. Para cada límite superior `U` de `Xi` todos los tipos `Uj` desde los que *no* se ha quitado una conversión implícita a `U` del conjunto de candidatos.
-*  Si entre los tipos candidatos restantes `Uj` hay un tipo único `V` desde el que hay una conversión implícita a todos los demás tipos candidatos y, a continuación, @no__t 2 se fija en `V`.
+*  A continuación, examinaremos cada límite por `Xi` a su vez: para cada `U` enlazado exacto de `Xi` todos los tipos `Uj` que no son idénticos a `U` se quitan del conjunto de candidatos. Para cada `U` de límite inferior de `Xi` todos los tipos `Uj` en los que *no* se ha quitado una conversión implícita de `U` del conjunto de candidatos. Para cada `U` de enlace superior de `Xi` todos los tipos `Uj` desde el que *no* se quita una conversión implícita a `U` del conjunto de candidatos.
+*  Si está entre los tipos de candidatos restantes `Uj` hay un tipo único `V` desde el que hay una conversión implícita a todos los demás tipos candidatos, `Xi` se fija en `V`.
 *  De lo contrario, se produce un error en la inferencia de tipos.
 
 #### <a name="inferred-return-type"></a>Tipo de valor devuelto deducido
 
-El tipo de valor devuelto deducido de una función anónima `F` se usa durante la inferencia de tipos y la resolución de sobrecarga. El tipo de valor devuelto deducido solo se puede determinar para una función anónima en la que se conocen todos los tipos de parámetro, ya sea porque se especifican explícitamente, se proporcionan a través de una conversión de función anónima o se infieren durante la inferencia de tipos en un genérico envolvente. invocación de método.
+El tipo de valor devuelto deducido de una función anónima `F` se utiliza durante la inferencia de tipos y la resolución de sobrecarga. El tipo de valor devuelto deducido solo se puede determinar para una función anónima en la que se conocen todos los tipos de parámetro, ya sea porque se especifican explícitamente, se proporcionan a través de una conversión de función anónima o se infieren durante la inferencia de tipos en un genérico envolvente. invocación de método.
 
 El ***tipo de resultado deducido*** se determina de la siguiente manera:
 
 *  Si el cuerpo de `F` es una *expresión* que tiene un tipo, el tipo de resultado deducido de `F` es el tipo de esa expresión.
-*  Si el cuerpo de `F` es un *bloque* y el conjunto de expresiones de las instrucciones `return` del bloque tiene un tipo más común `T` ([encontrar el mejor tipo común de un conjunto de expresiones](expressions.md#finding-the-best-common-type-of-a-set-of-expressions)), el tipo de resultado deducido de `F` es `T`.
+*  Si el cuerpo de `F` es un *bloque* y el conjunto de expresiones de las instrucciones de `return` del bloque tiene un mejor tipo común `T` ([encontrar el mejor tipo común de un conjunto de expresiones](expressions.md#finding-the-best-common-type-of-a-set-of-expressions)), se `T`el tipo de resultado deducido de `F`.
 *  De lo contrario, no se puede inferir un tipo de resultado para `F`.
 
 El ***tipo de valor devuelto deducido*** se determina de la siguiente manera:
 
-*  Si `F` es Async y el cuerpo de `F` es una expresión clasificada como Nothing ([clasificaciones de expresión](expressions.md#expression-classifications)) o un bloque de instrucciones en el que ninguna instrucción return tiene expresiones, el tipo de valor devuelto deducido es `System.Threading.Tasks.Task`
-*  Si `F` es Async y tiene un tipo de resultado inferido `T`, el tipo de valor devuelto deducido es `System.Threading.Tasks.Task<T>`.
-*  Si `F` no es asincrónico y tiene un tipo de resultado inferido `T`, el tipo de valor devuelto deducido es @no__t 2.
+*  Si `F` es Async y el cuerpo de `F` es una expresión clasificada como Nothing ([clasificación de expresión](expressions.md#expression-classifications)) o un bloque de instrucciones en el que ninguna instrucción return tiene expresiones, el tipo de valor devuelto deducido es `System.Threading.Tasks.Task`
+*  Si `F` es Async y tiene un tipo de resultado inferido `T`, el tipo de valor devuelto inferido es `System.Threading.Tasks.Task<T>`.
+*  Si `F` no es asincrónico y tiene un tipo de resultado inferido `T`, el tipo de valor devuelto deducido es `T`.
 *  De lo contrario, no se puede inferir un tipo de valor devuelto para `F`.
 
 Como ejemplo de inferencia de tipos que implica funciones anónimas, tenga en cuenta el método de extensión `Select` declarado en la clase `System.Linq.Enumerable`:
@@ -720,7 +720,7 @@ namespace System.Linq
 }
 ```
 
-Suponiendo que el espacio de nombres `System.Linq` se importó con una cláusula `using` y, dada una clase `Customer` con una propiedad `Name` de tipo `string`, se puede usar el método `Select` para seleccionar los nombres de una lista de clientes:
+Suponiendo que el espacio de nombres `System.Linq` se importó con una cláusula `using` y, dada una clase `Customer` con una propiedad `Name` de tipo `string`, el método `Select` se puede usar para seleccionar los nombres de una lista de clientes:
 ```csharp
 List<Customer> customers = GetCustomerList();
 IEnumerable<string> names = customers.Select(c => c.Name);
@@ -731,7 +731,7 @@ La invocación del método de extensión ([invocaciones de método de extensión
 IEnumerable<string> names = Enumerable.Select(customers, c => c.Name);
 ```
 
-Dado que los argumentos de tipo no se especificaron explícitamente, se usa la inferencia de tipos para inferir los argumentos de tipo. En primer lugar, el argumento `customers` está relacionado con el parámetro `source`, infiriendo a @no__t 2 `Customer`. A continuación, con el proceso de inferencia de tipos de función anónima descrito anteriormente, `c` tiene el tipo `Customer` y la expresión `c.Name` está relacionada con el tipo de valor devuelto del parámetro `selector`, infiriendo a `S` para que sea `string`. Por lo tanto, la invocación es equivalente a
+Dado que los argumentos de tipo no se especificaron explícitamente, se usa la inferencia de tipos para inferir los argumentos de tipo. En primer lugar, el argumento `customers` está relacionado con el parámetro `source`, infiriendo `T` que se `Customer`. A continuación, con el proceso de inferencia de tipos de función anónima descrito anteriormente, `c` se le asigna el tipo `Customer`y la expresión `c.Name` está relacionada con el tipo de valor devuelto del parámetro `selector`, deduciendo `S` que se va a `string`. Por lo tanto, la invocación es equivalente a
 ```csharp
 Sequence.Select<Customer,string>(customers, (Customer c) => c.Name)
 ```
@@ -748,7 +748,7 @@ Inferencia de tipos para la invocación:
 ```csharp
 double seconds = F("1:15:30", s => TimeSpan.Parse(s), t => t.TotalSeconds);
 ```
-continúa de la siguiente manera: En primer lugar, el argumento `"1:15:30"` está relacionado con el parámetro `value`, infiriendo a @no__t 2 `string`. A continuación, el parámetro de la primera función anónima, `s`, recibe el tipo deducido `string` y la expresión `TimeSpan.Parse(s)` se relaciona con el tipo de valor devuelto de `f1`, infiriendo a `Y` para que sea `System.TimeSpan`. Por último, el parámetro de la segunda función anónima, `t`, recibe el tipo deducido `System.TimeSpan` y la expresión `t.TotalSeconds` se relaciona con el tipo de valor devuelto de `f2`, infiriendo a `Z` para que sea `double`. Por lo tanto, el resultado de la invocación es de tipo `double`.
+continúa del modo siguiente: en primer lugar, el argumento `"1:15:30"` está relacionado con el parámetro `value`, infiriendo `X` que se `string`. A continuación, el parámetro de la primera función anónima, `s`, recibe el tipo deducido `string`y la expresión `TimeSpan.Parse(s)` está relacionada con el tipo de valor devuelto de `f1`, lo que infiere `Y` que se va a `System.TimeSpan`. Por último, el parámetro de la segunda función anónima, `t`, recibe el tipo deducido `System.TimeSpan`, y la expresión `t.TotalSeconds` está relacionada con el tipo de valor devuelto de `f2`, infiriendo `Z` que se va a `double`. Por lo tanto, el resultado de la invocación es de tipo `double`.
 
 #### <a name="type-inference-for-conversion-of-method-groups"></a>Inferencia de tipos para la conversión de grupos de métodos
 
@@ -756,7 +756,7 @@ De forma similar a las llamadas de métodos genéricos, la inferencia de tipos t
 ```csharp
 Tr M<X1...Xn>(T1 x1 ... Tm xm)
 ```
-y el grupo de métodos `M` que se asigna al tipo de delegado `D` la tarea de inferencia de tipo es buscar argumentos de tipo `S1...Sn` para que la expresión:
+y el grupo de métodos `M` que se asignan al tipo de delegado `D` la tarea de inferencia de tipo es buscar argumentos de tipo `S1...Sn` para que la expresión:
 ```csharp
 M<S1...Sn>
 ```
@@ -764,19 +764,19 @@ se convierte en compatible ([declaraciones de delegado](delegates.md#delegate-de
 
 A diferencia del algoritmo de inferencia de tipos para las llamadas de método genérico, en este caso solo hay *tipos*de argumento, no hay *expresiones*de argumento. En concreto, no hay ninguna función anónima y, por lo tanto, no es necesario que haya varias fases de inferencia.
 
-En su lugar, todos los `Xi` se consideran sin *corregir*y se realiza una *inferencia de enlace inferior* *desde* cada tipo de argumento `Uj` de `D` *al* tipo de parámetro correspondiente `Tj` de `M`. Si no se encuentra ningún límite en el `Xi`, se produce un error en la inferencia de tipos. De lo contrario, todos los `Xi` se *corrigen* en `Si` correspondiente, que son el resultado de la inferencia de tipos.
+En su lugar, todos los `Xi` se consideran sin *corregir*y se realiza una *inferencia de enlace inferior* *desde* cada tipo de argumento `Uj` de `D` *al* tipo de parámetro correspondiente `Tj` de `M`. Si no se encuentra ningún límite en el `Xi` no se encontró ningún límite, se produce un error en la inferencia de tipos. De lo contrario, todos los `Xi` se *corrigen* en `Si`correspondientes, que son el resultado de la inferencia de tipos.
 
 #### <a name="finding-the-best-common-type-of-a-set-of-expressions"></a>Buscar el mejor tipo común de un conjunto de expresiones
 
 En algunos casos, es necesario inferir un tipo común para un conjunto de expresiones. En concreto, los tipos de elemento de matrices con tipo implícito y los tipos de valor devueltos de las funciones anónimas con cuerpos de *bloque* se encuentran de esta manera.
 
-Intuitivamente, dado un conjunto de expresiones `E1...Em`, esta inferencia debe ser equivalente a llamar a un método.
+Intuitivamente, dado un conjunto de expresiones `E1...Em` esta inferencia debe ser equivalente a llamar a un método
 ```csharp
 Tr M<X>(X x1 ... X xm)
 ```
 con el `Ei` como argumentos.
 
-Más concretamente, la inferencia comienza con una variable de tipo sin *fixed* `X`. A continuación, se realizan *inferencias de tipos de salida* *de* cada `Ei` *a* `X`. Por último, `X` es *fijo* y, si es correcto, el tipo resultante `S` es el mejor tipo común resultante para las expresiones. Si no existe tal `S`, las expresiones no tienen el mejor tipo común.
+Más concretamente, la inferencia comienza con una variable de tipo sin *fixed* `X`. A continuación, se realizan *inferencias de tipos de salida* *de* cada `Ei` *a* `X`. Por último, `X` es *fixed* y, si es correcto, el tipo resultante `S` es el mejor tipo común resultante para las expresiones. Si no existe tal `S`, las expresiones no tienen el mejor tipo común.
 
 ### <a name="overload-resolution"></a>Resolución de sobrecarga
 
@@ -791,7 +791,7 @@ Cada uno de estos contextos define el conjunto de miembros de función candidata
 
 Una vez identificados los miembros de la función candidata y la lista de argumentos, la selección del mejor miembro de función es la misma en todos los casos:
 
-*  Dado el conjunto de miembros de función candidatos aplicables, se ubica el mejor miembro de función de ese conjunto. Si el conjunto contiene solo un miembro de función, ese miembro de función es el mejor miembro de función. De lo contrario, el mejor miembro de función es un miembro de función que es mejor que todos los demás miembros de función con respecto a la lista de argumentos determinada, siempre que cada miembro de función se compare con el resto de miembros de función con las reglas de [mejor función. miembro](expressions.md#better-function-member). Si no hay exactamente un miembro de función que sea mejor que todos los demás miembros de función, la invocación del miembro de función es ambigua y se produce un error en tiempo de enlace.
+*  Dado el conjunto de miembros de función candidatos aplicables, se ubica el mejor miembro de función de ese conjunto. Si el conjunto contiene solo un miembro de función, ese miembro de función es el mejor miembro de función. De lo contrario, el mejor miembro de función es un miembro de función que es mejor que todos los demás miembros de función con respecto a la lista de argumentos determinada, siempre que cada miembro de función se compare con el resto de miembros de función mediante las reglas de [un mejor miembro de función](expressions.md#better-function-member). Si no hay exactamente un miembro de función que sea mejor que todos los demás miembros de función, la invocación del miembro de función es ambigua y se produce un error en tiempo de enlace.
 
 En las secciones siguientes se definen los significados exactos de los términos ***miembro de función aplicable*** y ***mejor miembro de función***.
 
@@ -800,14 +800,14 @@ En las secciones siguientes se definen los significados exactos de los términos
 Se dice que un miembro de función es un ***miembro de función aplicable*** con respecto a una lista de argumentos `A` cuando se cumplen todas las condiciones siguientes:
 
 *  Cada argumento de `A` corresponde a un parámetro de la declaración de miembro de función tal y como se describe en [los parámetros correspondientes](expressions.md#corresponding-parameters), y los parámetros a los que ningún argumento corresponde es un parámetro opcional.
-*  Para cada argumento de `A`, el modo de paso de parámetros del argumento (es decir, Value, `ref` o `out`) es idéntico al modo de paso de parámetros del parámetro correspondiente, y
+*  Para cada argumento de `A`, el modo de paso de parámetros del argumento (es decir, valor, `ref`o `out`) es idéntico al modo de paso de parámetros del parámetro correspondiente, y
    *  para un parámetro de valor o una matriz de parámetros, existe una conversión implícita ([conversiones implícitas](conversions.md#implicit-conversions)) del argumento al tipo del parámetro correspondiente, o bien
    *  para un parámetro `ref` o `out`, el tipo del argumento es idéntico al tipo del parámetro correspondiente. Después de All, un parámetro `ref` o `out` es un alias para el argumento pasado.
 
 Para un miembro de función que incluye una matriz de parámetros, si el miembro de función es aplicable a las reglas anteriores, se dice que es aplicable en su ***forma normal***. Si un miembro de función que incluye una matriz de parámetros no es aplicable en su forma normal, el miembro de función puede ser aplicable en su ***forma expandida***:
 
-*  La forma expandida se construye reemplazando la matriz de parámetros en la declaración de miembro de función con cero o más parámetros de valor del tipo de elemento de la matriz de parámetros, de modo que el número de argumentos de la lista de argumentos `A` coincide con el número total de parámetros. Si `A` tiene menos argumentos que el número de parámetros fijos en la declaración de miembro de función, no se puede construir la forma expandida del miembro de función y, por tanto, no es aplicable.
-*  De lo contrario, la forma expandida es aplicable si para cada argumento de `A` el modo de paso de parámetros del argumento es idéntico al modo de paso de parámetros del parámetro correspondiente, y
+*  La forma expandida se construye reemplazando la matriz de parámetros en la declaración de miembro de función con cero o más parámetros de valor del tipo de elemento de la matriz de parámetros, de modo que el número de argumentos de la lista de argumentos `A` coincida con el número total de parámetros. Si `A` tiene menos argumentos que el número de parámetros fijos en la declaración de miembro de función, no se puede construir la forma expandida del miembro de función y, por tanto, no es aplicable.
+*  De lo contrario, el formulario expandido es aplicable si para cada argumento de `A` el modo de paso de parámetros del argumento es idéntico al modo de paso de parámetros del parámetro correspondiente, y
    *  para un parámetro de valor fijo o un parámetro de valor creado por la expansión, existe una conversión implícita ([conversiones implícitas](conversions.md#implicit-conversions)) del tipo del argumento al tipo del parámetro correspondiente, o bien
    *  para un parámetro `ref` o `out`, el tipo del argumento es idéntico al tipo del parámetro correspondiente.
 
@@ -823,18 +823,18 @@ Las listas de parámetros para cada uno de los miembros de la función candidata
 
 Dada una lista de argumentos `A` con un conjunto de expresiones de argumento `{E1, E2, ..., En}` y dos miembros de función aplicables `Mp` y `Mq` con tipos de parámetro `{P1, P2, ..., Pn}` y `{Q1, Q2, ..., Qn}`, `Mp` se define para ser un ***miembro de función mejor*** que `Mq` si
 
-*  para cada argumento, la conversión implícita de `Ex` a `Qx` no es mejor que la conversión implícita de `Ex` a `Px`, y
+*  para cada argumento, la conversión implícita de `Ex` a `Qx` no es mejor que la conversión implícita de `Ex` a `Px`y
 *  para al menos un argumento, la conversión de `Ex` a `Px` es mejor que la conversión de `Ex` a `Qx`.
 
 Al realizar esta evaluación, si `Mp` o `Mq` es aplicable en su forma expandida, `Px` o `Qx` hace referencia a un parámetro en la forma expandida de la lista de parámetros.
 
-En el caso de que las secuencias de tipo de parámetro @ no__t-0 y `{Q1, Q2, ..., Qn}` sean equivalentes (es decir, cada `Pi` tiene una conversión de identidad en el `Qi` correspondiente), se aplican las siguientes reglas de separación de desempates, en orden, para determinar el mejor miembro de función.
+En el caso de que las secuencias de tipo de parámetro `{P1, P2, ..., Pn}` y `{Q1, Q2, ..., Qn}` son equivalentes (es decir, cada `Pi` tiene una conversión de identidad en el `Qi`correspondiente), se aplican las siguientes reglas de separación de desempates, en orden, para determinar el mejor miembro de función.
 
-*  Si `Mp` es un método no genérico y `Mq` es un método genérico, @no__t 2 es mejor que `Mq`.
-*  De lo contrario, si `Mp` es aplicable en su forma normal y `Mq` tiene una matriz `params` y solo es aplicable en su forma expandida, `Mp` es mejor que `Mq`.
-*  De lo contrario, si `Mp` tiene más parámetros declarados que `Mq`, @no__t 2 es mejor que `Mq`. Esto puede ocurrir si ambos métodos tienen matrices `params` y solo se aplican en sus formularios expandidos.
-*  De lo contrario, si todos los parámetros de `Mp` tienen un argumento correspondiente, mientras que los argumentos predeterminados deben sustituirse por al menos un parámetro opcional en `Mq` y, a continuación, @no__t 2 es mejor que `Mq`.
-*  De lo contrario, si `Mp` tiene tipos de parámetro más específicos que `Mq`, @no__t 2 es mejor que `Mq`. Permita que `{R1, R2, ..., Rn}` y `{S1, S2, ..., Sn}` representen los tipos de parámetro sin instancia y sin expandir de `Mp` y `Mq`. los tipos de parámetro de `Mp` son más específicos que `Mq` si, para cada parámetro, `Rx` no es menos específico que `Sx` y, para al menos un parámetro, `Rx` es más específico que `Sx`:
+*  Si `Mp` es un método no genérico y `Mq` es un método genérico, `Mp` es mejor que `Mq`.
+*  De lo contrario, si `Mp` es aplicable en su forma normal y `Mq` tiene una matriz de `params` y solo es aplicable en su forma expandida, `Mp` es mejor que `Mq`.
+*  De lo contrario, si `Mp` tiene más parámetros declarados que `Mq`, `Mp` es mejor que `Mq`. Esto puede ocurrir si ambos métodos tienen matrices `params` y solo se pueden aplicar en sus formularios expandidos.
+*  De lo contrario, si todos los parámetros de `Mp` tienen un argumento correspondiente, mientras que los argumentos predeterminados deben sustituirse por al menos un parámetro opcional en `Mq` `Mp` es mejor que `Mq`.
+*  De lo contrario, si `Mp` tiene tipos de parámetro más específicos que `Mq`, `Mp` es mejor que `Mq`. Permita que `{R1, R2, ..., Rn}` y `{S1, S2, ..., Sn}` representen los tipos de parámetros sin instancia y sin expandir de `Mp` y `Mq`. los tipos de parámetro de `Mp`son más específicos que `Mq`si, para cada parámetro `Rx` no es menos específico que `Sx`y, para al menos un parámetro, `Rx` es más específico que `Sx`:
    *  Un parámetro de tipo es menos específico que un parámetro sin tipo.
    *  De forma recursiva, un tipo construido es más específico que otro tipo construido (con el mismo número de argumentos de tipo) si al menos un argumento de tipo es más específico y ningún argumento de tipo es menos específico que el argumento de tipo correspondiente en el otro.
    *  Un tipo de matriz es más específico que otro tipo de matriz (con el mismo número de dimensiones) si el tipo de elemento del primero es más específico que el tipo de elemento del segundo.
@@ -843,36 +843,36 @@ En el caso de que las secuencias de tipo de parámetro @ no__t-0 y `{Q1, Q2, ...
 
 #### <a name="better-conversion-from-expression"></a>Mejor conversión de la expresión
 
-Dada una conversión implícita `C1` que convierte de una expresión `E` a un tipo `T1` y una conversión implícita `C2` que convierte de una expresión `E` a un tipo `T2`, `C1` es una ***conversión mejor*** que `C2` si @no__ t-9 no coincide exactamente con 0 y al menos una de las siguientes:
+Dada una conversión implícita `C1` que convierte de una expresión `E` a un tipo `T1`, y una `C2` de conversión implícita que convierte de una expresión `E` a un tipo `T2`, `C1` es una ***conversión mejor*** que `C2` si `E` no coincide exactamente con `T2` y al menos uno de los siguientes:
 
 * `E` coincide exactamente con `T1` ([expresión de coincidencia exacta](expressions.md#exactly-matching-expression))
 * `T1` es un mejor destino de conversión que `T2` ([mejor destino](expressions.md#better-conversion-target)de la conversión)
 
 #### <a name="exactly-matching-expression"></a>Expresión coincidente exactamente
 
-Dada una expresión `E` y un tipo `T`, `E` coincide exactamente con `T` Si uno de los siguientes contiene:
+Dada una expresión `E` y un `T`de tipo, `E` coincide exactamente con `T` si uno de los siguientes contiene:
 
-*  `E` tiene un tipo `S` y existe una conversión de identidad de `S` a `T`
-*  `E` es una función anónima, `T` es un tipo de delegado `D` o un tipo de árbol de expresión `Expression<D>` y uno de los siguientes:
+*  `E` tiene un tipo `S`y existe una conversión de identidad de `S` a `T`
+*  `E` es una función anónima, `T` es un tipo de delegado `D` o un tipo de árbol de expresión `Expression<D>` y uno de los siguientes elementos contiene:
    *  Un tipo de valor devuelto deducido `X` existe para `E` en el contexto de la lista de parámetros de `D` ([tipo de valor devuelto deducido](expressions.md#inferred-return-type)) y existe una conversión de identidad de `X` al tipo de valor devuelto de `D`
-   *  @No__t-0 no es Async y `D` tiene un tipo de valor devuelto `Y` o `E` es Async y `D` tiene un tipo de valor devuelto `Task<Y>` y uno de los siguientes:
+   *  `E` no es Async y `D` tiene un tipo de valor devuelto `Y` o `E` es Async y `D` tiene un tipo de valor devuelto `Task<Y>`y uno de los siguientes:
       * El cuerpo de `E` es una expresión que coincide exactamente con `Y`
       * El cuerpo de `E` es un bloque de instrucciones en el que cada instrucción return devuelve una expresión que coincide exactamente con `Y`
 
 #### <a name="better-conversion-target"></a>Mejor destino de la conversión
 
-Dados dos tipos diferentes `T1` y `T2`, @no__t 2 es un mejor destino de conversión que `T2` si no existe una conversión implícita de `T2` a `T1` y al menos uno de los siguientes:
+Dado dos tipos diferentes `T1` y `T2`, `T1` es un mejor destino de conversión que `T2` si no existe una conversión implícita de `T2` a `T1` y al menos uno de los siguientes:
 
 *  Existe una conversión implícita de `T1` a `T2`
-*  `T1` es un tipo de delegado `D1` o un tipo de árbol de expresión `Expression<D1>`, `T2` es un tipo de delegado `D2` o un tipo de árbol de expresión `Expression<D2>`, `D1` tiene un tipo de valor devuelto `S1` y uno de los siguientes :
-   * `D2` es void devolviendo
-   * `D2` tiene un tipo de valor devuelto `S2` y `S1` es un destino de conversión mejor que `S2`
-*  `T1` es `Task<S1>`, @no__t 2 es `Task<S2>` y `S1` es un destino de conversión mejor que `S2`
-*  `T1` es `S1` o `S1?` donde `S1` es un tipo entero con signo y `T2` es `S2` o `S2?`, donde `S2` es un tipo entero sin signo. De manera específica:
-   * `S1` es `sbyte` y @no__t 2 es `byte`, `ushort`, `uint` o `ulong`
-   * `S1` es `short` y `S2` es `ushort`, `uint` o `ulong`
-   * `S1` es `int` y `S2` es `uint` o `ulong`
-   * `S1` es `long` y `S2` es `ulong`
+*  `T1` es un tipo de delegado `D1` o un tipo de árbol de expresión `Expression<D1>`, `T2` es un tipo de delegado `D2` o un tipo de árbol de expresión `Expression<D2>`, `D1` tiene un tipo de valor devuelto `S1` y uno de los siguientes:
+   * `D2` devuelve void
+   * `D2` tiene un tipo de valor devuelto `S2`y `S1` es un destino de conversión mejor que `S2`
+*  `T1` es `Task<S1>`, `T2` es `Task<S2>`y `S1` es un destino de conversión mejor que `S2`
+*  `T1` es `S1` o `S1?` donde `S1` es un tipo entero con signo y `T2` es `S2` o `S2?` donde `S2` es un tipo entero sin signo. De manera específica:
+   * `S1` es `sbyte` y `S2` es `byte`, `ushort`, `uint`o `ulong`
+   * `S1` es `short` y `S2` es `ushort`, `uint`o `ulong`
+   * `S1` es `int` y `S2` es `uint`, o `ulong`
+   * `S1` es `long` y `S2` está `ulong`
 
 #### <a name="overloading-in-generic-classes"></a>Sobrecarga en clases genéricas
 
@@ -921,8 +921,8 @@ Para la mayoría de las operaciones enlazadas dinámicamente, el conjunto de pos
 
 En estos casos, se realiza una comprobación limitada en tiempo de compilación para cada candidato a fin de ver si alguna de ellas podría aplicarse en tiempo de ejecución. Esta comprobación consta de los siguientes pasos:
 
-*  Inferencia de tipos parciales: Cualquier argumento de tipo que no dependa directa o indirectamente de un argumento de tipo `dynamic` se deduce mediante las reglas de [inferencia de tipos](expressions.md#type-inference). Los argumentos de tipo restantes son desconocidos.
-*  Comprobación parcial de aplicabilidad: La aplicabilidad se comprueba según el [miembro de función aplicable](expressions.md#applicable-function-member), pero se omiten los parámetros cuyos tipos son desconocidos.
+*  Inferencia de tipos parciales: cualquier argumento de tipo que no dependa directa o indirectamente de un argumento de tipo `dynamic` se deduce mediante las reglas de [inferencia de tipos](expressions.md#type-inference). Los argumentos de tipo restantes son desconocidos.
+*  Comprobación parcial de aplicabilidad: la aplicabilidad se comprueba según el [miembro de función aplicable](expressions.md#applicable-function-member), pero se omiten los parámetros cuyos tipos son desconocidos.
 *  Si ningún candidato pasa esta prueba, se produce un error en tiempo de compilación.
 
 ### <a name="function-member-invocation"></a>Invocación de miembros de función
@@ -938,34 +938,34 @@ El procesamiento en tiempo de ejecución de una invocación de miembro de funci�
 
 *  Si `M` es un miembro de función estático:
    * La lista de argumentos se evalúa como se describe en [listas de argumentos](expressions.md#argument-lists).
-   * se invoca `M`.
+   * `M` se invoca.
 
-*  Si `M` es un miembro de función de instancia declarado en *value_type*:
-   * se evalúa `E`. Si esta evaluación provoca una excepción, no se ejecuta ningún paso más.
-   * Si `E` no está clasificado como una variable, se crea una variable local temporal de tipo `E` y se asigna el valor de `E` a esa variable. a continuación, `E` se reclasifica como una referencia a esa variable local temporal. La variable temporal es accesible como `this` dentro de `M`, pero no de otra manera. Por lo tanto, solo cuando `E` es una variable verdadera, es posible que el llamador Observe los cambios que `M` realiza en `this`.
+*  Si `M` es un miembro de función de instancia declarado en un *value_type*:
+   * `E` se evalúa. Si esta evaluación provoca una excepción, no se ejecuta ningún paso más.
+   * Si `E` no está clasificado como una variable, se crea una variable local temporal de tipo de `E`y se asigna el valor de `E` a esa variable. a continuación, `E` se reclasifica como una referencia a esa variable local temporal. La variable temporal es accesible como `this` dentro de `M`, pero no de otra manera. Por lo tanto, solo cuando `E` es una variable verdadera, el autor de la llamada puede observar los cambios que `M` realiza en `this`.
    * La lista de argumentos se evalúa como se describe en [listas de argumentos](expressions.md#argument-lists).
-   * se invoca `M`. La variable a la que hace referencia `E` se convierte en la variable a la que hace referencia `this`.
+   * `M` se invoca. La variable a la que hace referencia `E` se convierte en la variable a la que hace referencia `this`.
 
-*  Si `M` es un miembro de función de instancia declarado en *reference_type*:
-   * se evalúa `E`. Si esta evaluación provoca una excepción, no se ejecuta ningún paso más.
+*  Si `M` es un miembro de función de instancia declarado en un *reference_type*:
+   * `E` se evalúa. Si esta evaluación provoca una excepción, no se ejecuta ningún paso más.
    * La lista de argumentos se evalúa como se describe en [listas de argumentos](expressions.md#argument-lists).
-   * Si el tipo de `E` es *value_type*, se realiza una conversión boxing ([conversiones boxing](types.md#boxing-conversions)) para convertir `E` al tipo `object` y `E` se considera de tipo `object` en los pasos siguientes. En este caso, `M` solo puede ser un miembro de `System.Object`.
-   * El valor de `E` se comprueba para ser válido. Si el valor de `E` es `null`, se produce una @no__t 2 y no se ejecuta ningún otro paso.
+   * Si el tipo de `E` es un *value_type*, se realiza una conversión boxing ([conversiones boxing](types.md#boxing-conversions)) para convertir `E` al tipo `object`y `E` se considera de tipo `object` en los pasos siguientes. En este caso, `M` solo podría ser miembro de `System.Object`.
+   * El valor de `E` se comprueba para ser válido. Si el valor de `E` es `null`, se produce una `System.NullReferenceException` y no se ejecuta ningún paso más.
    * Se determina la implementación del miembro de función que se va a invocar:
-     * Si el tipo de tiempo de enlace de `E` es una interfaz, el miembro de función que se va a invocar es la implementación de `M` proporcionada por el tipo en tiempo de ejecución de la instancia a la que hace referencia `E`. Este miembro de función se determina aplicando las reglas de asignación de interfaz ([asignación de interfaz](interfaces.md#interface-mapping)) para determinar la implementación de `M` proporcionada por el tipo en tiempo de ejecución de la instancia a la que hace referencia `E`.
+     * Si el tipo de tiempo de enlace de `E` es una interfaz, el miembro de función que se va a invocar es la implementación de `M` proporcionada por el tipo en tiempo de ejecución de la instancia a la que hace referencia `E`. Este miembro de función se determina aplicando las reglas de asignación de interfaz ([asignación de interfaz](interfaces.md#interface-mapping)) para determinar la implementación de `M` proporcionado por el tipo en tiempo de ejecución de la instancia a la que hace referencia `E`.
      * De lo contrario, si `M` es un miembro de función virtual, el miembro de función que se va a invocar es la implementación de `M` proporcionada por el tipo en tiempo de ejecución de la instancia a la que hace referencia `E`. Este miembro de función se determina aplicando las reglas para determinar la implementación más derivada ([métodos virtuales](classes.md#virtual-methods)) de `M` con respecto al tipo en tiempo de ejecución de la instancia a la que hace referencia `E`.
-     * De lo contrario, `M` es un miembro de función no virtual y el miembro de función que se va a invocar es `M`.
+     * De lo contrario, `M` es un miembro de función no virtual y el miembro de función que se va a invocar se `M` mismo.
    * Se invoca la implementación de miembro de función determinada en el paso anterior. El objeto al que hace referencia `E` se convierte en el objeto al que hace referencia `this`.
 
 #### <a name="invocations-on-boxed-instances"></a>Invocaciones en instancias de conversión boxing
 
-Un miembro de función implementado en un *value_type* se puede invocar a través de una instancia de conversión boxing de ese *value_type* en las situaciones siguientes:
+Un miembro de función implementado en un *value_type* se puede invocar a través de una instancia de conversión boxing de que *value_type* en las situaciones siguientes:
 
-*  Cuando el miembro de función es un `override` de un método heredado del tipo `object` y se invoca a través de una expresión de instancia de tipo `object`.
+*  Cuando el miembro de función es una `override` de un método heredado del tipo `object` y se invoca a través de una expresión de instancia de tipo `object`.
 *  Cuando el miembro de función es una implementación de un miembro de función de interfaz y se invoca a través de una expresión de instancia de un *interface_type*.
 *  Cuando el miembro de función se invoca a través de un delegado.
 
-En estas situaciones, se considera que la instancia con conversión boxing contiene una variable de *value_type*y esta variable se convierte en la variable a la que hace referencia `this` dentro de la invocación del miembro de función. En concreto, esto significa que cuando se invoca un miembro de función en una instancia de conversión boxing, es posible que el miembro de función modifique el valor contenido en la instancia de conversión boxing.
+En estas situaciones, se considera que la instancia con conversión boxing contiene una variable del *value_type*y esta variable se convierte en la variable a la que hace referencia `this` dentro de la invocación del miembro de función. En concreto, esto significa que cuando se invoca un miembro de función en una instancia de conversión boxing, es posible que el miembro de función modifique el valor contenido en la instancia de conversión boxing.
 
 ## <a name="primary-expressions"></a>Expresiones primarias
 
@@ -1018,7 +1018,7 @@ Un *primary_expression* que consta de un *literal* ([literales](lexical-structur
 
 ### <a name="interpolated-strings"></a>Cadenas interpoladas
 
-Un *interpolated_string_expression* consta de un signo de @no__t 1 seguido de un literal de cadena normal o textual, en el que los huecos, delimitados por `{` y `}`, incluyen expresiones y especificaciones de formato. Una expresión de cadena interpolada es el resultado de un *interpolated_string_literal* que se ha dividido en tokens individuales, tal y como se describe en [literales de cadena interpolados](lexical-structure.md#interpolated-string-literals).
+Un *interpolated_string_expression* consta de un signo de `$` seguido de un literal de cadena normal o textual, donde los huecos, delimitados por `{` y `}`, incluyen expresiones y especificaciones de formato. Una expresión de cadena interpolada es el resultado de una *interpolated_string_literal* que se ha dividido en tokens individuales, tal y como se describe en [literales de cadena interpolados](lexical-structure.md#interpolated-string-literals).
 
 ```antlr
 interpolated_string_expression
@@ -1050,21 +1050,21 @@ interpolated_verbatim_string_body
     ;
 ```
 
-El *constant_expression* de una interpolación debe tener una conversión implícita a `int`.
+El *constant_expression* en una interpolación debe tener una conversión implícita a `int`.
 
-Un *interpolated_string_expression* se clasifica como un valor. Si se convierte inmediatamente en `System.IFormattable` o `System.FormattableString` con una conversión de cadena interpolada implícita ([conversiones de cadenas interpoladas implícitas](conversions.md#implicit-interpolated-string-conversions)), la expresión de cadena interpolada tiene ese tipo. De lo contrario, tiene el tipo `string`.
+Un *interpolated_string_expression* se clasifica como un valor. Si se convierte inmediatamente en `System.IFormattable` o `System.FormattableString` con una conversión de cadena interpolada implícita ([conversiones de cadena interpolada implícita](conversions.md#implicit-interpolated-string-conversions)), la expresión de cadena interpolada tiene ese tipo. De lo contrario, tiene el tipo `string`.
 
 Si el tipo de una cadena interpolada es `System.IFormattable` o `System.FormattableString`, el significado es una llamada a `System.Runtime.CompilerServices.FormattableStringFactory.Create`. Si el tipo es `string`, el significado de la expresión es una llamada a `string.Format`. En ambos casos, la lista de argumentos de la llamada consta de un literal de cadena de formato con marcadores de posición para cada interpolación y un argumento para cada expresión correspondiente a los marcadores de posición.
 
-El literal de cadena de formato se construye como sigue, donde `N` es el número de interpolaciones de *interpolated_string_expression*:
+El literal de cadena de formato se construye como sigue, donde `N` es el número de interpolaciones en el *interpolated_string_expression*:
 
-*  Si un *interpolated_regular_string_whole* o un *interpolated_verbatim_string_whole* siguen el signo `$`, el literal de cadena de formato es ese token.
+*  Si un *interpolated_regular_string_whole* o un *interpolated_verbatim_string_whole* siguen el signo de `$`, el literal de cadena de formato es ese token.
 *  De lo contrario, el literal de cadena de formato consta de: 
    *  En primer lugar, *interpolated_regular_string_start* o *interpolated_verbatim_string_start*
    *  A continuación, para cada número `I` de `0` a `N-1`: 
       * Representación decimal de `I`
-      * Después, si la *interpolación* correspondiente tiene un *constant_expression*, una `,` (coma) seguida de la representación decimal del valor de *constant_expression*
-      * Después, *interpolated_regular_string_mid*, *interpolated_regular_string_end*, *interpolated_verbatim_string_mid* o *interpolated_verbatim_string_end* inmediatamente después de la interpolación correspondiente.
+      * A continuación, si la *interpolación* correspondiente tiene una *constant_expression*, una `,` (coma) seguida de la representación decimal del valor de la *constant_expression*
+      * A continuación, el *interpolated_regular_string_mid*, *interpolated_regular_string_end*, *interpolated_verbatim_string_mid* o *interpolated_verbatim_string_end* inmediatamente después de la interpolación correspondiente.
 
 Los argumentos subsiguientes son simplemente las *expresiones* de las *interpolaciones* (si existen), en orden.
 
@@ -1073,7 +1073,7 @@ TODO: ejemplos.
 
 ### <a name="simple-names"></a>Nombres simples
 
-Un *simple_name* consta de un identificador y, opcionalmente, seguido de una lista de argumentos de tipo:
+Un *simple_name* consta de un identificador, seguido opcionalmente de una lista de argumentos de tipo:
 
 ```antlr
 simple_name
@@ -1081,32 +1081,32 @@ simple_name
     ;
 ```
 
-Un *simple_name* tiene el formato `I` o el formulario `I<A1,...,Ak>`, donde `I` es un identificador único y `<A1,...,Ak>` es un *type_argument_list*opcional. Si no se especifica *type_argument_list* , considere la posibilidad de `K` para que sea cero. El *simple_name* se evalúa y se clasifica de la manera siguiente:
+Una *simple_name* tiene el formato `I` o del formulario `I<A1,...,Ak>`, donde `I` es un identificador único y `<A1,...,Ak>` es un *type_argument_list*opcional. Cuando no se especifica ningún *type_argument_list* , considere la posibilidad de que `K` sea cero. La *simple_name* se evalúa y se clasifica de la manera siguiente:
 
-*  Si `K` es cero y *simple_name* aparece dentro de un *bloque* y si el espacio de declaración de variable local del *bloque*(o el de un *bloque*de[inclusión) contiene](basic-concepts.md#declarations)una variable local, un parámetro o una constante con Name @ no__t-6, el *simple_name* hace referencia a esa variable local, parámetro o constante y se clasifica como una variable o un valor.
-*  Si `K` es cero y *simple_name* aparece dentro del cuerpo de una declaración de método genérico y la Declaración incluye un parámetro de tipo con el nombre @ no__t-2, el *simple_name* hace referencia a ese parámetro de tipo.
-*  De lo contrario, para cada tipo de instancia @ no__t-0 ([el tipo de instancia](classes.md#the-instance-type)), empezando por el tipo de instancia de la declaración de tipo de inclusión inmediata y continuando con el tipo de instancia de cada declaración de clase o estructura envolvente (si existe):
-   *  Si `K` es cero y la declaración de `T` incluye un parámetro de tipo con el nombre @ no__t-2, el *simple_name* hace referencia a ese parámetro de tipo.
-   *  De lo contrario, si una búsqueda de miembro ([búsqueda de miembros](expressions.md#member-lookup)) de `I` en `T` con argumentos `K` @ no__t-4Type genera una coincidencia:
+*  Si `K` es cero y el *simple_name* aparece dentro de un *bloque* y si el espacio de declaración de variable local del *bloque*(o el de un *bloque*de[inclusión) contiene](basic-concepts.md#declarations)una variable local, un parámetro o una constante con el nombre `I`, el *simple_name* hace referencia a esa variable, parámetro o constante local y se clasifica como una variable o valor.
+*  Si `K` es cero y el *simple_name* aparece dentro del cuerpo de una declaración de método genérico y la Declaración incluye un parámetro de tipo con el nombre `I`, el *simple_name* hace referencia a ese parámetro de tipo.
+*  De lo contrario, para cada tipo de instancia `T` ([el tipo de instancia](classes.md#the-instance-type)), empezando por el tipo de instancia de la declaración de tipo de inclusión inmediata y continuando con el tipo de instancia de cada declaración de clase o estructura envolvente (si existe):
+   *  Si `K` es cero y la declaración de `T` incluye un parámetro de tipo con el nombre `I`, el *simple_name* hace referencia a ese parámetro de tipo.
+   *  De lo contrario, si una búsqueda de miembro ([búsqueda de miembros](expressions.md#member-lookup)) de `I` en `T` con `K`argumentos de tipo  produce una coincidencia:
       * Si `T` es el tipo de instancia de la clase o el tipo de estructura de inclusión inmediata y la búsqueda identifica uno o más métodos, el resultado es un grupo de métodos con una expresión de instancia asociada de `this`. Si se especificó una lista de argumentos de tipo, se usa para llamar a un método genérico ([invocaciones de método](expressions.md#method-invocations)).
-      * De lo contrario, si `T` es el tipo de instancia de la clase o el tipo de estructura que se encuentra inmediatamente, si la búsqueda identifica un miembro de instancia, y si la referencia aparece dentro del cuerpo de un constructor de instancia, un método de instancia o un descriptor de acceso de instancia, el resultado es igual que un acceso a miembro ([acceso a miembros](expressions.md#member-access)) con el formato `this.I`. Esto solo puede ocurrir cuando `K` es cero.
-      * De lo contrario, el resultado es el mismo que un acceso a miembro ([acceso a miembros](expressions.md#member-access)) con el formato `T.I` o `T.I<A1,...,Ak>`. En este caso, es un error en tiempo de enlace para que *simple_name* haga referencia a un miembro de instancia.
+      * De lo contrario, si `T` es el tipo de instancia de la clase o el tipo de estructura que se encuentra inmediatamente, si la búsqueda identifica un miembro de instancia, y si la referencia se produce dentro del cuerpo de un constructor de instancia, un método de instancia o un descriptor de acceso de instancia, el resultado es el mismo que un acceso a miembro ([acceso a miembros](expressions.md#member-access)) del `this.I`formulario Esto solo puede ocurrir cuando `K` es cero.
+      * De lo contrario, el resultado es el mismo que un acceso a miembro ([acceso a miembros](expressions.md#member-access)) del formulario `T.I` o `T.I<A1,...,Ak>`. En este caso, es un error en tiempo de enlace para que el *simple_name* haga referencia a un miembro de instancia.
 
-*  De lo contrario, para cada espacio de nombres @ no__t-0, empezando por el espacio de nombres en el que se produce *simple_name* , continuando con cada espacio de nombres envolvente (si existe) y finalizando con el espacio de nombres global, se evalúan los pasos siguientes hasta que se encuentra una entidad:
-   *  Si `K` es cero y `I` es el nombre de un espacio de nombres en @ no__t-2, entonces:
-      * Si la ubicación donde se produce el *simple_name* se incluye en una declaración de espacio de nombres para `N` y la declaración del espacio de nombres contiene un *extern_alias_directive* o un *using_alias_directive* que asocia el nombre @ no__t-4 con un espacio de nombres o tipo, *simple_name* es ambiguo y se produce un error en tiempo de compilación.
-      * De lo contrario, *simple_name* hace referencia al espacio de nombres denominado `I` en `N`.
-   *  De lo contrario, si `N` contiene un tipo accesible con los parámetros Name @ no__t-1 y `K` @ no__t-3type, entonces:
-      * Si `K` es cero y la ubicación donde se produce el *simple_name* se incluye en una declaración de espacio de nombres para `N` y la declaración del espacio de nombres contiene un *extern_alias_directive* o un *using_alias_directive* que asocia el Name @ no__t-5 con un espacio de nombres o un tipo, el *simple_name* es ambiguo y se produce un error en tiempo de compilación.
-      * De lo contrario, *namespace_or_type_name* hace referencia al tipo construido con los argumentos de tipo especificados.
-   *  De lo contrario, si la ubicación donde se produce el *simple_name* se incluye en una declaración de espacio de nombres para @ no__t-1:
-      * Si `K` es cero y la declaración del espacio de nombres contiene un *extern_alias_directive* o un *using_alias_directive* que asocia el nombre @ no__t-3 con un espacio de nombres o tipo importado, el *simple_name* hace referencia a ese espacio de nombres o automáticamente.
-      * De lo contrario, si los espacios de nombres y las declaraciones de tipos importados por *using_namespace_directive*s y *using_static_directive*s de la declaración del espacio de nombres contienen exactamente un tipo accesible o un miembro estático que no es de extensión con el nombre @ No__ los parámetros t-2 y `K` @ no__t-4Type, *simple_name* hace referencia a ese tipo o miembro construido con los argumentos de tipo especificados.
-      * De lo contrario, si los espacios de nombres y los tipos importados por *using_namespace_directive*s de la declaración de espacio de nombres contienen más de un tipo accesible o un miembro estático de método que no es de extensión con los parámetros Name @ no__t-1 y `K` @ no__t-3type, a continuación, el *simple_name* es ambiguo y se produce un error.
+*  De lo contrario, para cada espacio de nombres `N`, empezando por el espacio de nombres en el que se produce el *simple_name* , continuando con cada espacio de nombres envolvente (si existe) y finalizando con el espacio de nombres global, se evalúan los pasos siguientes hasta que se encuentra una entidad:
+   *  Si `K` es cero y `I` es el nombre de un espacio de nombres en `N`, entonces:
+      * Si la ubicación donde se produce el *simple_name* se incluye en una declaración de espacio de nombres para `N` y la declaración del espacio de nombres contiene un *extern_alias_directive* o *using_alias_directive* que asocia el nombre `I` con un espacio de nombres o un tipo, el *simple_name* es ambiguo y se produce un error en tiempo de compilación.
+      * De lo contrario, el *simple_name* hace referencia al espacio de nombres denominado `I` en `N`.
+   *  De lo contrario, si `N` contiene un tipo accesible que tiene el nombre `I` y `K` parámetros de tipo, entonces:
+      * Si `K` es cero y la ubicación donde se produce la *simple_name* se incluye en una declaración de espacio de nombres para `N` y la declaración del espacio de nombres contiene una *extern_alias_directive* o *using_alias_directive* que asocia el nombre `I` con un espacio de nombres o un tipo, el *simple_name* es ambiguo y se produce un error en tiempo de compilación.
+      * De lo contrario, el *namespace_or_type_name* hace referencia al tipo construido con los argumentos de tipo especificados.
+   *  De lo contrario, si la ubicación donde se produce el *simple_name* se incluye en una declaración de espacio de nombres para `N`:
+      * Si `K` es cero y la declaración del espacio de nombres contiene un *extern_alias_directive* o *using_alias_directive* que asocia el nombre `I` con un espacio de nombres o tipo importado, el *simple_name* hace referencia a ese espacio de nombres o tipo.
+      * De lo contrario, si los espacios de nombres y las declaraciones de tipos importados por los *using_namespace_directive*s y *using_static_directive*s de la declaración del espacio de nombres contienen exactamente un tipo accesible o un miembro estático que no es de extensión con el nombre `I` y `K` parámetros de tipo, el *simple_name* hace referencia a ese tipo o miembro construido con los argumentos de tipo especificados.
+      * De lo contrario, si los espacios de nombres y los tipos importados por la *using_namespace_directive*s de la declaración del espacio de nombres contienen más de un tipo accesible o un miembro estático del método que no es de extensión con el nombre `I` y `K` parámetros de tipo, el *simple_name* es ambiguo y se produce un error.
 
    Tenga en cuenta que todo el paso es exactamente paralelo al paso correspondiente en el procesamiento de un *namespace_or_type_name* (espacio de nombres[y nombres de tipo](basic-concepts.md#namespace-and-type-names)).
 
-*  De lo contrario, *simple_name* no está definido y se produce un error en tiempo de compilación.
+*  De lo contrario, el *simple_name* es indefinido y se produce un error en tiempo de compilación.
 
 
 ### <a name="parenthesized-expressions"></a>Expresiones entre paréntesis
@@ -1119,11 +1119,11 @@ parenthesized_expression
     ;
 ```
 
-Un *parenthesized_expression* se evalúa evaluando la *expresión* entre paréntesis. Si la *expresión* entre paréntesis denota un espacio de nombres o un tipo, se produce un error en tiempo de compilación. De lo contrario, el resultado de *parenthesized_expression* es el resultado de la evaluación de la *expresión*contenida.
+Un *parenthesized_expression* se evalúa evaluando la *expresión* entre paréntesis. Si la *expresión* entre paréntesis denota un espacio de nombres o un tipo, se produce un error en tiempo de compilación. De lo contrario, el resultado de la *parenthesized_expression* es el resultado de la evaluación de la *expresión*contenida.
 
 ### <a name="member-access"></a>Acceso a miembros
 
-Un *member_access* consta de *primary_expression*, *predefined_type*o *qualified_alias_member*, seguido de un token "`.`", seguido de un *identificador*, seguido opcionalmente de un *type_argument_list* .
+Un *member_access* consta de un *primary_expression*, un *predefined_type*o un *qualified_alias_member*, seguido de un token "`.`", seguido de un *identificador*, seguido opcionalmente de un *type_argument_list*.
 
 ```antlr
 member_access
@@ -1138,50 +1138,50 @@ predefined_type
     ;
 ```
 
-La producción *qualified_alias_member* se define en [calificadores de alias del espacio de nombres](namespaces.md#namespace-alias-qualifiers).
+La *qualified_alias_member* producción se define en [calificadores de alias del espacio de nombres](namespaces.md#namespace-alias-qualifiers).
 
-Un *member_access* tiene el formato `E.I` o el formulario `E.I<A1, ..., Ak>`, donde `E` es una expresión primaria, @no__t 4 es un identificador único y `<A1, ..., Ak>` es un *type_argument_list*opcional. Si no se especifica *type_argument_list* , considere la posibilidad de `K` para que sea cero.
+Una *member_access* tiene el formato `E.I` o con el formato `E.I<A1, ..., Ak>`, donde `E` es una expresión primaria, `I` es un identificador único y `<A1, ..., Ak>` es un *type_argument_list*opcional. Cuando no se especifica ningún *type_argument_list* , considere la posibilidad de que `K` sea cero.
 
-Un *member_access* con un *primary_expression* de tipo `dynamic` está enlazado dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el compilador clasifica el acceso a miembros como un acceso de propiedad de tipo `dynamic`. A continuación, se aplican las siguientes reglas para determinar el significado de *member_access* en tiempo de ejecución, utilizando el tipo en tiempo de ejecución en lugar del tipo en tiempo de compilación de *primary_expression*. Si esta clasificación en tiempo de ejecución conduce a un grupo de métodos, el acceso a miembros debe ser el *primary_expression* de un *invocation_expression*.
+Un *member_access* con un *primary_expression* de tipo `dynamic` está enlazado dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el compilador clasifica el acceso a miembros como un acceso de propiedad de tipo `dynamic`. A continuación, se aplican las siguientes reglas para determinar el significado de la *member_access* en tiempo de ejecución, utilizando el tipo en tiempo de ejecución en lugar del tipo en tiempo de compilación del *primary_expression*. Si esta clasificación en tiempo de ejecución conduce a un grupo de métodos, el acceso a miembros debe ser el *primary_expression* de un *invocation_expression*.
 
-El *member_access* se evalúa y se clasifica de la manera siguiente:
+La *member_access* se evalúa y se clasifica de la manera siguiente:
 
-*  Si `K` es cero y `E` es un espacio de nombres y `E` contiene un espacio de nombres anidado con el nombre @ no__t-3, el resultado es dicho espacio de nombres.
-*  De lo contrario, si `E` es un espacio de nombres y `E` contiene un tipo accesible con los parámetros Name @ no__t-2 y `K` @ no__t-4Type, el resultado será ese tipo construido con los argumentos de tipo especificados.
-*  Si `E` es un *predefined_type* o un *primary_expression* clasificado como un tipo, si `E` no es un parámetro de tipo, y si una búsqueda de miembro ([búsqueda de miembros](expressions.md#member-lookup)) de `I` en `E` con parámetros `K` @ no__t-8type genera una coincidencia, a continuación, `E.I` se evalúa y se clasifica como sigue:
+*  Si `K` es cero y `E` es un espacio de nombres y `E` contiene un espacio de nombres anidado con el nombre `I`, el resultado es dicho espacio de nombres.
+*  De lo contrario, si `E` es un espacio de nombres y `E` contiene un tipo accesible con el nombre `I` y `K` parámetros de tipo, el resultado será ese tipo construido con los argumentos de tipo especificados.
+*  Si `E` es un *predefined_type* o un *primary_expression* clasificado como un tipo, si `E` no es un parámetro de tipo, y si una búsqueda de miembro ([búsqueda de miembros](expressions.md#member-lookup)) de `I` en `E` con parámetros de tipo `K` produce una coincidencia, `E.I` se evalúa y se clasifica de la manera siguiente:
    *  Si `I` identifica un tipo, el resultado es ese tipo construido con los argumentos de tipo especificados.
    *  Si `I` identifica uno o más métodos, el resultado es un grupo de métodos sin expresión de instancia asociada. Si se especificó una lista de argumentos de tipo, se usa para llamar a un método genérico ([invocaciones de método](expressions.md#method-invocations)).
    *  Si `I` identifica una propiedad `static`, el resultado es un acceso de propiedad sin expresión de instancia asociada.
    *  Si `I` identifica un campo `static`:
-      * Si el campo es `readonly` y la referencia se produce fuera del constructor estático de la clase o estructura en la que se declara el campo, el resultado es un valor, es decir, el valor del campo estático @ no__t-1 en @ no__t-2.
-      * De lo contrario, el resultado es una variable, es decir, el campo estático @ no__t-0 en @ no__t-1.
-   *  Si `I` identifica un evento `static`:
+      * Si el campo es `readonly` y la referencia se produce fuera del constructor estático de la clase o estructura en la que se declara el campo, el resultado es un valor, es decir, el valor del campo estático `I` en `E`.
+      * De lo contrario, el resultado es una variable, es decir, el campo estático `I` en `E`.
+   *  Si `I` identifica un evento de `static`:
       * Si la referencia aparece dentro de la clase o estructura en la que se declara el evento y el evento se declaró sin *event_accessor_declarations* ([eventos](classes.md#events)), `E.I` se procesa exactamente como si `I` fuera un campo estático.
       * De lo contrario, el resultado es un acceso de evento sin expresión de instancia asociada.
    *  Si `I` identifica una constante, el resultado es un valor, es decir, el valor de dicha constante.
     * Si `I` identifica un miembro de enumeración, el resultado es un valor, es decir, el valor de ese miembro de la enumeración.
     * De lo contrario, `E.I` es una referencia de miembro no válida y se produce un error en tiempo de compilación.
-*  Si `E` es un acceso de propiedad, un acceso de indexador, una variable o un valor, el tipo de que es @ no__t-1, y una búsqueda de miembro ([búsqueda de miembros](expressions.md#member-lookup)) de `I` en `T` con `K` @ no__t-6type arguments genera una coincidencia, se evalúa `E.I` y se clasifica como sigue:
+*  Si `E` es un acceso de propiedad, un acceso de indexador, una variable o un valor, el tipo de que es `T`y una búsqueda de miembro ([búsqueda de miembros](expressions.md#member-lookup)) de `I` en `T` con los argumentos de tipo `K` genera una coincidencia, `E.I` se evalúa y se clasifica de la manera siguiente:
    *  En primer lugar, si `E` es un acceso de propiedad o indizador, se obtiene el valor de la propiedad o el acceso del indexador ([valores de las expresiones](expressions.md#values-of-expressions)) y `E` se reclasifica como un valor.
    *  Si `I` identifica uno o más métodos, el resultado es un grupo de métodos con una expresión de instancia asociada de `E`. Si se especificó una lista de argumentos de tipo, se usa para llamar a un método genérico ([invocaciones de método](expressions.md#method-invocations)).
    *  Si `I` identifica una propiedad de instancia,
-      * Si `E` es `this`, @no__t 2 identifica una propiedad implementada automáticamente ([propiedades implementadas automáticamente](classes.md#automatically-implemented-properties)) sin un establecedor y la referencia se produce dentro de un constructor de instancia para un tipo de clase o struct `T`, el resultado es una variable, es decir, el campo de respaldo oculto para la propiedad automática proporcionada por `I` en la instancia de `T` proporcionada por `this`.
-      * De lo contrario, el resultado es un acceso de propiedad con una expresión de instancia asociada de @ no__t-0.
-   *  Si `T` es un *class_type* y `I` identifica un campo de instancia de ese *class_type*:
+      * Si `E` es `this`, `I` identifica una propiedad implementada automáticamente ([propiedades implementadas automáticamente](classes.md#automatically-implemented-properties)) sin un establecedor y la referencia se produce dentro de un constructor de instancia para un tipo de clase o struct `T`, el resultado es una variable, es decir, el campo de respaldo oculto para la propiedad automática proporcionada por `I` en la instancia de `T` proporcionada por `this`.
+      * De lo contrario, el resultado es un acceso de propiedad con una expresión de instancia asociada de `E`.
+   *  Si `T` es un *class_type* y `I` identifica un campo de instancia de que *class_type*:
       * Si el valor de `E` es `null`, se produce una `System.NullReferenceException`.
-      * De lo contrario, si el campo es `readonly` y la referencia se produce fuera de un constructor de instancia de la clase en la que se declara el campo, el resultado es un valor, es decir, el valor del campo @ no__t-1 en el objeto al que hace referencia @ no__t-2.
-      * De lo contrario, el resultado es una variable, es decir, el campo @ no__t-0 en el objeto al que hace referencia @ no__t-1.
-   *  Si `T` es un *struct_type* y `I` identifica un campo de instancia de ese *struct_type*:
-      * Si `E` es un valor, o si el campo es `readonly` y la referencia se produce fuera de un constructor de instancia de la estructura en la que se declara el campo, el resultado es un valor, es decir, el valor del campo @ no__t-2 en la instancia de struct especificada por @ no__t-3.
-      * De lo contrario, el resultado es una variable, es decir, el campo @ no__t-0 en la instancia de struct proporcionada por @ no__t-1.
+      * De lo contrario, si el campo es `readonly` y la referencia se produce fuera de un constructor de instancia de la clase en la que se declara el campo, el resultado es un valor, es decir, el valor del campo `I` en el objeto al que hace referencia `E`.
+      * De lo contrario, el resultado es una variable, es decir, el campo `I` en el objeto al que hace referencia `E`.
+   *  Si `T` es un *struct_type* y `I` identifica un campo de instancia de que *struct_type*:
+      * Si `E` es un valor, o si el campo es `readonly` y la referencia se produce fuera de un constructor de instancia de la estructura en la que se declara el campo, el resultado es un valor, es decir, el valor del campo `I` en la instancia de struct proporcionada por `E`.
+      * De lo contrario, el resultado es una variable, es decir, el campo `I` en la instancia de struct proporcionada por `E`.
    *  Si `I` identifica un evento de instancia:
-      * Si la referencia se produce dentro de la clase o estructura en la que se declara el evento y el evento se declaró sin *event_accessor_declarations* ([eventos](classes.md#events)), y la referencia no se produce como el lado izquierdo de un operador `+=` o `-=` , `E.I` se procesa exactamente como si `I` fuera un campo de instancia.
-      * De lo contrario, el resultado es un evento de acceso con una expresión de instancia asociada de @ no__t-0.
+      * Si la referencia se produce dentro de la clase o estructura en la que se declara el evento y el evento se declaró sin *event_accessor_declarations* ([eventos](classes.md#events)), y la referencia no se produce como el lado izquierdo de un operador `+=` o `-=`, `E.I` se procesa exactamente como si `I` fuera un campo de instancia.
+      * De lo contrario, el resultado es un evento de acceso con una expresión de instancia asociada de `E`.
 *  De lo contrario, se realiza un intento de procesar `E.I` como una invocación de método de extensión ([invocaciones de método de extensión](expressions.md#extension-method-invocations)). Si se produce un error, `E.I` es una referencia de miembro no válida y se produce un error en tiempo de enlace.
 
 #### <a name="identical-simple-names-and-type-names"></a>Nombres simples y nombres de tipo idénticos
 
-En un acceso de miembro con el formato `E.I`, si `E` es un identificador único y si el significado de `E` como *simple_name* ([nombres simples](expressions.md#simple-names)) es una constante, un campo, una propiedad, una variable local o un parámetro con el mismo tipo que el significado de `E` como *type_name* ([espacio de nombres y nombres de tipo](basic-concepts.md#namespace-and-type-names)), se permiten ambos significados posibles de `E`. Los dos significados posibles de `E.I` nunca son ambiguos, ya que `I` debe ser necesariamente miembro del tipo `E` en ambos casos. En otras palabras, la regla simplemente permite el acceso a los miembros estáticos y los tipos anidados de `E`, donde en caso contrario, se produciría un error en tiempo de compilación. Por ejemplo:
+En un acceso de miembro del formulario `E.I`, si `E` es un identificador único y si el significado de `E` como *simple_name* ([nombres simples](expressions.md#simple-names)) es una constante, un campo, una propiedad, una variable local o un parámetro con el mismo tipo que el significado de `E` como *type_name* ([espacio de nombres y nombres de tipo](basic-concepts.md#namespace-and-type-names)), se permiten ambos significados posibles de `E`. Los dos significados posibles de `E.I` nunca son ambiguos, ya que `I` debe ser necesariamente miembro del tipo `E` en ambos casos. En otras palabras, la regla simplemente permite el acceso a los miembros estáticos y los tipos anidados de `E` en los que, de lo contrario, se produciría un error en tiempo de compilación. Por ejemplo:
 ```csharp
 struct Color
 {
@@ -1208,17 +1208,17 @@ class A
 
 #### <a name="grammar-ambiguities"></a>Ambigüedades de la gramática
 
-Las producciones para *simple_name* ([nombres simples](expressions.md#simple-names)) y *member_access* ([acceso a miembros](expressions.md#member-access)) pueden dar lugar a ambigüedades en la gramática de expresiones. Por ejemplo, la instrucción:
+Las producciones de *simple_name* ([nombres simples](expressions.md#simple-names)) y *member_access* ([acceso a miembros](expressions.md#member-access)) pueden dar lugar a ambigüedades en la gramática de expresiones. Por ejemplo, la instrucción:
 ```csharp
 F(G<A,B>(7));
 ```
-podría interpretarse como una llamada a `F` con dos argumentos, `G < A` y `B > (7)`. Como alternativa, podría interpretarse como una llamada a `F` con un argumento, que es una llamada a un método genérico @ no__t-1 con dos argumentos de tipo y un argumento normal.
+podría interpretarse como una llamada a `F` con dos argumentos, `G < A` y `B > (7)`. Como alternativa, podría interpretarse como una llamada a `F` con un argumento, que es una llamada a un método genérico `G` con dos argumentos de tipo y un argumento normal.
 
-Si se puede analizar una secuencia de tokens (en contexto) como *simple_name* ([nombres simples](expressions.md#simple-names)), *member_access* ([acceso a miembros](expressions.md#member-access)) o *pointer_member_access* ([acceso a miembros de puntero](unsafe-code.md#pointer-member-access)) que finaliza con un *type_argument_ List* ([argumentos de tipo](types.md#type-arguments)), se examina el token inmediatamente después del token `>` de cierre. Si es uno de
+Si se puede analizar una secuencia de tokens (en contexto) como *simple_name* ([nombres simples](expressions.md#simple-names)), *member_access* ([acceso a miembros](expressions.md#member-access)) o *pointer_member_access* ([acceso a miembros de puntero](unsafe-code.md#pointer-member-access)) que finaliza con un *type_argument_list* ([argumentos de tipo](types.md#type-arguments)), se examina el token inmediatamente posterior al token de cierre `>`. Si es uno de
 ```csharp
 (  )  ]  }  :  ;  ,  .  ?  ==  !=  |  ^
 ```
-a continuación, *type_argument_list* se conserva como parte de *simple_name*, *member_access* o *pointer_member_access* y se descarta cualquier otro posible análisis de la secuencia de tokens. De lo contrario, *type_argument_list* no se considera parte de *simple_name*, *member_access* o *pointer_member_access*, incluso si no hay ningún otro análisis posible de la secuencia de tokens. Tenga en cuenta que estas reglas no se aplican al analizar un *type_argument_list* en un *namespace_or_type_name* (espacio de nombres[y nombres de tipo](basic-concepts.md#namespace-and-type-names)). La instrucción
+a continuación, el *type_argument_list* se conserva como parte del *simple_name*, *member_access* o *pointer_member_access* y se descarta cualquier otro posible análisis de la secuencia de tokens. De lo contrario, el *type_argument_list* no se considera parte de la *simple_name*, *member_access* o *pointer_member_access*, aunque no haya ningún otro análisis posible de la secuencia de tokens. Tenga en cuenta que estas reglas no se aplican al analizar una *type_argument_list* en un *namespace_or_type_name* (espacio de nombres[y nombres de tipo](basic-concepts.md#namespace-and-type-names)). La instrucción
 ```csharp
 F(G<A,B>(7));
 ```
@@ -1235,11 +1235,11 @@ se interpretará como un operador menor que, mayor que y unario más, como si la
 ```csharp
 x = y is C<T> + z;
 ```
-los tokens `C<T>` se interpretan como *namespace_or_type_name* con *type_argument_list*.
+los tokens `C<T>` se interpretan como un *namespace_or_type_name* con un *type_argument_list*.
 
 ### <a name="invocation-expressions"></a>Expresiones de invocación
 
-Un *invocation_expression* se usa para invocar un método.
+Un *invocation_expression* se utiliza para invocar un método.
 
 ```antlr
 invocation_expression
@@ -1249,46 +1249,46 @@ invocation_expression
 
 Un *invocation_expression* está enlazado dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)) si al menos uno de los siguientes contiene:
 
-* *Primary_expression* tiene el tipo en tiempo de compilación `dynamic`.
-* Al menos un argumento de *argument_list* opcional tiene el tipo en tiempo de compilación `dynamic` y *primary_expression* no tiene un tipo de delegado.
+* El *primary_expression* tiene `dynamic`de tipo en tiempo de compilación.
+* Al menos un argumento del *argument_list* opcional tiene `dynamic` de tipo en tiempo de compilación y el *primary_expression* no tiene un tipo de delegado.
 
-En este caso, el compilador clasifica *invocation_expression* como un valor de tipo `dynamic`. A continuación, se aplican las siguientes reglas para determinar el significado de *invocation_expression* en tiempo de ejecución, utilizando el tipo en tiempo de ejecución en lugar del tipo en tiempo de compilación de los *primary_expression* y argumentos que tienen el tipo en tiempo de compilación @no_ _ t-2. Si el *primary_expression* no tiene el tipo en tiempo de compilación `dynamic`, la invocación del método sufre una comprobación limitada del tiempo de compilación, como se describe en [comprobación en tiempo de compilación de la resolución dinámica de sobrecarga](expressions.md#compile-time-checking-of-dynamic-overload-resolution).
+En este caso, el compilador clasifica el *invocation_expression* como un valor de tipo `dynamic`. A continuación, se aplican las siguientes reglas para determinar el significado del *invocation_expression* en tiempo de ejecución, utilizando el tipo en tiempo de ejecución en lugar del tipo en tiempo de compilación de los *primary_expression* y los argumentos que tienen el tipo en tiempo de compilación `dynamic`. Si el *primary_expression* no tiene `dynamic`de tipo en tiempo de compilación, la invocación del método sufre una comprobación limitada del tiempo de compilación, como se describe en comprobación de la [resolución de sobrecarga dinámica en tiempo de compilación](expressions.md#compile-time-checking-of-dynamic-overload-resolution).
 
-El *primary_expression* de un *invocation_expression* debe ser un grupo de métodos o un valor de *delegate_type*. Si *primary_expression* es un grupo de métodos, *invocation_expression* es una invocación de método ([invocaciones de método](expressions.md#method-invocations)). Si *primary_expression* es un valor de *delegate_type*, *invocation_expression* es una invocación de delegado ([invocaciones de delegado](expressions.md#delegate-invocations)). Si *primary_expression* no es un grupo de métodos ni un valor de *delegate_type*, se produce un error en tiempo de enlace.
+El *primary_expression* de una *invocation_expression* debe ser un grupo de métodos o un valor de un *delegate_type*. Si el *primary_expression* es un grupo de métodos, el *invocation_expression* es una invocación de método ([invocaciones de método](expressions.md#method-invocations)). Si el *primary_expression* es un valor de un *delegate_type*, el *invocation_expression* es una invocación de delegado ([invocaciones de delegado](expressions.md#delegate-invocations)). Si el *primary_expression* no es un grupo de métodos ni un valor de un *delegate_type*, se produce un error en tiempo de enlace.
 
 El *argument_list* opcional ([listas de argumentos](expressions.md#argument-lists)) proporciona valores o referencias a variables para los parámetros del método.
 
-El resultado de la evaluación de un *invocation_expression* se clasifica como sigue:
+El resultado de evaluar una *invocation_expression* se clasifica como sigue:
 
-*  Si el *invocation_expression* invoca un método o un delegado que devuelve `void`, el resultado es Nothing. Una expresión que se clasifique como Nothing solo se permite en el contexto de *statement_expression* ([instrucciones de expresión](statements.md#expression-statements)) o como el cuerpo de un *lambda_expression* ([expresiones de función anónima](expressions.md#anonymous-function-expressions)). En caso contrario, se produce un error en tiempo de enlace.
+*  Si el *invocation_expression* invoca un método o un delegado que devuelve `void`, el resultado es Nothing. Una expresión que se clasifique como Nothing solo se permite en el contexto de una *statement_expression* ([instrucciones de expresión](statements.md#expression-statements)) o como el cuerpo de un *lambda_expression* ([expresiones de función anónima](expressions.md#anonymous-function-expressions)). En caso contrario, se produce un error en tiempo de enlace.
 *  De lo contrario, el resultado es un valor del tipo devuelto por el método o el delegado.
 
 #### <a name="method-invocations"></a>Invocaciones de método
 
-En el caso de una invocación de método, el *primary_expression* de *invocation_expression* debe ser un grupo de métodos. El grupo de métodos identifica el método que se va a invocar o el conjunto de métodos sobrecargados desde los que se va a elegir un método específico que se va a invocar. En el último caso, la determinación del método específico que se va a invocar se basa en el contexto proporcionado por los tipos de los argumentos de *argument_list*.
+En el caso de una invocación de método, el *primary_expression* de la *invocation_expression* debe ser un grupo de métodos. El grupo de métodos identifica el método que se va a invocar o el conjunto de métodos sobrecargados desde los que se va a elegir un método específico que se va a invocar. En el último caso, la determinación del método específico que se va a invocar se basa en el contexto proporcionado por los tipos de los argumentos en el *argument_list*.
 
-El procesamiento en tiempo de enlace de una invocación de método con la forma `M(A)`, donde `M` es un grupo de métodos (posiblemente incluir un *type_argument_list*) y `A` es un *argument_list*opcional, consta de los siguientes pasos:
+El procesamiento en tiempo de enlace de una invocación de método de la forma `M(A)`, donde `M` es un grupo de métodos (posiblemente incluir un *type_argument_list*) y `A` es un *argument_list*opcional, consta de los siguientes pasos:
 
 *  Se construye el conjunto de métodos candidatos para la invocación del método. Para cada método `F` asociado al grupo de métodos `M`:
-   *  Si `F` no es genérico, `F` es un candidato cuando:
+   *  Si `F` no es genérico, `F` es candidata cuando:
       * `M` no tiene ninguna lista de argumentos de tipo y
       * `F` es aplicable con respecto a `A` ([miembro de función aplicable](expressions.md#applicable-function-member)).
-   *  Si `F` es genérico y `M` no tiene ninguna lista de argumentos de tipo, @no__t 2 es candidata cuando:
+   *  Si `F` es genérico y `M` no tiene ninguna lista de argumentos de tipo, `F` es candidata cuando:
       * La inferencia de tipos ([inferencia de tipo](expressions.md#type-inference)) se realiza correctamente, deduciendo una lista de argumentos de tipo para la llamada y
-      * Una vez que los argumentos de tipo deducido se sustituyen por los parámetros de tipo de método correspondientes, todos los tipos construidos en la lista de parámetros de F satisfacen sus restricciones (que cumplen con las[restricciones](types.md#satisfying-constraints)) y la lista de parámetros de `F` es aplicable con respecto a @no__t 2 ([miembro de función aplicable](expressions.md#applicable-function-member)).
-   *  Si `F` es genérico y `M` incluye una lista de argumentos de tipo, @no__t 2 es candidata cuando:
+      * Una vez que los argumentos de tipo deducido se sustituyen por los parámetros de tipo de método correspondientes, todos los tipos construidos en la lista de parámetros de F cumplen sus restricciones (que cumplen con las[restricciones](types.md#satisfying-constraints)) y la lista de parámetros de `F` es aplicable con respecto a `A` ([miembro de función aplicable](expressions.md#applicable-function-member)).
+   *  Si `F` es genérico y `M` incluye una lista de argumentos de tipo, `F` es candidata cuando:
       * `F` tiene el mismo número de parámetros de tipo de método que se proporcionaron en la lista de argumentos de tipo y
       * Una vez que los argumentos de tipo se sustituyen por los parámetros de tipo de método correspondientes, todos los tipos construidos en la lista de parámetros de F satisfacen sus restricciones (que cumplen con las[restricciones](types.md#satisfying-constraints)) y la lista de parámetros de `F` es aplicable con respecto a `A` ([miembro de función aplicable](expressions.md#applicable-function-member)).
-*  El conjunto de métodos candidatos se reduce para contener solo los métodos de los tipos más derivados: Para cada método `C.F` del conjunto, donde `C` es el tipo en el que se declara el método `F`, todos los métodos declarados en un tipo base de `C` se quitan del conjunto. Además, si `C` es un tipo de clase distinto de `object`, todos los métodos declarados en un tipo de interfaz se quitan del conjunto. (Esta última regla solo tiene efecto cuando el grupo de métodos era el resultado de una búsqueda de miembros en un parámetro de tipo que tiene una clase base efectiva que no es un objeto y un conjunto de interfaces efectivo no vacío).
+*  El conjunto de métodos candidatos se reduce para que solo contengan métodos de los tipos más derivados: para cada método `C.F` del conjunto, donde `C` es el tipo en el que se declara el `F` de método, todos los métodos declarados en un tipo base de `C` se quitan del conjunto. Además, si `C` es un tipo de clase que no sea `object`, todos los métodos declarados en un tipo de interfaz se quitan del conjunto. (Esta última regla solo tiene efecto cuando el grupo de métodos era el resultado de una búsqueda de miembros en un parámetro de tipo que tiene una clase base efectiva que no es un objeto y un conjunto de interfaces efectivo no vacío).
 *  Si el conjunto resultante de métodos candidatos está vacío, se abandona el procesamiento posterior a lo largo de los pasos siguientes y, en su lugar, se intenta procesar la invocación como una invocación de método de extensión ([invocaciones de método de extensión](expressions.md#extension-method-invocations)). Si se produce un error, no existe ningún método aplicable y se produce un error en tiempo de enlace.
 *  El mejor método del conjunto de métodos candidatos se identifica mediante las reglas de resolución de sobrecarga de la [resolución de sobrecarga](expressions.md#overload-resolution). Si no se puede identificar un único método mejor, la invocación del método es ambigua y se produce un error en tiempo de enlace. Al realizar la resolución de sobrecarga, los parámetros de un método genérico se tienen en cuenta después de sustituir los argumentos de tipo (proporcionados o deducidos) para los parámetros de tipo de método correspondientes.
 *  Se realiza la validación final del mejor método elegido:
-   * El método se valida en el contexto del grupo de métodos: Si el mejor método es un método estático, el grupo de métodos debe haber sido el resultado de un *simple_name* o un *member_access* a través de un tipo. Si el mejor método es un método de instancia, el grupo de métodos debe haber sido el resultado de un *simple_name*, un *member_access* a través de una variable o un valor o un *base_access*. Si ninguno de estos requisitos es true, se produce un error en tiempo de enlace.
+   * El método se valida en el contexto del grupo de métodos: Si el mejor método es un método estático, el grupo de métodos debe haber sido el resultado de un *simple_name* o de un *member_access* a través de un tipo. Si el mejor método es un método de instancia, el grupo de métodos debe haber sido el resultado de un *simple_name*, un *member_access* a través de una variable o un valor, o un *base_access*. Si ninguno de estos requisitos es true, se produce un error en tiempo de enlace.
    * Si el mejor método es un método genérico, los argumentos de tipo (suministrados o deducidos) se comprueban con las restricciones (que[cumplen las restricciones](types.md#satisfying-constraints)) declaradas en el método genérico. Si algún argumento de tipo no satisface las restricciones correspondientes en el parámetro de tipo, se produce un error en tiempo de enlace.
 
 Una vez que se ha seleccionado y validado un método en tiempo de enlace según los pasos anteriores, la invocación real en tiempo de ejecución se procesa de acuerdo con las reglas de invocación de miembros de función descritas en la [comprobación en tiempo de compilación de la resolución dinámica de sobrecarga](expressions.md#compile-time-checking-of-dynamic-overload-resolution).
 
-El efecto intuitivo de las reglas de resolución descritas anteriormente es el siguiente: Para buscar el método determinado invocado por una invocación de método, empiece con el tipo indicado por la invocación del método y continúe con la cadena de herencia hasta que se encuentre al menos una declaración de método aplicable, accesible y sin invalidación. A continuación, realice la inferencia de tipos y la resolución de sobrecarga en el conjunto de métodos aplicables, accesibles y no invalidaciones declarados en ese tipo e invoque el método de la forma que se seleccione. Si no se encuentra ningún método, pruebe en su lugar para procesar la invocación como una invocación de método de extensión.
+El efecto intuitivo de las reglas de resolución descritos anteriormente es el siguiente: para encontrar el método determinado invocado por una invocación de método, empiece con el tipo indicado por la invocación del método y continúe con la cadena de herencia hasta que haya al menos una aplicable. se encontró una declaración de método no invalidable accesible. A continuación, realice la inferencia de tipos y la resolución de sobrecarga en el conjunto de métodos aplicables, accesibles y no invalidaciones declarados en ese tipo e invoque el método de la forma que se seleccione. Si no se encuentra ningún método, pruebe en su lugar para procesar la invocación como una invocación de método de extensión.
 
 #### <a name="extension-method-invocations"></a>Invocaciones de métodos de extensión
 
@@ -1302,7 +1302,7 @@ expr . identifier < typeargs > ( )
 
 expr . identifier < typeargs > ( args )
 ```
-Si el procesamiento normal de la invocación no encuentra ningún método aplicable, se realiza un intento de procesar la construcción como una invocación de método de extensión. Si *expr* o cualquiera de los *argumentos* tiene el tipo en tiempo de compilación `dynamic`, los métodos de extensión no se aplicarán.
+Si el procesamiento normal de la invocación no encuentra ningún método aplicable, se realiza un intento de procesar la construcción como una invocación de método de extensión. Si *expr* o cualquiera de los *argumentos* tiene el tipo en tiempo de compilación `dynamic`, no se aplicarán los métodos de extensión.
 
 El objetivo es encontrar el mejor *type_name* `C`, de modo que pueda tener lugar la invocación de método estático correspondiente:
 ```csharp
@@ -1317,8 +1317,8 @@ C . identifier < typeargs > ( expr , args )
 
 Un método de extensión `Ci.Mj` es ***válido*** si:
 
-*  `Ci` es una clase no anidada no genérica
-*  El nombre de `Mj` es el *identificador*
+*  `Ci` es una clase no genérica y no anidada
+*  El nombre de `Mj` es *Identifier*
 *  `Mj` es accesible y aplicable cuando se aplica a los argumentos como un método estático, como se muestra arriba
 *  Existe una conversión implícita de identidad, referencia o conversión boxing de *expr* al tipo del primer parámetro de `Mj`.
 
@@ -1326,12 +1326,12 @@ La búsqueda de `C` continúa como sigue:
 
 *  A partir de la declaración de espacio de nombres envolvente más cercana, continuando con cada declaración de espacio de nombres envolvente y finalizando con la unidad de compilación que lo contiene, se realizan sucesivos intentos para buscar un conjunto candidato de métodos de extensión:
    * Si el espacio de nombres o la unidad de compilación especificados contiene directamente declaraciones de tipos no genéricos `Ci` con métodos de extensión válidos `Mj`, el conjunto de estos métodos de extensión es el conjunto de candidatos.
-   * Si los tipos `Ci` importados por *using_static_declarations* y se declaran directamente en los espacios de nombres importados por *using_namespace_directive*s en el espacio de nombres o la unidad de compilación especificados directamente contienen métodos de extensión válidos `Mj`, entonces el conjunto de estos métodos de extensión es el conjunto de candidatos.
+   * Si los tipos `Ci` importados por *using_static_declarations* y se declaran directamente en los espacios de nombres importados por *using_namespace_directive*s en el espacio de nombres o la unidad de compilación especificados directamente contienen métodos de extensión válidos `Mj`, el conjunto de esos métodos de extensión es el conjunto de candidatos.
 *  Si no se encuentra ningún conjunto candidato en ninguna declaración de espacio de nombres envolvente o unidad de compilación, se produce un error en tiempo de compilación.
 *  De lo contrario, se aplica la resolución de sobrecarga al conjunto de candidatos tal y como se describe en ([resolución de sobrecarga](expressions.md#overload-resolution)). Si no se encuentra ningún método mejor, se produce un error en tiempo de compilación.
 *  `C` es el tipo en el que se declara el mejor método como método de extensión.
 
-Al usar `C` como destino, la llamada al método se procesa entonces como una invocación de método estático ([comprobación en tiempo de compilación de la resolución dinámica de sobrecarga](expressions.md#compile-time-checking-of-dynamic-overload-resolution)).
+Al utilizar `C` como destino, la llamada al método se procesa entonces como una invocación de método estático ([comprobación en tiempo de compilación de la resolución dinámica de sobrecarga](expressions.md#compile-time-checking-of-dynamic-overload-resolution)).
 
 Las reglas anteriores significan que los métodos de instancia tienen prioridad sobre los métodos de extensión, que los métodos de extensión disponibles en las declaraciones de espacios de nombres internos tienen prioridad sobre los métodos de extensión disponibles en las declaraciones de espacios de nombres exteriores y esa extensión los métodos declarados directamente en un espacio de nombres tienen prioridad sobre los métodos de extensión importados en el mismo espacio de nombres con una directiva de espacio de nombres using. Por ejemplo:
 ```csharp
@@ -1369,7 +1369,7 @@ class X
 }
 ```
 
-En el ejemplo, el método de `B` tiene prioridad sobre el primer método de extensión y el método de `C` tiene prioridad sobre ambos métodos de extensión.
+En el ejemplo, el método de `B`tiene prioridad sobre el primer método de extensión y el método de `C`tiene prioridad sobre ambos métodos de extensión.
 
 ```csharp
 public static class C
@@ -1415,21 +1415,21 @@ E.F(1)
 D.G(2)
 C.H(3)
 ```
-`D.G` tiene prioridad sobre `C.G` y `E.F` tiene prioridad sobre `D.F` y `C.F`.
+`D.G` tiene prioridad sobre `C.G`y `E.F` tiene prioridad sobre `D.F` y `C.F`.
 
 #### <a name="delegate-invocations"></a>Invocaciones de delegado
 
-En el caso de una invocación de delegado, el *primary_expression* de *invocation_expression* debe ser un valor de *delegate_type*. Además, si se considera que el *delegate_type* es un miembro de función con la misma lista de parámetros que el *delegate_type*, el *delegate_type* debe ser aplicable ([miembro de función aplicable](expressions.md#applicable-function-member)) con respecto a la *argument_ lista* de *invocation_expression*.
+En el caso de una invocación de delegado, el *primary_expression* de la *invocation_expression* debe ser un valor de un *delegate_type*. Además, si se considera que el *delegate_type* ser un miembro de función con la misma lista de parámetros que el *delegate_type*, el *delegate_type* debe ser aplicable ([miembro de función aplicable](expressions.md#applicable-function-member)) con respecto al *argument_list* del *invocation_expression*.
 
 El procesamiento en tiempo de ejecución de una invocación de delegado con el formato `D(A)`, donde `D` es un *primary_expression* de un *delegate_type* y `A` es un *argument_list*opcional, consta de los siguientes pasos:
 
-*  se evalúa `D`. Si esta evaluación provoca una excepción, no se ejecuta ningún paso más.
-*  El valor de `D` se comprueba para ser válido. Si el valor de `D` es `null`, se produce una @no__t 2 y no se ejecuta ningún otro paso.
+*  `D` se evalúa. Si esta evaluación provoca una excepción, no se ejecuta ningún paso más.
+*  El valor de `D` se comprueba para ser válido. Si el valor de `D` es `null`, se produce una `System.NullReferenceException` y no se ejecuta ningún paso más.
 *  De lo contrario, `D` es una referencia a una instancia de delegado. Las invocaciones de miembros de función ([comprobación en tiempo de compilación de la resolución dinámica de sobrecarga](expressions.md#compile-time-checking-of-dynamic-overload-resolution)) se realizan en cada una de las entidades a las que se puede llamar en la lista de invocaciones del delegado. Para las entidades a las que se puede llamar que se componen de un método de instancia y de instancia, la instancia de para la invocación es la instancia contenida en la entidad a la que se puede
 
 ### <a name="element-access"></a>Acceso a elementos
 
-Un *element_access* consta de un *primary_no_array_creation_expression*, seguido de un token "`[`", seguido de un *argument_list*, seguido de un token "`]`". *Argument_list* consta de uno o más *argumentos*, separados por comas.
+Un *element_access* consta de un *primary_no_array_creation_expression*, seguido de un token "`[`", seguido de un *argument_list*, seguido de un token "`]`". El *argument_list* se compone de uno o más *argumentos*, separados por comas.
 
 ```antlr
 element_access
@@ -1437,49 +1437,49 @@ element_access
     ;
 ```
 
-El *argument_list* de una *element_access* no puede contener los argumentos `ref` o `out`.
+No se permite que la *argument_list* de un *element_access* contenga `ref` o `out` argumentos.
 
 Un *element_access* está enlazado dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)) si al menos uno de los siguientes contiene:
 
-* *Primary_no_array_creation_expression* tiene el tipo en tiempo de compilación `dynamic`.
-* Al menos una expresión de *argument_list* tiene el tipo en tiempo de compilación `dynamic` y *primary_no_array_creation_expression* no tiene un tipo de matriz.
+* El *primary_no_array_creation_expression* tiene `dynamic`de tipo en tiempo de compilación.
+* Al menos una expresión de la *argument_list* tiene `dynamic` de tipo en tiempo de compilación y el *primary_no_array_creation_expression* no tiene un tipo de matriz.
 
-En este caso, el compilador clasifica *element_access* como un valor de tipo `dynamic`. A continuación, se aplican las siguientes reglas para determinar el significado de *element_access* en tiempo de ejecución, utilizando el tipo en tiempo de ejecución en lugar del tipo en tiempo de compilación de los de *primary_no_array_creation_expression* y *argument_list* expresiones que tienen el tipo en tiempo de compilación `dynamic`. Si el *primary_no_array_creation_expression* no tiene el tipo en tiempo de compilación `dynamic`, el acceso al elemento sufre una comprobación de tiempo de compilación limitada, como se describe en [comprobación en tiempo de compilación de la resolución de sobrecarga dinámica](expressions.md#compile-time-checking-of-dynamic-overload-resolution).
+En este caso, el compilador clasifica el *element_access* como un valor de tipo `dynamic`. A continuación, se aplican las siguientes reglas para determinar el significado de la *element_access* en tiempo de ejecución, utilizando el tipo en tiempo de ejecución en lugar del tipo en tiempo de compilación de las expresiones *primary_no_array_creation_expression* y *argument_list* que tienen el tipo en tiempo de compilación `dynamic`. Si el *primary_no_array_creation_expression* no tiene `dynamic`de tipo en tiempo de compilación, el acceso al elemento sufre una comprobación limitada del tiempo de compilación, como se describe en [comprobación en tiempo de compilación de la resolución de sobrecarga dinámica](expressions.md#compile-time-checking-of-dynamic-overload-resolution).
 
-Si el *primary_no_array_creation_expression* de un *element_access* es un valor de *array_type*, *element_access* es un acceso de matriz ([acceso de matriz](expressions.md#array-access)). De lo contrario, *primary_no_array_creation_expression* debe ser una variable o un valor de una clase, estructura o tipo de interfaz que tenga uno o más miembros del indexador, en cuyo caso *element_access* es un acceso de indexador ([acceso del indexador](expressions.md#indexer-access)).
+Si el *primary_no_array_creation_expression* de una *element_access* es un valor de un *array_type*, el *element_access* es un acceso a la matriz ([acceso a la matriz](expressions.md#array-access)). De lo contrario, el *primary_no_array_creation_expression* debe ser una variable o un valor de una clase, estructura o tipo de interfaz que tenga uno o más miembros del indexador, en cuyo caso el *element_access* es un acceso de indexador ([acceso del indexador](expressions.md#indexer-access)).
 
 #### <a name="array-access"></a>Acceso a matriz
 
-Para un acceso de matriz, el *primary_no_array_creation_expression* de *element_access* debe ser un valor de *array_type*. Además, el *argument_list* de acceso de una matriz no puede contener argumentos con nombre. El número de expresiones de *argument_list* debe ser el mismo que el rango de *array_type*y cada expresión debe ser de tipo `int`, `uint`, `long`, `ulong` o debe poder convertirse implícitamente a uno o varios de estos tipos.
+Para un acceso de matriz, el *primary_no_array_creation_expression* de la *element_access* debe ser un valor de un *array_type*. Además, el *argument_list* de un acceso de matriz no puede contener argumentos con nombre. El número de expresiones en el *argument_list* debe ser el mismo que el rango del *array_type*y cada expresión debe ser de tipo `int`, `uint`, `long`, `ulong`o debe poder convertirse implícitamente a uno o varios de estos tipos.
 
-El resultado de evaluar un acceso de matriz es una variable del tipo de elemento de la matriz, es decir, el elemento de matriz seleccionado por los valores de las expresiones de *argument_list*.
+El resultado de evaluar un acceso de matriz es una variable del tipo de elemento de la matriz, es decir, el elemento de matriz seleccionado por los valores de las expresiones de la *argument_list*.
 
 El procesamiento en tiempo de ejecución de un acceso de matriz del formulario `P[A]`, donde `P` es un *primary_no_array_creation_expression* de un *array_type* y `A` es un *argument_list*, consta de los siguientes pasos:
 
-*  se evalúa `P`. Si esta evaluación provoca una excepción, no se ejecuta ningún paso más.
-*  Las expresiones de índice de *argument_list* se evalúan en orden, de izquierda a derecha. Después de la evaluación de cada expresión de índice, se realiza una conversión implícita ([conversiones implícitas](conversions.md#implicit-conversions)) en uno de los siguientes tipos: `int`, `uint`, `long`, @no__t 4. Se elige el primer tipo de esta lista para el que existe una conversión implícita. Por ejemplo, si la expresión de índice es de tipo `short`, se realiza una conversión implícita a `int`, ya que las conversiones implícitas de @no__t 2 a `int` y de `short` a `long` son posibles. Si la evaluación de una expresión de índice o de la conversión implícita subsiguiente produce una excepción, no se evalúan más expresiones de índice y no se ejecuta ningún paso más.
-*  El valor de `P` se comprueba para ser válido. Si el valor de `P` es `null`, se produce una @no__t 2 y no se ejecuta ningún otro paso.
-*  El valor de cada expresión de *argument_list* se comprueba con los límites reales de cada dimensión de la instancia de la matriz a la que hace referencia `P`. Si uno o más valores están fuera del intervalo, se produce una `System.IndexOutOfRangeException` y no se ejecuta ningún paso más.
+*  `P` se evalúa. Si esta evaluación provoca una excepción, no se ejecuta ningún paso más.
+*  Las expresiones de índice del *argument_list* se evalúan en orden, de izquierda a derecha. Después de la evaluación de cada expresión de índice, se realiza una conversión implícita ([conversiones implícitas](conversions.md#implicit-conversions)) en uno de los siguientes tipos: `int`, `uint`, `long``ulong`. Se elige el primer tipo de esta lista para el que existe una conversión implícita. Por ejemplo, si la expresión de índice es de tipo `short`, se realiza una conversión implícita a `int`, ya que las conversiones implícitas de `short` a `int` y de `short` a `long` son posibles. Si la evaluación de una expresión de índice o de la conversión implícita subsiguiente produce una excepción, no se evalúan más expresiones de índice y no se ejecuta ningún paso más.
+*  El valor de `P` se comprueba para ser válido. Si el valor de `P` es `null`, se produce una `System.NullReferenceException` y no se ejecuta ningún paso más.
+*  El valor de cada expresión del *argument_list* se comprueba con respecto a los límites reales de cada dimensión de la instancia de la matriz a la que hace referencia `P`. Si uno o más valores están fuera del intervalo, se produce una `System.IndexOutOfRangeException` y no se ejecuta ningún paso más.
 *  Se calcula la ubicación del elemento de matriz proporcionado por las expresiones de índice y esta ubicación se convierte en el resultado del acceso a la matriz.
 
 #### <a name="indexer-access"></a>Acceso a indizador
 
-En el caso de un acceso de indexador, el *primary_no_array_creation_expression* de *element_access* debe ser una variable o valor de un tipo de clase, struct o interfaz, y este tipo debe implementar uno o varios indexadores aplicables con respecto al *argument_list* de *element_access*.
+En el caso de un acceso de indexador, el *primary_no_array_creation_expression* de la *element_access* debe ser una variable o valor de un tipo de clase, struct o interfaz, y este tipo debe implementar uno o más indexadores aplicables con respecto a la *argument_list* del *element_access*.
 
-El procesamiento en tiempo de enlace de un acceso de indexador con el formato `P[A]`, donde `P` es un *primary_no_array_creation_expression* de un tipo de clase, struct o interfaz `T`, y `A` es un *argument_list*, consta de lo siguiente: pasos
+El procesamiento en tiempo de enlace de un acceso del indizador del formulario `P[A]`, donde `P` es una *primary_no_array_creation_expression* de una clase, estructura o tipo de interfaz `T`y `A` es un *argument_list*, consta de los siguientes pasos:
 
-*  Se crea el conjunto de indexadores proporcionado por `T`. El conjunto está formado por todos los indizadores declarados en `T` o un tipo base de `T` que no son declaraciones `override` y son accesibles en el contexto actual ([acceso a miembros](basic-concepts.md#member-access)).
-*  El conjunto se reduce a los indizadores aplicables y no ocultos por otros indexadores. Las siguientes reglas se aplican a cada indizador `S.I` en el conjunto, donde `S` es el tipo en el que se declara el indizador `I`:
+*  Se crea el conjunto de indexadores proporcionado por `T`. El conjunto está formado por todos los indexadores declarados en `T` o un tipo base de `T` que no son `override` declaraciones y son accesibles en el contexto actual ([acceso a miembros](basic-concepts.md#member-access)).
+*  El conjunto se reduce a los indizadores aplicables y no ocultos por otros indexadores. Las siguientes reglas se aplican a cada indexador `S.I` del conjunto, donde `S` es el tipo en el que se declara el `I` del indexador:
    * Si `I` no es aplicable con respecto a `A` ([miembro de función aplicable](expressions.md#applicable-function-member)), `I` se quita del conjunto.
    * Si `I` es aplicable con respecto a `A` ([miembro de función aplicable](expressions.md#applicable-function-member)), todos los indexadores declarados en un tipo base de `S` se quitan del conjunto.
    * Si `I` es aplicable con respecto a `A` ([miembro de función aplicable](expressions.md#applicable-function-member)) y `S` es un tipo de clase distinto de `object`, todos los indexadores declarados en una interfaz se quitan del conjunto.
 *  Si el conjunto resultante de indizadores candidatos está vacío, no existe ningún indexador aplicable y se produce un error en tiempo de enlace.
 *  El mejor indexador del conjunto de indizadores candidatos se identifica mediante las reglas de resolución de sobrecarga de la [resolución de sobrecarga](expressions.md#overload-resolution). Si no se puede identificar un único indexador mejor, el acceso del indexador es ambiguo y se produce un error en tiempo de enlace.
-*  Las expresiones de índice de *argument_list* se evalúan en orden, de izquierda a derecha. El resultado de procesar el acceso del indexador es una expresión clasificada como un acceso de indexador. La expresión de acceso de indexador hace referencia al indizador determinado en el paso anterior y tiene una expresión de instancia asociada de `P` y una lista de argumentos asociada de `A`.
+*  Las expresiones de índice del *argument_list* se evalúan en orden, de izquierda a derecha. El resultado de procesar el acceso del indexador es una expresión clasificada como un acceso de indexador. La expresión de acceso de indexador hace referencia al indizador determinado en el paso anterior y tiene una expresión de instancia asociada de `P` y una lista de argumentos asociada de `A`.
 
 En función del contexto en el que se utiliza, un acceso de indexador provoca la invocación del *descriptor* de acceso get o del *descriptor* de acceso set del indexador. Si el acceso del indizador es el destino de una asignación, se invoca al *descriptor* de acceso set para asignar un nuevo valor ([asignación simple](expressions.md#simple-assignment)). En todos los demás casos, el *descriptor de acceso get* se invoca para obtener el valor actual ([valores de las expresiones](expressions.md#values-of-expressions)).
 
-### <a name="this-access"></a>este acceso
+### <a name="this-access"></a>Este acceso
 
 Un *this_access* consta de la palabra reservada `this`.
 
@@ -1489,12 +1489,12 @@ this_access
     ;
 ```
 
-Un *this_access* solo se permite en el *bloque* de un constructor de instancia, un método de instancia o un descriptor de acceso de instancia. Tiene uno de los significados siguientes:
+Solo se permite un *this_access* en el *bloque* de un constructor de instancia, un método de instancia o un descriptor de acceso de instancia. Tiene uno de los significados siguientes:
 
-*  Cuando se usa `this` en un *primary_expression* dentro de un constructor de instancia de una clase, se clasifica como un valor. El tipo del valor es el tipo de instancia ([el tipo de instancia](classes.md#the-instance-type)) de la clase en la que se produce el uso y el valor es una referencia al objeto que se está construyendo.
-*  Cuando se usa `this` en un *primary_expression* dentro de un método de instancia o un descriptor de acceso de instancia de una clase, se clasifica como un valor. El tipo del valor es el tipo de instancia ([el tipo de instancia](classes.md#the-instance-type)) de la clase en la que se produce el uso y el valor es una referencia al objeto para el que se invocó el método o el descriptor de acceso.
-*  Cuando se usa `this` en un *primary_expression* dentro de un constructor de instancia de un struct, se clasifica como una variable. El tipo de la variable es el tipo de instancia ([el tipo de instancia](classes.md#the-instance-type)) del struct en el que se produce el uso y la variable representa el struct que se está construyendo. La variable `this` de un constructor de instancia de una estructura se comporta exactamente igual que un parámetro `out` del tipo struct, en concreto, esto significa que la variable debe estar asignada definitivamente en todas las rutas de acceso de ejecución del constructor de instancia.
-*  Cuando se usa `this` en un *primary_expression* dentro de un método de instancia o un descriptor de acceso de instancia de un struct, se clasifica como una variable. El tipo de la variable es el tipo de instancia ([el tipo de instancia](classes.md#the-instance-type)) del struct en el que se produce el uso.
+*  Cuando se utiliza `this` en un *primary_expression* dentro de un constructor de instancia de una clase, se clasifica como un valor. El tipo del valor es el tipo de instancia ([el tipo de instancia](classes.md#the-instance-type)) de la clase en la que se produce el uso y el valor es una referencia al objeto que se está construyendo.
+*  Cuando se utiliza `this` en un *primary_expression* dentro de un método de instancia o un descriptor de acceso de instancia de una clase, se clasifica como un valor. El tipo del valor es el tipo de instancia ([el tipo de instancia](classes.md#the-instance-type)) de la clase en la que se produce el uso y el valor es una referencia al objeto para el que se invocó el método o el descriptor de acceso.
+*  Cuando se utiliza `this` en un *primary_expression* dentro de un constructor de instancia de un struct, se clasifica como una variable. El tipo de la variable es el tipo de instancia ([el tipo de instancia](classes.md#the-instance-type)) del struct en el que se produce el uso y la variable representa el struct que se está construyendo. La variable `this` de un constructor de instancia de una estructura se comporta exactamente igual que un parámetro `out` del tipo struct; en concreto, esto significa que la variable debe estar asignada definitivamente en todas las rutas de acceso de ejecución del constructor de instancia.
+*  Cuando se utiliza `this` en un *primary_expression* dentro de un método de instancia o un descriptor de acceso de instancia de un struct, se clasifica como una variable. El tipo de la variable es el tipo de instancia ([el tipo de instancia](classes.md#the-instance-type)) del struct en el que se produce el uso.
    * Si el método o el descriptor de acceso no es un iterador ([iteradores](classes.md#iterators)), la variable `this` representa la estructura para la que se invocó el método o descriptor de acceso, y se comporta exactamente igual que un parámetro `ref` del tipo struct.
    * Si el método o descriptor de acceso es un iterador, la variable `this` representa una copia del struct para el que se invocó el método o descriptor de acceso, y se comporta exactamente igual que un parámetro de valor del tipo de estructura.
 
@@ -1511,11 +1511,11 @@ base_access
     ;
 ```
 
-Un *base_access* se usa para tener acceso a los miembros de clase base que están ocultos por miembros con el mismo nombre en la clase o el struct actual. Un *base_access* solo se permite en el *bloque* de un constructor de instancia, un método de instancia o un descriptor de acceso de instancia. Cuando `base.I` se produce en una clase o struct, `I` debe indicar un miembro de la clase base de esa clase o estructura. Del mismo modo, cuando `base[E]` se produce en una clase, debe existir un indexador aplicable en la clase base.
+Un *base_access* se utiliza para tener acceso a los miembros de clase base que están ocultos por miembros con el mismo nombre en la clase o el struct actual. Solo se permite un *base_access* en el *bloque* de un constructor de instancia, un método de instancia o un descriptor de acceso de instancia. Cuando `base.I` se produce en una clase o struct, `I` debe indicar un miembro de la clase base de esa clase o estructura. Del mismo modo, cuando `base[E]` se produce en una clase, debe existir un indexador aplicable en la clase base.
 
-En tiempo de enlace, las expresiones *base_access* de la forma `base.I` y `base[E]` se evalúan exactamente como si se hubieran escrito `((B)this).I` y `((B)this)[E]`, donde `B` es la clase base de la clase o estructura en la que se produce la construcción. Por lo tanto, `base.I` y `base[E]` se corresponden con `this.I` y `this[E]`, excepto que `this` se ve como una instancia de la clase base.
+En tiempo de enlace, *base_access* expresiones del formulario `base.I` y `base[E]` se evalúan exactamente como si se hubieran escrito `((B)this).I` y `((B)this)[E]`, donde `B` es la clase base de la clase o estructura en la que se produce la construcción. Por lo tanto, `base.I` y `base[E]` corresponden a `this.I` y `this[E]`, excepto que `this` se ve como una instancia de la clase base.
 
-Cuando un *base_access* hace referencia a un miembro de función virtual (un método, una propiedad o un indizador), se cambia la determinación del miembro de función que se va a invocar en tiempo de ejecución ([comprobación en tiempo de compilación de la resolución dinámica de sobrecarga](expressions.md#compile-time-checking-of-dynamic-overload-resolution)). El miembro de función que se invoca se determina mediante la búsqueda de la implementación más derivada ([métodos virtuales](classes.md#virtual-methods)) del miembro de función con respecto a `B` (en lugar de con respecto al tipo en tiempo de ejecución de `this`, como sería habitual en un acceso no base). . Por lo tanto, dentro de un `override` de un miembro de función `virtual`, se puede usar una *base_access* para invocar la implementación heredada del miembro de función. Si el miembro de función al que hace referencia un *base_access* es abstracto, se produce un error en tiempo de enlace.
+Cuando un *base_access* hace referencia a un miembro de función virtual (un método, una propiedad o un indizador), se cambia la determinación del miembro de función que se va a invocar en tiempo de ejecución ([comprobación en tiempo de compilación de la resolución dinámica de sobrecarga](expressions.md#compile-time-checking-of-dynamic-overload-resolution)). El miembro de función que se invoca se determina mediante la búsqueda de la implementación más derivada ([métodos virtuales](classes.md#virtual-methods)) del miembro de función con respecto a `B` (en lugar de con respecto al tipo en tiempo de ejecución de `this`, como sería habitual en un acceso no base). Por lo tanto, dentro de una `override` de un miembro de función `virtual`, se puede usar un *base_access* para invocar la implementación heredada del miembro de función. Si el miembro de función al que hace referencia una *base_access* es abstracto, se produce un error en tiempo de enlace.
 
 ### <a name="postfix-increment-and-decrement-operators"></a>Operadores de incremento y decremento posfijos
 
@@ -1531,36 +1531,36 @@ post_decrement_expression
 
 El operando de una operación de incremento o decremento postfijo debe ser una expresión clasificada como una variable, un acceso de propiedad o un acceso de indexador. El resultado de la operación es un valor del mismo tipo que el operando.
 
-Si *primary_expression* tiene el tipo en tiempo de compilación `dynamic`, el operador está enlazado dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)), *post_increment_expression* o *post_decrement_expression* tiene el tipo en tiempo de compilación `dynamic`. y las siguientes reglas se aplican en tiempo de ejecución mediante el tipo en tiempo de ejecución de *primary_expression*.
+Si el *primary_expression* tiene el tipo en tiempo de compilación `dynamic`, el operador está enlazado dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)), el *post_increment_expression* o *post_decrement_expression* tiene `dynamic` de tipo en tiempo de compilación y las siguientes reglas se aplican en tiempo de ejecución utilizando el tipo en tiempo de ejecución del *primary_expression*.
 
-Si el operando de una operación de incremento o decremento postfijo es una propiedad o un indexador, la propiedad o el indexador deben tener un descriptor de acceso `get` y `set`. Si no es así, se produce un error en tiempo de enlace.
+Si el operando de una operación de incremento o decremento postfijo es una propiedad o un indexador, la propiedad o el indexador deben tener un `get` y un descriptor de acceso `set`. Si no es así, se produce un error en tiempo de enlace.
 
-La resolución de sobrecargas de operador unario ([resolución de sobrecarga de operadores unarios](expressions.md#unary-operator-overload-resolution)) se aplica para seleccionar una implementación de operador específica. Los operadores predefinidos `++` y `--` existen para los siguientes tipos: @no__t 2, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, 0, 1, 2, 3 y cualquier tipo de enumeración. Los operadores predefinidos `++` devuelven el valor generado agregando 1 al operando y los operadores `--` predefinidos devuelven el valor generado restando 1 del operando. En un contexto `checked`, si el resultado de esta suma o resta está fuera del intervalo del tipo de resultado y el tipo de resultado es un tipo entero o un tipo de enumeración, se produce una `System.OverflowException`.
+La resolución de sobrecargas de operador unario ([resolución de sobrecarga de operadores unarios](expressions.md#unary-operator-overload-resolution)) se aplica para seleccionar una implementación de operador específica. Los operadores predefinidos `++` y `--` existen para los siguientes tipos: `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `float`, `double`, `decimal`y cualquier tipo de enumeración. Los operadores predefinidos `++` devuelven el valor generado agregando 1 al operando y los operadores `--` predefinidos devuelven el valor generado restando 1 del operando. En un contexto de `checked`, si el resultado de esta suma o resta está fuera del intervalo del tipo de resultado y el tipo de resultado es un tipo entero o de enumeración, se produce una `System.OverflowException`.
 
-El procesamiento en tiempo de ejecución de una operación de incremento o decremento postfijo con el formato `x++` o `x--` consta de los siguientes pasos:
+El procesamiento en tiempo de ejecución de una operación de incremento o decremento postfijo del formulario `x++` o `x--` consta de los siguientes pasos:
 
-*   Si `x` está clasificado como una variable:
+*   Si `x` se clasifica como una variable:
     * `x` se evalúa para generar la variable.
     * Se guarda el valor de `x`.
-    * El operador seleccionado se invoca con el valor guardado de `x` como argumento.
+    * El operador seleccionado se invoca con el valor guardado de `x` como su argumento.
     * El valor devuelto por el operador se almacena en la ubicación proporcionada por la evaluación de `x`.
     * El valor guardado de `x` se convierte en el resultado de la operación.
 *   Si `x` se clasifica como un acceso de propiedad o indizador:
-    * La expresión de instancia (si `x` no es `static`) y la lista de argumentos (si `x` es un indexador) asociada a `x` se evalúan, y los resultados se usan en las siguientes invocaciones de descriptor de acceso `get` y `set`.
+    * La expresión de instancia (si `x` no se `static`) y la lista de argumentos (si `x` es un acceso de indexador) asociadas a `x` se evalúan, y los resultados se usan en las invocaciones de descriptor de acceso `get` y `set` subsiguientes.
     * Se invoca al descriptor de acceso `get` de `x` y se guarda el valor devuelto.
-    * El operador seleccionado se invoca con el valor guardado de `x` como argumento.
+    * El operador seleccionado se invoca con el valor guardado de `x` como su argumento.
     * El descriptor de acceso `set` de `x` se invoca con el valor devuelto por el operador como su argumento `value`.
     * El valor guardado de `x` se convierte en el resultado de la operación.
 
-Los operadores `++` y `--` también admiten la notación de prefijo ([operadores de incremento y decremento de prefijo](expressions.md#prefix-increment-and-decrement-operators)). Normalmente, el resultado de `x++` o `x--` es el valor de @no__t 2 antes de la operación, mientras que el resultado de `++x` o `--x` es el valor de `x` después de la operación. En cualquier caso, `x` tiene el mismo valor después de la operación.
+Los operadores `++` y `--` también admiten la notación de prefijo ([operadores de incremento y decremento de prefijo](expressions.md#prefix-increment-and-decrement-operators)). Normalmente, el resultado de `x++` o `x--` es el valor de `x` antes de la operación, mientras que el resultado de `++x` o `--x` es el valor de `x` después de la operación. En cualquier caso, `x` tiene el mismo valor después de la operación.
 
-Se puede invocar una implementación `operator ++` o `operator --` mediante la notación de sufijo o de prefijo. No es posible tener implementaciones de operador independientes para las dos notaciones.
+Una implementación de `operator ++` o `operator --` se puede invocar mediante la notación de sufijo o de prefijo. No es posible tener implementaciones de operador independientes para las dos notaciones.
 
 ### <a name="the-new-operator"></a>Operador new
 
-El operador `new` se usa para crear nuevas instancias de tipos.
+El operador `new` se utiliza para crear nuevas instancias de tipos.
 
-Hay tres formas de expresiones `new`:
+Hay tres formas de expresiones de `new`:
 
 *  Las expresiones de creación de objetos se utilizan para crear nuevas instancias de tipos de clase y tipos de valor.
 *  Las expresiones de creación de matrices se utilizan para crear nuevas instancias de tipos de matriz.
@@ -1570,7 +1570,7 @@ El operador `new` implica la creación de una instancia de un tipo, pero no impl
 
 #### <a name="object-creation-expressions"></a>Expresiones de creación de objetos
 
-Se usa un *object_creation_expression* para crear una nueva instancia de *class_type* o *value_type*.
+Un *object_creation_expression* se usa para crear una nueva instancia de un *class_type* o un *value_type*.
 
 ```antlr
 object_creation_expression
@@ -1584,39 +1584,39 @@ object_or_collection_initializer
     ;
 ```
 
-El *tipo* de *object_creation_expression* debe ser *class_type*, *value_type* o *type_parameter*. El *tipo* no puede ser `abstract` *class_type*.
+El *tipo* de un *object_creation_expression* debe ser un *class_type*, un *value_type* o un *type_parameter*. El *tipo* no puede ser un *class_type*de `abstract`.
 
-Solo se permite *argument_list* ([listas de argumentos](expressions.md#argument-lists)) opcionales si el *tipo* es *class_type* o *struct_type*.
+Solo se permite el *argument_list* opcional ([listas de argumentos](expressions.md#argument-lists)) si el *tipo* es un *class_type* o un *struct_type*.
 
 Una expresión de creación de objeto puede omitir la lista de argumentos del constructor y los paréntesis de cierre especificados que incluye un inicializador de objeto o un inicializador de colección. Omitir la lista de argumentos del constructor y los paréntesis de inclusión equivale a especificar una lista de argumentos vacía.
 
-El procesamiento de una expresión de creación de objetos que incluye un inicializador de objeto o un inicializador de colección consiste en procesar primero el constructor de instancia y después procesar las inicializaciones de miembro o elemento especificadas por el inicializador de objeto ([ Inicializadores de objeto](expressions.md#object-initializers)) o inicializadores de colección ([inicializadores de colección](expressions.md#collection-initializers)).
+El procesamiento de una expresión de creación de objetos que incluye un inicializador de objeto o un inicializador de colección consiste en procesar primero el constructor de instancia y después procesar las inicializaciones de miembro o elemento especificadas por el inicializador de objeto ([inicializadores de objeto](expressions.md#object-initializers)) o el inicializador de colección ([inicializadores de colección](expressions.md#collection-initializers)).
 
-Si alguno de los argumentos del *argument_list* opcional tiene el tipo en tiempo de compilación `dynamic`, el *object_creation_expression* está enlazado dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)) y se aplican las siguientes reglas en tiempo de ejecución mediante el tiempo de ejecución. tipo de los argumentos de *argument_list* que tienen el tipo de tiempo de compilación `dynamic`. Sin embargo, la creación de objetos sufre una comprobación de tiempo de compilación limitada, como se describe en [comprobación en tiempo de compilación de la resolución dinámica de sobrecarga](expressions.md#compile-time-checking-of-dynamic-overload-resolution).
+Si alguno de los argumentos del *argument_list* opcional tiene el tipo en tiempo de compilación `dynamic`, el *object_creation_expression* se enlaza dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)) y se aplican las siguientes reglas en tiempo de ejecución utilizando el tipo en tiempo de ejecución de los argumentos de *argument_list* que tienen el tipo de tiempo de compilación `dynamic`. Sin embargo, la creación de objetos sufre una comprobación de tiempo de compilación limitada, como se describe en [comprobación en tiempo de compilación de la resolución dinámica de sobrecarga](expressions.md#compile-time-checking-of-dynamic-overload-resolution).
 
-El procesamiento en tiempo de enlace de un *object_creation_expression* del formulario `new T(A)`, donde `T` es un *class_type* o un *value_type* y `A` es un *argument_list*opcional, consta de los siguientes pasos:
+El procesamiento en tiempo de enlace de una *object_creation_expression* del formulario `new T(A)`, donde `T` es un *class_type* o *value_type* y `A` es un *argument_list*opcional, consta de los siguientes pasos:
 
-*   Si `T` es *value_type* y `A` no está presente:
-    * *Object_creation_expression* es una invocación de constructor predeterminada. El resultado de *object_creation_expression* es un valor de tipo `T`, es decir, el valor predeterminado de `T` tal y como se define en [el tipo System. ValueType](types.md#the-systemvaluetype-type).
-*   De lo contrario, si `T` es *type_parameter* y `A` no está presente:
+*   Si `T` es una *value_type* y `A` no está presente:
+    * El *object_creation_expression* es una invocación de constructor predeterminada. El resultado de la *object_creation_expression* es un valor de tipo `T`, es decir, el valor predeterminado para `T` tal y como se define en [el tipo System. ValueType](types.md#the-systemvaluetype-type).
+*   De lo contrario, si `T` es una *type_parameter* y `A` no está presente:
     * Si no se ha especificado ninguna restricción de tipo de valor o restricción de constructor ([restricciones de parámetro de tipo](classes.md#type-parameter-constraints)) para `T`, se produce un error en tiempo de enlace.
-    * El resultado de *object_creation_expression* es un valor del tipo en tiempo de ejecución al que se ha enlazado el parámetro de tipo, es decir, el resultado de invocar el constructor predeterminado de ese tipo. El tipo en tiempo de ejecución puede ser un tipo de referencia o un tipo de valor.
-*   De lo contrario, si `T` es *class_type* o *struct_type*:
+    * El resultado de la *object_creation_expression* es un valor del tipo en tiempo de ejecución al que se ha enlazado el parámetro de tipo, es decir, el resultado de invocar el constructor predeterminado de ese tipo. El tipo en tiempo de ejecución puede ser un tipo de referencia o un tipo de valor.
+*   De lo contrario, si `T` es un *class_type* o un *struct_type*:
     * Si `T` es un *class_type*`abstract`, se produce un error en tiempo de compilación.
-    * El constructor de instancia que se va a invocar se determina mediante las reglas de resolución de sobrecarga de la [resolución de sobrecarga](expressions.md#overload-resolution). El conjunto de constructores de instancias candidatas se compone de todos los constructores de instancia accesibles declarados en `T`, que son aplicables con respecto a `A` ([miembro de función aplicable](expressions.md#applicable-function-member)). Si el conjunto de constructores de instancia candidata está vacío, o si no se puede identificar un único constructor de instancia mejor, se produce un error en tiempo de enlace.
-    * El resultado de *object_creation_expression* es un valor de tipo `T`, es decir, el valor generado al invocar el constructor de instancia determinado en el paso anterior.
+    * El constructor de instancia que se va a invocar se determina mediante las reglas de resolución de sobrecarga de la [resolución de sobrecarga](expressions.md#overload-resolution). El conjunto de constructores de instancias candidatas se compone de todos los constructores de instancia accesibles declarados en `T` aplicables con respecto a `A` ([miembro de función aplicable](expressions.md#applicable-function-member)). Si el conjunto de constructores de instancia candidata está vacío, o si no se puede identificar un único constructor de instancia mejor, se produce un error en tiempo de enlace.
+    * El resultado de la *object_creation_expression* es un valor de tipo `T`, es decir, el valor generado al invocar el constructor de instancia determinado en el paso anterior.
 *  De lo contrario, el *object_creation_expression* no es válido y se produce un error en tiempo de enlace.
 
 Aunque el *object_creation_expression* esté enlazado dinámicamente, el tipo en tiempo de compilación sigue siendo `T`.
 
-El procesamiento en tiempo de ejecución de un *object_creation_expression* con el formato `new T(A)`, donde `T` es *class_type* o *struct_type* y `A` es un *argument_list*opcional, consta de los siguientes pasos:
+El procesamiento en tiempo de ejecución de una *object_creation_expression* del formulario `new T(A)`, donde se *class_type* `T` o una *struct_type* y `A` es un *argument_list*opcional, consta de los siguientes pasos:
 
-*   Si `T` es *class_type*:
+*   Si `T` es un *class_type*:
     * Se asigna una nueva instancia de la clase `T`. Si no hay suficiente memoria disponible para asignar la nueva instancia, se produce una `System.OutOfMemoryException` y no se ejecuta ningún otro paso.
     * Todos los campos de la nueva instancia se inicializan con sus valores predeterminados ([valores predeterminados](variables.md#default-values)).
     * El constructor de instancia se invoca de acuerdo con las reglas de invocación de miembros de función ([comprobación en tiempo de compilación de la resolución dinámica de sobrecarga](expressions.md#compile-time-checking-of-dynamic-overload-resolution)). Se pasa automáticamente una referencia a la instancia recién asignada al constructor de instancia y se puede tener acceso a la instancia desde dentro de ese constructor como `this`.
-*   Si `T` es *struct_type*:
-    * Se crea una instancia de tipo `T` mediante la asignación de una variable local temporal. Dado que se requiere un constructor de instancia de un *struct_type* para asignar definitivamente un valor a cada campo de la instancia que se va a crear, no es necesaria la inicialización de la variable temporal.
+*   Si `T` es un *struct_type*:
+    * Se crea una instancia de tipo `T` mediante la asignación de una variable local temporal. Puesto que se requiere un constructor de instancia de un *struct_type* para asignar definitivamente un valor a cada campo de la instancia que se va a crear, no es necesario inicializar la variable temporal.
     * El constructor de instancia se invoca de acuerdo con las reglas de invocación de miembros de función ([comprobación en tiempo de compilación de la resolución dinámica de sobrecarga](expressions.md#compile-time-checking-of-dynamic-overload-resolution)). Se pasa automáticamente una referencia a la instancia recién asignada al constructor de instancia y se puede tener acceso a la instancia desde dentro de ese constructor como `this`.
 
 #### <a name="object-initializers"></a>Inicializadores de objeto
@@ -1648,7 +1648,7 @@ initializer_value
     ;
 ```
 
-Un inicializador de objeto consta de una secuencia de inicializadores de miembro, delimitada por los tokens `{` y `}` y separados por comas. Cada *member_initializer* designa un destino para la inicialización. Un *identificador* debe nombrar un campo o propiedad accesible del objeto que se va a inicializar, mientras que un *argument_list* entre corchetes debe especificar los argumentos de un indizador accesible en el objeto que se va a inicializar. Es un error que un inicializador de objeto incluya más de un inicializador de miembro para el mismo campo o propiedad.
+Un inicializador de objeto se compone de una secuencia de inicializadores de miembro, delimitada por los tokens de `{` y `}` y separados por comas. Cada *member_initializer* designa un destino para la inicialización. Un *identificador* debe asignar un nombre a un campo o propiedad accesible del objeto que se va a inicializar, mientras que una *argument_list* entre corchetes debe especificar los argumentos de un indizador accesible en el objeto que se va a inicializar. Es un error que un inicializador de objeto incluya más de un inicializador de miembro para el mismo campo o propiedad.
 
 Cada *initializer_target* va seguido de un signo igual y una expresión, un inicializador de objeto o un inicializador de colección. No es posible que las expresiones del inicializador de objeto hagan referencia al objeto recién creado que se está inicializando.
 
@@ -1671,7 +1671,7 @@ public class Point
 }
 ```
 
-Se puede crear una instancia de `Point` e inicializarla de la siguiente manera:
+Una instancia de `Point` se puede crear e inicializar de la siguiente manera:
 ```csharp
 Point a = new Point { X = 0, Y = 1 };
 ```
@@ -1693,7 +1693,7 @@ public class Rectangle
 }
 ```
 
-Se puede crear una instancia de `Rectangle` e inicializarla de la siguiente manera:
+Una instancia de `Rectangle` se puede crear e inicializar de la siguiente manera:
 ```csharp
 Rectangle r = new Rectangle {
     P1 = new Point { X = 0, Y = 1 },
@@ -1715,7 +1715,7 @@ Rectangle r = __r;
 ```
 donde `__r`, `__p1` y `__p2` son variables temporales que, de lo contrario, son invisibles e inaccesibles.
 
-Si el constructor de `Rectangle` asigna las dos instancias de `Point` incrustadas
+Si el constructor de `Rectangle`asigna las dos instancias de `Point` incrustadas
 ```csharp
 public class Rectangle
 {
@@ -1770,7 +1770,7 @@ __c[__i2,__i3].Add("b");
 int __i4 = 1, __i5 = 2;
 var c = __c;
 ```
-donde `__c`, etc., son variables generadas que son invisibles e inaccesibles para el código fuente. Tenga en cuenta que los argumentos de `[0,0]` solo se evalúan una vez, y los argumentos de `[1,2]` se evalúan una vez aunque nunca se usan.
+donde `__c`, etc., se generan variables que son invisibles e inaccesibles para el código fuente. Tenga en cuenta que los argumentos de `[0,0]` se evalúan solo una vez, y los argumentos de `[1,2]` se evalúan una vez aunque nunca se usan.
 
 #### <a name="collection-initializers"></a>Inicializadores de colección
 
@@ -1796,7 +1796,7 @@ expression_list
     ;
 ```
 
-Un inicializador de colección consta de una secuencia de inicializadores de elemento, delimitada por los tokens `{` y `}` y separados por comas. Cada inicializador de elemento especifica un elemento que se va a agregar al objeto de colección que se va a inicializar y consta de una lista de expresiones delimitadas por los tokens `{` y `}` y separados por comas.  Un inicializador de elemento de una sola expresión se puede escribir sin llaves, pero no puede ser una expresión de asignación para evitar la ambigüedad con los inicializadores de miembro. La producción de *non_assignment_expression* se define en la [expresión](expressions.md#expression).
+Un inicializador de colección consta de una secuencia de inicializadores de elementos, entre los tokens `{` y `}` y separados por comas. Cada inicializador de elemento especifica un elemento que se va a agregar al objeto de colección que se va a inicializar y consta de una lista de expresiones entre `{` y tokens de `}` y separadas por comas.  Un inicializador de elemento de una sola expresión se puede escribir sin llaves, pero no puede ser una expresión de asignación para evitar la ambigüedad con los inicializadores de miembro. La *non_assignment_expression* Production se define en [Expression](expressions.md#expression).
 
 A continuación se muestra un ejemplo de una expresión de creación de objeto que incluye un inicializador de colección:
 ```csharp
@@ -1818,7 +1818,7 @@ public class Contact
 }
 ```
 
-Se puede crear un `List<Contact>` e inicializarlo como se indica a continuación:
+Un `List<Contact>` se puede crear e inicializar de la siguiente manera:
 ```csharp
 var contacts = new List<Contact> {
     new Contact {
@@ -1849,7 +1849,7 @@ donde `__clist`, `__c1` y `__c2` son variables temporales que, de lo contrario, 
 
 #### <a name="array-creation-expressions"></a>Expresiones de creación de matrices
 
-Se usa un *array_creation_expression* para crear una nueva instancia de un *array_type*.
+Un *array_creation_expression* se usa para crear una nueva instancia de un *array_type*.
 
 ```antlr
 array_creation_expression
@@ -1859,7 +1859,7 @@ array_creation_expression
     ;
 ```
 
-Una expresión de creación de matriz del primer formulario asigna una instancia de matriz del tipo resultante de la eliminación de cada una de las expresiones individuales de la lista de expresiones. Por ejemplo, la expresión de creación de matriz `new int[10,20]` genera una instancia de matriz de tipo `int[,]` y la expresión de creación de matriz `new int[10][,]` genera una matriz de tipo `int[][,]`. Cada expresión de la lista de expresiones debe ser de tipo `int`, `uint`, `long` o `ulong`, o bien se puede convertir implícitamente a uno o varios de estos tipos. El valor de cada expresión determina la longitud de la dimensión correspondiente en la instancia de matriz recién asignada. Dado que la longitud de una dimensión de matriz no debe ser negativa, es un error en tiempo de compilación que tiene un *constant_expression* con un valor negativo en la lista de expresiones.
+Una expresión de creación de matriz del primer formulario asigna una instancia de matriz del tipo resultante de la eliminación de cada una de las expresiones individuales de la lista de expresiones. Por ejemplo, la expresión de creación de matriz `new int[10,20]` genera una instancia de matriz de tipo `int[,]`y la expresión de creación de matriz `new int[10][,]` genera una matriz de tipo `int[][,]`. Cada expresión de la lista de expresiones debe ser de tipo `int`, `uint`, `long`o `ulong`, o bien se puede convertir implícitamente a uno o varios de estos tipos. El valor de cada expresión determina la longitud de la dimensión correspondiente en la instancia de matriz recién asignada. Dado que la longitud de una dimensión de matriz no debe ser negativa, es un error en tiempo de compilación tener un *constant_expression* con un valor negativo en la lista de expresiones.
 
 Excepto en un contexto no seguro ([contextos no seguros](unsafe-code.md#unsafe-contexts)), no se especifica el diseño de las matrices.
 
@@ -1874,13 +1874,13 @@ corresponde exactamente a
 new int[3, 2] {{0, 1}, {2, 3}, {4, 5}}
 ```
 
-Se hace referencia a una expresión de creación de matriz del tercer formulario como una ***expresión de creación de matriz con tipo implícito***. Es similar a la segunda forma, salvo que el tipo de elemento de la matriz no se proporciona explícitamente, pero se determina como el mejor tipo común ([encontrar el mejor tipo común de un conjunto de expresiones](expressions.md#finding-the-best-common-type-of-a-set-of-expressions)) del conjunto de expresiones en el inicializador de matriz. En el caso de una matriz multidimensional, es decir, una donde la *rank_specifier* contiene al menos una coma, este conjunto consta de todas las *expresiones*que se encuentran en los *array_initializer*anidados.
+Se hace referencia a una expresión de creación de matriz del tercer formulario como una ***expresión de creación de matriz con tipo implícito***. Es similar a la segunda forma, salvo que el tipo de elemento de la matriz no se proporciona explícitamente, pero se determina como el mejor tipo común ([encontrar el mejor tipo común de un conjunto de expresiones](expressions.md#finding-the-best-common-type-of-a-set-of-expressions)) del conjunto de expresiones en el inicializador de matriz. En el caso de una matriz multidimensional, es decir, una donde la *rank_specifier* contiene al menos una coma, este conjunto incluye todas las *expresiones*que se encuentran en los *array_initializer*anidados.
 
 Los inicializadores de matriz se describen con más detalle en [inicializadores de matriz](arrays.md#array-initializers).
 
 El resultado de evaluar una expresión de creación de matriz se clasifica como un valor, es decir, una referencia a la instancia de la matriz recién asignada. El procesamiento en tiempo de ejecución de una expresión de creación de matriz consta de los siguientes pasos:
 
-*  Las expresiones de longitud de dimensión del *expression_list* se evalúan en orden, de izquierda a derecha. Después de la evaluación de cada expresión, se realiza una conversión implícita ([conversiones implícitas](conversions.md#implicit-conversions)) en uno de los siguientes tipos: `int`, `uint`, `long`, @no__t 4. Se elige el primer tipo de esta lista para el que existe una conversión implícita. Si la evaluación de una expresión o la conversión implícita subsiguiente produce una excepción, no se evalúan más expresiones y no se ejecuta ningún otro paso.
+*  Las expresiones de longitud de dimensión del *expression_list* se evalúan en orden, de izquierda a derecha. Después de la evaluación de cada expresión, se realiza una conversión implícita ([conversiones implícitas](conversions.md#implicit-conversions)) en uno de los siguientes tipos: `int`, `uint`, `long``ulong`. Se elige el primer tipo de esta lista para el que existe una conversión implícita. Si la evaluación de una expresión o la conversión implícita subsiguiente produce una excepción, no se evalúan más expresiones y no se ejecuta ningún otro paso.
 *  Los valores calculados de las longitudes de dimensión se validan como se indica a continuación. Si uno o varios de los valores son menores que cero, se produce una `System.OverflowException` y no se ejecuta ningún otro paso.
 *  Se asigna una instancia de matriz con las longitudes de dimensión dadas. Si no hay suficiente memoria disponible para asignar la nueva instancia, se produce una `System.OutOfMemoryException` y no se ejecuta ningún otro paso.
 *  Todos los elementos de la nueva instancia de matriz se inicializan con sus valores predeterminados ([valores predeterminados](variables.md#default-values)).
@@ -1917,7 +1917,7 @@ var c = new[,] { { "hello", null }, { "world", "!" } };   // string[,]
 var d = new[] { 1, "one", 2, "two" };                     // Error
 ```
 
-La última expresión genera un error en tiempo de compilación porque ni `int` ni `string` se convierte implícitamente en el otro, por lo que no hay ningún tipo común mejor. En este caso, se debe usar una expresión de creación de matriz con tipo explícito, por ejemplo, especificando el tipo que se va a `object[]`. Como alternativa, uno de los elementos se puede convertir a un tipo base común, que luego se convertiría en el tipo de elemento deducido.
+La última expresión genera un error en tiempo de compilación porque ni `int` ni `string` se pueden convertir implícitamente al otro, por lo que no hay ningún tipo común más adecuado. En este caso, se debe usar una expresión de creación de matriz con tipo explícito, por ejemplo, especificando el tipo que se va a `object[]`. Como alternativa, uno de los elementos se puede convertir a un tipo base común, que luego se convertiría en el tipo de elemento deducido.
 
 Las expresiones de creación de matrices con tipo implícito se pueden combinar con inicializadores de objeto anónimos ([expresiones de creación de objetos anónimos](expressions.md#anonymous-object-creation-expressions)) para crear estructuras de datos con tipos anónimos. Por ejemplo:
 ```csharp
@@ -1935,7 +1935,7 @@ var contacts = new[] {
 
 #### <a name="delegate-creation-expressions"></a>Expresiones de creación de delegados
 
-Se usa un *delegate_creation_expression* para crear una nueva instancia de *delegate_type*.
+Un *delegate_creation_expression* se usa para crear una nueva instancia de un *delegate_type*.
 
 ```antlr
 delegate_creation_expression
@@ -1943,23 +1943,23 @@ delegate_creation_expression
     ;
 ```
 
-El argumento de una expresión de creación de delegado debe ser un grupo de métodos, una función anónima o un valor del tipo en tiempo de compilación `dynamic` o *delegate_type*. Si el argumento es un grupo de métodos, identifica el método y, para un método de instancia, el objeto para el que se va a crear un delegado. Si el argumento es una función anónima, define directamente los parámetros y el cuerpo del método del destino del delegado. Si el argumento es un valor, identifica una instancia de delegado de la que se va a crear una copia.
+El argumento de una expresión de creación de delegado debe ser un grupo de métodos, una función anónima o un valor del tipo en tiempo de compilación `dynamic` o un *delegate_type*. Si el argumento es un grupo de métodos, identifica el método y, para un método de instancia, el objeto para el que se va a crear un delegado. Si el argumento es una función anónima, define directamente los parámetros y el cuerpo del método del destino del delegado. Si el argumento es un valor, identifica una instancia de delegado de la que se va a crear una copia.
 
-Si la *expresión* tiene el tipo en tiempo de compilación `dynamic`, el *delegate_creation_expression* está enlazado dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)) y las reglas siguientes se aplican en tiempo de ejecución mediante el tipo en tiempo de ejecución de la *expresión*. De lo contrario, las reglas se aplican en tiempo de compilación.
+Si la *expresión* tiene el tipo en tiempo de compilación `dynamic`, el *delegate_creation_expression* está enlazado dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)) y las reglas siguientes se aplican en tiempo de ejecución utilizando el tipo en tiempo de ejecución de la *expresión*. De lo contrario, las reglas se aplican en tiempo de compilación.
 
-El procesamiento en tiempo de enlace de un *delegate_creation_expression* del formulario `new D(E)`, donde `D` es un *delegate_type* y @no__t 4 es una *expresión*, consta de los siguientes pasos:
+El procesamiento en tiempo de enlace de una *delegate_creation_expression* del formulario `new D(E)`, donde `D` es una *delegate_type* y `E` es una *expresión*, consta de los siguientes pasos:
 
 *  Si `E` es un grupo de métodos, la expresión de creación de delegado se procesa de la misma manera que una conversión de grupo de métodos ([conversiones de grupo de métodos](conversions.md#method-group-conversions)) de `E` a `D`.
 *  Si `E` es una función anónima, la expresión de creación de delegado se procesa de la misma manera que una conversión de función anónima ([conversiones de funciones anónimas](conversions.md#anonymous-function-conversions)) de `E` a `D`.
-*  Si `E` es un valor, `E` debe ser compatible ([declaraciones de delegado](delegates.md#delegate-declarations)) con `D` y el resultado es una referencia a un delegado recién creado de tipo `D` que hace referencia a la misma lista de invocación que `E`. Si `E` no es compatible con `D`, se produce un error en tiempo de compilación.
+*  Si `E` es un valor, `E` debe ser compatible ([declaraciones de delegado](delegates.md#delegate-declarations)) con `D`y el resultado es una referencia a un delegado recién creado de tipo `D` que hace referencia a la misma lista de invocación que `E`. Si `E` no es compatible con `D`, se produce un error en tiempo de compilación.
 
-El procesamiento en tiempo de ejecución de un *delegate_creation_expression* con el formato `new D(E)`, donde `D` es un *delegate_type* y @no__t 4 es una *expresión*, consta de los siguientes pasos:
+El procesamiento en tiempo de ejecución de una *delegate_creation_expression* del formulario `new D(E)`, donde `D` es una *delegate_type* y `E` es una *expresión*, consta de los siguientes pasos:
 
-*   Si `E` es un grupo de métodos, la expresión de creación de delegados se evalúa como una conversión de grupo de métodos ([conversiones de grupo de métodos](conversions.md#method-group-conversions)) de `E` a `D`.
+*   Si `E` es un grupo de métodos, la expresión de creación de delegado se evalúa como una conversión de grupo de métodos ([conversiones de grupo de métodos](conversions.md#method-group-conversions)) de `E` a `D`.
 *   Si `E` es una función anónima, la creación del delegado se evalúa como una conversión de función anónima de `E` a `D` ([conversiones de funciones anónimas](conversions.md#anonymous-function-conversions)).
-*   Si `E` es un valor de *delegate_type*:
-    * se evalúa `E`. Si esta evaluación provoca una excepción, no se ejecuta ningún paso más.
-    * Si el valor de `E` es `null`, se produce una @no__t 2 y no se ejecuta ningún otro paso.
+*   Si `E` es un valor de un *delegate_type*:
+    * `E` se evalúa. Si esta evaluación provoca una excepción, no se ejecuta ningún paso más.
+    * Si el valor de `E` es `null`, se produce una `System.NullReferenceException` y no se ejecuta ningún paso más.
     * Se asigna una nueva instancia del tipo de delegado `D`. Si no hay suficiente memoria disponible para asignar la nueva instancia, se produce una `System.OutOfMemoryException` y no se ejecuta ningún otro paso.
     * La nueva instancia de delegado se inicializa con la misma lista de invocación que la instancia de delegado proporcionada por `E`.
 
@@ -1967,7 +1967,7 @@ La lista de invocaciones de un delegado se determina cuando se crea una instanci
 
 No es posible crear un delegado que haga referencia a una propiedad, un indexador, un operador definido por el usuario, un constructor de instancia, un destructor o un constructor estático.
 
-Como se describió anteriormente, cuando se crea un delegado a partir de un grupo de métodos, la lista de parámetros formales y el tipo de valor devuelto del delegado determinan cuál de los métodos sobrecargados se deben seleccionar. En el ejemplo
+Como se describió anteriormente, cuando se crea un delegado a partir de un grupo de métodos, la lista de parámetros formales y el tipo de valor devuelto del delegado determinan cuál de los métodos sobrecargados se deben seleccionar. en el ejemplo
 ```csharp
 delegate double DoubleFunc(double x);
 
@@ -1988,7 +1988,7 @@ el campo `A.f` se inicializa con un delegado que hace referencia al segundo mét
 
 #### <a name="anonymous-object-creation-expressions"></a>Expresiones de creación de objetos anónimos
 
-Se usa un *anonymous_object_creation_expression* para crear un objeto de un tipo anónimo.
+Un *anonymous_object_creation_expression* se usa para crear un objeto de un tipo anónimo.
 
 ```antlr
 anonymous_object_creation_expression
@@ -2042,13 +2042,13 @@ class __Anonymous1
     public override int GetHashCode() { ... }
 }
 ```
-donde cada `Tx` es el tipo de la expresión correspondiente `ex`. La expresión usada en *member_declarator* debe tener un tipo. Por lo tanto, se trata de un error en tiempo de compilación para que una expresión de *member_declarator* sea NULL o una función anónima. También es un error en tiempo de compilación para que la expresión tenga un tipo no seguro.
+donde cada `Tx` es el tipo de la `ex`de expresión correspondiente. La expresión utilizada en un *member_declarator* debe tener un tipo. Por lo tanto, se trata de un error en tiempo de compilación para que una expresión de una *member_declarator* sea NULL o una función anónima. También es un error en tiempo de compilación para que la expresión tenga un tipo no seguro.
 
-El compilador genera automáticamente los nombres de un tipo anónimo y del parámetro para su método `Equals` y no se puede hacer referencia a ellos en el texto del programa.
+El compilador genera automáticamente los nombres de un tipo anónimo y del parámetro para su método `Equals`, y no se puede hacer referencia a ellos en el texto del programa.
 
 En el mismo programa, dos inicializadores de objeto anónimo que especifican una secuencia de propiedades de los mismos nombres y tipos en tiempo de compilación en el mismo orden generarán instancias del mismo tipo anónimo.
 
-En el ejemplo
+en el ejemplo
 ```csharp
 var p1 = new { Name = "Lawnmower", Price = 495.00 };
 var p2 = new { Name = "Shovel", Price = 26.95 };
@@ -2056,9 +2056,9 @@ p1 = p2;
 ```
 la asignación en la última línea se permite porque `p1` y `p2` son del mismo tipo anónimo.
 
-Los métodos `Equals` y `GetHashcode` en los tipos anónimos invalidan los métodos heredados de `object` y se definen en términos de `Equals` y `GetHashcode` de las propiedades, de modo que dos instancias del mismo tipo anónimo son iguales si y solo si todas sus propiedades son sea.
+Los métodos `Equals` y `GetHashcode` en los tipos anónimos invalidan los métodos heredados de `object`y se definen en términos de `Equals` y `GetHashcode` de las propiedades, de modo que dos instancias del mismo tipo anónimo son iguales si y solo si todas sus propiedades son iguales.
 
-Un declarador de miembro se puede abreviar como un nombre simple ([inferencia de tipos](expressions.md#type-inference)), un acceso a miembro ([comprobación en tiempo de compilación de la resolución dinámica de sobrecarga](expressions.md#compile-time-checking-of-dynamic-overload-resolution)), un acceso base ([acceso base](expressions.md#base-access)) o un acceso a miembro condicional nulo ([ Expresiones condicionales NULL como inicializadores de proyección](expressions.md#null-conditional-expressions-as-projection-initializers)). Esto se denomina ***inicializador de proyección*** y es la abreviatura de una declaración de y la asignación a una propiedad con el mismo nombre. En concreto, los declaradores de miembros de los formularios
+Un declarador de miembro se puede abreviar como un nombre simple ([inferencia de tipos](expressions.md#type-inference)), un acceso a miembro ([comprobación en tiempo de compilación de la resolución dinámica de sobrecarga](expressions.md#compile-time-checking-of-dynamic-overload-resolution)), un acceso base ([acceso base](expressions.md#base-access)) o un acceso a miembro condicional nulo ([expresiones condicionales NULL como inicializadores de proyección](expressions.md#null-conditional-expressions-as-projection-initializers)). Esto se denomina ***inicializador de proyección*** y es la abreviatura de una declaración de y la asignación a una propiedad con el mismo nombre. En concreto, los declaradores de miembros de los formularios
 ```csharp
 identifier
 expr.identifier
@@ -2073,7 +2073,7 @@ Por lo tanto, en un inicializador de proyección, el *identificador* selecciona 
 
 ### <a name="the-typeof-operator"></a>El operador typeof
 
-El operador `typeof` se usa para obtener el objeto `System.Type` para un tipo.
+El operador `typeof` se utiliza para obtener el objeto `System.Type` de un tipo.
 
 ```antlr
 typeof_expression
@@ -2097,19 +2097,19 @@ comma
     ;
 ```
 
-La primera forma de *typeof_expression* consta de una palabra clave `typeof` seguida de un *tipo*entre paréntesis. El resultado de una expresión de este formulario es el objeto `System.Type` para el tipo indicado. Solo hay un objeto `System.Type` para cualquier tipo dado. Esto significa que para un tipo @ no__t-0, `typeof(T) == typeof(T)` siempre es true. El *tipo* no puede ser `dynamic`.
+La primera forma de *typeof_expression* consta de una palabra clave `typeof` seguida de un *tipo*entre paréntesis. El resultado de una expresión de este formulario es el `System.Type` objeto para el tipo indicado. Solo hay un objeto `System.Type` para un tipo determinado. Esto significa que para un tipo `T`, `typeof(T) == typeof(T)` siempre es true. No se puede `dynamic`el *tipo* .
 
-La segunda forma de *typeof_expression* consta de una palabra clave `typeof` seguida de un *unbound_type_name*entre paréntesis. Un *unbound_type_name* es muy similar a un *type_name* ([espacio de nombres y nombres de tipo](basic-concepts.md#namespace-and-type-names)), salvo que un *unbound_type_name* contiene *generic_dimension_specifier*s donde *type_name* contiene *tipo argument_list*s. Cuando el operando de una *typeof_expression* es una secuencia de tokens que satisface las gramáticas de *unbound_type_name* y *type_name*, es decir, cuando no contiene ningún *generic_dimension_specifier* ni *type_argument _list*, la secuencia de tokens se considera un *type_name*. El significado de un *unbound_type_name* se determina de la siguiente manera:
+La segunda forma de *typeof_expression* consta de una palabra clave `typeof` seguida de un *unbound_type_name*entre paréntesis. Un *unbound_type_name* es muy similar a un *type_name* ([espacio de nombres y nombres de tipo](basic-concepts.md#namespace-and-type-names)), salvo que un *unbound_type_name* contiene *generic_dimension_specifier*s donde una *type_name* contiene *type_argument_list*s. Cuando el operando de una *typeof_expression* es una secuencia de tokens que satisface las gramáticas de *unbound_type_name* y *type_name*, es decir, cuando no contiene un *generic_dimension_specifier* ni un *type_argument_list*, la secuencia de tokens se considera una *type_name*. El significado de un *unbound_type_name* se determina de la manera siguiente:
 
 *  Convierta la secuencia de tokens en un *type_name* reemplazando cada *generic_dimension_specifier* por un *type_argument_list* que tenga el mismo número de comas y la palabra clave `object` como cada *type_argument*.
-*  Evalúe el *type_name*resultante, pasando por alto todas las restricciones de parámetro de tipo.
-*  *Unbound_type_name* se resuelve en el tipo genérico sin enlazar asociado con el tipo construido resultante ([tipos enlazados y sin enlazar](types.md#bound-and-unbound-types)).
+*  Evalúe el *type_name*resultante, pasando por alto todas las restricciones de parámetros de tipo.
+*  El *unbound_type_name* se resuelve en el tipo genérico sin enlazar asociado con el tipo construido resultante ([tipos enlazados y sin enlazar](types.md#bound-and-unbound-types)).
 
-El resultado de *typeof_expression* es el objeto `System.Type` para el tipo genérico sin enlazar resultante.
+El resultado de la *typeof_expression* es el `System.Type` objeto para el tipo genérico sin enlazar resultante.
 
 La tercera forma de *typeof_expression* consta de una palabra clave `typeof` seguida de una palabra clave `void` entre paréntesis. El resultado de una expresión de este formulario es el objeto `System.Type` que representa la ausencia de un tipo. El objeto de tipo devuelto por `typeof(void)` es distinto del objeto de tipo devuelto para cualquier tipo. Este objeto de tipo especial es útil en las bibliotecas de clases que permiten la reflexión en métodos del lenguaje, donde esos métodos desean tener una manera de representar el tipo de valor devuelto de cualquier método, incluidos los métodos void, con una instancia de `System.Type`.
 
-El operador `typeof` se puede usar en un parámetro de tipo. El resultado es el objeto `System.Type` para el tipo en tiempo de ejecución que se enlazó al parámetro de tipo. El operador `typeof` también se puede usar en un tipo construido o en un tipo genérico sin enlazar ([tipos enlazados y sin enlazar](types.md#bound-and-unbound-types)). El objeto `System.Type` para un tipo genérico sin enlazar no es el mismo que el objeto `System.Type` del tipo de instancia. El tipo de instancia siempre es un tipo construido cerrado en tiempo de ejecución, por lo que su objeto `System.Type` depende de los argumentos de tipo en tiempo de ejecución en uso, mientras que el tipo genérico sin enlazar no tiene ningún argumento de tipo.
+El operador `typeof` se puede utilizar en un parámetro de tipo. El resultado es el `System.Type` objeto para el tipo en tiempo de ejecución que se enlazó al parámetro de tipo. El operador `typeof` también se puede usar en un tipo construido o en un tipo genérico sin enlazar ([tipos enlazados y sin enlazar](types.md#bound-and-unbound-types)). El objeto `System.Type` para un tipo genérico sin enlazar no es el mismo que el objeto `System.Type` del tipo de instancia. El tipo de instancia siempre es un tipo construido cerrado en tiempo de ejecución, por lo que su `System.Type` objeto depende de los argumentos de tipo en tiempo de ejecución en uso, mientras que el tipo genérico sin enlazar no tiene ningún argumento de tipo.
 
 El ejemplo
 ```csharp
@@ -2157,7 +2157,7 @@ X`1[T]
 
 Tenga en cuenta que `int` y `System.Int32` son del mismo tipo.
 
-Tenga en cuenta también que el resultado de `typeof(X<>)` no depende del argumento de tipo, pero el resultado de `typeof(X<T>)` sí lo hace.
+Tenga en cuenta también que el resultado de `typeof(X<>)` no depende del argumento de tipo, pero el resultado de `typeof(X<T>)` sí.
 
 ### <a name="the-checked-and-unchecked-operators"></a>Operadores checked y unchecked
 
@@ -2173,29 +2173,29 @@ unchecked_expression
     ;
 ```
 
-El operador `checked` evalúa la expresión contenida en un contexto comprobado y el operador `unchecked` evalúa la expresión contenida en un contexto no comprobado. Un *checked_expression* o *unchecked_expression* corresponde exactamente a un *parenthesized_expression* ([expresiones entre paréntesis](expressions.md#parenthesized-expressions)), salvo que la expresión contenida se evalúa en el contexto de comprobación de desbordamiento determinado. .
+El operador `checked` evalúa la expresión contenida en un contexto comprobado y el operador `unchecked` evalúa la expresión contenida en un contexto no comprobado. Un *checked_expression* o *unchecked_expression* corresponde exactamente a un *parenthesized_expression* ([expresiones entre paréntesis](expressions.md#parenthesized-expressions)), salvo que la expresión contenida se evalúa en el contexto de comprobación de desbordamiento determinado.
 
 El contexto de comprobación de desbordamiento también se puede controlar a través de las instrucciones `checked` y `unchecked` ([las instrucciones checked y unchecked](statements.md#the-checked-and-unchecked-statements)).
 
-Las siguientes operaciones se ven afectadas por el contexto de comprobación de desbordamiento establecido por los operadores y las instrucciones `checked` y `unchecked`:
+Las siguientes operaciones se ven afectadas por el contexto de comprobación de desbordamiento establecido por los operadores e instrucciones de `checked` y `unchecked`:
 
-*  Los operadores unarios predefinidos `++` y `--` (operadores de[incremento y decremento](expressions.md#postfix-increment-and-decrement-operators) [postfijo y operadores de incremento y decremento de prefijo](expressions.md#prefix-increment-and-decrement-operators)) cuando el operando es de un tipo entero.
+*  Los operadores unarios `++` y `--` (operadores de[incremento y decremento](expressions.md#postfix-increment-and-decrement-operators) postfijo y operadores de [incremento y decremento de prefijo](expressions.md#prefix-increment-and-decrement-operators)) cuando el operando es de un tipo entero.
 *  El operador unario `-` predefinido ([operador unario menos](expressions.md#unary-minus-operator)), cuando el operando es de un tipo entero.
-*  Los operadores binarios `+`, `-`, `*` y `/` predefinidos ([operadores aritméticos](expressions.md#arithmetic-operators)), cuando ambos operandos son de tipos enteros.
+*  Los operadores binarios predefinidos `+`, `-`, `*`y `/` ([operadores aritméticos](expressions.md#arithmetic-operators)), cuando ambos operandos son de tipos enteros.
 *  Conversiones numéricas explícitas ([Conversiones numéricas explícitas](conversions.md#explicit-numeric-conversions)) de un tipo entero a otro tipo entero, o de `float` o `double` a un tipo entero.
 
 Cuando una de las operaciones anteriores produce un resultado que es demasiado grande para representarlo en el tipo de destino, el contexto en el que se realiza la operación controla el comportamiento resultante:
 
-*  En un contexto `checked`, si la operación es una expresión constante ([expresiones constantes](expressions.md#constant-expressions)), se produce un error en tiempo de compilación. De lo contrario, cuando la operación se realiza en tiempo de ejecución, se produce una `System.OverflowException`.
-*  En un contexto `unchecked`, el resultado se trunca descartando los bits de orden superior que no caben en el tipo de destino.
+*  En un contexto de `checked`, si la operación es una expresión constante ([expresiones constantes](expressions.md#constant-expressions)), se produce un error en tiempo de compilación. De lo contrario, cuando la operación se realiza en tiempo de ejecución, se produce una `System.OverflowException`.
+*  En un contexto de `unchecked`, el resultado se trunca descartando los bits de orden superior que no caben en el tipo de destino.
 
-En el caso de expresiones no constantes (expresiones que se evalúan en tiempo de ejecución) que no están incluidas en ningún operador o instrucción `checked` o `unchecked`, el contexto de comprobación de desbordamiento predeterminado es `unchecked` a menos que se produzcan factores externos (como modificadores de compilador y configuración del entorno de ejecución) llamada para la evaluación de `checked`.
+En el caso de expresiones que no son constantes (expresiones que se evalúan en tiempo de ejecución) que no están incluidas en ningún operador o instrucción `checked` o `unchecked`, el contexto de comprobación de desbordamiento predeterminado es `unchecked` a menos que los factores externos (como los modificadores de compilador y la configuración del entorno de ejecución) llamen a la evaluación de `checked`.
 
-En el caso de expresiones constantes (expresiones que se pueden evaluar completamente en tiempo de compilación), el contexto de comprobación de desbordamiento predeterminado siempre es `checked`. A menos que una expresión constante se coloque explícitamente en un contexto `unchecked`, los desbordamientos que se producen durante la evaluación de la expresión en tiempo de compilación siempre producen errores en tiempo de compilación.
+En el caso de expresiones constantes (expresiones que se pueden evaluar por completo en tiempo de compilación), el contexto de comprobación de desbordamiento predeterminado siempre es `checked`. A menos que una expresión constante se coloque explícitamente en un contexto de `unchecked`, los desbordamientos que se producen durante la evaluación de la expresión en tiempo de compilación siempre producen errores en tiempo de compilación.
 
-El cuerpo de una función anónima no se ve afectado por los contextos `checked` o `unchecked` en los que se produce la función anónima.
+El cuerpo de una función anónima no se ve afectado por `checked` o `unchecked` contextos en los que se produce la función anónima.
 
-En el ejemplo
+en el ejemplo
 ```csharp
 class Test
 {
@@ -2215,9 +2215,9 @@ class Test
     }
 }
 ```
-no se detectan errores en tiempo de compilación, ya que ninguna de las expresiones se puede evaluar en tiempo de compilación. En tiempo de ejecución, el método `F` produce una `System.OverflowException` y el método `G` devuelve-727379968 (los 32 bits inferiores del resultado fuera del intervalo). El comportamiento del método `H` depende del contexto de comprobación de desbordamiento predeterminado para la compilación, pero es igual que `F` o igual que `G`.
+no se detectan errores en tiempo de compilación, ya que ninguna de las expresiones se puede evaluar en tiempo de compilación. En tiempo de ejecución, el método `F` produce una `System.OverflowException`y el método `G` devuelve-727379968 (los 32 bits inferiores del resultado fuera del intervalo). El comportamiento del método `H` depende del contexto de comprobación de desbordamiento predeterminado para la compilación, pero es igual que `F` o igual que `G`.
 
-En el ejemplo
+en el ejemplo
 ```csharp
 class Test
 {
@@ -2237,9 +2237,9 @@ class Test
     }
 }
 ```
-los desbordamientos que se producen al evaluar las expresiones constantes en `F` y `H` provocan que se notifiquen los errores en tiempo de compilación porque las expresiones se evalúan en un contexto de @no__t 2. También se produce un desbordamiento al evaluar la expresión constante en `G`, pero como la evaluación tiene lugar en un contexto `unchecked`, el desbordamiento no se registra.
+los desbordamientos que se producen al evaluar las expresiones constantes en `F` y `H` provocan que se notifiquen los errores en tiempo de compilación porque las expresiones se evalúan en un contexto de `checked`. También se produce un desbordamiento al evaluar la expresión constante en `G`, pero como la evaluación tiene lugar en un contexto de `unchecked`, no se genera el desbordamiento.
 
-Los operadores `checked` y `unchecked` solo afectan al contexto de comprobación de desbordamiento para las operaciones que están contenidas textualmente en los tokens "@no__t 2" y "`)`". Los operadores no tienen ningún efecto en los miembros de función que se invocan como resultado de evaluar la expresión contenida. En el ejemplo
+Los operadores `checked` y `unchecked` solo afectan al contexto de comprobación de desbordamiento para las operaciones que están contenidas textualmente en los tokens "`(`" y "`)`". Los operadores no tienen ningún efecto en los miembros de función que se invocan como resultado de evaluar la expresión contenida. en el ejemplo
 ```csharp
 class Test
 {
@@ -2252,9 +2252,9 @@ class Test
     }
 }
 ```
-el uso de `checked` en `F` no afecta a la evaluación de @no__t 2 en `Multiply`, por lo que `x * y` se evalúa en el contexto de comprobación de desbordamiento predeterminado.
+el uso de `checked` en `F` no afecta a la evaluación de `x * y` en `Multiply`, por lo que `x * y` se evalúa en el contexto de comprobación de desbordamiento predeterminado.
 
-El operador `unchecked` es práctico al escribir constantes de los tipos enteros con signo en notación hexadecimal. Por ejemplo:
+El operador `unchecked` es conveniente cuando se escriben constantes de los tipos enteros con signo en notación hexadecimal. Por ejemplo:
 ```csharp
 class Test
 {
@@ -2264,9 +2264,9 @@ class Test
 }
 ```
 
-Las dos constantes hexadecimales anteriores son del tipo `uint`. Dado que las constantes están fuera del intervalo `int`, sin el operador `unchecked`, las conversiones a `int` generarán errores en tiempo de compilación.
+Las dos constantes hexadecimales anteriores son de tipo `uint`. Dado que las constantes están fuera del intervalo de `int`, sin el operador `unchecked`, las conversiones a `int` producirán errores en tiempo de compilación.
 
-Los operadores e instrucciones `checked` y `unchecked` permiten a los programadores controlar determinados aspectos de algunos cálculos numéricos. Sin embargo, el comportamiento de algunos operadores numéricos depende de los tipos de datos de los operandos. Por ejemplo, si se multiplican dos decimales, siempre se produce una excepción en el desbordamiento incluso dentro de una construcción `unchecked` explícitamente. Del mismo modo, si se multiplican dos floats, nunca se produce una excepción en el desbordamiento incluso dentro de una construcción `checked` explícitamente. Además, otros operadores nunca se ven afectados por el modo de comprobación, ya sea de forma predeterminada o explícita.
+Los operadores e instrucciones `checked` y `unchecked` permiten a los programadores controlar determinados aspectos de algunos cálculos numéricos. Sin embargo, el comportamiento de algunos operadores numéricos depende de los tipos de datos de los operandos. Por ejemplo, si se multiplican dos decimales siempre se produce una excepción en el desbordamiento incluso dentro de una construcción de `unchecked` explícita. Del mismo modo, si se multiplican dos floats, nunca se produce una excepción en el desbordamiento incluso dentro de una construcción de `checked` explícita. Además, otros operadores nunca se ven afectados por el modo de comprobación, ya sea de forma predeterminada o explícita.
 
 ### <a name="default-value-expressions"></a>Expresiones de valor predeterminado
 
@@ -2278,14 +2278,14 @@ default_value_expression
     ;
 ```
 
-Si el *tipo* de un *default_value_expression* se evalúa en tiempo de ejecución en un tipo de referencia, el resultado es `null` convertido en ese tipo. Si el *tipo* de un *default_value_expression* se evalúa en tiempo de ejecución en un tipo de valor, el resultado es el valor predeterminado de *Value_type*([constructores predeterminados](types.md#default-constructors)).
+Si el *tipo* de un *default_value_expression* se evalúa en tiempo de ejecución en un tipo de referencia, el resultado se `null` convertir a ese tipo. Si el *tipo* de un *default_value_expression* se evalúa en tiempo de ejecución en un tipo de valor, el resultado es el valor predeterminado del *Value_type*([constructores predeterminados](types.md#default-constructors)).
 
-Un *default_value_expression* es una expresión constante ([expresiones constantes](expressions.md#constant-expressions)) si el tipo es un tipo de referencia o un parámetro de tipo que se sabe que es un tipo de referencia ([restricciones de parámetro de tipo](classes.md#type-parameter-constraints)). Además, un *default_value_expression* es una expresión constante si el tipo es uno de los siguientes tipos de valor: `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, 0, 1, 2, 3 o cualquier tipo de enumeración.
+Un *default_value_expression* es una expresión constante ([expresiones constantes](expressions.md#constant-expressions)) si el tipo es un tipo de referencia o un parámetro de tipo que se sabe que es un tipo de referencia ([restricciones de parámetro de tipo](classes.md#type-parameter-constraints)). Además, una *default_value_expression* es una expresión constante si el tipo es uno de los siguientes tipos de valor: `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `float`, `double`, `decimal`, `bool`o cualquier tipo de enumeración.
 
 
 ### <a name="nameof-expressions"></a>Expresiones Name
 
-Un *nameof_expression* se usa para obtener el nombre de una entidad de programa como una cadena de constante.
+Un *nameof_expression* se utiliza para obtener el nombre de una entidad de programa como una cadena de constante.
 
 ```antlr
 nameof_expression
@@ -2306,17 +2306,17 @@ named_entity_target
     ;
 ```
 
-En términos gramaticales, el operando *named_entity* siempre es una expresión. Dado que `nameof` no es una palabra clave reservada, una expresión name es siempre sintácticamente ambigua con una invocación del nombre simple `nameof`. Por motivos de compatibilidad, si la búsqueda de nombres ([nombres simples](expressions.md#simple-names)) del nombre `nameof` se realiza correctamente, la expresión se trata como un *invocation_expression* , independientemente de si la invocación es legal. En caso contrario, es *nameof_expression*.
+Gramaticalmente hablando, el operando *named_entity* siempre es una expresión. Dado que `nameof` no es una palabra clave reservada, una expresión name es siempre sintácticamente ambigua con una invocación del nombre simple `nameof`. Por motivos de compatibilidad, si la búsqueda de nombres ([nombres simples](expressions.md#simple-names)) del nombre `nameof` se realiza correctamente, la expresión se trata como un *invocation_expression* , independientemente de si la invocación es válida. En caso contrario, es un *nameof_expression*.
 
-El significado de *named_entity* de un *nameof_expression* es el significado de este como una expresión; es decir, como *simple_name*, *base_access* o *member_access*. Sin embargo, en los casos en los que la búsqueda descrita en [nombres simples](expressions.md#simple-names) y [acceso a miembros](expressions.md#member-access) produce un error porque se encontró un miembro de instancia en un contexto estático, *nameof_expression* no genera este error.
+El significado de la *named_entity* de una *nameof_expression* es el significado de la misma como una expresión; es decir, como un *simple_name*, un *base_access* o un *member_access*. Sin embargo, si la búsqueda descrita en [nombres simples](expressions.md#simple-names) y [acceso a miembros](expressions.md#member-access) produce un error porque se encontró un miembro de instancia en un contexto estático, un *nameof_expression* no genera este error.
 
-Se trata de un error en tiempo de compilación para un *named_entity* que designa un grupo de métodos para que tenga un *type_argument_list*. Es un error en tiempo de compilación para que un *named_entity_target* tenga el tipo `dynamic`.
+Se trata de un error en tiempo de compilación para un *named_entity* que designa que un grupo de métodos tiene un *type_argument_list*. Es un error en tiempo de compilación para que una *named_entity_target* tenga el tipo `dynamic`.
 
-Un *nameof_expression* es una expresión constante de tipo `string` y no tiene ningún efecto en tiempo de ejecución. En concreto, su *named_entity* no se evalúa y se omite para los fines del análisis de asignación definitiva ([reglas generales para expresiones simples](variables.md#general-rules-for-simple-expressions)). Su valor es el último identificador de *named_entity* antes de la *type_argument_list*final opcional, transformada de la siguiente manera:
+Un *nameof_expression* es una expresión constante de tipo `string`y no tiene ningún efecto en tiempo de ejecución. En concreto, su *named_entity* no se evalúa y se omite para los fines del análisis de asignación definitiva ([reglas generales para expresiones simples](variables.md#general-rules-for-simple-expressions)). Su valor es el último identificador de la *named_entity* antes del *type_argument_list*final opcional, transformada de la siguiente manera:
 
-* El prefijo`@`"", si se utiliza, se quita.
+* El prefijo "`@`", si se utiliza, se quita.
 * Cada *unicode_escape_sequence* se transforma en el carácter Unicode correspondiente.
-* Se quitan todos los *formatting_characters* .
+* Se quitan los *formatting_characters* .
 
 Se trata de las mismas transformaciones aplicadas en los [identificadores](lexical-structure.md#identifiers) al probar la igualdad entre los identificadores.
 
@@ -2324,7 +2324,7 @@ TODO: ejemplos
 
 ### <a name="anonymous-method-expressions"></a>Expresiones de método anónimo
 
-Un *anonymous_method_expression* es una de las dos formas de definir una función anónima. Se describen con más detalle en [expresiones de función anónima](expressions.md#anonymous-function-expressions).
+Una *anonymous_method_expression* es una de las dos formas de definir una función anónima. Se describen con más detalle en [expresiones de función anónima](expressions.md#anonymous-function-expressions).
 
 ## <a name="unary-operators"></a>Operadores unarios
 
@@ -2346,7 +2346,7 @@ unary_expression
     ;
 ```
 
-Si el operando de un *unary_expression* tiene el tipo en tiempo de compilación `dynamic`, está enlazado dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el tipo en tiempo de compilación de *unary_expression* es `dynamic` y la resolución que se describe a continuación se realiza en tiempo de ejecución mediante el tipo en tiempo de ejecución del operando.
+Si el operando de una *unary_expression* tiene el `dynamic`de tipo en tiempo de compilación, se enlaza dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el tipo en tiempo de compilación del *unary_expression* es `dynamic`y la resolución que se describe a continuación se realiza en tiempo de ejecución mediante el tipo en tiempo de ejecución del operando.
 
 ### <a name="null-conditional-operator"></a>Operador condicional null
 
@@ -2368,19 +2368,19 @@ null_conditional_operations
 
 La lista de operaciones puede incluir operaciones de acceso a miembros y acceso a elementos (que pueden ser a su vez valores condicionales null), así como invocación.
 
-Por ejemplo, la expresión `a.b?[0]?.c()` es un *null_conditional_expression* con un *primary_expression* `a.b` y *null_conditional_operations* `?[0]` (acceso de elemento condicional null), `?.c` (miembro condicional null acceso) y `()` (Invocación).
+Por ejemplo, la expresión `a.b?[0]?.c()` es una *null_conditional_expression* con un *primary_expression* `a.b` y *null_conditional_operations* `?[0]` (acceso a elemento condicional null), `?.c` (acceso a miembros condicional null) y `()` (Invocación).
 
-En el caso de un *null_conditional_expression* `E` con *primary_expression* `P`, permita que `E0` sea la expresión obtenida quitando textualmente el @no__t 5 inicial de cada una de las *null_conditional_operations* de `E` que tener uno. Conceptualmente, `E0` es la expresión que se evaluará si ninguna de las comprobaciones nulas representadas por el `?`s encuentra un `null`.
+En el caso de una `E` de *null_conditional_expression* con un `P`de *primary_expression* , permita que `E0` sea la expresión obtenida quitando textualmente el `?` inicial de cada una de las *null_conditional_operations* de `E` que tienen uno. Conceptualmente, `E0` es la expresión que se evaluará si ninguna de las comprobaciones nulas representadas por los `?`s encuentra una `null`.
 
-Además, deje que `E1` sea la expresión obtenida quitando textualmente el @no__t inicial 1 de la primera de las *null_conditional_operations* en `E`. Esto puede conducir a una *expresión principal* (si solo había un `?`) o a otro *null_conditional_expression*.
+Además, deje que `E1` sea la expresión obtenida quitando textualmente el `?` inicial de solo el primero de la *null_conditional_operations* en `E`. Esto puede conducir a una *expresión principal* (si solo había un `?`) o a otro *null_conditional_expression*.
 
-Por ejemplo, si `E` es la expresión `a.b?[0]?.c()`, `E0` es la expresión `a.b[0].c()` y `E1` es la expresión `a.b[0]?.c()`.
+Por ejemplo, si `E` es el `a.b?[0]?.c()`de la expresión, `E0` es la expresión `a.b[0].c()` y `E1` es la `a.b[0]?.c()`de la expresión.
 
 Si `E0` se clasifica como Nothing, `E` se clasifica como Nothing. De lo contrario, E se clasifica como un valor.
 
 `E0` y `E1` se usan para determinar el significado de `E`:
 
-*  Si `E` se produce como *statement_expression* , el significado de `E` es el mismo que el de la instrucción.
+*  Si `E` se produce como *statement_expression* el significado de `E` es el mismo que el de la instrucción
 
    ```csharp
    if ((object)P != null) E1;
@@ -2394,7 +2394,7 @@ Si `E0` se clasifica como Nothing, `E` se clasifica como Nothing. De lo contrari
 
    *  Si `T0` es un parámetro de tipo que no se sabe que es un tipo de referencia o un tipo de valor que no acepta valores NULL, se produce un error en tiempo de compilación.
 
-   *  Si `T0` es un tipo de valor que no acepta valores NULL, el tipo de `E` es `T0?` y el significado de `E` es el mismo que
+   *  Si `T0` es un tipo de valor que no acepta valores NULL, el tipo de `E` es `T0?`y el significado de `E` es el mismo que
 
       ```csharp
       ((object)P == null) ? (T0?)null : E1
@@ -2410,7 +2410,7 @@ Si `E0` se clasifica como Nothing, `E` se clasifica como Nothing. De lo contrari
 
       salvo que `P` solo se evalúa una vez.
 
-Si `E1` es en sí mismo un *null_conditional_expression*, estas reglas se aplican de nuevo, anidando las pruebas para `null` hasta que no haya más `?`, y la expresión se ha reducido hasta la expresión principal `E0`.
+Si `E1` es en sí misma una *null_conditional_expression*, estas reglas se aplican de nuevo, anidando las pruebas para `null` hasta que no haya más `?`, y la expresión se ha reducido hasta el `E0`de la expresión principal.
 
 Por ejemplo, si la expresión `a.b?[0]?.c()` se produce como una expresión de instrucción, como en la instrucción:
 ```csharp
@@ -2424,7 +2424,7 @@ lo que es equivalente a:
 ```csharp
 if (a.b != null) if (a.b[0] != null) a.b[0].c();
 ```
-Salvo que `a.b` y `a.b[0]` solo se evalúan una vez.
+Salvo que `a.b` y `a.b[0]` se evalúan solo una vez.
 
 Si se produce en un contexto donde se usa su valor, como en:
 ```csharp
@@ -2434,7 +2434,7 @@ y suponiendo que el tipo de la invocación final no es un tipo de valor que no a
 ```csharp
 var x = (a.b == null) ? null : (a.b[0] == null) ? null : a.b[0].c();
 ```
-salvo que `a.b` y `a.b[0]` solo se evalúan una vez.
+Salvo que `a.b` y `a.b[0]` se evalúan solo una vez.
 
 #### <a name="null-conditional-expressions-as-projection-initializers"></a>Expresiones condicionales NULL como inicializadores de proyección
 
@@ -2459,7 +2459,7 @@ null_conditional_invocation_expression
     ;
 ```
 
-Este es un caso especial de la gramática de *null_conditional_expression* anterior. La producción de *statement_expression* en las [instrucciones de expresión](statements.md#expression-statements) solo incluye *null_conditional_invocation_expression*.
+Este es un caso especial de la gramática de *null_conditional_expression* anterior. La producción de *statement_expression* en las [instrucciones de expresión](statements.md#expression-statements) incluye solo *null_conditional_invocation_expression*.
 
 
 ### <a name="unary-plus-operator"></a>Operador unario más
@@ -2489,9 +2489,9 @@ Para una operación con el formato `-x`, se aplica la resolución de sobrecargas
    long operator -(long x);
    ```
 
-   El resultado se calcula restando `x` de cero. Si el valor de `x` es el valor representable más pequeño del tipo de operando (-2 ^ 31 para `int` o-2 ^ 63 para `long`), la negación matemática de `x` no se podrá representar en el tipo de operando. Si esto ocurre dentro de un contexto `checked`, se produce una `System.OverflowException`; Si se produce dentro de un contexto de @no__t 2, el resultado es el valor del operando y el desbordamiento no se registra.
+   El resultado se calcula restando `x` de cero. Si el valor de `x` es el valor representable más pequeño del tipo de operando (-2 ^ 31 para `int` o-2 ^ 63 para `long`), la negación matemática de `x` no se podrá representar en el tipo de operando. Si esto ocurre dentro de un contexto de `checked`, se produce una `System.OverflowException`; Si se produce dentro de un contexto de `unchecked`, el resultado es el valor del operando y no se registra el desbordamiento.
 
-   Si el operando del operador de negación es de tipo `uint`, se convierte al tipo `long` y el tipo del resultado es `long`. Una excepción es la regla que permite escribir el 2147483648 valor `int` (-2 ^ 31) como un literal entero decimal ([literales enteros](lexical-structure.md#integer-literals)).
+   Si el operando del operador de negación es de tipo `uint`, se convierte al tipo `long`y el tipo del resultado es `long`. Una excepción es la regla que permite escribir el valor `int`-2147483648 (-2 ^ 31) como un literal entero decimal ([literales enteros](lexical-structure.md#integer-literals)).
 
    Si el operando del operador de negación es de tipo `ulong`, se produce un error en tiempo de compilación. Una excepción es la regla que permite escribir el valor `long`-9.223.372.036.854.775.808 (-2 ^ 63) como un literal entero decimal ([literales enteros](lexical-structure.md#integer-literals)).
 
@@ -2539,7 +2539,7 @@ Cada tipo de enumeración `E` proporciona implícitamente el siguiente operador 
 E operator ~(E x);
 ```
 
-El resultado de evaluar `~x`, donde `x` es una expresión de un tipo de enumeración `E` con un tipo subyacente `U`, es exactamente igual que evaluar `(E)(~(U)x)`, salvo que la conversión a `E` siempre se realiza como si estuviera en un contexto de `unchecked` ( [Los operadores Checked y unchecked](expressions.md#the-checked-and-unchecked-operators)).
+El resultado de evaluar `~x`, donde `x` es una expresión de un tipo de enumeración `E` con un tipo subyacente `U`, es exactamente igual que evaluar `(E)(~(U)x)`, salvo que la conversión a `E` siempre se realiza como si estuviera en un contexto de `unchecked` ([los operadores comprobados y sin comprobar](expressions.md#the-checked-and-unchecked-operators)).
 
 ### <a name="prefix-increment-and-decrement-operators"></a>Operadores de incremento y decremento prefijos
 
@@ -2555,31 +2555,31 @@ pre_decrement_expression
 
 El operando de una operación de incremento o decremento de prefijo debe ser una expresión clasificada como una variable, un acceso a la propiedad o un acceso a un indexador. El resultado de la operación es un valor del mismo tipo que el operando.
 
-Si el operando de una operación de incremento o decremento de prefijo es una propiedad o un indexador, la propiedad o el indexador deben tener un descriptor de acceso `get` y `set`. Si no es así, se produce un error en tiempo de enlace.
+Si el operando de una operación de incremento o decremento de prefijo es una propiedad o un indexador, la propiedad o el indexador deben tener un `get` y un descriptor de acceso `set`. Si no es así, se produce un error en tiempo de enlace.
 
-La resolución de sobrecargas de operador unario ([resolución de sobrecarga de operadores unarios](expressions.md#unary-operator-overload-resolution)) se aplica para seleccionar una implementación de operador específica. Los operadores predefinidos `++` y `--` existen para los siguientes tipos: @no__t 2, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, 0, 1, 2, 3 y cualquier tipo de enumeración. Los operadores predefinidos `++` devuelven el valor generado agregando 1 al operando y los operadores `--` predefinidos devuelven el valor generado restando 1 del operando. En un contexto `checked`, si el resultado de esta suma o resta está fuera del intervalo del tipo de resultado y el tipo de resultado es un tipo entero o un tipo de enumeración, se produce una `System.OverflowException`.
+La resolución de sobrecargas de operador unario ([resolución de sobrecarga de operadores unarios](expressions.md#unary-operator-overload-resolution)) se aplica para seleccionar una implementación de operador específica. Los operadores predefinidos `++` y `--` existen para los siguientes tipos: `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `float`, `double`, `decimal`y cualquier tipo de enumeración. Los operadores predefinidos `++` devuelven el valor generado agregando 1 al operando y los operadores `--` predefinidos devuelven el valor generado restando 1 del operando. En un contexto de `checked`, si el resultado de esta suma o resta está fuera del intervalo del tipo de resultado y el tipo de resultado es un tipo entero o de enumeración, se produce una `System.OverflowException`.
 
-El procesamiento en tiempo de ejecución de una operación de incremento o decremento de prefijo con el formato `++x` o `--x` consta de los siguientes pasos:
+El procesamiento en tiempo de ejecución de una operación de incremento o decremento de prefijo del formulario `++x` o `--x` consta de los siguientes pasos:
 
-*   Si `x` está clasificado como una variable:
+*   Si `x` se clasifica como una variable:
     * `x` se evalúa para generar la variable.
-    * El operador seleccionado se invoca con el valor de `x` como argumento.
+    * El operador seleccionado se invoca con el valor de `x` como su argumento.
     * El valor devuelto por el operador se almacena en la ubicación proporcionada por la evaluación de `x`.
     * El valor devuelto por el operador se convierte en el resultado de la operación.
 *   Si `x` se clasifica como un acceso de propiedad o indizador:
-    * La expresión de instancia (si `x` no es `static`) y la lista de argumentos (si `x` es un indexador) asociada a `x` se evalúan, y los resultados se usan en las siguientes invocaciones de descriptor de acceso `get` y `set`.
-    * Se invoca al descriptor de acceso `get` de `x`.
+    * La expresión de instancia (si `x` no se `static`) y la lista de argumentos (si `x` es un acceso de indexador) asociadas a `x` se evalúan, y los resultados se usan en las invocaciones de descriptor de acceso `get` y `set` subsiguientes.
+    * Se invoca el `get` descriptor de acceso de `x`.
     * El operador seleccionado se invoca con el valor devuelto por el descriptor de acceso `get` como su argumento.
     * El descriptor de acceso `set` de `x` se invoca con el valor devuelto por el operador como su argumento `value`.
     * El valor devuelto por el operador se convierte en el resultado de la operación.
 
-Los operadores `++` y `--` también admiten la notación de postfijo ([operadores de incremento y decremento de postfijo](expressions.md#postfix-increment-and-decrement-operators)). Normalmente, el resultado de `x++` o `x--` es el valor de @no__t 2 antes de la operación, mientras que el resultado de `++x` o `--x` es el valor de `x` después de la operación. En cualquier caso, `x` tiene el mismo valor después de la operación.
+Los operadores `++` y `--` también admiten la notación de postfijo ([operadores de incremento y decremento de postfijo](expressions.md#postfix-increment-and-decrement-operators)). Normalmente, el resultado de `x++` o `x--` es el valor de `x` antes de la operación, mientras que el resultado de `++x` o `--x` es el valor de `x` después de la operación. En cualquier caso, `x` tiene el mismo valor después de la operación.
 
-Se puede invocar una implementación `operator++` o `operator--` mediante la notación de sufijo o de prefijo. No es posible tener implementaciones de operador independientes para las dos notaciones.
+Una implementación de `operator++` o `operator--` se puede invocar mediante la notación de sufijo o de prefijo. No es posible tener implementaciones de operador independientes para las dos notaciones.
 
 ### <a name="cast-expressions"></a>Expresiones de conversión
 
-Se usa un *cast_expression* para convertir explícitamente una expresión a un tipo determinado.
+Un *cast_expression* se utiliza para convertir explícitamente una expresión a un tipo determinado.
 
 ```antlr
 cast_expression
@@ -2587,18 +2587,18 @@ cast_expression
     ;
 ```
 
-Un *cast_expression* con el formato `(T)E`, donde `T` es un *tipo* y `E` es *unary_expression*, realiza una conversión explícita ([conversiones explícitas](conversions.md#explicit-conversions)) del valor de `E` al tipo `T`. Si no existe una conversión explícita de `E` a `T`, se produce un error en tiempo de enlace. De lo contrario, el resultado es el valor generado por la conversión explícita. El resultado siempre se clasifica como un valor, incluso si `E` denota una variable.
+*Cast_expression* del formulario `(T)E`, donde `T` es un *tipo* y `E` es un *unary_expression*, realiza una conversión explícita ([conversiones explícitas](conversions.md#explicit-conversions)) del valor de `E` en el tipo `T`. Si no existe una conversión explícita de `E` a `T`, se produce un error en tiempo de enlace. De lo contrario, el resultado es el valor generado por la conversión explícita. El resultado siempre se clasifica como un valor, incluso si `E` denota una variable.
 
-La gramática de una *cast_expression* conduce a ciertas ambigüedades sintácticas. Por ejemplo, la expresión `(x)-y` puede interpretarse como *cast_expression* (una conversión de `-y` al tipo `x`) o como un *additive_expression* combinado con *parenthesized_expression* (que calcula el valor `x - y)`.
+La gramática de una *cast_expression* conduce a ciertas ambigüedades sintácticas. Por ejemplo, la expresión `(x)-y` se puede interpretar como un *cast_expression* (una conversión de `-y` al tipo `x`) o como un *additive_expression* combinado con una *parenthesized_expression* (que calcula el valor `x - y)`.
 
-Para resolver ambigüedades de *cast_expression* , existe la siguiente regla: Una secuencia de uno o más *tokens*([espacio en blanco](lexical-structure.md#white-space)) entre paréntesis se considera el inicio de un *cast_expression* solo si se cumple al menos una de las siguientes condiciones:
+Para resolver las ambigüedades de *cast_expression* , existe la siguiente regla: una secuencia de uno o más *tokens*([espacio en blanco](lexical-structure.md#white-space)) entre paréntesis se considera el inicio de un *cast_expression* solo si se cumple al menos una de las siguientes condiciones:
 
 *  La secuencia de tokens es la gramática correcta para un *tipo*, pero no para una *expresión*.
-*  La secuencia de tokens es la gramática correcta para un *tipo*, y el token que sigue inmediatamente al paréntesis de cierre es el token "`~`", el token "`!`", el token "`(`", un *identificador* (secuencias de[escape de caracteres Unicode ](lexical-structure.md#unicode-character-escape-sequences)), un *literal* ([literales](lexical-structure.md#literals)) o cualquier *palabra clave* ([keywords](lexical-structure.md#keywords)) excepto 0 y 1.
+*  La secuencia de tokens es la gramática correcta para un *tipo*, y el token que sigue inmediatamente a los paréntesis de cierre es el token "`~`", el token "`!`", el token "`(`", un *identificador* (secuencias de[escape de caracteres Unicode](lexical-structure.md#unicode-character-escape-sequences)), un *literal* ([literales](lexical-structure.md#literals)) o cualquier *palabra clave* ([Keywords](lexical-structure.md#keywords)), excepto `as` y `is`.
 
-El término "gramática correcta" anterior significa que la secuencia de tokens debe ajustarse a la producción gramatical concreta. En concreto, no se tiene en cuenta el significado real de los identificadores constituyentes. Por ejemplo, si `x` y `y` son identificadores, `x.y` es la gramática correcta para un tipo, incluso si `x.y` no denota realmente un tipo.
+El término "gramática correcta" anterior significa que la secuencia de tokens debe ajustarse a la producción gramatical concreta. En concreto, no se tiene en cuenta el significado real de los identificadores constituyentes. Por ejemplo, si `x` y `y` son identificadores, `x.y` es la gramática correcta para un tipo, incluso si `x.y` realmente no denota un tipo.
 
-En la regla de desambiguación se sigue que, si `x` y `y` son identificadores, @no__t 2, `(x)(y)` y `(x)(-y)` son *cast_expression*, pero `(x)-y` no es, aunque `x` identifique un tipo. Sin embargo, si `x` es una palabra clave que identifica un tipo predefinido (como `int`), las cuatro formas son *cast_expression*s (porque tal palabra clave podría ser una expresión por sí misma).
+En la regla de desambiguación se sigue que, si `x` y `y` son identificadores, `(x)y`, `(x)(y)`y `(x)(-y)` son *cast_expression*s, pero `(x)-y` no, incluso si `x` identifica un tipo. Sin embargo, si `x` es una palabra clave que identifica un tipo predefinido (como `int`), las cuatro formas son *cast_expression*s (porque tal palabra clave podría no ser una expresión por sí misma).
 
 ### <a name="await-expressions"></a>Expresiones Await
 
@@ -2610,13 +2610,13 @@ await_expression
     ;
 ```
 
-Un *await_expression* solo se permite en el cuerpo de una función asincrónica ([iteradores](classes.md#iterators)). Dentro de la función asincrónica envolvente más cercana, puede que no se produzca una *await_expression* en estos lugares:
+Solo se permite un *await_expression* en el cuerpo de una función asincrónica ([iteradores](classes.md#iterators)). Dentro de la función asincrónica envolvente más cercana, puede que no se produzca una *await_expression* en estos lugares:
 
 *  Dentro de una función anónima anidada (no asincrónica)
 *  Dentro del bloque de un *lock_statement*
 *  En un contexto no seguro
 
-Tenga en cuenta que no se puede producir un *await_expression* en la mayoría de los lugares de una *query_expression*, ya que se transforman sintácticamente para usar expresiones lambda no asincrónicas.
+Tenga en cuenta que no se puede producir un *await_expression* en la mayoría de los lugares de una *query_expression*, porque se transforman sintácticamente para usar expresiones lambda no asincrónicas.
 
 Dentro de una función asincrónica, `await` no se puede usar como identificador. Por lo tanto, no hay ambigüedades sintácticas entre las expresiones Await y varias expresiones que intervienen en identificadores. Fuera de las funciones asincrónicas, `await` actúa como un identificador normal.
 
@@ -2627,8 +2627,8 @@ El operando de un *await_expression* se denomina ***tarea***. Representa una ope
 Es necesario que la tarea de una expresión Await sea ***Await***. Una expresión `t` es que admite Await si uno de los siguientes elementos contiene:
 
 *  `t` es del tipo de tiempo de compilación `dynamic`
-*  `t` tiene una instancia o un método de extensión accesible denominado `GetAwaiter` sin parámetros y sin parámetros de tipo, y un tipo de valor devuelto `A` para el que se mantiene todo lo siguiente:
-   * `A` implementa la interfaz `System.Runtime.CompilerServices.INotifyCompletion` (en adelante denominada `INotifyCompletion` por motivos de brevedad)
+*  `t` tiene una instancia o un método de extensión accesible denominado `GetAwaiter` sin parámetros y sin parámetros de tipo, y un tipo de valor devuelto `A` para el que se retienen todos los elementos siguientes:
+   * `A` implementa el `System.Runtime.CompilerServices.INotifyCompletion` de interfaz (en adelante conocido como `INotifyCompletion` por motivos de brevedad)
    * `A` tiene una propiedad de instancia accesible y legible `IsCompleted` de tipo `bool`
    * `A` tiene un método de instancia accesible `GetResult` sin parámetros y sin parámetros de tipo
 
@@ -2642,25 +2642,25 @@ El propósito del método `GetResult` es obtener el resultado de la tarea una ve
 
 #### <a name="classification-of-await-expressions"></a>Clasificación de expresiones Await
 
-La expresión `await t` se clasifica de la misma forma que la expresión `(t).GetAwaiter().GetResult()`. Por lo tanto, si el tipo de valor devuelto de `GetResult` es `void`, el *await_expression* se clasifica como Nothing. Si tiene un tipo de valor devuelto distinto de void `T`, el *await_expression* se clasifica como un valor de tipo `T`.
+La expresión `await t` se clasifica de la misma forma que la expresión `(t).GetAwaiter().GetResult()`. Por lo tanto, si el tipo de valor devuelto de `GetResult` es `void`, el *await_expression* se clasifica como Nothing. Si tiene un tipo de valor devuelto no nulo `T`, el *await_expression* se clasifica como un valor de tipo `T`.
 
 #### <a name="runtime-evaluation-of-await-expressions"></a>Evaluación en tiempo de ejecución de expresiones Await
 
 En tiempo de ejecución, la expresión `await t` se evalúa como sigue:
 
-*  Se obtiene un Await `a` evaluando la expresión `(t).GetAwaiter()`.
-*  Se obtiene un `bool` `b` evaluando la expresión `(a).IsCompleted`.
-*  Si `b` es `false`, la evaluación depende de si `a` implementa la interfaz `System.Runtime.CompilerServices.ICriticalNotifyCompletion` (en adelante conocida como `ICriticalNotifyCompletion` por motivos de brevedad). Esta comprobación se realiza en el momento del enlace; es decir, en tiempo de ejecución si `a` tiene el tipo de tiempo de compilación `dynamic` y en tiempo de compilación, de lo contrario,. Permita que `r` denote el delegado de reanudación ([iteradores](classes.md#iterators)):
+*  Un `a` de espera se obtiene al evaluar la expresión `(t).GetAwaiter()`.
+*  Un `b` `bool` se obtiene evaluando la expresión `(a).IsCompleted`.
+*  Si `b` se `false`, la evaluación depende de si `a` implementa la interfaz `System.Runtime.CompilerServices.ICriticalNotifyCompletion` (en adelante conocida como `ICriticalNotifyCompletion` por motivos de brevedad). Esta comprobación se realiza en el momento del enlace; es decir, en tiempo de ejecución si `a` tiene el tipo de tiempo de compilación `dynamic`y, en tiempo de compilación, de lo contrario. Permita que `r` denote el delegado de reanudación ([iteradores](classes.md#iterators)):
     * Si `a` no implementa `ICriticalNotifyCompletion`, se evalúa la expresión `(a as (INotifyCompletion)).OnCompleted(r)`.
     * Si `a` implementa `ICriticalNotifyCompletion`, se evalúa la expresión `(a as (ICriticalNotifyCompletion)).UnsafeOnCompleted(r)`.
     * A continuación, la evaluación se suspende y el control se devuelve al autor de la llamada actual de la función asincrónica.
-*  Inmediatamente después de (si `b` era `true`) o tras una invocación posterior del delegado de reanudación (si `b` era `false`), se evalúa la expresión `(a).GetResult()`. Si devuelve un valor, ese valor es el resultado de *await_expression*. De lo contrario, el resultado es Nothing.
+*  Inmediatamente después de (si `b` fue `true`) o después de la invocación posterior del delegado de reanudación (si se `false``b`), se evalúa la `(a).GetResult()` de la expresión. Si devuelve un valor, ese valor es el resultado de la *await_expression*. De lo contrario, el resultado es Nothing.
 
-La implementación de un espera de los métodos de interfaz `INotifyCompletion.OnCompleted` y `ICriticalNotifyCompletion.UnsafeOnCompleted` debe hacer que el delegado `r` se invoque como máximo una vez. De lo contrario, el comportamiento de la función asincrónica envolvente es indefinido.
+La implementación de un esperador de los métodos de interfaz `INotifyCompletion.OnCompleted` y `ICriticalNotifyCompletion.UnsafeOnCompleted` debe hacer que la `r` del delegado se invoque como máximo una vez. De lo contrario, el comportamiento de la función asincrónica envolvente es indefinido.
 
 ## <a name="arithmetic-operators"></a>Operadores aritméticos
 
-Los operadores `*`, `/`, `%`, `+` y `-` se denominan operadores aritméticos.
+Los operadores `*`, `/`, `%`, `+`y `-` se denominan operadores aritméticos.
 
 ```antlr
 multiplicative_expression
@@ -2677,7 +2677,7 @@ additive_expression
     ;
 ```
 
-Si un operando de un operador aritmético tiene el tipo en tiempo de compilación `dynamic`, la expresión está enlazada dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el tipo en tiempo de compilación de la expresión es `dynamic`, y la resolución que se describe a continuación se realiza en tiempo de ejecución mediante el tipo en tiempo de ejecución de los operandos que tienen el tipo en tiempo de compilación `dynamic`.
+Si un operando de un operador aritmético tiene el tipo en tiempo de compilación `dynamic`, la expresión está enlazada dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el tipo en tiempo de compilación de la expresión es `dynamic`y la resolución que se describe a continuación se realiza en tiempo de ejecución mediante el tipo en tiempo de ejecución de los operandos que tienen el tipo en tiempo de compilación `dynamic`.
 
 ### <a name="multiplication-operator"></a>Operador de multiplicación
 
@@ -2694,7 +2694,7 @@ A continuación se enumeran los operadores de multiplicación predefinidos. Todo
    ulong operator *(ulong x, ulong y);
    ```
 
-   En un contexto `checked`, si el producto está fuera del intervalo del tipo de resultado, se produce una `System.OverflowException`. En un contexto `unchecked`, no se informan los desbordamientos y se descartan los bits significativos de orden superior fuera del intervalo del tipo de resultado.
+   En un contexto de `checked`, si el producto está fuera del intervalo del tipo de resultado, se produce una `System.OverflowException`. En un contexto de `unchecked`, no se informan los desbordamientos y se descartan los bits significativos de orden superior fuera del intervalo del tipo de resultado.
 
 
 *  Multiplicación de punto flotante:
@@ -2723,7 +2723,7 @@ A continuación se enumeran los operadores de multiplicación predefinidos. Todo
    decimal operator *(decimal x, decimal y);
    ```
 
-   Si el valor resultante es demasiado grande para representarlo en el formato `decimal`, se produce una `System.OverflowException`. Si el valor del resultado es demasiado pequeño para representarlo en el formato `decimal`, el resultado es cero. La escala del resultado, antes de cualquier redondeo, es la suma de las escalas de los dos operandos.
+   Si el valor resultante es demasiado grande para representarlo en el formato de `decimal`, se produce una `System.OverflowException`. Si el valor del resultado es demasiado pequeño para representarlo en el formato de `decimal`, el resultado es cero. La escala del resultado, antes de cualquier redondeo, es la suma de las escalas de los dos operandos.
 
    La multiplicación decimal es equivalente a usar el operador de multiplicación de tipo `System.Decimal`.
 
@@ -2747,7 +2747,7 @@ A continuación se enumeran los operadores de división predefinidos. Todos los 
 
    La división redondea el resultado hacia cero. Por lo tanto, el valor absoluto del resultado es el entero posible más grande que sea menor o igual que el valor absoluto del cociente de los dos operandos. El resultado es cero o positivo cuando los dos operandos tienen el mismo signo y cero o negativo cuando los dos operandos tienen signos opuestos.
 
-   Si el operando izquierdo es el valor más pequeño que se va a representar `int` o `long` y el operando derecho es `-1`, se produce un desbordamiento. En un contexto `checked`, esto hace que se produzca una `System.ArithmeticException` (o una subclase). En un contexto `unchecked`, se define como si se produjera una `System.ArithmeticException` (o una subclase de ella) o el desbordamiento se desinforma de que el valor resultante es el del operando izquierdo.
+   Si el operando izquierdo es el valor más pequeño `int` o `long` y el operando derecho es `-1`, se produce un desbordamiento. En un contexto de `checked`, esto hace que se produzca una `System.ArithmeticException` (o una subclase de ella). En un contexto de `unchecked`, se define como si se produjera una `System.ArithmeticException` (o una subclase de ella) o el desbordamiento se desinforma de que el valor resultante es el del operando izquierdo.
 
 *  División de punto flotante:
 
@@ -2775,7 +2775,7 @@ A continuación se enumeran los operadores de división predefinidos. Todos los 
    decimal operator /(decimal x, decimal y);
    ```
 
-   Si el valor del operando derecho es cero, se produce una `System.DivideByZeroException`. Si el valor resultante es demasiado grande para representarlo en el formato `decimal`, se produce una `System.OverflowException`. Si el valor del resultado es demasiado pequeño para representarlo en el formato `decimal`, el resultado es cero. La escala del resultado es la menor escala que conservará un resultado igual al valor decimal que se va a representar más cercano al resultado matemático verdadero.
+   Si el valor del operando derecho es cero, se produce una `System.DivideByZeroException`. Si el valor resultante es demasiado grande para representarlo en el formato de `decimal`, se produce una `System.OverflowException`. Si el valor del resultado es demasiado pequeño para representarlo en el formato de `decimal`, el resultado es cero. La escala del resultado es la menor escala que conservará un resultado igual al valor decimal que se va a representar más cercano al resultado matemático verdadero.
 
    La división decimal es equivalente a usar el operador de división de tipo `System.Decimal`.
 
@@ -2797,7 +2797,7 @@ A continuación se enumeran los operadores de resto predefinidos. Todos los oper
 
    El resultado de `x % y` es el valor generado por `x - (x / y) * y`. Si `y` es cero, se produce una `System.DivideByZeroException`.
 
-   Si el operando izquierdo es el valor más pequeño `int` o `long` y el operando derecho es `-1`, se produce una `System.OverflowException`. En ningún caso, `x % y` producen una excepción en la que `x / y` no produciría una excepción.
+   Si el operando izquierdo es el valor más pequeño `int` o `long` y se `-1`el operando derecho, se produce una `System.OverflowException`. En ningún caso `x % y` inicia una excepción en la que `x / y` no produciría una excepción.
 
 *  Resto de punto flotante:
 
@@ -2806,7 +2806,7 @@ A continuación se enumeran los operadores de resto predefinidos. Todos los oper
    double operator %(double x, double y);
    ```
 
-   En la tabla siguiente se enumeran los resultados de todas las posibles combinaciones de valores finitos distintos de cero, ceros, infinitos y NaN. En la tabla, `x` y `y` son valores finitos positivos. `z` es el resultado de `x % y` y se calcula como @no__t 2, donde `n` es el entero posible más grande que sea menor o igual que `x / y`. Este método de calcular el resto es análogo al que se usa para los operandos de enteros, pero difiere de la definición de IEEE 754 (en la que `n` es el entero más próximo a `x / y`).
+   En la tabla siguiente se enumeran los resultados de todas las posibles combinaciones de valores finitos distintos de cero, ceros, infinitos y NaN. En la tabla, `x` y `y` son valores finitos positivos. `z` es el resultado de `x % y` y se calcula como `x - n * y`, donde `n` es el mayor entero posible que es menor o igual que `x / y`. Este método de calcular el resto es análogo al que se usa para los operandos de enteros, pero difiere de la definición de IEEE 754 (en la que `n` es el entero más próximo a `x / y`).
 
    |      |      |      |      |      |      |      |      |
    |:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
@@ -2845,7 +2845,7 @@ A continuación se enumeran los operadores de suma predefinidos. En el caso de l
    ulong operator +(ulong x, ulong y);
    ```
 
-   En un contexto `checked`, si la suma está fuera del intervalo del tipo de resultado, se produce una `System.OverflowException`. En un contexto `unchecked`, no se informan los desbordamientos y se descartan los bits significativos de orden superior fuera del intervalo del tipo de resultado.
+   En un contexto de `checked`, si la suma está fuera del intervalo del tipo de resultado, se produce una `System.OverflowException`. En un contexto de `unchecked`, no se informan los desbordamientos y se descartan los bits significativos de orden superior fuera del intervalo del tipo de resultado.
 
 *  Adición de punto flotante:
 
@@ -2854,7 +2854,7 @@ A continuación se enumeran los operadores de suma predefinidos. En el caso de l
    double operator +(double x, double y);
    ```
 
-   La suma se calcula de acuerdo con las reglas de aritmética de IEEE 754. En la tabla siguiente se enumeran los resultados de todas las posibles combinaciones de valores finitos distintos de cero, ceros, infinitos y NaN. En la tabla, `x` y `y` son valores finitos distintos de cero y @no__t 2 es el resultado de `x + y`. Si `x` y `y` tienen la misma magnitud pero signos opuestos, `z` es cero positivo. Si `x + y` es demasiado grande para representarlo en el tipo de destino, `z` es un infinito con el mismo signo que @no__t 2.
+   La suma se calcula de acuerdo con las reglas de aritmética de IEEE 754. En la tabla siguiente se enumeran los resultados de todas las posibles combinaciones de valores finitos distintos de cero, ceros, infinitos y NaN. En la tabla, `x` y `y` son valores finitos distintos de cero y `z` es el resultado de `x + y`. Si `x` y `y` tienen la misma magnitud pero signos opuestos, `z` es cero positivo. Si `x + y` es demasiado grande para representarlo en el tipo de destino, `z` es un infinito con el mismo signo que `x + y`.
 
    |      |      |      |      |      |      |      |
    |:----:|:----:|:----:|:----:|:----:|:----:|:----:|
@@ -2872,7 +2872,7 @@ A continuación se enumeran los operadores de suma predefinidos. En el caso de l
    decimal operator +(decimal x, decimal y);
    ```
 
-   Si el valor resultante es demasiado grande para representarlo en el formato `decimal`, se produce una `System.OverflowException`. La escala del resultado, antes de cualquier redondeo, es el mayor de las escalas de los dos operandos.
+   Si el valor resultante es demasiado grande para representarlo en el formato de `decimal`, se produce una `System.OverflowException`. La escala del resultado, antes de cualquier redondeo, es el mayor de las escalas de los dos operandos.
 
    La suma decimal es equivalente a usar el operador de suma de tipo `System.Decimal`.
 
@@ -2893,7 +2893,7 @@ A continuación se enumeran los operadores de suma predefinidos. En el caso de l
    string operator +(object x, string y);
    ```
 
-   Estas sobrecargas del operador binario `+` realizan la concatenación de cadenas. Si un operando de la concatenación de cadenas es `null`, se sustituye una cadena vacía. De lo contrario, cualquier argumento que no sea de cadena se convierte en su representación de cadena invocando el método virtual `ToString` heredado del tipo `object`. Si `ToString` devuelve `null`, se sustituye una cadena vacía.
+   Estas sobrecargas del operador binario `+` realizan la concatenación de cadenas. Si un operando de la concatenación de cadenas es `null`, se sustituye una cadena vacía. De lo contrario, cualquier argumento que no sea de cadena se convierte en su representación de cadena mediante la invocación del método `ToString` virtual heredado del tipo `object`. Si `ToString` devuelve `null`, se sustituye una cadena vacía.
 
    ```csharp
    using System;
@@ -2913,7 +2913,7 @@ A continuación se enumeran los operadores de suma predefinidos. En el caso de l
    }
    ```
 
-   El resultado del operador de concatenación de cadenas es una cadena que consta de los caracteres del operando izquierdo seguidos de los caracteres del operando derecho. El operador de concatenación de cadenas nunca devuelve un valor `null`. Se puede iniciar una `System.OutOfMemoryException` si no hay suficiente memoria disponible para asignar la cadena resultante.
+   El resultado del operador de concatenación de cadenas es una cadena que consta de los caracteres del operando izquierdo seguidos de los caracteres del operando derecho. El operador de concatenación de cadenas nunca devuelve un valor `null`. Se puede producir una `System.OutOfMemoryException` si no hay suficiente memoria disponible para asignar la cadena resultante.
 
 *  Combinación de delegado. Cada tipo de delegado proporciona implícitamente el siguiente operador predefinido, donde `D` es el tipo de delegado:
 
@@ -2921,7 +2921,7 @@ A continuación se enumeran los operadores de suma predefinidos. En el caso de l
    D operator +(D x, D y);
    ```
 
-   El operador binario `+` realiza la combinación de delegados cuando ambos operandos son de algún tipo de delegado `D`. (Si los operandos tienen distintos tipos de delegado, se produce un error en tiempo de enlace). Si el primer operando es `null`, el resultado de la operación es el valor del segundo operando (aunque también sea `null`). De lo contrario, si el segundo operando es `null`, el resultado de la operación es el valor del primer operando. De lo contrario, el resultado de la operación es una nueva instancia de delegado que, cuando se invoca, invoca el primer operando y, a continuación, invoca el segundo operando. Para obtener ejemplos de la combinación de delegados, vea [operador de resta](expressions.md#subtraction-operator) e [invocación de delegado](delegates.md#delegate-invocation). Como `System.Delegate` no es un tipo de delegado, `operator` @ no__t-2 no está definido para él.
+   El operador binario `+` realiza la combinación de delegados cuando ambos operandos son de algún tipo de delegado `D`. (Si los operandos tienen distintos tipos de delegado, se produce un error en tiempo de enlace). Si el primer operando es `null`, el resultado de la operación es el valor del segundo operando (aunque también sea `null`). De lo contrario, si el segundo operando es `null`, el resultado de la operación es el valor del primer operando. De lo contrario, el resultado de la operación es una nueva instancia de delegado que, cuando se invoca, invoca el primer operando y, a continuación, invoca el segundo operando. Para obtener ejemplos de la combinación de delegados, vea [operador de resta](expressions.md#subtraction-operator) e [invocación de delegado](delegates.md#delegate-invocation). Dado que `System.Delegate` no es un tipo de delegado, `operator` `+` no está definido para él.
 
 ### <a name="subtraction-operator"></a>Operador de resta
 
@@ -2938,7 +2938,7 @@ A continuación se enumeran los operadores de resta predefinidos. Todos los oper
    ulong operator -(ulong x, ulong y);
    ```
 
-   En un contexto `checked`, si la diferencia está fuera del intervalo del tipo de resultado, se produce una `System.OverflowException`. En un contexto `unchecked`, no se informan los desbordamientos y se descartan los bits significativos de orden superior fuera del intervalo del tipo de resultado.
+   En un contexto de `checked`, si la diferencia está fuera del intervalo del tipo de resultado, se produce una `System.OverflowException`. En un contexto de `unchecked`, no se informan los desbordamientos y se descartan los bits significativos de orden superior fuera del intervalo del tipo de resultado.
 
 *  Resta de punto flotante:
 
@@ -2947,7 +2947,7 @@ A continuación se enumeran los operadores de resta predefinidos. Todos los oper
    double operator -(double x, double y);
    ```
 
-   La diferencia se calcula de acuerdo con las reglas de aritmética de IEEE 754. En la tabla siguiente se enumeran los resultados de todas las posibles combinaciones de valores finitos distintos de cero, ceros, infinitos y Nan. En la tabla, `x` y `y` son valores finitos distintos de cero y @no__t 2 es el resultado de `x - y`. Si `x` y `y` son iguales, @no__t 2 es cero positivo. Si `x - y` es demasiado grande para representarlo en el tipo de destino, `z` es un infinito con el mismo signo que @no__t 2.
+   La diferencia se calcula de acuerdo con las reglas de aritmética de IEEE 754. En la tabla siguiente se enumeran los resultados de todas las posibles combinaciones de valores finitos distintos de cero, ceros, infinitos y Nan. En la tabla, `x` y `y` son valores finitos distintos de cero y `z` es el resultado de `x - y`. Si `x` y `y` son iguales, `z` es cero positivo. Si `x - y` es demasiado grande para representarlo en el tipo de destino, `z` es un infinito con el mismo signo que `x - y`.
 
    |      |      |      |      |      |      |     |
    |:----:|:----:|:----:|:----:|:----:|:----:|:---:|
@@ -2965,7 +2965,7 @@ A continuación se enumeran los operadores de resta predefinidos. Todos los oper
    decimal operator -(decimal x, decimal y);
    ```
 
-   Si el valor resultante es demasiado grande para representarlo en el formato `decimal`, se produce una `System.OverflowException`. La escala del resultado, antes de cualquier redondeo, es el mayor de las escalas de los dos operandos.
+   Si el valor resultante es demasiado grande para representarlo en el formato de `decimal`, se produce una `System.OverflowException`. La escala del resultado, antes de cualquier redondeo, es el mayor de las escalas de los dos operandos.
 
    La resta decimal es equivalente a usar el operador de resta de tipo `System.Decimal`.
 
@@ -2989,7 +2989,7 @@ A continuación se enumeran los operadores de resta predefinidos. Todos los oper
    D operator -(D x, D y);
    ```
 
-   El operador binario `-` realiza la eliminación del delegado cuando ambos operandos son de algún tipo de delegado `D`. Si los operandos tienen distintos tipos de delegado, se produce un error en tiempo de enlace. Si el primer operando es `null`, el resultado de la operación es `null`. De lo contrario, si el segundo operando es `null`, el resultado de la operación es el valor del primer operando. De lo contrario, ambos operandos representan listas de invocación ([declaraciones de delegado](delegates.md#delegate-declarations)) que tienen una o más entradas y el resultado es una nueva lista de invocación que se compone de la lista del primer operando con las entradas del segundo operando que se han quitado, siempre y cuando el segundo la lista de operandos es una sublista contigua adecuada de la primera.     (Para determinar la igualdad de la lista, las entradas correspondientes se comparan como para el operador de igualdad de delegado ([operadores de igualdad de delegado](expressions.md#delegate-equality-operators))). De lo contrario, el resultado es el valor del operando izquierdo. En el proceso no se cambia ninguna de las listas de operandos. Si la lista del segundo operando coincide con varias sublistas de entradas contiguas de la lista del primer operando, se quita la sublista coincidente situada más a la derecha de las entradas contiguas. Si la eliminación da como resultado una lista vacía, el resultado es `null`. Por ejemplo:
+   El operador binario `-` realiza la eliminación de delegados cuando ambos operandos son de algún tipo de delegado `D`. Si los operandos tienen distintos tipos de delegado, se produce un error en tiempo de enlace. Si el primer operando es `null`, el resultado de la operación es `null`. De lo contrario, si el segundo operando es `null`, el resultado de la operación es el valor del primer operando. De lo contrario, ambos operandos representan listas de invocación ([declaraciones de delegado](delegates.md#delegate-declarations)) que tienen una o más entradas y el resultado es una nueva lista de invocación que se compone de la lista del primer operando con las entradas del segundo operando que se han quitado, siempre que la lista del segundo operando sea una sublista contigua adecuada de la primera.     (Para determinar la igualdad de la lista, las entradas correspondientes se comparan como para el operador de igualdad de delegado ([operadores de igualdad de delegado](expressions.md#delegate-equality-operators))). De lo contrario, el resultado es el valor del operando izquierdo. En el proceso no se cambia ninguna de las listas de operandos. Si la lista del segundo operando coincide con varias sublistas de entradas contiguas de la lista del primer operando, se quita la sublista coincidente situada más a la derecha de las entradas contiguas. Si la eliminación da como resultado una lista vacía, el resultado es `null`. Por ejemplo:
 
    ```csharp
    delegate void D(int x);
@@ -3035,9 +3035,9 @@ shift_expression
     ;
 ```
 
-Si un operando de un *shift_expression* tiene el tipo en tiempo de compilación `dynamic`, la expresión está enlazada dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el tipo en tiempo de compilación de la expresión es `dynamic`, y la resolución que se describe a continuación se realiza en tiempo de ejecución mediante el tipo en tiempo de ejecución de los operandos que tienen el tipo en tiempo de compilación `dynamic`.
+Si un operando de una *shift_expression* tiene el tipo en tiempo de compilación `dynamic`, la expresión está enlazada dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el tipo en tiempo de compilación de la expresión es `dynamic`y la resolución que se describe a continuación se realiza en tiempo de ejecución mediante el tipo en tiempo de ejecución de los operandos que tienen el tipo en tiempo de compilación `dynamic`.
 
-Para una operación con el formato `x << count` o `x >> count`, se aplica la resolución de sobrecarga del operador binario ([resolución de sobrecarga del operador binario](expressions.md#binary-operator-overload-resolution)) para seleccionar una implementación de operador específica. Los operandos se convierten en los tipos de parámetro del operador seleccionado y el tipo del resultado es el tipo de valor devuelto del operador.
+Para una operación con el formato `x << count` o `x >> count`, se aplica la resolución de sobrecargas del operador binario ([resolución de sobrecarga del operador binario](expressions.md#binary-operator-overload-resolution)) para seleccionar una implementación de operador específica. Los operandos se convierten en los tipos de parámetro del operador seleccionado y el tipo del resultado es el tipo de valor devuelto del operador.
 
 Al declarar un operador de desplazamiento sobrecargado, el tipo del primer operando siempre debe ser la clase o el struct que contiene la declaración del operador y el tipo del segundo operando siempre debe ser `int`.
 
@@ -3052,7 +3052,7 @@ A continuación se enumeran los operadores de desplazamiento predefinidos.
    ulong operator <<(ulong x, int count);
    ```
 
-   El operador `<<` desplaza `x` a la izquierda por un número de bits calculado como se describe a continuación.
+   El operador `<<` desplaza `x` izquierda por un número de bits calculado como se describe a continuación.
 
    Los bits de orden superior fuera del intervalo del tipo de resultado de `x` se descartan, los bits restantes se desplazan a la izquierda y las posiciones de bits vacías de orden inferior se establecen en cero.
 
@@ -3065,11 +3065,11 @@ A continuación se enumeran los operadores de desplazamiento predefinidos.
    ulong operator >>(ulong x, int count);
    ```
 
-   El operador `>>` desplaza `x` a la derecha un número de bits calculado como se describe a continuación.
+   El operador `>>` desplaza `x` a la derecha un número de bits calculados como se describe a continuación.
 
-   Cuando `x` es de tipo `int` o @no__t 2, se descartan los bits de orden inferior de `x`, los bits restantes se desplazan a la derecha y las posiciones de bits vacías de orden superior se establecen en cero si `x` no es negativo y se establece en uno si `x` es negativo.
+   Cuando `x` es de tipo `int` o `long`, se descartan los bits de orden inferior de `x`, los bits restantes se desplazan a la derecha y las posiciones de bits vacías de orden superior se establecen en cero si `x` no es negativo y se establecen en uno si `x` es negativo.
 
-   Cuando `x` es de tipo `uint` o @no__t 2, se descartan los bits de orden inferior de `x`, los bits restantes se desplazan a la derecha y las posiciones de bits vacías de orden superior se establecen en cero.
+   Cuando `x` es de tipo `uint` o `ulong`, se descartan los bits de orden inferior de `x`, los bits restantes se desplazan a la derecha y las posiciones de bits vacías de orden superior se establecen en cero.
 
 En el caso de los operadores predefinidos, el número de bits que se va a desplazar se calcula de la manera siguiente:
 
@@ -3078,9 +3078,9 @@ En el caso de los operadores predefinidos, el número de bits que se va a despla
 
 Si el número de turnos resultante es cero, los operadores de desplazamiento simplemente devuelven el valor de `x`.
 
-Las operaciones de desplazamiento nunca causan desbordamientos y producen los mismos resultados en los contextos `checked` y `unchecked`.
+Las operaciones de desplazamiento nunca causan desbordamientos y producen los mismos resultados en `checked` y `unchecked` contextos.
 
-Cuando el operando izquierdo del operador `>>` es de un tipo entero con signo, el operador realiza un desplazamiento aritmético a la derecha, donde el valor del bit más significativo (el bit de signo) del operando se propaga a las posiciones de bits vacías de orden superior. Cuando el operando izquierdo del operador `>>` es de un tipo entero sin signo, el operador realiza un desplazamiento lógico derecho en el que las posiciones de bits vacías de orden superior siempre se establecen en cero. Para realizar la operación opuesta a la que se infiere del tipo de operando, se pueden usar conversiones explícitas. Por ejemplo, si `x` es una variable de tipo `int`, la operación `unchecked((int)((uint)x >> y))` realiza un desplazamiento lógico a la derecha de `x`.
+Cuando el operando izquierdo del operador `>>` es de un tipo entero con signo, el operador realiza un desplazamiento aritmético a la derecha, donde el valor del bit más significativo (el bit de signo) del operando se propaga a las posiciones de bits vacías de orden superior. Cuando el operando izquierdo del operador `>>` es de un tipo entero sin signo, el operador realiza un desplazamiento lógico justo donde las posiciones de bits vacías de orden superior siempre se establecen en cero. Para realizar la operación opuesta a la que se infiere del tipo de operando, se pueden usar conversiones explícitas. Por ejemplo, si `x` es una variable de tipo `int`, la operación `unchecked((int)((uint)x >> y))` realiza un desplazamiento lógico a la derecha de `x`.
 
 ## <a name="relational-and-type-testing-operators"></a>Operadores de comprobación de tipos y relacionales
 
@@ -3108,21 +3108,21 @@ El operador `is` se describe en [el operador is](expressions.md#the-is-operator)
 
 Los operadores `==`, `!=`, `<`, `>`, `<=` y `>=` son ***operadores de comparación***.
 
-Si un operando de un operador de comparación tiene el tipo en tiempo de compilación `dynamic`, la expresión está enlazada dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el tipo en tiempo de compilación de la expresión es `dynamic`, y la resolución que se describe a continuación se realiza en tiempo de ejecución mediante el tipo en tiempo de ejecución de los operandos que tienen el tipo en tiempo de compilación `dynamic`.
+Si un operando de un operador de comparación tiene el tipo en tiempo de compilación `dynamic`, la expresión está enlazada dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el tipo en tiempo de compilación de la expresión es `dynamic`y la resolución que se describe a continuación se realiza en tiempo de ejecución mediante el tipo en tiempo de ejecución de los operandos que tienen el tipo en tiempo de compilación `dynamic`.
 
 En el caso de una operación con el formato `x` *op* `y`, donde *OP* es un operador de comparación, se aplica la resolución de sobrecarga ([resolución de sobrecarga del operador binario](expressions.md#binary-operator-overload-resolution)) para seleccionar una implementación de operador específica. Los operandos se convierten en los tipos de parámetro del operador seleccionado y el tipo del resultado es el tipo de valor devuelto del operador.
 
-Los operadores de comparación predefinidos se describen en las secciones siguientes. Todos los operadores de comparación predefinidos devuelven un resultado de tipo `bool`, tal y como se describe en la tabla siguiente.
+Los operadores de comparación predefinidos se describen en las secciones siguientes. Todos los operadores de comparación predefinidos devuelven un resultado de tipo `bool`, como se describe en la tabla siguiente.
 
 
 | __Sesión__ | __Resultado__                                                       |
 |---------------|------------------------------------------------------------------|
-| `x == y`      | `true` si `x` es igual a `y`, `false` en caso contrario                 | 
-| `x != y`      | `true` si `x` no es igual a `y`, `false` en caso contrario             | 
-| `x < y`       | `true` si `x` es menor que `y`, `false` en caso contrario                | 
-| `x > y`       | `true` si `x` es mayor que `y`, `false` en caso contrario             | 
-| `x <= y`      | `true` si `x` es menor o igual que `y`, `false` en caso contrario    | 
-| `x >= y`      | `true` si `x` es mayor o igual que `y`, `false` en caso contrario | 
+| `x == y`      | `true` si `x` es igual a `y`, `false` de lo contrario                 | 
+| `x != y`      | `true` si `x` no es igual a `y`, `false` de lo contrario             | 
+| `x < y`       | `true` si `x` es menor que `y`, `false` de lo contrario                | 
+| `x > y`       | `true` si `x` es mayor que `y`, `false` de lo contrario             | 
+| `x <= y`      | `true` si `x` es menor o igual que `y`, `false` de lo contrario    | 
+| `x >= y`      | `true` si `x` es mayor o igual que `y`, `false` de lo contrario | 
 
 ### <a name="integer-comparison-operators"></a>Operadores de comparación de enteros
 
@@ -3159,7 +3159,7 @@ bool operator >=(long x, long y);
 bool operator >=(ulong x, ulong y);
 ```
 
-Cada uno de estos operadores compara los valores numéricos de los dos operandos enteros y devuelve un valor `bool` que indica si la relación determinada es `true` o `false`.
+Cada uno de estos operadores compara los valores numéricos de los dos operandos de tipo entero y devuelve un valor `bool` que indica si la relación determinada es `true` o `false`.
 
 ### <a name="floating-point-comparison-operators"></a>Operadores de comparación de punto flotante
 
@@ -3186,7 +3186,7 @@ bool operator >=(double x, double y);
 
 Los operadores comparan los operandos según las reglas del estándar IEEE 754:
 
-*  Si alguno de los operandos es NaN, el resultado es `false` para todos los operadores excepto `!=`, para los que el resultado es `true`. Para dos operandos cualesquiera, `x != y` siempre produce el mismo resultado que `!(x == y)`. Sin embargo, cuando uno o ambos operandos son NaN, los operadores `<`, `>`, `<=` y `>=` no producen los mismos resultados que la negación lógica del operador opuesto. Por ejemplo, si cualquiera de `x` y `y` es NaN, @no__t 2 es `false`, pero `!(x >= y)` es `true`.
+*  Si alguno de los operandos es NaN, el resultado se `false` para todos los operadores excepto `!=`, para los que se `true`el resultado. Para dos operandos cualesquiera, `x != y` siempre produce el mismo resultado que `!(x == y)`. Sin embargo, cuando uno o ambos operandos son NaN, los operadores `<`, `>`, `<=`y `>=` no producen los mismos resultados que la negación lógica del operador opuesto. Por ejemplo, si cualquiera de `x` y `y` es NaN, `x < y` se `false`, pero `!(x >= y)` es `true`.
 *  Cuando ninguno de los operandos es NaN, los operadores comparan los valores de los dos operandos de punto flotante con respecto a la ordenación.
 
    ```csharp
@@ -3210,7 +3210,7 @@ bool operator <=(decimal x, decimal y);
 bool operator >=(decimal x, decimal y);
 ```
 
-Cada uno de estos operadores compara los valores numéricos de los dos operandos decimales y devuelve un valor `bool` que indica si la relación determinada es `true` o `false`. Cada comparación decimal es equivalente a usar el operador relacional o de igualdad correspondiente del tipo `System.Decimal`.
+Cada uno de estos operadores compara los valores numéricos de los dos operandos decimales y devuelve un valor `bool` que indica si la relación determinada es `true` o `false`. Cada comparación decimal es equivalente a usar el operador relacional o de igualdad correspondiente de tipo `System.Decimal`.
 
 ### <a name="boolean-equality-operators"></a>Operadores de igualdad booleanos
 
@@ -3220,9 +3220,9 @@ bool operator ==(bool x, bool y);
 bool operator !=(bool x, bool y);
 ```
 
-El resultado de `==` es `true` si tanto `x` como `y` son `true` o si `x` y `y` son `false`. De lo contrario, el resultado es `false`.
+El resultado de la `==` se `true` si `x` y `y` son `true` o si `x` y `y`.`false` De lo contrario, el resultado es `false`.
 
-El resultado de `!=` es `false` si tanto `x` como `y` son `true` o si `x` y `y` son `false`. De lo contrario, el resultado es `true`. Cuando los operandos son del tipo `bool`, el operador `!=` produce el mismo resultado que el operador `^`.
+El resultado de la `!=` se `false` si `x` y `y` son `true` o si `x` y `y`.`false` De lo contrario, el resultado es `true`. Cuando los operandos son del tipo `bool`, el operador `!=` produce el mismo resultado que el operador `^`.
 
 ### <a name="enumeration-comparison-operators"></a>Operadores de comparación de enumeración
 
@@ -3236,7 +3236,7 @@ bool operator <=(E x, E y);
 bool operator >=(E x, E y);
 ```
 
-El resultado de evaluar `x op y`, donde `x` y `y` son expresiones de un tipo de enumeración `E` con un tipo subyacente `U` y `op` es uno de los operadores de comparación, es exactamente igual que evaluar `((U)x) op ((U)y)`. En otras palabras, los operadores de comparación de tipos de enumeración simplemente comparan los valores enteros subyacentes de los dos operandos.
+El resultado de evaluar `x op y`, donde `x` y `y` son expresiones de un tipo de enumeración `E` con un tipo subyacente `U`y `op` es uno de los operadores de comparación, es exactamente igual que evaluar `((U)x) op ((U)y)`. En otras palabras, los operadores de comparación de tipos de enumeración simplemente comparan los valores enteros subyacentes de los dos operandos.
 
 ### <a name="reference-type-equality-operators"></a>Operadores de igualdad de tipos de referencia
 
@@ -3248,19 +3248,19 @@ bool operator !=(object x, object y);
 
 Los operadores devuelven el resultado de comparar las dos referencias de igualdad o de no igualdad.
 
-Puesto que los operadores de igualdad de tipos de referencia predefinidos aceptan operandos de tipo `object`, se aplican a todos los tipos que no declaran los miembros `operator ==` y `operator !=` aplicables. Por el contrario, todos los operadores de igualdad definidos por el usuario aplicables ocultan de forma eficaz los operadores de igualdad de tipos de referencia predefinidos.
+Dado que los operadores de igualdad de tipos de referencia predefinidos aceptan operandos de tipo `object`, se aplican a todos los tipos que no declaran los miembros `operator !=` y `operator ==` aplicables. Por el contrario, todos los operadores de igualdad definidos por el usuario aplicables ocultan de forma eficaz los operadores de igualdad de tipos de referencia predefinidos.
 
 Los operadores de igualdad de tipos de referencia predefinidos requieren uno de los siguientes:
 
 *  Ambos operandos son un valor de un tipo conocido como *reference_type* o literal `null`. Además, existe una conversión de referencia explícita ([conversiones de referencia explícitas](conversions.md#explicit-reference-conversions)) desde el tipo de uno de los operandos al tipo del otro operando.
-*  Un operando es un valor de tipo `T` donde `T` es un *type_parameter* y el otro operando es el literal `null`. Además `T` no tiene la restricción de tipo de valor.
+*  Un operando es un valor de tipo `T` donde `T` es un *type_parameter* y el otro operando es el `null`literal. Además `T` no tiene la restricción de tipo de valor.
 
 A menos que se cumpla una de estas condiciones, se produce un error en tiempo de enlace. Las implicaciones destacadas de estas reglas son:
 
-*  Es un error en tiempo de enlace usar los operadores de igualdad de tipos de referencia predefinidos para comparar dos referencias que se sabe que son diferentes en tiempo de enlace. Por ejemplo, si los tipos en tiempo de enlace de los operandos son dos tipos de clase `A` y `B`, y si ninguno de los dos operandos `A` ni `B` se derivan del otro, sería imposible que los dos operandos hagan referencia al mismo objeto. Por lo tanto, la operación se considera un error en tiempo de enlace.
+*  Es un error en tiempo de enlace usar los operadores de igualdad de tipos de referencia predefinidos para comparar dos referencias que se sabe que son diferentes en tiempo de enlace. Por ejemplo, si los tipos en tiempo de enlace de los operandos son dos tipos de clase `A` y `B`, y si no `A` ni `B` derivan del otro, sería imposible que los dos operandos hagan referencia al mismo objeto. Por lo tanto, la operación se considera un error en tiempo de enlace.
 *  Los operadores de igualdad de tipos de referencia predefinidos no permiten comparar los operandos de tipo de valor. Por lo tanto, a menos que un tipo de estructura declare sus propios operadores de igualdad, no es posible comparar valores de ese tipo de estructura.
 *  Los operadores de igualdad de tipos de referencia predefinidos nunca provocan que se produzcan operaciones de conversión boxing para sus operandos. No tendría sentido realizar estas operaciones de conversión boxing, ya que las referencias a las instancias de conversión boxing recién asignadas serían necesariamente distintas de las demás referencias.
-*  Si un operando de un tipo de parámetro de tipo `T` se compara con `null` y el tipo en tiempo de ejecución de `T` es un tipo de valor, el resultado de la comparación es `false`.
+*  Si un operando de un tipo de parámetro de tipo `T` se compara con `null`y el tipo en tiempo de ejecución de `T` es un tipo de valor, se `false`el resultado de la comparación.
 
 En el ejemplo siguiente se comprueba si un argumento de un tipo de parámetro de tipo sin restricciones es `null`.
 ```csharp
@@ -3273,9 +3273,9 @@ class C<T>
 }
 ```
 
-La construcción `x == null` se permite aunque `T` pueda representar un tipo de valor y el resultado se define simplemente como @no__t 2 cuando `T` es un tipo de valor.
+La construcción `x == null` se permite aunque `T` pueda representar un tipo de valor y el resultado se define simplemente como `false` cuando `T` es un tipo de valor.
 
-En el caso de una operación con el formato `x == y` o `x != y`, si se cumple alguna `operator ==` o `operator !=` aplicable, las reglas de resolución de sobrecarga del operador ([resolución de sobrecarga del operador binario](expressions.md#binary-operator-overload-resolution)) seleccionarán ese operador en lugar de la igualdad de tipos de referencia predefinida. Operator. Sin embargo, siempre es posible seleccionar el operador de igualdad de tipos de referencia predefinidos convirtiendo explícitamente uno o ambos operandos al tipo `object`. El ejemplo
+En el caso de una operación con el formato `x == y` o `x != y`, si existe alguna `operator ==` o `operator !=` aplicable, las reglas de resolución de sobrecarga del operador ([resolución de sobrecarga del operador binario](expressions.md#binary-operator-overload-resolution)) seleccionarán ese operador en lugar del operador de igualdad de tipos de referencia predefinido. Sin embargo, siempre es posible seleccionar el operador de igualdad de tipos de referencia predefinidos convirtiendo explícitamente uno o ambos operandos al tipo `object`. El ejemplo
 ```csharp
 using System;
 
@@ -3299,7 +3299,7 @@ False
 False
 ```
 
-Las variables `s` y `t` hacen referencia a dos instancias distintas de @no__t 2 que contienen los mismos caracteres. La primera comparación genera `True` porque el operador de igualdad de cadena predefinido ([operadores de igualdad de cadena](expressions.md#string-equality-operators)) está seleccionado cuando ambos operandos son del tipo `string`. En el resto se comparan todos los resultados `False` porque se selecciona el operador de igualdad de tipos de referencia predefinido cuando uno o ambos operandos son del tipo `object`.
+Las variables `s` y `t` hacen referencia a dos instancias de `string` diferentes que contienen los mismos caracteres. El primer resultado de la comparación `True` porque el operador de igualdad de cadena predefinido ([operadores de igualdad de cadena](expressions.md#string-equality-operators)) se selecciona cuando ambos operandos son del tipo `string`. En el resto se comparan todos los resultados `False` porque se selecciona el operador de igualdad de tipos de referencia predefinido cuando uno o ambos operandos son del tipo `object`.
 
 Tenga en cuenta que la técnica anterior no es significativa para los tipos de valor. El ejemplo
 ```csharp
@@ -3324,7 +3324,7 @@ bool operator !=(string x, string y);
 
 Dos valores `string` se consideran iguales cuando se cumple una de las siguientes condiciones:
 
-*  Ambos valores son `null`.
+*  Ambos valores se `null`.
 *  Ambos valores son referencias no nulas a instancias de cadena que tienen longitudes idénticas y caracteres idénticos en cada posición de carácter.
 
 Los operadores de igualdad de cadena comparan valores de cadena en lugar de referencias de cadena. Cuando dos instancias de cadena independientes contienen exactamente la misma secuencia de caracteres, los valores de las cadenas son iguales, pero las referencias son diferentes. Como se describe en [operadores de igualdad de tipos de referencia](expressions.md#reference-type-equality-operators), los operadores de igualdad de tipos de referencia se pueden usar para comparar referencias de cadena en lugar de valores de cadena.
@@ -3340,19 +3340,19 @@ bool operator !=(System.Delegate x, System.Delegate y);
 
 Dos instancias de delegado se consideran iguales como se indica a continuación:
 
-*  Si alguna de las instancias de delegado es `null`, son iguales si y solo si ambas son `null`.
+*  Si alguna de las instancias de delegado es `null`, son iguales si y solo si ambos están `null`.
 *  Si los delegados tienen un tipo diferente en tiempo de ejecución, nunca son iguales.
-*  Si ambas instancias de delegado tienen una lista de invocaciones ([declaraciones de delegado](delegates.md#delegate-declarations)), esas instancias son iguales si y solo si sus listas de invocación tienen la misma longitud, y cada entrada de una lista de invocación de un es igual (tal como se define a continuación) al correspondiente entrada, en orden, en la lista de invocación de otro.
+*  Si ambas instancias de delegado tienen una lista de invocaciones ([declaraciones de delegado](delegates.md#delegate-declarations)), esas instancias son iguales si y solo si sus listas de invocación tienen la misma longitud, y cada entrada de una lista de invocación de una de ellas es igual (tal como se define a continuación) a la entrada correspondiente, en orden, en la lista de invocación de otro.
 
 Las siguientes reglas rigen la igualdad de las entradas de la lista de invocación:
 
 *  Si dos entradas de la lista de invocación hacen referencia al mismo método estático, las entradas son iguales.
 *  Si dos entradas de la lista de invocación hacen referencia al mismo método no estático en el mismo objeto de destino (tal y como se define en los operadores de igualdad de referencia), las entradas son iguales.
-*  Las entradas de la lista de invocación generadas a partir de la evaluación de *anonymous_method_expression*s semánticamente idénticas o *lambda_expression*s con el mismo conjunto (posiblemente vacío) de instancias de variables externas capturadas se permiten (pero no se requieren) sea.
+*  Las entradas de la lista de invocación generadas a partir de la evaluación de *anonymous_method_expression*s o *lambda_expression*con el mismo conjunto (posiblemente vacío) de las instancias de variables externas capturadas están permitidas (pero no necesarias).
 
 ### <a name="equality-operators-and-null"></a>Operadores de igualdad y null
 
-Los operadores `==` y `!=` permiten que un operando sea un valor de un tipo que acepta valores NULL y el otro para ser el literal @no__t 2, aunque no exista ningún operador predefinido o definido por el usuario (en formato sin levantar o elevado) para la operación.
+Los operadores `==` y `!=` permiten que un operando sea un valor de un tipo que acepta valores NULL y el otro para ser el `null` literal, aunque no exista ningún operador predefinido o definido por el usuario (en forma de elevación o elevación) para la operación.
 
 Para una operación de uno de los formularios
 ```csharp
@@ -3361,20 +3361,20 @@ null == x
 x != null
 null != x
 ```
-donde `x` es una expresión de un tipo que acepta valores NULL, si la resolución de sobrecarga del operador ([resolución de sobrecarga del operador binario](expressions.md#binary-operator-overload-resolution)) no encuentra un operador aplicable, el resultado se calcula a partir de la propiedad `HasValue` de `x`. En concreto, las dos primeras formas se traducen en `!x.HasValue` y las dos últimas se traducen en `x.HasValue`.
+donde `x` es una expresión de un tipo que acepta valores NULL, si se produce un error en la resolución de sobrecarga del operador ([resolución de sobrecarga del operador binario](expressions.md#binary-operator-overload-resolution)) al encontrar un operador aplicable, en su lugar se calcula el resultado a partir de la propiedad `HasValue` de `x`. En concreto, las dos primeras formas se traducen en `!x.HasValue`y las dos formas de la última se traducen en `x.HasValue`.
 
 ### <a name="the-is-operator"></a>El operador is
 
-El operador `is` se usa para comprobar dinámicamente si el tipo en tiempo de ejecución de un objeto es compatible con un tipo determinado. El resultado de la operación `E is T`, donde `E` es una expresión y @no__t 2 es un tipo, es un valor booleano que indica si `E` se puede convertir correctamente al tipo `T` por una conversión de referencia, una conversión boxing o una conversión unboxing. La operación se evalúa como sigue, después de que se hayan sustituido los argumentos de tipo para todos los parámetros de tipo:
+El operador `is` se usa para comprobar dinámicamente si el tipo en tiempo de ejecución de un objeto es compatible con un tipo determinado. El resultado de la operación `E is T`, donde `E` es una expresión y `T` es un tipo, es un valor booleano que indica si `E` se puede convertir correctamente al tipo `T` por una conversión de referencia, una conversión boxing o una conversión unboxing. La operación se evalúa como sigue, después de que se hayan sustituido los argumentos de tipo para todos los parámetros de tipo:
 
 *  Si `E` es una función anónima, se produce un error en tiempo de compilación
-*  Si `E` es un grupo de métodos o el literal `null`, si el tipo de `E` es un tipo de referencia o un tipo que acepta valores NULL y el valor de `E` es null, el resultado es false.
-*  De lo contrario, deje que `D` represente el tipo dinámico de `E` como se indica a continuación:
-   * Si el tipo de `E` es un tipo de referencia, `D` es el tipo en tiempo de ejecución de la referencia de instancia por `E`.
+*  Si `E` es un grupo de métodos o el `null` literal, si el tipo de `E` es un tipo de referencia o un tipo que acepta valores NULL y el valor de `E` es null, el resultado es false.
+*  En caso contrario, deje que `D` represente el tipo dinámico de `E` como se indica a continuación:
+   * Si el tipo de `E` es un tipo de referencia, `D` es el tipo en tiempo de ejecución de la referencia de instancia mediante `E`.
    * Si el tipo de `E` es un tipo que acepta valores NULL, `D` es el tipo subyacente de ese tipo que acepta valores NULL.
    * Si el tipo de `E` es un tipo de valor que no acepta valores NULL, `D` es el tipo de `E`.
-*  El resultado de la operación depende de `D` y `T` como se indica a continuación:
-   * Si `T` es un tipo de referencia, el resultado es true si `D` y `T` son del mismo tipo, si `D` es un tipo de referencia y existe una conversión de referencia implícita de `D` a `T`, o bien si `D` es un tipo de valor y una conversión boxing de `D`. para `T` existe.
+*  El resultado de la operación depende de `D` y `T` de la siguiente manera:
+   * Si `T` es un tipo de referencia, el resultado es true si `D` y `T` son del mismo tipo, si `D` es un tipo de referencia y existe una conversión de referencia implícita de `D` a `T`, o si `D` es un tipo de valor y existe una conversión boxing de `D` a `T`.
    * Si `T` es un tipo que acepta valores NULL, el resultado es true si `D` es el tipo subyacente de `T`.
    * Si `T` es un tipo de valor que no acepta valores NULL, el resultado es true si `D` y `T` son del mismo tipo.
    * De lo contrario, el resultado es false.
@@ -3383,28 +3383,28 @@ Tenga en cuenta que las conversiones definidas por el usuario no se tienen en cu
 
 ### <a name="the-as-operator"></a>El operador as
 
-El operador `as` se usa para convertir explícitamente un valor en un tipo de referencia determinado o un tipo que acepta valores NULL. A diferencia de una expresión de conversión ([expresiones de conversión](expressions.md#cast-expressions)), el operador `as` nunca produce una excepción. En su lugar, si la conversión indicada no es posible, el valor resultante es `null`.
+El operador `as` se utiliza para convertir explícitamente un valor en un tipo de referencia determinado o un tipo que acepta valores NULL. A diferencia de una expresión de conversión ([expresiones de conversión](expressions.md#cast-expressions)), el operador `as` nunca produce una excepción. En su lugar, si la conversión indicada no es posible, el valor resultante es `null`.
 
 En una operación con el formato `E as T`, `E` debe ser una expresión y `T` debe ser un tipo de referencia, un parámetro de tipo conocido como un tipo de referencia o un tipo que acepta valores NULL. Además, al menos uno de los siguientes debe ser true o, de lo contrario, se producirá un error en tiempo de compilación:
 
-*  Una identidad ([conversión de identidad](conversions.md#identity-conversion)), implícita que acepta valores NULL ([conversiones implícitas que aceptan valores NULL](conversions.md#implicit-nullable-conversions)), referencia implícita (conversiones de[referencias implícitas](conversions.md#implicit-reference-conversions)), conversión boxing ([conversiones boxing](conversions.md#boxing-conversions)), explícitamente acepta valores NULL ([admite valores NULL explícitos). conversiones](conversions.md#explicit-nullable-conversions)), referencia explícita (conversiones de[referencia explícita](conversions.md#explicit-reference-conversions)) o conversión unboxing ([conversiones unboxing](conversions.md#unboxing-conversions)) de `E` a `T`.
+*  Una identidad ([conversión de identidad](conversions.md#identity-conversion)), implícita que acepta valores NULL ([conversiones implícitas que aceptan valores NULL](conversions.md#implicit-nullable-conversions)), referencia implícita (conversiones de[referencias implícitas](conversions.md#implicit-reference-conversions)), conversión boxing ([conversiones boxing](conversions.md#boxing-conversions)), conversión explícita de valores NULL (conversiones[explícitas que aceptan valores NULL](conversions.md#explicit-nullable-conversions)), referencia explícita (conversiones de[referencia explícita](conversions.md#explicit-reference-conversions)) o conversión unboxing (conversiones[unboxing](conversions.md#unboxing-conversions)) de `E` a `T`
 *  El tipo de `E` o `T` es un tipo abierto.
-*  `E` es el literal `null`.
+*  `E` es el literal de `null`.
 
-Si el tipo en tiempo de compilación de `E` no es `dynamic`, la operación `E as T` genera el mismo resultado que
+Si el tipo en tiempo de compilación de `E` no es `dynamic`, la operación `E as T` produce el mismo resultado que
 ```csharp
 E is T ? (T)(E) : (T)null
 ```
 salvo que `E` solo se evalúa una vez. Se puede esperar que el compilador optimice `E as T` para realizar como máximo una comprobación de tipos dinámicos en lugar de las dos comprobaciones de tipos dinámicos implícitas por la expansión anterior.
 
-Si el tipo en tiempo de compilación de `E` es `dynamic`, a diferencia del operador de conversión, el operador `as` no está enlazado dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). Por lo tanto, la expansión en este caso es:
+Si el tipo en tiempo de compilación de `E` es `dynamic`, a diferencia del operador de conversión, el operador de `as` no está enlazado dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). Por lo tanto, la expansión en este caso es:
 ```csharp
 E is T ? (T)(object)(E) : (T)null
 ```
 
 Tenga en cuenta que algunas conversiones, como las conversiones definidas por el usuario, no son posibles con el operador `as` y, en su lugar, deben realizarse mediante expresiones de conversión.
 
-En el ejemplo
+en el ejemplo
 ```csharp
 class X
 {
@@ -3422,11 +3422,11 @@ class X
     }
 }
 ```
-se sabe que el parámetro de tipo `T` de `G` es un tipo de referencia, porque tiene la restricción de clase. Sin embargo, el parámetro de tipo `U` de `H` no es; por lo tanto, no se permite el uso del operador `as` en `H`.
+se sabe que el parámetro de tipo `T` de `G` es un tipo de referencia, porque tiene la restricción de clase. Sin embargo, el parámetro de tipo `U` de `H` no. por lo tanto, no se permite el uso del operador `as` en `H`.
 
 ## <a name="logical-operators"></a>Operadores lógicos
 
-Los operadores `&`, `^` y `|` se denominan operadores lógicos.
+Los operadores `&`, `^`y `|` se denominan operadores lógicos.
 
 ```antlr
 and_expression
@@ -3445,7 +3445,7 @@ inclusive_or_expression
     ;
 ```
 
-Si un operando de un operador lógico tiene el tipo en tiempo de compilación `dynamic`, la expresión está enlazada dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el tipo en tiempo de compilación de la expresión es `dynamic`, y la resolución que se describe a continuación se realiza en tiempo de ejecución mediante el tipo en tiempo de ejecución de los operandos que tienen el tipo en tiempo de compilación `dynamic`.
+Si un operando de un operador lógico tiene el tipo en tiempo de compilación `dynamic`, la expresión está enlazada dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el tipo en tiempo de compilación de la expresión es `dynamic`y la resolución que se describe a continuación se realiza en tiempo de ejecución mediante el tipo en tiempo de ejecución de los operandos que tienen el tipo en tiempo de compilación `dynamic`.
 
 En el caso de una operación con el formato `x op y`, donde `op` es uno de los operadores lógicos, se aplica la resolución de sobrecarga ([resolución de sobrecarga del operador binario](expressions.md#binary-operator-overload-resolution)) para seleccionar una implementación de operador específica. Los operandos se convierten en los tipos de parámetro del operador seleccionado y el tipo del resultado es el tipo de valor devuelto del operador.
 
@@ -3471,7 +3471,7 @@ long operator ^(long x, long y);
 ulong operator ^(ulong x, ulong y);
 ```
 
-El operador `&` calcula el @no__t lógico bit a bit de los dos operandos, el operador `|` calcula el @no__t lógico bit a bit de los dos operandos y el operador `^` calcula la @no__t lógica exclusiva bit a bit de los dos operandos. No es posible realizar desbordamientos en estas operaciones.
+El operador `&` calcula el `AND` lógico bit a bit de los dos operandos, el operador `|` calcula el `OR` lógico bit a bit de los dos operandos y el operador `^` calcula la `OR` lógica exclusiva bit a bit de los dos operandos. No es posible realizar desbordamientos en estas operaciones.
 
 ### <a name="enumeration-logical-operators"></a>Operadores lógicos de enumeración
 
@@ -3483,7 +3483,7 @@ E operator |(E x, E y);
 E operator ^(E x, E y);
 ```
 
-El resultado de evaluar `x op y`, donde `x` y `y` son expresiones de un tipo de enumeración `E` con un tipo subyacente `U` y `op` es uno de los operadores lógicos, es exactamente igual que evaluar `(E)((U)x op (U)y)`. En otras palabras, los operadores lógicos de tipo de enumeración simplemente realizan la operación lógica en el tipo subyacente de los dos operandos.
+El resultado de evaluar `x op y`, donde `x` y `y` son expresiones de un tipo de enumeración `E` con un tipo subyacente `U`y `op` es uno de los operadores lógicos, es exactamente igual que evaluar `(E)((U)x op (U)y)`. En otras palabras, los operadores lógicos de tipo de enumeración simplemente realizan la operación lógica en el tipo subyacente de los dos operandos.
 
 ### <a name="boolean-logical-operators"></a>Operadores lógicos booleanos
 
@@ -3496,20 +3496,20 @@ bool operator ^(bool x, bool y);
 
 El resultado de `x & y` es `true` si tanto `x` como `y` son `true`. De lo contrario, el resultado es `false`.
 
-El resultado de `x | y` es `true` si `x` o `y` es `true`. De lo contrario, el resultado es `false`.
+El resultado de `x | y` se `true` si `x` o `y` es `true`. De lo contrario, el resultado es `false`.
 
-El resultado de `x ^ y` es `true` si @no__t 2 es `true` y `y` es `false`, o `x` es `false` y `y` es `true`. De lo contrario, el resultado es `false`. Cuando los operandos son del tipo `bool`, el operador `^` calcula el mismo resultado que el operador `!=`.
+El resultado de `x ^ y` se `true` si se `true` `x` y `y` es `false`, o `x` es `false` y `y` es `true`. De lo contrario, el resultado es `false`. Cuando los operandos son del tipo `bool`, el operador `^` calcula el mismo resultado que el operador `!=`.
 
 ### <a name="nullable-boolean-logical-operators"></a>Operadores lógicos booleanos que aceptan valores NULL
 
-El tipo booleano que acepta valores NULL `bool?` puede representar tres valores, `true`, `false` y `null`, y es conceptualmente similar al tipo de tres valores que se usa para las Expresiones booleanas en SQL. Para asegurarse de que los resultados generados por los operadores `&` y `|` para los operandos `bool?` son coherentes con la lógica de tres valores de SQL, se proporcionan los siguientes operadores predefinidos:
+El tipo booleano que acepta valores NULL `bool?` puede representar tres valores, `true`, `false`y `null`, y es conceptualmente similar al tipo de tres valores que se usa para las Expresiones booleanas en SQL. Para asegurarse de que los resultados generados por los operadores `&` y `|` para `bool?` operandos son coherentes con la lógica de tres valores de SQL, se proporcionan los siguientes operadores predefinidos:
 
 ```csharp
 bool? operator &(bool? x, bool? y);
 bool? operator |(bool? x, bool? y);
 ```
 
-En la tabla siguiente se enumeran los resultados generados por estos operadores para todas las combinaciones de los valores `true`, `false` y `null`.
+En la tabla siguiente se enumeran los resultados generados por estos operadores para todas las combinaciones de los valores `true`, `false`y `null`.
 
 | `x`     | `y`     | `x & y` | <code>x &#124; y</code> |
 |:-------:|:-------:|:-------:|:-------:|
@@ -3539,39 +3539,39 @@ conditional_or_expression
     ;
 ```
 
-Los operadores `&&` y `||` son versiones condicionales de los operadores @no__t 2 y `|`:
+Los operadores `&&` y `||` son versiones condicionales de los operadores `&` y `|`:
 
-*  La operación `x && y` corresponde a la operación `x & y`, salvo que `y` solo se evalúa si `x` no es `false`.
-*  La operación `x || y` corresponde a la operación `x | y`, salvo que `y` solo se evalúa si `x` no es `true`.
+*  La operación `x && y` corresponde al `x & y`de la operación, salvo que `y` solo se evalúa si `x` no se `false`.
+*  La operación `x || y` corresponde al `x | y`de la operación, salvo que `y` solo se evalúa si `x` no se `true`.
 
-Si un operando de un operador lógico condicional tiene el tipo en tiempo de compilación `dynamic`, la expresión está enlazada dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el tipo en tiempo de compilación de la expresión es `dynamic`, y la resolución que se describe a continuación se realiza en tiempo de ejecución mediante el tipo en tiempo de ejecución de los operandos que tienen el tipo en tiempo de compilación `dynamic`.
+Si un operando de un operador lógico condicional tiene el tipo en tiempo de compilación `dynamic`, la expresión está enlazada dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el tipo en tiempo de compilación de la expresión es `dynamic`y la resolución que se describe a continuación se realiza en tiempo de ejecución mediante el tipo en tiempo de ejecución de los operandos que tienen el tipo en tiempo de compilación `dynamic`.
 
-Una operación con el formato `x && y` o `x || y` se procesa aplicando la resolución de sobrecarga ([resolución de sobrecarga del operador binario](expressions.md#binary-operator-overload-resolution)) como si la operación estuviera escrita `x & y` o `x | y`. A
+Una operación con el formato `x && y` o `x || y` se procesa aplicando la resolución de sobrecarga ([resolución de sobrecarga del operador binario](expressions.md#binary-operator-overload-resolution)) como si la operación se hubiera escrito `x & y` o `x | y`. A
 
 *  Si la resolución de sobrecarga no encuentra un único operador mejor, o si la resolución de sobrecarga selecciona uno de los operadores lógicos de enteros predefinidos, se produce un error en tiempo de enlace.
-*  De lo contrario, si el operador seleccionado es uno de los operadores lógicos booleanos predefinidos (operadores[lógicos booleanos](expressions.md#boolean-logical-operators)) o los operadores lógicos booleanos que aceptan valores NULL ([operadores lógicos booleanos que aceptan valores NULL](expressions.md#nullable-boolean-logical-operators)), la operación se procesa como se describe en [ Operadores lógicos condicionales booleanos](expressions.md#boolean-conditional-logical-operators).
+*  De lo contrario, si el operador seleccionado es uno de los operadores lógicos booleanos predefinidos ([operadores lógicos booleanos](expressions.md#boolean-logical-operators)) o los operadores lógicos booleanos que aceptan valores NULL (operadores lógicos[booleanos que aceptan valores NULL](expressions.md#nullable-boolean-logical-operators)), la operación se procesa como se describe en [operadores lógicos condicionales booleanos](expressions.md#boolean-conditional-logical-operators).
 *  De lo contrario, el operador seleccionado es un operador definido por el usuario y la operación se procesa como se describe en [operadores lógicos condicionales definidos por el usuario](expressions.md#user-defined-conditional-logical-operators).
 
 No es posible sobrecargar directamente los operadores lógicos condicionales. Sin embargo, dado que los operadores lógicos condicionales se evalúan en términos de los operadores lógicos normales, las sobrecargas de los operadores lógicos normales son, con ciertas restricciones, que también se consideran sobrecargas de los operadores lógicos condicionales. Esto se describe con más detalle en [operadores lógicos condicionales definidos por el usuario](expressions.md#user-defined-conditional-logical-operators).
 
 ### <a name="boolean-conditional-logical-operators"></a>Operadores lógicos condicionales booleanos
 
-Cuando los operandos de `&&` o `||` son del tipo `bool`, o cuando los operandos son de tipos que no definen un `operator &` o `operator |` aplicable, pero definen conversiones implícitas a `bool`, la operación se procesa de la siguiente manera: :
+Cuando los operandos de `&&` o `||` son del tipo `bool`, o cuando los operandos son de tipos que no definen una `operator &` aplicable o `operator |`, pero definen conversiones implícitas a `bool`, la operación se procesa de la siguiente manera:
 
-*  La operación `x && y` se evalúa como `x ? y : false`. En otras palabras, `x` se evalúa primero y se convierte al tipo `bool`. Después, si `x` es `true`, `y` se evalúa y se convierte al tipo `bool`, y esto se convierte en el resultado de la operación. De lo contrario, el resultado de la operación es `false`.
-*  La operación `x || y` se evalúa como `x ? true : y`. En otras palabras, `x` se evalúa primero y se convierte al tipo `bool`. A continuación, si `x` es `true`, el resultado de la operación es @no__t 2. De lo contrario, se evalúa `y` y se convierte al tipo `bool`, lo que se convierte en el resultado de la operación.
+*  La operación `x && y` se evalúa como `x ? y : false`. En otras palabras, `x` se evalúa primero y se convierte al tipo `bool`. Después, si se `true``x`, `y` se evalúa y se convierte al tipo `bool`y esto se convierte en el resultado de la operación. De lo contrario, el resultado de la operación es `false`.
+*  La operación `x || y` se evalúa como `x ? true : y`. En otras palabras, `x` se evalúa primero y se convierte al tipo `bool`. Después, si se `true``x`, se `true`el resultado de la operación. De lo contrario, `y` se evalúa y se convierte al tipo `bool`, y esto se convierte en el resultado de la operación.
 
 ### <a name="user-defined-conditional-logical-operators"></a>Operadores lógicos condicionales definidos por el usuario
 
-Cuando los operandos de `&&` o `||` son de tipos que declaran un @no__t válido definido por el usuario o `operator |`, deben cumplirse las dos condiciones siguientes, donde `T` es el tipo en el que se declara el operador seleccionado:
+Cuando los operandos de `&&` o `||` son de tipos que declaran una `operator &` o `operator |`definida por el usuario aplicable, ambos deben ser true, donde `T` es el tipo en el que se declara el operador seleccionado:
 
-*  El tipo de valor devuelto y el tipo de cada parámetro del operador seleccionado deben ser `T`. En otras palabras, el operador debe calcular el @no__t lógico-0 o el @no__t lógico-1 de dos operandos de tipo `T` y debe devolver un resultado de tipo `T`.
+*  El tipo de valor devuelto y el tipo de cada parámetro del operador seleccionado deben ser `T`. En otras palabras, el operador debe calcular el `AND` lógico o el `OR` lógico de dos operandos de tipo `T`y debe devolver un resultado de tipo `T`.
 *  `T` debe contener declaraciones de `operator true` y `operator false`.
 
-Se produce un error en tiempo de enlace si no se cumple alguno de estos requisitos. De lo contrario, la operación `&&` o `||` se evalúa combinando el @no__t 2 o el `operator false` definidos por el usuario con el operador definido por el usuario seleccionado:
+Se produce un error en tiempo de enlace si no se cumple alguno de estos requisitos. De lo contrario, la operación de `&&` o `||` se evalúa combinando los `operator true` definidos por el usuario o `operator false` con el operador definido por el usuario seleccionado:
 
-*  La operación `x && y` se evalúa como `T.false(x) ? x : T.&(x, y)`, donde `T.false(x)` es una invocación del `operator false` declarado en `T` y `T.&(x, y)` es una invocación del `operator &` seleccionado. En otras palabras, primero se evalúa `x` y se invoca `operator false` en el resultado para determinar si `x` es definitivamente false. Después, si `x` es definitivamente false, el resultado de la operación es el valor previamente calculado para `x`. De lo contrario, se evalúa `y` y se invoca el `operator &` seleccionado en el valor calculado anteriormente para `x` y el valor calculado para `y` para generar el resultado de la operación.
-*  La operación `x || y` se evalúa como `T.true(x) ? x : T.|(x, y)`, donde `T.true(x)` es una invocación del `operator true` declarado en `T` y `T.|(x,y)` es una invocación del `operator|` seleccionado. En otras palabras, primero se evalúa `x` y se invoca `operator true` en el resultado para determinar si `x` es definitivamente true. Después, si `x` es definitivamente true, el resultado de la operación es el valor previamente calculado para `x`. De lo contrario, se evalúa `y` y se invoca el `operator |` seleccionado en el valor calculado anteriormente para `x` y el valor calculado para `y` para generar el resultado de la operación.
+*  La operación `x && y` se evalúa como `T.false(x) ? x : T.&(x, y)`, donde `T.false(x)` es una invocación del `operator false` declarado en `T`y `T.&(x, y)` es una invocación de la `operator &`seleccionada. En otras palabras, primero se evalúa `x` y `operator false` se invoca en el resultado para determinar si `x` es definitivamente false. A continuación, si `x` es definitivamente false, el resultado de la operación es el valor previamente calculado para `x`. De lo contrario, se evalúa `y` y el `operator &` seleccionado se invoca en el valor calculado anteriormente para `x` y el valor calculado para `y` para generar el resultado de la operación.
+*  La operación `x || y` se evalúa como `T.true(x) ? x : T.|(x, y)`, donde `T.true(x)` es una invocación del `operator true` declarado en `T`y `T.|(x,y)` es una invocación de la `operator|`seleccionada. En otras palabras, primero se evalúa `x` y `operator true` se invoca en el resultado para determinar si `x` es true definitivamente. A continuación, si `x` es definitivamente true, el resultado de la operación es el valor previamente calculado para `x`. De lo contrario, se evalúa `y` y el `operator |` seleccionado se invoca en el valor calculado anteriormente para `x` y el valor calculado para `y` para generar el resultado de la operación.
 
 En cualquiera de estas operaciones, la expresión proporcionada por `x` solo se evalúa una vez, y la expresión proporcionada por `y` no se evalúa ni se evalúa exactamente una vez.
 
@@ -3579,7 +3579,7 @@ Para obtener un ejemplo de un tipo que implementa `operator true` y `operator fa
 
 ## <a name="the-null-coalescing-operator"></a>Operador de uso combinado de null
 
-El operador `??` se denomina operador de uso combinado de NULL.
+El operador de `??` se denomina operador de uso combinado de NULL.
 
 ```antlr
 null_coalescing_expression
@@ -3588,22 +3588,22 @@ null_coalescing_expression
     ;
 ```
 
-Una expresión de fusión nula con el formato `a ?? b` requiere que `a` sea de un tipo que acepte valores NULL o un tipo de referencia. Si `a` no es null, el resultado de `a ?? b` es `a`; de lo contrario, el resultado es `b`. La operación evalúa `b` solo si `a` es NULL.
+Una expresión de fusión nula con la forma `a ?? b` requiere que `a` sea de un tipo que acepte valores NULL o un tipo de referencia. Si `a` no es null, el resultado de `a ?? b` es `a`; de lo contrario, el resultado es `b`. La operación solo evalúa `b` si `a` es NULL.
 
 El operador de uso combinado de NULL es asociativo a la derecha, lo que significa que las operaciones se agrupan de derecha a izquierda. Por ejemplo, una expresión con el formato `a ?? b ?? c` se evalúa como `a ?? (b ?? c)`. En términos generales, una expresión con el formato `E1 ?? E2 ?? ... ?? En` devuelve el primero de los operandos que no son NULL, o null si todos los operandos son NULL.
 
-El tipo de la expresión `a ?? b` depende de las conversiones implícitas que están disponibles en los operandos. En orden de preferencia, el tipo de `a ?? b` es `A0`, `A` o `B`, donde `A` es el tipo de `a` (siempre que `a` tenga un tipo), `B` es el tipo de `b` (siempre que `b` tenga un tipo). y 0 es el tipo subyacente de 1 si 2 es un tipo que acepta valores NULL o 3 en caso contrario. En concreto, `a ?? b` se procesa como se indica a continuación:
+El tipo de la expresión `a ?? b` depende de qué conversiones implícitas están disponibles en los operandos. En orden de preferencia, el tipo de `a ?? b` es `A0`, `A`o `B`, donde `A` es el tipo de `a` (siempre que `a` tenga un tipo), `B` es el tipo de `b` (siempre que `b` tenga un tipo) y `A0` es el tipo subyacente de `A` si `A` es un tipo que acepta valores NULL o `A` en caso contrario. En concreto, `a ?? b` se procesa de la siguiente manera:
 
 *  Si `A` existe y no es un tipo que acepta valores NULL o un tipo de referencia, se produce un error en tiempo de compilación.
 *  Si `b` es una expresión dinámica, el tipo de resultado es `dynamic`. En tiempo de ejecución, se evalúa primero `a`. Si `a` no es null, `a` se convierte en dinámico y se convierte en el resultado. De lo contrario, se evalúa `b` y se convierte en el resultado.
-*  De lo contrario, si `A` existe y es un tipo que acepta valores NULL y existe una conversión implícita de `b` a `A0`, el tipo de resultado es `A0`. En tiempo de ejecución, se evalúa primero `a`. Si `a` no es null, `a` se desencapsulará en el tipo `A0` y se convertirá en el resultado. De lo contrario, se evalúa `b` y se convierte al tipo `A0`, lo que se convierte en el resultado.
-*  De lo contrario, si `A` existe y existe una conversión implícita de `b` a `A`, el tipo de resultado es `A`. En tiempo de ejecución, se evalúa primero `a`. Si `a` no es null, `a` se convierte en el resultado. De lo contrario, se evalúa `b` y se convierte al tipo `A`, lo que se convierte en el resultado.
-*  De lo contrario, si `b` tiene un tipo `B` y existe una conversión implícita de `a` a `B`, el tipo de resultado es `B`. En tiempo de ejecución, se evalúa primero `a`. Si `a` no es null, `a` no se ajusta al tipo `A0` (si @no__t existe y acepta valores NULL) y se convierte al tipo `B`, y esto se convierte en el resultado. De lo contrario, se evalúa `b` y se convierte en el resultado.
+*  De lo contrario, si `A` existe y es un tipo que acepta valores NULL y existe una conversión implícita de `b` a `A0`, el tipo de resultado es `A0`. En tiempo de ejecución, se evalúa primero `a`. Si `a` no es null, `a` se desencapsulará en el tipo `A0`y se convertirá en el resultado. De lo contrario, `b` se evalúa y se convierte al tipo `A0`y se convierte en el resultado.
+*  De lo contrario, si `A` existe y existe una conversión implícita de `b` a `A`, el tipo de resultado es `A`. En tiempo de ejecución, se evalúa primero `a`. Si `a` no es null, `a` se convierte en el resultado. De lo contrario, `b` se evalúa y se convierte al tipo `A`y se convierte en el resultado.
+*  De lo contrario, si `b` tiene un tipo `B` y existe una conversión implícita de `a` a `B`, el tipo de resultado es `B`. En tiempo de ejecución, se evalúa primero `a`. Si `a` no es null, `a` se desencapsulará en el tipo `A0` (si `A` existe y acepta valores NULL) y se convierte en el tipo `B`, y esto se convierte en el resultado. De lo contrario, `b` se evalúa y se convierte en el resultado.
 *  De lo contrario, `a` y `b` son incompatibles y se produce un error en tiempo de compilación.
 
 ## <a name="conditional-operator"></a>Operador condicional
 
-El operador `?:` se denomina operador condicional. En ocasiones también se denomina operador ternario.
+El operador de `?:` se denomina operador condicional. En ocasiones también se denomina operador ternario.
 
 ```antlr
 conditional_expression
@@ -3612,32 +3612,32 @@ conditional_expression
     ;
 ```
 
-Una expresión condicional con el formato `b ? x : y` primero evalúa la condición `b`. A continuación, si `b` es `true`, se evalúa @no__t 2 y se convierte en el resultado de la operación. De lo contrario, se evalúa `y` y se convierte en el resultado de la operación. Una expresión condicional nunca evalúa `x` y `y`.
+Una expresión condicional con el formato `b ? x : y` primero evalúa la condición `b`. Después, si se `true``b`, `x` se evalúa y se convierte en el resultado de la operación. De lo contrario, se evalúa `y` y se convierte en el resultado de la operación. Una expresión condicional nunca evalúa `x` y `y`.
 
 El operador condicional es asociativo a la derecha, lo que significa que las operaciones se agrupan de derecha a izquierda. Por ejemplo, una expresión con el formato `a ? b : c ? d : e` se evalúa como `a ? b : (c ? d : e)`.
 
-El primer operando del operador `?:` debe ser una expresión que se pueda convertir implícitamente a `bool`, o una expresión de un tipo que implementa `operator true`. Si no se cumple ninguno de estos requisitos, se produce un error en tiempo de compilación.
+El primer operando del operador `?:` debe ser una expresión que se pueda convertir implícitamente en `bool`, o una expresión de un tipo que implemente `operator true`. Si no se cumple ninguno de estos requisitos, se produce un error en tiempo de compilación.
 
 Los operandos segundo y tercero, `x` y `y`, del operador `?:` controlan el tipo de la expresión condicional.
 
-*  Si `x` tiene el tipo `X` y `y` tiene el tipo `Y`, entonces
+*  Si `x` tiene el tipo `X` y `y` tiene el tipo `Y`
    * Si existe una conversión implícita ([conversiones implícitas](conversions.md#implicit-conversions)) de `X` a `Y`, pero no de `Y` a `X`, `Y` es el tipo de la expresión condicional.
    * Si existe una conversión implícita ([conversiones implícitas](conversions.md#implicit-conversions)) de `Y` a `X`, pero no de `X` a `Y`, `X` es el tipo de la expresión condicional.
    * De lo contrario, no se puede determinar ningún tipo de expresión y se produce un error en tiempo de compilación.
-*  Si solo uno de `x` y `y` tiene un tipo, y `x` y `y`, de se pueden convertir implícitamente a ese tipo, es decir, el tipo de la expresión condicional.
+*  Si solo una de `x` y `y` tiene un tipo, y tanto `x` como `y`, de se pueden convertir implícitamente a ese tipo, es decir, el tipo de la expresión condicional.
 *  De lo contrario, no se puede determinar ningún tipo de expresión y se produce un error en tiempo de compilación.
 
 El procesamiento en tiempo de ejecución de una expresión condicional con el formato `b ? x : y` consta de los siguientes pasos:
 
-*  En primer lugar, se evalúa `b` y se determina el valor `bool` de `b`:
-   * Si existe una conversión implícita del tipo de `b` a `bool`, esta conversión implícita se realiza para generar un valor `bool`.
-   * De lo contrario, se invoca el `operator true` definido por el tipo de `b` para generar un valor `bool`.
-*  Si el valor `bool` producido por el paso anterior es `true`, `x` se evalúa y se convierte al tipo de la expresión condicional, y esto se convierte en el resultado de la expresión condicional.
-*  De lo contrario, se evalúa `y` y se convierte al tipo de la expresión condicional, lo que se convierte en el resultado de la expresión condicional.
+*  En primer lugar, se evalúa `b` y se determina el valor de `bool` de `b`:
+   * Si existe una conversión implícita del tipo de `b` en `bool`, esta conversión implícita se realiza para generar un valor de `bool`.
+   * De lo contrario, se invoca el `operator true` definido por el tipo de `b` para generar un valor de `bool`.
+*  Si el valor de `bool` producido en el paso anterior es `true`, `x` se evalúa y se convierte al tipo de la expresión condicional y se convierte en el resultado de la expresión condicional.
+*  De lo contrario, `y` se evalúa y se convierte al tipo de la expresión condicional y se convierte en el resultado de la expresión condicional.
 
 ## <a name="anonymous-function-expressions"></a>Expresiones de función anónima
 
-Una ***función anónima*** es una expresión que representa una definición de método "en línea". Una función anónima no tiene un valor o un tipo en y de sí mismo, pero se pueden convertir en un tipo de árbol de expresión o delegado compatible. La evaluación de una conversión de función anónima depende del tipo de destino de la conversión: Si es un tipo de delegado, la conversión se evalúa como un valor de delegado que hace referencia al método que define la función anónima. Si es un tipo de árbol de expresión, la conversión se evalúa como un árbol de expresión que representa la estructura del método como una estructura de objeto.
+Una ***función anónima*** es una expresión que representa una definición de método "en línea". Una función anónima no tiene un valor o un tipo en y de sí mismo, pero se pueden convertir en un tipo de árbol de expresión o delegado compatible. La evaluación de una conversión de función anónima depende del tipo de destino de la conversión: si es un tipo de delegado, la conversión se evalúa como un valor de delegado que hace referencia al método que define la función anónima. Si es un tipo de árbol de expresión, la conversión se evalúa como un árbol de expresión que representa la estructura del método como una estructura de objeto.
 
 Por motivos históricos, hay dos tipos sintácticos de funciones anónimas, es decir, *lambda_expression*s y *anonymous_method_expression*s. Para casi todos los propósitos, *lambda_expression*s son más concisos y expresivos que *anonymous_method_expression*s, que permanecen en el lenguaje por compatibilidad con versiones anteriores.
 
@@ -3706,7 +3706,7 @@ se puede abreviar como
 param => expr
 ```
 
-La lista de parámetros de una función anónima en forma de *anonymous_method_expression* es opcional. Si se especifica, los parámetros se deben escribir explícitamente. En caso contrario, la función anónima se convertirá en un delegado con cualquier lista de parámetros que no contenga @no__t parámetros-0.
+La lista de parámetros de una función anónima en forma de un *anonymous_method_expression* es opcional. Si se especifica, los parámetros se deben escribir explícitamente. En caso contrario, la función anónima se convertirá en un delegado con cualquier lista de parámetros que no contenga `out` parámetros.
 
 Se puede tener acceso al cuerpo de un *bloque* de una función anónima ([puntos de conexión y disponibilidad](statements.md#end-points-and-reachability)) a menos que la función anónima se encuentre dentro de una instrucción inalcanzable.
 
@@ -3726,18 +3726,18 @@ delegate { return 1 + 1; }              // Parameter list omitted
 
 El comportamiento de *lambda_expression*s y *anonymous_method_expression*s es el mismo, salvo los siguientes puntos:
 
-*  *anonymous_method_expression*s permite omitir completamente la lista de parámetros, lo que produce Convertibility para delegar tipos de cualquier lista de parámetros de valor.
-*  *lambda_expression*s permite omitir y deducir los tipos de parámetro, mientras que *anonymous_method_expression*s requiere que los tipos de parámetro se indiquen explícitamente.
-*  El cuerpo de una *lambda_expression* puede ser una expresión o un bloque de instrucciones, mientras que el cuerpo de un *anonymous_method_expression* debe ser un bloque de instrucciones.
+*  *anonymous_method_expression*s permiten omitir completamente la lista de parámetros, lo que produce Convertibility para delegar tipos de cualquier lista de parámetros de valor.
+*  *lambda_expression*s permiten omitir e inferir los tipos de parámetro, mientras que *anonymous_method_expression*s requieren que se indiquen explícitamente los tipos de parámetro.
+*  El cuerpo de una *lambda_expression* puede ser una expresión o un bloque de instrucciones, mientras que el cuerpo de una *anonymous_method_expression* debe ser un bloque de instrucciones.
 *  Solo *lambda_expression*s tienen conversiones a tipos de árbol de expresión compatibles ([tipos de árbol de expresión](types.md#expression-tree-types)).
 
 ### <a name="anonymous-function-signatures"></a>Firmas de funciones anónimas
 
-El *anonymous_function_signature* opcional de una función anónima define los nombres y, opcionalmente, los tipos de los parámetros formales de la función anónima. El ámbito de los parámetros de la función anónima es *anonymous_function_body*. ([Ámbitos](basic-concepts.md#scopes)) Junto con la lista de parámetros (si se especifica), el cuerpo del método anónimo constituye un espacio de declaración ([declaraciones](basic-concepts.md#declarations)). Por lo tanto, es un error en tiempo de compilación que el nombre de un parámetro de la función anónima coincida con el nombre de una variable local, una constante local o un parámetro cuyo ámbito incluya *anonymous_method_expression* o *lambda_expression*.
+El *anonymous_function_signature* opcional de una función anónima define los nombres y, opcionalmente, los tipos de los parámetros formales de la función anónima. El ámbito de los parámetros de la función anónima es el *anonymous_function_body*. ([Ámbitos](basic-concepts.md#scopes)) Junto con la lista de parámetros (si se especifica), el cuerpo del método anónimo constituye un espacio de declaración ([declaraciones](basic-concepts.md#declarations)). Por lo tanto, es un error en tiempo de compilación que el nombre de un parámetro de la función anónima coincida con el nombre de una variable local, una constante local o un parámetro cuyo ámbito incluya el *anonymous_method_expression* o *lambda_expression*.
 
-Si una función anónima tiene un *explicit_anonymous_function_signature*, el conjunto de tipos de delegado compatibles y los tipos de árbol de expresión están restringidos a los que tienen los mismos tipos de parámetros y modificadores en el mismo orden. A diferencia de las conversiones de grupos de métodos ([conversiones de grupos de métodos](conversions.md#method-group-conversions)), no se admite la varianza de tipos de parámetros de función anónimos. Si una función anónima no tiene un *anonymous_function_signature*, el conjunto de tipos de delegado compatibles y los tipos de árbol de expresión está restringido a los que no tienen `out` parámetros.
+Si una función anónima tiene un *explicit_anonymous_function_signature*, el conjunto de tipos de delegado compatibles y los tipos de árbol de expresión están restringidos a los que tienen los mismos tipos de parámetros y modificadores en el mismo orden. A diferencia de las conversiones de grupos de métodos ([conversiones de grupos de métodos](conversions.md#method-group-conversions)), no se admite la varianza de tipos de parámetros de función anónimos. Si una función anónima no tiene un *anonymous_function_signature*, el conjunto de tipos de delegado compatibles y tipos de árbol de expresión está restringido a los que no tienen parámetros de `out`.
 
-Tenga en cuenta que un *anonymous_function_signature* no puede incluir atributos ni una matriz de parámetros. No obstante, un *anonymous_function_signature* puede ser compatible con un tipo de delegado cuya lista de parámetros contiene una matriz de parámetros.
+Tenga en cuenta que un *anonymous_function_signature* no puede incluir atributos o una matriz de parámetros. No obstante, un *anonymous_function_signature* puede ser compatible con un tipo de delegado cuya lista de parámetros contiene una matriz de parámetros.
 
 Tenga en cuenta también que la conversión a un tipo de árbol de expresión, incluso si es compatible, todavía puede producir un error en tiempo de compilación ([tipos de árbol de expresión](types.md#expression-tree-types)).
 
@@ -3746,13 +3746,13 @@ Tenga en cuenta también que la conversión a un tipo de árbol de expresión, i
 El cuerpo (*expresión* o *bloque*) de una función anónima está sujeto a las siguientes reglas:
 
 *  Si la función anónima incluye una firma, los parámetros especificados en la firma están disponibles en el cuerpo. Si la función anónima no tiene ninguna firma, se puede convertir en un tipo de delegado o tipo de expresión con parámetros ([conversiones de funciones anónimas](conversions.md#anonymous-function-conversions)), pero no se puede tener acceso a los parámetros en el cuerpo.
-*  Excepto en el caso de los parámetros `ref` o `out` especificados en la firma (si existe) de la función anónima envolvente más cercana, se trata de un error en tiempo de compilación para que el cuerpo tenga acceso a un parámetro `ref` o `out`.
+*  Excepto en el caso de los parámetros `ref` o `out` especificados en la firma (si existe) de la función anónima envolvente más cercana, se trata de un error en tiempo de compilación para que el cuerpo tenga acceso a un `ref` o `out` parámetro.
 *  Cuando el tipo de `this` es un tipo de estructura, se trata de un error en tiempo de compilación para que el cuerpo tenga acceso a `this`. Esto es así si el acceso es explícito (como en `this.x`) o implícito (como en `x` donde `x` es un miembro de instancia de la estructura). Esta regla simplemente prohíbe el acceso y no afecta a si la búsqueda de miembros da como resultado un miembro de la estructura.
-*  El cuerpo tiene acceso a las variables externas ([variables externas](expressions.md#outer-variables)) de la función anónima. El acceso de una variable externa hará referencia a la instancia de la variable que está activa en el momento en que se evalúa *lambda_expression* o *anonymous_method_expression* ([evaluación de expresiones de función anónimas](expressions.md#evaluation-of-anonymous-function-expressions)).
-*  Se trata de un error en tiempo de compilación para que el cuerpo contenga una instrucción `goto`, una instrucción `break` o una instrucción `continue` cuyo destino esté fuera del cuerpo o dentro del cuerpo de una función anónima contenida.
-*  Una instrucción `return` en el cuerpo devuelve el control de una invocación de la función anónima envolvente más cercana, no del miembro de función envolvente. Una expresión especificada en una instrucción `return` debe poder convertirse implícitamente al tipo de valor devuelto del tipo de delegado o del tipo de árbol de expresión al que se convierte el *lambda_expression* o *anonymous_method_expression* más próximo ( [Conversiones de funciones anónimas](conversions.md#anonymous-function-conversions)).
+*  El cuerpo tiene acceso a las variables externas ([variables externas](expressions.md#outer-variables)) de la función anónima. El acceso de una variable externa hará referencia a la instancia de la variable que está activa en el momento en que se evalúa el *lambda_expression* o *anonymous_method_expression* ([evaluación de expresiones de función anónimas](expressions.md#evaluation-of-anonymous-function-expressions)).
+*  Es un error en tiempo de compilación que el cuerpo contenga una instrucción `goto`, `break` instrucción o una instrucción `continue` cuyo destino esté fuera del cuerpo o dentro del cuerpo de una función anónima contenida.
+*  Una instrucción `return` del cuerpo devuelve el control de una invocación de la función anónima envolvente más cercana, no del miembro de función envolvente. Una expresión especificada en una instrucción `return` se debe poder convertir implícitamente al tipo de valor devuelto del tipo de delegado o del tipo de árbol de expresión al que se convierte el *lambda_expression* o *anonymous_method_expression* envolvente más cercano ([conversiones de función anónima](conversions.md#anonymous-function-conversions)).
 
-No se especifica explícitamente si hay alguna manera de ejecutar el bloque de una función anónima que no sea a través de la evaluación y la invocación de *lambda_expression* o *anonymous_method_expression*. En concreto, el compilador puede optar por implementar una función anónima mediante la sintetización de uno o varios métodos o tipos con nombre. Los nombres de estos elementos sintetizados deben tener un formato reservado para el uso del compilador.
+No se especifica explícitamente si hay alguna manera de ejecutar el bloque de una función anónima que no sea a través de la evaluación y la invocación del *lambda_expression* o *anonymous_method_expression*. En concreto, el compilador puede optar por implementar una función anónima mediante la sintetización de uno o varios métodos o tipos con nombre. Los nombres de estos elementos sintetizados deben tener un formato reservado para el uso del compilador.
 
 ### <a name="overload-resolution-and-anonymous-functions"></a>Resolución de sobrecarga y funciones anónimas
 
@@ -3777,9 +3777,9 @@ class ItemList<T>: List<T>
 }
 ```
 
-La clase `ItemList<T>` tiene dos métodos `Sum`. Cada toma un argumento `selector`, que extrae el valor que se va a sumar de un elemento de lista. El valor extraído puede ser un `int` o un `double` y la suma resultante es igualmente una `int` o un `double`.
+La clase `ItemList<T>` tiene dos métodos `Sum`. Cada toma un argumento `selector`, que extrae el valor que se va a sumar de un elemento de lista. El valor extraído puede ser un `int` o un `double` y la suma resultante es igualmente un `int` o un `double`.
 
-Los métodos `Sum` podrían usarse, por ejemplo, para calcular las sumas de una lista de líneas de detalles de un pedido.
+Los métodos de `Sum` se pueden usar, por ejemplo, para calcular las sumas de una lista de líneas de detalle en un pedido.
 
 ```csharp
 class Detail
@@ -3797,7 +3797,7 @@ void ComputeSums() {
 }
 ```
 
-En la primera invocación de `orderDetails.Sum`, ambos métodos `Sum` son aplicables porque la función anónima `d => d. UnitCount` es compatible con `Func<Detail,int>` y `Func<Detail,double>`. Sin embargo, la resolución de sobrecarga selecciona el primer método `Sum` porque la conversión a `Func<Detail,int>` es mejor que la conversión a `Func<Detail,double>`.
+En la primera invocación de `orderDetails.Sum`, ambos métodos de `Sum` son aplicables porque la función anónima `d => d. UnitCount` es compatible con `Func<Detail,int>` y `Func<Detail,double>`. Sin embargo, la resolución de sobrecarga selecciona el primer método `Sum` porque la conversión a `Func<Detail,int>` es mejor que la conversión a `Func<Detail,double>`.
 
 En la segunda invocación de `orderDetails.Sum`, solo se puede aplicar el segundo método `Sum` porque la función anónima `d => d.UnitPrice * d.UnitCount` genera un valor de tipo `double`. Por lo tanto, la resolución de sobrecarga elige el segundo método `Sum` para esa invocación.
 
@@ -3807,13 +3807,13 @@ Una función anónima no puede ser un receptor, un argumento o un operando de un
 
 ### <a name="outer-variables"></a>Variables externas
 
-Cualquier variable local, parámetro de valor o matriz de parámetros cuyo ámbito incluya *lambda_expression* o *anonymous_method_expression* se denomina una ***variable externa*** de la función anónima. En un miembro de función de instancia de una clase, el valor `this` se considera un parámetro de valor y es una variable externa de cualquier función anónima incluida en el miembro de función.
+Cualquier variable local, parámetro de valor o matriz de parámetros cuyo ámbito incluya el *lambda_expression* o *anonymous_method_expression* se denomina una ***variable externa*** de la función anónima. En un miembro de función de instancia de una clase, el valor de `this` se considera un parámetro de valor y es una variable externa de cualquier función anónima incluida en el miembro de función.
 
 #### <a name="captured-outer-variables"></a>Variables externas capturadas
 
 Cuando una función anónima hace referencia a una variable externa, se dice que la función anónima ha ***capturado*** la variable externa. Normalmente, la duración de una variable local se limita a la ejecución del bloque o la instrucción con la que está asociada ([variables locales](variables.md#local-variables)). Sin embargo, la duración de una variable externa capturada se extiende al menos hasta que el delegado o el árbol de expresión creado a partir de la función anónima sea válido para la recolección de elementos no utilizados.
 
-En el ejemplo
+en el ejemplo
 ```csharp
 using System;
 
@@ -3835,14 +3835,14 @@ class Test
     }
 }
 ```
-la función anónima captura la variable local `x`, y la duración de `x` se extiende al menos hasta que el delegado devuelto de `F` sea válido para la recolección de elementos no utilizados (que no se produce hasta el final del programa). Dado que cada invocación de la función anónima funciona en la misma instancia de `x`, el resultado del ejemplo es:
+la función anónima captura la variable local `x`, y la duración de `x` se extiende al menos hasta que el delegado devuelto de `F` se pueda seleccionar para la recolección de elementos no utilizados (que no se produce hasta el final del programa). Dado que cada invocación de la función anónima funciona en la misma instancia de `x`, la salida del ejemplo es:
 ```console
 1
 2
 3
 ```
 
-Cuando una función anónima captura una variable local o un parámetro de valor, la variable local o el parámetro ya no se considera una variable fija ([variables fijas y móviles](unsafe-code.md#fixed-and-moveable-variables)), sino que se considera una variable móvil. Por lo tanto, cualquier código `unsafe` que toma la dirección de una variable externa capturada debe usar primero la instrucción `fixed` para corregir la variable.
+Cuando una función anónima captura una variable local o un parámetro de valor, la variable local o el parámetro ya no se considera una variable fija ([variables fijas y móviles](unsafe-code.md#fixed-and-moveable-variables)), sino que se considera una variable móvil. Por lo tanto, cualquier `unsafe` código que toma la dirección de una variable externa capturada debe usar primero la instrucción `fixed` para corregir la variable.
 
 Tenga en cuenta que, a diferencia de una variable no capturada, una variable local capturada se puede exponer simultáneamente a varios subprocesos de ejecución.
 
@@ -3859,7 +3859,7 @@ static void F() {
 }
 ```
 
-Sin embargo, si se mueve la declaración de `x` fuera del bucle, se produce una única creación de instancias de `x`:
+Sin embargo, si se mueve la declaración de `x` fuera del bucle, se produce una única instancia de `x`:
 ```csharp
 static void F() {
     int x;
@@ -3913,7 +3913,7 @@ static D[] F() {
     return result;
 }
 ```
-El resultado es:
+el resultado es:
 ```console
 5
 5
@@ -3950,7 +3950,7 @@ static D[] F() {
     return result;
 }
 ```
-los tres delegados capturan la misma instancia de `x` pero instancias independientes de `y` y el resultado es:
+los tres delegados capturan la misma instancia de `x` pero instancias independientes de `y`y el resultado es:
 ```console
 1 1
 2 1
@@ -3978,7 +3978,7 @@ class Test
     }
 }
 ```
-las dos funciones anónimas capturan la misma instancia de la variable local `x` y, por lo tanto, pueden "comunicarse" a través de esa variable. La salida del ejemplo es:
+las dos funciones anónimas capturan la misma instancia de la variable local `x`y, por tanto, pueden "comunicarse" a través de esa variable. La salida del ejemplo es:
 ```console
 5
 10
@@ -3986,7 +3986,7 @@ las dos funciones anónimas capturan la misma instancia de la variable local `x`
 
 ### <a name="evaluation-of-anonymous-function-expressions"></a>Evaluación de expresiones de función anónimas
 
-Una función anónima `F` siempre debe convertirse en un tipo de delegado `D` o en un tipo de árbol de expresión `E`, ya sea directamente o mediante la ejecución de una expresión de creación de delegado `new D(F)`. Esta conversión determina el resultado de la función anónima, como se describe en [conversiones de funciones anónimas](conversions.md#anonymous-function-conversions).
+Una función anónima `F` debe convertirse siempre en un tipo de delegado `D` o un tipo de árbol de expresión `E`, ya sea directamente o mediante la ejecución de una expresión de creación de delegado `new D(F)`. Esta conversión determina el resultado de la función anónima, como se describe en [conversiones de funciones anónimas](conversions.md#anonymous-function-conversions).
 
 ## <a name="query-expressions"></a>Expresiones de consulta
 
@@ -4070,11 +4070,11 @@ query_continuation
     ;
 ```
 
-Una expresión de consulta comienza con una cláusula `from` y termina con una cláusula `select` o `group`. La cláusula `from` inicial puede ir seguida de cero o más `from`, `let`, `where`, `join` o `orderby`. Cada cláusula `from` es un generador que introduce una ***variable de rango*** que abarca los elementos de una ***secuencia***. Cada cláusula `let` introduce una variable de rango que representa un valor calculado por medio de las variables de rango anteriores. Cada cláusula `where` es un filtro que excluye elementos del resultado. Cada cláusula `join` compara las claves especificadas de la secuencia de origen con claves de otra secuencia, lo que produce pares coincidentes. Cada cláusula `orderby` reordena los elementos según los criterios especificados. La cláusula final `select` o `group` especifica la forma del resultado en términos de las variables de rango. Por último, se puede usar una cláusula `into` para "Insertar" consultas mediante el tratamiento de los resultados de una consulta como un generador en una consulta posterior.
+Una expresión de consulta comienza con una cláusula `from` y termina con una cláusula `select` o `group`. La cláusula `from` inicial puede ir seguida de cero o más cláusulas `from`, `let`, `where`, `join` o `orderby`. Cada cláusula `from` es un generador que introduce una ***variable de rango*** que abarca los elementos de una ***secuencia***. Cada cláusula `let` introduce una variable de rango que representa un valor calculado por medio de las variables de rango anteriores. Cada cláusula `where` es un filtro que excluye los elementos del resultado. Cada cláusula `join` compara las claves especificadas de la secuencia de origen con claves de otra secuencia, lo que produce pares coincidentes. Cada cláusula `orderby` reordena los elementos según los criterios especificados. La cláusula final `select` o `group` especifica la forma del resultado en términos de las variables de rango. Por último, se puede usar una cláusula `into` para "Insertar" las consultas tratando los resultados de una consulta como un generador en una consulta posterior.
 
 ### <a name="ambiguities-in-query-expressions"></a>Ambigüedades en expresiones de consulta
 
-Las expresiones de consulta contienen una serie de "palabras clave contextuales", es decir, identificadores que tienen un significado especial en un contexto determinado. En concreto, se trata de `from`, `where`, @no__t 2, `on`, `equals`, `into`, `let`, `orderby`, `ascending`, `descending`, 0, 1 y 2. Para evitar ambigüedades en las expresiones de consulta producidas por el uso mixto de estos identificadores como palabras clave o nombres simples, estos identificadores se consideran palabras clave cuando se producen en cualquier parte de una expresión de consulta.
+Las expresiones de consulta contienen una serie de "palabras clave contextuales", es decir, identificadores que tienen un significado especial en un contexto determinado. En concreto, se trata de `from`, `where`, `join`, `on`, `equals`, `into`, `let`, `orderby`, `ascending`, `descending`, `select`, `group` y `by`. Para evitar ambigüedades en las expresiones de consulta producidas por el uso mixto de estos identificadores como palabras clave o nombres simples, estos identificadores se consideran palabras clave cuando se producen en cualquier parte de una expresión de consulta.
 
 Para este propósito, una expresión de consulta es cualquier expresión que empiece por "`from identifier`" seguida de cualquier token excepto "`;`", "`=`" o "`,`".
 
@@ -4082,7 +4082,7 @@ Para usar estas palabras como identificadores dentro de una expresión de consul
 
 ### <a name="query-expression-translation"></a>Traducción de expresiones de consulta
 
-El C# lenguaje no especifica la semántica de ejecución de las expresiones de consulta. En su lugar, las expresiones de consulta se convierten en invocaciones de métodos que se adhieren al *patrón de expresión de consulta* ([el patrón de expresión de consulta](expressions.md#the-query-expression-pattern)). En concreto, las expresiones de consulta se convierten en invocaciones de métodos denominados `Where`, `Select`, `SelectMany`, `Join`, `GroupJoin`, `OrderBy`, `OrderByDescending`, `ThenBy`, `ThenByDescending`, `GroupBy` y 0. Se espera que estos métodos tengan firmas concretas y tipos de resultado, como se describe en [el patrón de expresión de consulta](expressions.md#the-query-expression-pattern). Estos métodos pueden ser métodos de instancia del objeto que se consulta o métodos de extensión que son externos al objeto e implementan la ejecución real de la consulta.
+El C# lenguaje no especifica la semántica de ejecución de las expresiones de consulta. En su lugar, las expresiones de consulta se convierten en invocaciones de métodos que se adhieren al *patrón de expresión de consulta* ([el patrón de expresión de consulta](expressions.md#the-query-expression-pattern)). En concreto, las expresiones de consulta se convierten en invocaciones de métodos denominados `Where`, `Select`, `SelectMany`, `Join`, `GroupJoin`, `OrderBy`, `OrderByDescending`, `ThenBy`, `ThenByDescending`, `GroupBy`y `Cast`. Se espera que estos métodos tengan firmas concretas y tipos de resultado, como se describe en [el patrón de expresión de consulta](expressions.md#the-query-expression-pattern). Estos métodos pueden ser métodos de instancia del objeto que se consulta o métodos de extensión que son externos al objeto e implementan la ejecución real de la consulta.
 
 La conversión de las expresiones de consulta a las invocaciones de método es una asignación sintáctica que se produce antes de que se haya realizado cualquier enlace de tipo o resolución de sobrecarga. Se garantiza que la conversión es sintácticamente correcta, pero no se garantiza que genere código correcto C# semánticamente. Después de la traducción de las expresiones de consulta, las invocaciones de método resultantes se procesan como invocaciones de método regulares y esto puede a su vez detectar errores, por ejemplo, si los métodos no existen, si los argumentos tienen tipos incorrectos, o si los métodos son genéricos y se produce un error en la inferencia de tipos.
 
@@ -4090,7 +4090,7 @@ Una expresión de consulta se procesa mediante la aplicación repetida de las si
 
 No se permite la asignación a variables de rango en expresiones de consulta. Sin embargo C# , se permite que una implementación no siempre aplique esta restricción, ya que a veces esto no es posible con el esquema de traducción sintáctica que se muestra aquí.
 
-Ciertas traducciones insertan variables de rango con identificadores transparentes indicados por `*`. Las propiedades especiales de los identificadores transparentes se tratan en profundidad en los [identificadores transparentes](expressions.md#transparent-identifiers).
+Ciertas traducciones insertan variables de rango con identificadores transparentes que se indican mediante `*`. Las propiedades especiales de los identificadores transparentes se tratan en profundidad en los [identificadores transparentes](expressions.md#transparent-identifiers).
 
 #### <a name="select-and-groupby-clauses-with-continuations"></a>Cláusulas SELECT y GroupBy con continuaciones
 
@@ -4103,7 +4103,7 @@ se traduce en
 from x in ( from ... ) ...
 ```
 
-Las traducciones de las secciones siguientes suponen que las consultas no tienen ninguna continuación `into`.
+Las traducciones de las secciones siguientes suponen que las consultas no tienen ninguna continuación de `into`.
 
 El ejemplo
 ```csharp
@@ -4166,7 +4166,7 @@ Cast<Customer>().
 Where(c => c.City == "London")
 ```
 
-Los tipos de variables de rango explícitos son útiles para consultar colecciones que implementan la interfaz `IEnumerable` no genérica, pero no la interfaz genérica de `IEnumerable<T>`. En el ejemplo anterior, este sería el caso si `customers` fuera del tipo `ArrayList`.
+Los tipos de variables de rango explícitos son útiles para consultar colecciones que implementan la interfaz de `IEnumerable` no genérica, pero no la interfaz de `IEnumerable<T>` genérica. En el ejemplo anterior, este sería el caso si `customers` fuera del tipo `ArrayList`.
 
 #### <a name="degenerate-query-expressions"></a>Expresiones de consulta degeneradas
 
@@ -4193,7 +4193,7 @@ Una expresión de consulta degenerada es aquella que selecciona trivialmente los
 
 #### <a name="from-let-where-join-and-orderby-clauses"></a>Cláusulas from, Let, Where, join y OrderBy
 
-Una expresión de consulta con una segunda cláusula `from` seguida de una cláusula `select`
+Expresión de consulta con una segunda cláusula `from` seguida de una cláusula `select`.
 ```csharp
 from x1 in e1
 from x2 in e2
@@ -4204,7 +4204,7 @@ se traduce en
 ( e1 ) . SelectMany( x1 => e2 , ( x1 , x2 ) => v )
 ```
 
-Una expresión de consulta con una segunda cláusula `from` seguida de una cláusula `select`:
+Expresión de consulta con una segunda cláusula `from` seguida de una cláusula de `select`:
 
 ```csharp
 from x1 in e1
@@ -4241,7 +4241,7 @@ from x in ( e ) . Where ( x => f )
 ...
 ```
 
-Una expresión de consulta con una cláusula `join` sin un `into` seguida de una cláusula `select`.
+Expresión de consulta con una cláusula `join` sin una `into` seguida de una cláusula `select`
 ```csharp
 from x1 in e1
 join x2 in e2 on k1 equals k2
@@ -4252,7 +4252,7 @@ se traduce en
 ( e1 ) . Join( e2 , x1 => k1 , x2 => k2 , ( x1 , x2 ) => v )
 ```
 
-Una expresión de consulta con una cláusula `join` sin un `into` seguido de un valor distinto de una cláusula `select`
+Expresión de consulta con una cláusula `join` sin un `into` seguido de un valor distinto de una cláusula `select`
 ```csharp
 from x1 in e1
 join x2 in e2 on k1 equals k2
@@ -4264,7 +4264,7 @@ from * in ( e1 ) . Join( e2 , x1 => k1 , x2 => k2 , ( x1 , x2 ) => new { x1 , x2
 ...
 ```
 
-Una expresión de consulta con una cláusula `join` con un `into` seguida de una cláusula `select`.
+Expresión de consulta con una cláusula `join` con un `into` seguido de una cláusula `select`
 ```csharp
 from x1 in e1
 join x2 in e2 on k1 equals k2 into g
@@ -4275,7 +4275,7 @@ se traduce en
 ( e1 ) . GroupJoin( e2 , x1 => k1 , x2 => k2 , ( x1 , g ) => v )
 ```
 
-Una expresión de consulta con una cláusula `join` con un `into` seguido de un valor distinto de una cláusula `select`
+Expresión de consulta con una cláusula `join` con un `into` seguido de un valor distinto de una cláusula `select`
 ```csharp
 from x1 in e1
 join x2 in e2 on k1 equals k2 into g
@@ -4305,7 +4305,7 @@ ThenBy ( x => kn )
 
 Si una cláusula de ordenación especifica un indicador de dirección `descending`, se produce una invocación de `OrderByDescending` o `ThenByDescending` en su lugar.
 
-Las siguientes traducciones suponen que no hay ninguna cláusula `let`, `where`, `join` o `orderby`, y no más de una cláusula de `from` inicial en cada expresión de consulta.
+Las siguientes traducciones suponen que no hay ninguna cláusula `let`, `where`, `join` o `orderby` y que no hay más de una cláusula de `from` inicial en cada expresión de consulta.
 
 El ejemplo
 ```csharp
@@ -4473,7 +4473,7 @@ GroupBy(c => c.Country, c => c.Name)
 
 #### <a name="transparent-identifiers"></a>Identificadores transparentes
 
-Ciertas traducciones insertan variables de rango con ***identificadores transparentes*** indicados por `*`. Los identificadores transparentes no son una característica de lenguaje adecuada; solo existen como un paso intermedio en el proceso de conversión de expresiones de consulta.
+Ciertas traducciones insertan variables de rango con ***identificadores transparentes*** que se indican mediante `*`. Los identificadores transparentes no son una característica de lenguaje adecuada; solo existen como un paso intermedio en el proceso de conversión de expresiones de consulta.
 
 Cuando una traducción de consultas inserta un identificador transparente, los pasos de traducción adicionales propagan el identificador transparente en funciones anónimas e inicializadores de objeto anónimos. En esos contextos, los identificadores transparentes tienen el siguiente comportamiento:
 
@@ -4549,7 +4549,7 @@ Join(products, y => y.d.ProductID, p => p.ProductID,
     (y, p) => new { y, p }).
 Select(z => new { z.y.x.c.Name, z.y.x.o.OrderDate, z.p.ProductName })
 ```
-donde `x`, `y` y `z` son identificadores generados por el compilador que, de lo contrario, son invisibles e inaccesibles.
+donde `x`, `y`y `z` son identificadores generados por el compilador que, de lo contrario, son invisibles e inaccesibles.
 
 ### <a name="the-query-expression-pattern"></a>Patrón de expresión de consulta
 
@@ -4605,9 +4605,9 @@ class G<K,T> : C<T>
 }
 ```
 
-Los métodos anteriores usan los tipos de delegado genérico `Func<T1,R>` y `Func<T1,T2,R>`, pero también podrían haber usado otros tipos de árbol de delegado o de expresión con las mismas relaciones en los tipos de parámetro y de resultado.
+Los métodos anteriores usan los tipos de delegado genéricos `Func<T1,R>` y `Func<T1,T2,R>`, pero también podrían haber usado otros tipos de árbol de delegado o de expresión con las mismas relaciones en los tipos de parámetro y de resultado.
 
-Observe la relación recomendada entre `C<T>` y `O<T>`, lo que garantiza que los métodos @no__t 2 y `ThenByDescending` solo están disponibles en el resultado de `OrderBy` o `OrderByDescending`. Observe también la forma recomendada del resultado de `GroupBy`--una secuencia de secuencias, donde cada secuencia interna tiene una propiedad `Key` adicional.
+Observe la relación recomendada entre `C<T>` y `O<T>` que garantiza que los métodos `ThenBy` y `ThenByDescending` solo están disponibles en el resultado de un `OrderBy` o `OrderByDescending`. Observe también la forma recomendada del resultado de `GroupBy`--una secuencia de secuencias, donde cada secuencia interna tiene una propiedad `Key` adicional.
 
 El espacio de nombres `System.Linq` proporciona una implementación del patrón de operador de consulta para cualquier tipo que implemente la interfaz `System.Collections.Generic.IEnumerable<T>`.
 
@@ -4637,7 +4637,7 @@ assignment_operator
 
 El operando izquierdo de una asignación debe ser una expresión clasificada como una variable, un acceso de propiedad, un acceso de indexador o un acceso de evento.
 
-El operador `=` se denomina ***operador de asignación simple***. Asigna el valor del operando derecho a la variable, propiedad o elemento de indexador proporcionado por el operando izquierdo. Es posible que el operando izquierdo del operador de asignación simple no sea un acceso a eventos (excepto como se describe en [eventos similares a los de campo](classes.md#field-like-events)). El operador de asignación simple se describe en [asignación simple](expressions.md#simple-assignment).
+El operador de `=` se denomina ***operador de asignación simple***. Asigna el valor del operando derecho a la variable, propiedad o elemento de indexador proporcionado por el operando izquierdo. Es posible que el operando izquierdo del operador de asignación simple no sea un acceso a eventos (excepto como se describe en [eventos similares a los de campo](classes.md#field-like-events)). El operador de asignación simple se describe en [asignación simple](expressions.md#simple-assignment).
 
 Los operadores de asignación distintos del operador `=` se denominan ***operadores de asignación compuesta***. Estos operadores realizan la operación indicada en los dos operandos y, a continuación, asignan el valor resultante a la variable, la propiedad o el elemento indexador proporcionado por el operando izquierdo. Los operadores de asignación compuesta se describen en [asignación compuesta](expressions.md#compound-assignment).
 
@@ -4647,29 +4647,29 @@ Los operadores de asignación son asociativos a la derecha, lo que significa que
 
 ### <a name="simple-assignment"></a>Asignación simple
 
-El operador `=` se denomina operador de asignación simple.
+El operador de `=` se denomina operador de asignación simple.
 
-Si el operando izquierdo de una asignación simple tiene el formato `E.P` o `E[Ei]`, donde @no__t 2 tiene el tipo en tiempo de compilación `dynamic`, la asignación está enlazada dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el tipo en tiempo de compilación de la expresión de asignación es `dynamic`, y la resolución que se describe a continuación se realizará en tiempo de ejecución en función del tipo en tiempo de ejecución de `E`.
+Si el operando izquierdo de una asignación simple tiene el formato `E.P` o `E[Ei]` donde `E` tiene el tipo en tiempo de compilación `dynamic`, la asignación está enlazada dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el tipo en tiempo de compilación de la expresión de asignación es `dynamic`y la resolución que se describe a continuación se realiza en tiempo de ejecución en función del tipo de `E`en tiempo de ejecución.
 
 En una asignación simple, el operando derecho debe ser una expresión que se pueda convertir implícitamente al tipo del operando izquierdo. La operación asigna el valor del operando derecho a la variable, la propiedad o el elemento indexador proporcionado por el operando izquierdo.
 
 El resultado de una expresión de asignación simple es el valor asignado al operando izquierdo. El resultado tiene el mismo tipo que el operando izquierdo y siempre se clasifica como un valor.
 
-Si el operando izquierdo es una propiedad o un indexador, la propiedad o el indexador deben tener un descriptor de acceso `set`. Si no es así, se produce un error en tiempo de enlace.
+Si el operando izquierdo es una propiedad o un indexador, la propiedad o el indizador deben tener un descriptor de acceso `set`. Si no es así, se produce un error en tiempo de enlace.
 
 El procesamiento en tiempo de ejecución de una asignación simple del formulario `x = y` consta de los siguientes pasos:
 
-*  Si `x` está clasificado como una variable:
+*  Si `x` se clasifica como una variable:
    * `x` se evalúa para generar la variable.
    * `y` se evalúa y, si es necesario, se convierte al tipo de `x` a través de una conversión implícita ([conversiones implícitas](conversions.md#implicit-conversions)).
-   * Si la variable proporcionada por `x` es un elemento de matriz de un *reference_type*, se realiza una comprobación en tiempo de ejecución para asegurarse de que el valor calculado para `y` es compatible con la instancia de matriz de la que `x` es un elemento. La comprobación se realiza correctamente si `y` es `null`, o si existe una conversión de referencia implícita ([conversiones de referencia implícita](conversions.md#implicit-reference-conversions)) del tipo real de la instancia a la que hace referencia `y` en el tipo de elemento real de la instancia de matriz que contiene `x`. De lo contrario, se produce una excepción `System.ArrayTypeMismatchException`.
+   * Si la variable proporcionada por `x` es un elemento de matriz de un *reference_type*, se realiza una comprobación en tiempo de ejecución para asegurarse de que el valor calculado para `y` sea compatible con la instancia de la matriz de la que `x` es un elemento. La comprobación se realiza correctamente si se `null``y` o si existe una conversión de referencia implícita ([conversiones de referencia implícita](conversions.md#implicit-reference-conversions)) del tipo real de la instancia a la que hace referencia `y` al tipo de elemento real de la instancia de la matriz que contiene `x`. De lo contrario, se produce una excepción `System.ArrayTypeMismatchException`.
    * El valor resultante de la evaluación y conversión de `y` se almacena en la ubicación proporcionada por la evaluación de `x`.
 *  Si `x` se clasifica como un acceso de propiedad o indizador:
-   * La expresión de instancia (si `x` no es `static`) y la lista de argumentos (si `x` es un indexador) asociada a `x` se evalúan y los resultados se usan en la invocación del descriptor de acceso `set` subsiguiente.
+   * La expresión de instancia (si `x` no se `static`) y la lista de argumentos (si `x` es un acceso de indexador) asociadas a `x` se evalúan, y los resultados se usan en la invocación del descriptor de acceso `set` subsiguiente.
    * `y` se evalúa y, si es necesario, se convierte al tipo de `x` a través de una conversión implícita ([conversiones implícitas](conversions.md#implicit-conversions)).
-   * El descriptor de acceso `set` de `x` se invoca con el valor calculado para `y` como su argumento `value`.
+   * El descriptor de acceso `set` de `x` se invoca con el valor calculado para `y` como su `value` argumento.
 
-Las reglas de covarianza de matriz ([covarianza de matriz](arrays.md#array-covariance)) permiten que un valor de un tipo de matriz `A[]` sea una referencia a una instancia de un tipo de matriz `B[]`, siempre que exista una conversión de referencia implícita de `B` a `A`. Debido a estas reglas, la asignación a un elemento de matriz de una *reference_type* requiere una comprobación en tiempo de ejecución para asegurarse de que el valor que se está asignando es compatible con la instancia de la matriz. En el ejemplo
+Las reglas de covarianza de matriz ([covarianza de matriz](arrays.md#array-covariance)) permiten que un valor de un tipo de matriz `A[]` sea una referencia a una instancia de un tipo de matriz `B[]`, siempre que exista una conversión de referencia implícita de `B` a `A`. Debido a estas reglas, la asignación a un elemento de matriz de un *reference_type* requiere una comprobación en tiempo de ejecución para asegurarse de que el valor que se está asignando es compatible con la instancia de la matriz. en el ejemplo
 ```csharp
 string[] sa = new string[10];
 object[] oa = sa;
@@ -4678,7 +4678,7 @@ oa[0] = null;               // Ok
 oa[1] = "Hello";            // Ok
 oa[2] = new ArrayList();    // ArrayTypeMismatchException
 ```
-la última asignación provoca que se inicie una `System.ArrayTypeMismatchException` porque una instancia de `ArrayList` no puede almacenarse en un elemento de un `string[]`.
+la última asignación hace que se inicie una `System.ArrayTypeMismatchException` porque no se puede almacenar una instancia de `ArrayList` en un elemento de un `string[]`.
 
 Cuando una propiedad o un indizador declarado en una *struct_type* es el destino de una asignación, la expresión de instancia asociada con el acceso a la propiedad o indizador debe estar clasificada como una variable. Si la expresión de instancia se clasifica como un valor, se produce un error en tiempo de enlace. Debido al [acceso a miembros](expressions.md#member-access), la misma regla también se aplica a los campos.
 
@@ -4724,7 +4724,7 @@ struct Rectangle
     }
 }
 ```
-En el ejemplo
+en el ejemplo
 ```csharp
 Point p = new Point();
 p.X = 100;
@@ -4733,7 +4733,7 @@ Rectangle r = new Rectangle();
 r.A = new Point(10, 10);
 r.B = p;
 ```
-se permiten las asignaciones a `p.X`, `p.Y`, `r.A` y `r.B` porque `p` y `r` son variables. Sin embargo, en el ejemplo
+se permiten las asignaciones a `p.X`, `p.Y`, `r.A`y `r.B` porque `p` y `r` son variables. Sin embargo, en el ejemplo
 ```csharp
 Rectangle r = new Rectangle();
 r.A.X = 10;
@@ -4745,21 +4745,21 @@ las asignaciones no son válidas, ya que `r.A` y `r.B` no son variables.
 
 ### <a name="compound-assignment"></a>Asignación compuesta
 
-Si el operando izquierdo de una asignación compuesta tiene el formato `E.P` o `E[Ei]`, donde @no__t 2 tiene el tipo en tiempo de compilación `dynamic`, la asignación está enlazada dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el tipo en tiempo de compilación de la expresión de asignación es `dynamic`, y la resolución que se describe a continuación se realizará en tiempo de ejecución en función del tipo en tiempo de ejecución de `E`.
+Si el operando izquierdo de una asignación compuesta tiene el formato `E.P` o `E[Ei]` donde `E` tiene el tipo en tiempo de compilación `dynamic`, la asignación está enlazada dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el tipo en tiempo de compilación de la expresión de asignación es `dynamic`y la resolución que se describe a continuación se realiza en tiempo de ejecución en función del tipo de `E`en tiempo de ejecución.
 
-Una operación con el formato `x op= y` se procesa aplicando la resolución de sobrecarga del operador binario ([resolución de sobrecarga del operador binario](expressions.md#binary-operator-overload-resolution)) como si la operación se hubiera escrito `x op y`. A
+Una operación con el formato `x op= y` se procesa mediante la aplicación de la resolución de sobrecarga del operador binario ([resolución de sobrecarga del operador binario](expressions.md#binary-operator-overload-resolution)) como si la operación se hubiera escrito `x op y`. A
 
-*  Si el tipo de valor devuelto del operador seleccionado es implícitamente convertible al tipo de `x`, la operación se evalúa como `x = x op y`, excepto en que `x` solo se evalúa una vez.
-*  De lo contrario, si el operador seleccionado es un operador predefinido, si el tipo de valor devuelto del operador seleccionado es convertible explícitamente al tipo de `x`, y si `y` es implícitamente convertible al tipo de `x` o el operador es un operador de desplazamiento , la operación se evalúa como `x = (T)(x op y)`, donde `T` es el tipo de `x`, salvo que `x` se evalúa solo una vez.
+*  Si el tipo de valor devuelto del operador seleccionado es implícitamente convertible al tipo de `x`, la operación se evalúa como `x = x op y`, salvo que `x` solo se evalúa una vez.
+*  De lo contrario, si el operador seleccionado es un operador predefinido, si el tipo de valor devuelto del operador seleccionado es convertible explícitamente al tipo de `x`, y si `y` es implícitamente convertible al tipo de `x` o el operador es un operador de desplazamiento, la operación se evalúa como `x = (T)(x op y)`, donde `T` es el tipo de `x`, salvo que `x` se evalúa solo una vez.
 *  De lo contrario, la asignación compuesta no es válida y se produce un error en tiempo de enlace.
 
-El término "evaluado solo una vez" significa que en la evaluación de `x op y`, los resultados de cualquier expresión constitutiva de `x` se guardan temporalmente y se reutilizan al realizar la asignación a `x`. Por ejemplo, en la asignación `A()[B()] += C()`, donde `A` es un método que devuelve `int[]` y `B` y `C` son métodos que devuelven `int`, los métodos se invocan solo una vez, en el orden `A`, `B`, `C`.
+El término "evaluado solo una vez" significa que, en la evaluación de `x op y`, los resultados de las expresiones que son constitutivas de `x` se guardan temporalmente y se reutilizan al realizar la asignación en `x`. Por ejemplo, en la `A()[B()] += C()`de asignación, donde `A` es un método que devuelve `int[]`, y `B` y `C` son métodos que devuelven `int`, los métodos se invocan solo una vez, en el orden `A`, `B``C`.
 
 Cuando el operando izquierdo de una asignación compuesta es un acceso a propiedad o a un indexador, la propiedad o el indexador deben tener un descriptor de acceso `get` y un descriptor de acceso `set`. Si no es así, se produce un error en tiempo de enlace.
 
-La segunda regla anterior permite evaluar `x op= y` como `x = (T)(x op y)` en determinados contextos. La regla existe de forma que los operadores predefinidos se pueden usar como operadores compuestos cuando el operando izquierdo es de tipo `sbyte`, `byte`, `short`, `ushort` o `char`. Incluso cuando ambos argumentos son de uno de esos tipos, los operadores predefinidos producen un resultado de tipo `int`, tal y como se describe en [promociones numéricas binarias](expressions.md#binary-numeric-promotions). Por lo tanto, sin una conversión, no sería posible asignar el resultado al operando izquierdo.
+La segunda regla anterior permite evaluar `x op= y` como `x = (T)(x op y)` en determinados contextos. La regla existe de forma que los operadores predefinidos se pueden usar como operadores compuestos cuando el operando izquierdo es de tipo `sbyte`, `byte`, `short`, `ushort`o `char`. Incluso cuando ambos argumentos son de uno de esos tipos, los operadores predefinidos producen un resultado de tipo `int`, como se describe en [promociones numéricas binarias](expressions.md#binary-numeric-promotions). Por lo tanto, sin una conversión, no sería posible asignar el resultado al operando izquierdo.
 
-El efecto intuitivo de la regla para los operadores predefinidos es simplemente que se permite `x op= y` si se permiten los dos `x op y` y `x = y`. En el ejemplo
+El efecto intuitivo de la regla para los operadores predefinidos es simplemente que se permite `x op= y` si se permiten los dos `x op y` y `x = y`. en el ejemplo
 ```csharp
 byte b = 0;
 char ch = '\0';
@@ -4775,12 +4775,12 @@ ch += (char)1;      // Ok
 ```
 la razón intuitiva de cada error es que una asignación simple correspondiente también habría sido un error.
 
-Esto también significa que las operaciones de asignación compuesta admiten operaciones de elevación. En el ejemplo
+Esto también significa que las operaciones de asignación compuesta admiten operaciones de elevación. en el ejemplo
 ```csharp
 int? i = 0;
 i += 1;             // Ok
 ```
-se usa el operador de elevación `+(int?,int?)`.
+se utiliza el operador de elevación `+(int?,int?)`.
 
 ### <a name="event-assignment"></a>Asignación de eventos
 
@@ -4788,13 +4788,13 @@ Si el operando izquierdo de un operador `+=` o `-=` se clasifica como un acceso 
 
 *  Expresión de instancia, si existe, del acceso al evento que se va a evaluar.
 *  Se evalúa el operando derecho del operador `+=` o `-=` y, si es necesario, se convierte al tipo del operando izquierdo a través de una conversión implícita ([conversiones implícitas](conversions.md#implicit-conversions)).
-*  Se invoca un descriptor de acceso de eventos del evento, con la lista de argumentos que consiste en el operando derecho, después de la evaluación y, si es necesario, conversión. Si el operador era `+=`, se invoca al descriptor de acceso `add`; Si el operador era `-=`, se invoca al descriptor de acceso `remove`.
+*  Se invoca un descriptor de acceso de eventos del evento, con la lista de argumentos que consiste en el operando derecho, después de la evaluación y, si es necesario, conversión. Si el operador se `+=`, se invoca al descriptor de acceso `add`; Si el operador se `-=`, se invoca al descriptor de acceso `remove`.
 
 Una expresión de asignación de eventos no produce un valor. Por lo tanto, una expresión de asignación de eventos solo es válida en el contexto de una *statement_expression* ([instrucciones de expresión](statements.md#expression-statements)).
 
 ## <a name="expression"></a>Expresión
 
-Una *expresión* es un *non_assignment_expression* o una *asignación*.
+Una *expresión* es una *non_assignment_expression* o una *asignación*.
 
 ```antlr
 expression
@@ -4809,9 +4809,9 @@ non_assignment_expression
     ;
 ```
 
-## <a name="constant-expressions"></a>Expresiones de constante
+## <a name="constant-expressions"></a>Expresiones constantes
 
-Un *constant_expression* es una expresión que se puede evaluar por completo en tiempo de compilación.
+Una *constant_expression* es una expresión que se puede evaluar por completo en tiempo de compilación.
 
 ```antlr
 constant_expression
@@ -4819,20 +4819,20 @@ constant_expression
     ;
 ```
 
-Una expresión constante debe ser el literal `null` o un valor con uno de los siguientes tipos: `sbyte`, @no__t 2, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, 0, 1, 2, 3, 4 , 5 o cualquier tipo de enumeración. Solo se permiten las siguientes construcciones en expresiones constantes:
+Una expresión constante debe ser el `null` literal o un valor con uno de los siguientes tipos: `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `float`, `double`, `decimal`, `bool`, `object`, `string`o cualquier tipo de enumeración. Solo se permiten las siguientes construcciones en expresiones constantes:
 
-*  Literales (incluido el literal `null`).
-*  Referencias a miembros `const` de tipos de clase y estructura.
+*  Literales (incluido el `null` literal).
+*  Referencias a `const` miembros de tipos de clase y estructura.
 *  Referencias a miembros de tipos de enumeración.
-*  Referencias a parámetros `const` o variables locales
+*  Referencias a `const` parámetros o variables locales
 *  Subexpresiones entre paréntesis, que son expresiones constantes.
 *  Expresiones de conversión, siempre que el tipo de destino sea uno de los tipos enumerados anteriormente.
 *  Expresiones `checked` y `unchecked`
 *  Expresiones de valor predeterminado
 *  Expresiones Name
-*  Los operadores unarios predefinidos `+`, `-`, `!` y `~`.
-*  El @no__t predefinido-0, `-`, `*`, `/`, `%`, `<<`, `>>`, `&`, `|`, `^`, 0, 1, 2, 3, 4, 5, 6 y 7 operadores binarios, siempre que cada operando sea de tipo enumerado anteriormente.
-*  Operador condicional `?:`.
+*  Los operadores unarios predefinidos `+`, `-`, `!`y `~`.
+*  Los operadores predefinidos `+`, `-`, `*`, `/`, `%`, `<<`, `>>`, `&`, `|`, `^`, `&&`, `||`, `==`, `!=`, `<`, `>`, `<=`y `>=` binarios, siempre que cada operando sea de un tipo enumerado anteriormente.
+*  `?:` operador condicional.
 
 Las siguientes conversiones se permiten en expresiones constantes:
 
@@ -4855,23 +4855,23 @@ Siempre que una expresión cumple los requisitos mencionados anteriormente, la e
 
 La evaluación en tiempo de compilación de las expresiones constantes utiliza las mismas reglas que la evaluación en tiempo de ejecución de expresiones no constantes, salvo que, en el caso de que la evaluación en tiempo de ejecución hubiera producido una excepción, la evaluación en tiempo de compilación provoca un error en tiempo de compilación.
 
-A menos que una expresión constante se coloque explícitamente en un contexto `unchecked`, los desbordamientos que se producen en operaciones aritméticas de tipo entero y en las conversiones durante la evaluación en tiempo de compilación de la expresión siempre producen errores en tiempo de compilación ([Constant Expresiones](expressions.md#constant-expressions)).
+A menos que una expresión constante se coloque explícitamente en un contexto de `unchecked`, los desbordamientos que se producen en operaciones aritméticas de tipo entero y en las conversiones durante la evaluación en tiempo de compilación de la expresión siempre producen errores en tiempo de compilación ([expresiones constantes](expressions.md#constant-expressions)).
 
 Las expresiones constantes se producen en los contextos que se enumeran a continuación. En estos contextos, se produce un error en tiempo de compilación si una expresión no se puede evaluar por completo en tiempo de compilación.
 
 *  Declaraciones de constantes ([constantes](classes.md#constants)).
 *  Declaraciones de miembros de enumeración ([miembros de enumeración](enums.md#enum-members)).
 *  Argumentos predeterminados de las listas de parámetros formales ([parámetros de método](classes.md#method-parameters))
-*  etiquetas `case` de una instrucción `switch` ([la instrucción switch](statements.md#the-switch-statement)).
-*  instrucciones `goto case` ([instrucción Goto](statements.md#the-goto-statement)).
+*  `case` etiquetas de una instrucción de `switch` ([instrucción switch](statements.md#the-switch-statement)).
+*  `goto case` instrucciones ([instrucción Goto](statements.md#the-goto-statement)).
 *  Longitudes de dimensión en una expresión de creación de matriz ([expresiones de creación de matrices](expressions.md#array-creation-expressions)) que incluye un inicializador.
 *  Attributes ([atributos](attributes.md)).
 
-Una conversión de expresión constante implícita ([conversiones de expresión constante implícita](conversions.md#implicit-constant-expression-conversions)) permite convertir una expresión constante de tipo `int` a `sbyte`, `byte`, `short`, `ushort`, `uint` o `ulong`, siempre y cuando el valor de la la expresión constante está dentro del intervalo del tipo de destino.
+Una conversión de expresión constante implícita ([conversiones de expresión constante implícitas](conversions.md#implicit-constant-expression-conversions)) permite convertir una expresión constante de tipo `int` en `sbyte`, `byte`, `short`, `ushort`, `uint`o `ulong`, siempre que el valor de la expresión constante esté dentro del intervalo del tipo de destino.
 
 ## <a name="boolean-expressions"></a>expresiones booleanas
 
-Una *Boolean_expression* es una expresión que produce un resultado de tipo `bool`; ya sea directamente o a través de la aplicación de `operator true` en determinados contextos, tal y como se especifica en el siguiente.
+Un *Boolean_expression* es una expresión que produce un resultado de tipo `bool`; ya sea directamente o a través de la aplicación de `operator true` en determinados contextos, tal y como se especifica en el siguiente.
 
 ```antlr
 boolean_expression
@@ -4879,12 +4879,12 @@ boolean_expression
     ;
 ```
 
-La expresión condicional de control de *una if_statement* ([la instrucción If](statements.md#the-if-statement)) *, while_statement* ([la instrucción while](statements.md#the-while-statement)), *do_statement* ([la instrucción do](statements.md#the-do-statement)) o *for_Statement* ([para Statement](statements.md#the-for-statement)) es una *Boolean_expression*. La expresión condicional de control del operador `?:` ([operador condicional](expressions.md#conditional-operator)) sigue las mismas reglas que una *Boolean_expression*, pero por razones de precedencia de operadores se clasifica como *conditional_or_expression*.
+La expresión condicional de control de *una if_statement* ([la instrucción if](statements.md#the-if-statement)), *while_statement* ([la instrucción while](statements.md#the-while-statement)) *, do_statement* ([la instrucción do](statements.md#the-do-statement)) o *for_Statement* ([la instrucción for](statements.md#the-for-statement)) es una *Boolean_expression*. La expresión condicional de control del operador `?:` ([operador condicional](expressions.md#conditional-operator)) sigue las mismas reglas que una *Boolean_expression*, pero por razones de precedencia de operadores se clasifica como un *conditional_or_expression*.
 
-Se requiere una *boolean_expression* `E` para poder generar un valor de tipo `bool`, como se indica a continuación:
+Se requiere un *boolean_expression* `E` para poder generar un valor de tipo `bool`, como se indica a continuación:
 
-*  Si `E` es implícitamente convertible a `bool` en tiempo de ejecución, se aplica la conversión implícita.
-*  De lo contrario, se utiliza la resolución de sobrecargas de operador unario ([resolución de sobrecarga de operadores unarios](expressions.md#unary-operator-overload-resolution)) para encontrar una implementación óptima única de Operator `true` en `E` y esa implementación se aplica en tiempo de ejecución.
+*  Si `E` se pueden convertir implícitamente en `bool` en tiempo de ejecución, se aplica la conversión implícita.
+*  De lo contrario, se utiliza la resolución de sobrecargas de operador unario ([resolución de sobrecarga de operadores unarios](expressions.md#unary-operator-overload-resolution)) para encontrar una implementación óptima única de `true` de operador en `E`, y esa implementación se aplica en tiempo de ejecución.
 *  Si no se encuentra ningún operador de este tipo, se produce un error en tiempo de enlace.
 
-El tipo de estructura `DBBool` en [tipo booleano de base de datos](structs.md#database-boolean-type) proporciona un ejemplo de un tipo que implementa `operator true` y `operator false`.
+El tipo de struct `DBBool` del [tipo Boolean de base de datos](structs.md#database-boolean-type) proporciona un ejemplo de un tipo que implementa `operator true` y `operator false`.

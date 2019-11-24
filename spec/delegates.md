@@ -39,17 +39,17 @@ Es un error en tiempo de compilación que el mismo modificador aparezca varias v
 
 El modificador `new` solo se permite en los delegados declarados dentro de otro tipo, en cuyo caso especifica que dicho delegado oculte un miembro heredado con el mismo nombre, tal y como se describe en [el modificador New](classes.md#the-new-modifier).
 
-Los modificadores `public`, `protected`, `internal` y `private` controlan la accesibilidad del tipo de delegado. En función del contexto en el que se produce la declaración de delegado, es posible que algunos de estos modificadores no estén permitidos (se[declare accesibilidad](basic-concepts.md#declared-accessibility)).
+Los modificadores `public`, `protected`, `internal`y `private` controlan la accesibilidad del tipo de delegado. En función del contexto en el que se produce la declaración de delegado, es posible que algunos de estos modificadores no estén permitidos (se[declare accesibilidad](basic-concepts.md#declared-accessibility)).
 
 El nombre de tipo del delegado es *Identifier*.
 
-El *formal_parameter_list* opcional especifica los parámetros del delegado y el valor de *tipo indica el* tipo de valor devuelto del delegado.
+El *formal_parameter_list* opcional especifica los parámetros del delegado y *return_type* indica el tipo de valor devuelto del delegado.
 
-Las listas opcionales de[parámetros de tipo](interfaces.md#variant-type-parameter-lists) *variant_type_parameter_list* (variante) especifican los parámetros de tipo para el delegado.
+El *variant_type_parameter_list* opcional ([listas de parámetros de tipo variante](interfaces.md#variant-type-parameter-lists)) especifica los parámetros de tipo para el delegado.
 
-El tipo de valor devuelto de un tipo de delegado debe ser `void` o Safe ([seguridad](interfaces.md#variance-safety)de la varianza).
+El tipo de valor devuelto de un tipo de delegado debe ser `void`o seguro de salida (seguridad de la[varianza](interfaces.md#variance-safety)).
 
-Todos los tipos de parámetros formales de un tipo de delegado deben ser seguros para la entrada. Además, los tipos de parámetros `out` o `ref` también deben ser seguros para la salida. Tenga en cuenta que incluso los parámetros `out` deben ser seguros para la entrada, debido a una limitación de la plataforma de ejecución subyacente.
+Todos los tipos de parámetros formales de un tipo de delegado deben ser seguros para la entrada. Además, los tipos de parámetros `out` o `ref` también deben ser seguros para la salida. Tenga en cuenta que incluso `out` parámetros deben ser seguros para la entrada, debido a una limitación de la plataforma de ejecución subyacente.
 
 Los tipos de C# delegado de son equivalentes de nombre, no estructuralmente equivalentes. En concreto, dos tipos de delegado diferentes que tienen las mismas listas de parámetros y tipo de valor devuelto se consideran tipos de delegado distintos. Sin embargo, las instancias de dos tipos de delegado distintos, pero estructuralmente equivalentes, pueden compararse como iguales ([operadores de igualdad de delegado](expressions.md#delegate-equality-operators)).
 
@@ -73,7 +73,7 @@ class B
 }
 ```
 
-Los métodos `A.M1` y `B.M1` son compatibles con los tipos de delegado `D1` y `D2`, ya que tienen el mismo tipo de valor devuelto y la misma lista de parámetros. sin embargo, estos tipos de delegado son dos tipos diferentes, por lo que no son intercambiables. Los métodos `B.M2`, `B.M3` y `B.M4` son incompatibles con los tipos de delegado `D1` y `D2`, ya que tienen tipos de valor devuelto o listas de parámetros diferentes.
+Los métodos `A.M1` y `B.M1` son compatibles con los tipos de delegado `D1` y `D2`, ya que tienen el mismo tipo de valor devuelto y la misma lista de parámetros. sin embargo, estos tipos de delegado son dos tipos diferentes, por lo que no son intercambiables. Los métodos `B.M2`, `B.M3`y `B.M4` son incompatibles con los tipos de delegado `D1` y `D2`, ya que tienen tipos de valor devuelto o listas de parámetros diferentes.
 
 Al igual que otras declaraciones de tipos genéricos, se deben proporcionar argumentos de tipo para crear un tipo de delegado construido. Los tipos de parámetro y el tipo de valor devuelto de un tipo de delegado construido se crean sustituyendo, por cada parámetro de tipo de la declaración de delegado, el argumento de tipo correspondiente del tipo de delegado construido. El tipo de valor devuelto y los tipos de parámetro resultantes se usan para determinar qué métodos son compatibles con un tipo de delegado construido. Por ejemplo:
 
@@ -87,15 +87,15 @@ class X
 }
 ```
 
-El método `X.F` es compatible con el tipo de delegado `Predicate<int>` y el método `X.G` es compatible con el tipo de delegado `Predicate<string>`.
+El método `X.F` es compatible con el tipo de delegado `Predicate<int>` y el `X.G` de método es compatible con el tipo de delegado `Predicate<string>`.
 
-La única manera de declarar un tipo de delegado es a través de un *delegate_declaration*. Un tipo de delegado es un tipo de clase que se deriva de `System.Delegate`. Los tipos de delegado son implícitamente `sealed`, por lo que no se permite derivar ningún tipo de un tipo de delegado. Tampoco se permite derivar un tipo de clase que no sea de delegado de `System.Delegate`. Tenga en cuenta que `System.Delegate` no es un tipo delegado. es un tipo de clase del que se derivan todos los tipos de delegado.
+La única manera de declarar un tipo de delegado es a través de un *delegate_declaration*. Un tipo de delegado es un tipo de clase que se deriva de `System.Delegate`. Los tipos de delegado son implícitamente `sealed`, por lo que no se permite derivar ningún tipo de un tipo de delegado. Tampoco se permite derivar un tipo de clase no delegada de `System.Delegate`. Tenga en cuenta que `System.Delegate` no es un tipo delegado. es un tipo de clase del que se derivan todos los tipos de delegado.
 
 C#proporciona una sintaxis especial para la invocación y creación de instancias de delegado. A excepción de la creación de instancias, cualquier operación que se puede aplicar a una instancia de clase o clase también se puede aplicar a una clase o instancia de delegado, respectivamente. En concreto, es posible tener acceso a los miembros del tipo `System.Delegate` a través de la sintaxis de acceso a miembros habitual.
 
 El conjunto de métodos encapsulado por una instancia de delegado se denomina lista de invocación. Cuando se crea una instancia de delegado ([compatibilidad con delegación](delegates.md#delegate-compatibility)) desde un único método, encapsula ese método y su lista de invocación contiene solo una entrada. Sin embargo, cuando se combinan dos instancias de delegado que no son NULL, sus listas de invocación se concatenan, en el operando izquierdo de orden y operando derecho, para formar una nueva lista de invocación, que contiene dos o más entradas.
 
-Los delegados se combinan mediante los operadores binarios `+` ([operador de suma](expressions.md#addition-operator)) y `+=` ([asignación compuesta](expressions.md#compound-assignment)). Un delegado se puede quitar de una combinación de delegados, mediante el @no__t binario-0 ([operador de resta](expressions.md#subtraction-operator)) y los operadores `-=` ([asignación compuesta](expressions.md#compound-assignment)). Los delegados se pueden comparar para comprobar si son iguales ([operadores de igualdad de delegado](expressions.md#delegate-equality-operators)).
+Los delegados se combinan mediante el `+` binario ([operador de suma](expressions.md#addition-operator)) y los operadores de `+=` ([asignación compuesta](expressions.md#compound-assignment)). Un delegado se puede quitar de una combinación de delegados, mediante el `-` binario ([operador de resta](expressions.md#subtraction-operator)) y los operadores de `-=` ([asignación compuesta](expressions.md#compound-assignment)). Los delegados se pueden comparar para comprobar si son iguales ([operadores de igualdad de delegado](expressions.md#delegate-equality-operators)).
 
 En el ejemplo siguiente se muestra la creación de instancias de varios delegados y sus listas de invocación correspondientes:
 
@@ -122,23 +122,23 @@ class Test
 }
 ```
 
-Cuando se crean instancias de `cd1` y `cd2`, cada una de ellas encapsula un método. Cuando se crea una instancia de `cd3`, tiene una lista de invocaciones de dos métodos, `M1` y `M2`, en ese orden. la lista de invocación de `cd4` contiene `M1`, `M2` y `M1`, en ese orden. Por último, la lista de invocación de `cd5` contiene `M1`, `M2`, `M1`, `M1` y `M2`, en ese orden. Para obtener más ejemplos de cómo combinar (y quitar) delegados, vea [invocación de delegado](delegates.md#delegate-invocation).
+Cuando se crean instancias de `cd1` y `cd2`, cada una de ellas encapsula un método. Cuando se crea una instancia de `cd3`, tiene una lista de invocaciones de dos métodos, `M1` y `M2`, en ese orden. la lista de invocación de `cd4`contiene `M1`, `M2`y `M1`, en ese orden. Por último, la lista de invocación de `cd5`contiene `M1`, `M2`, `M1`, `M1`y `M2`, en ese orden. Para obtener más ejemplos de cómo combinar (y quitar) delegados, vea [invocación de delegado](delegates.md#delegate-invocation).
 
 ## <a name="delegate-compatibility"></a>Compatibilidad de los delegados
 
 Un método o delegado `M` es ***compatible*** con un tipo de delegado `D` si se cumplen todas las condiciones siguientes:
 
-*  `D` y `M` tienen el mismo número de parámetros y cada parámetro de `D` tiene los mismos modificadores `ref` o `out` que el parámetro correspondiente en `M`.
-*  Para cada parámetro de valor (un parámetro sin `ref` o `out`), existe una conversión de identidad ([conversión de identidad](conversions.md#identity-conversion)) o una conversión de referencia implícita ([conversiones de referencia implícita](conversions.md#implicit-reference-conversions)) del tipo de parámetro de `D` al tipo de parámetro correspondiente en `M`.
+*  `D` y `M` tienen el mismo número de parámetros y cada parámetro de `D` tiene los mismos modificadores `ref` o `out` que el parámetro correspondiente de `M`.
+*  Para cada parámetro de valor (un parámetro sin `ref` o `out` modificador), existe una conversión de identidad ([conversión de identidad](conversions.md#identity-conversion)) o una conversión de referencia implícita ([conversiones de referencia implícita](conversions.md#implicit-reference-conversions)) del tipo de parámetro de `D` al tipo de parámetro correspondiente en `M`.
 *  Para cada parámetro `ref` o `out`, el tipo de parámetro de `D` es el mismo que el tipo de parámetro de `M`.
 *  Existe una conversión de referencia implícita o de identidad del tipo de valor devuelto de `M` al tipo de valor devuelto de `D`.
 
 ## <a name="delegate-instantiation"></a>Creación de instancias de delegado
 
-Una instancia de un delegado se crea mediante una *delegate_creation_expression* ([expresiones de creación de delegados](expressions.md#delegate-creation-expressions)) o una conversión a un tipo de delegado. La instancia de delegado recién creada hace referencia a:
+Una instancia de un delegado se crea mediante un *delegate_creation_expression* ([expresiones de creación de delegados](expressions.md#delegate-creation-expressions)) o una conversión a un tipo de delegado. La instancia de delegado recién creada hace referencia a:
 
-*  Método estático al que se hace referencia en *delegate_creation_expression*, o bien
-*  El objeto de destino (que no puede ser `null`) y el método de instancia al que se hace referencia en *delegate_creation_expression*, o bien
+*  Método estático al que se hace referencia en el *delegate_creation_expression*, o bien
+*  El objeto de destino (que no se puede `null`) y el método de instancia al que se hace referencia en el *delegate_creation_expression*, o bien
 *  Otro delegado.
 
 Por ejemplo:
@@ -167,7 +167,7 @@ Una vez creada la instancia, las instancias de delegado siempre hacen referencia
 
 ## <a name="delegate-invocation"></a>Invocación de delegado
 
-C#proporciona una sintaxis especial para invocar un delegado. Cuando se invoca una instancia de delegado que no es null cuya lista de invocación contiene una entrada, invoca el método con los mismos argumentos en los que se ha dado y devuelve el mismo valor que el método al que se hace referencia. (Vea [invocaciones de delegado](expressions.md#delegate-invocations) para obtener información detallada sobre la invocación de delegado). Si se produce una excepción durante la invocación de este tipo de delegado y esa excepción no se detecta en el método que se invocó, la búsqueda de una cláusula catch de excepción continúa en el método que llamó al delegado, como si ese método hubiera llamado directamente a. método al que hace referencia el delegado.
+C#proporciona una sintaxis especial para invocar un delegado. Cuando se invoca una instancia de delegado que no es null cuya lista de invocación contiene una entrada, invoca el método con los mismos argumentos en los que se ha dado y devuelve el mismo valor que el método al que se hace referencia. (Vea [invocaciones de delegado](expressions.md#delegate-invocations) para obtener información detallada sobre la invocación de delegado). Si se produce una excepción durante la invocación de este tipo de delegado y esa excepción no se detecta dentro del método que se invocó, la búsqueda de una cláusula catch de excepción continúa en el método que llamó al delegado, como si ese método hubiera llamado directamente al método al que el delegado hizo referencia.
 
 La invocación de una instancia de delegado cuya lista de invocaciones contiene varias entradas continúa invocando cada uno de los métodos de la lista de invocación, de forma sincrónica, en orden. Cada método al que se llama se pasa el mismo conjunto de argumentos que se asignó a la instancia del delegado. Si dicha invocación de delegado incluye parámetros de referencia ([parámetros de referencia](classes.md#reference-parameters)), cada invocación de método se producirá con una referencia a la misma variable. los cambios en esa variable por un método en la lista de invocación serán visibles para los métodos más abajo en la lista de invocación. Si la invocación del delegado incluye parámetros de salida o un valor devuelto, su valor final proviene de la invocación del último delegado en la lista.
 
@@ -240,7 +240,7 @@ class Test
 
 Como se muestra en la instrucción `cd3 += cd1;`, un delegado puede estar presente varias veces en una lista de invocación. En este caso, simplemente se invoca una vez por cada repetición. En una lista de invocación como esta, cuando se quita ese delegado, la última aparición en la lista de invocación es la que realmente se quita.
 
-Justo antes de la ejecución de la instrucción final, `cd3 -= cd1;`, el delegado `cd3` hace referencia a una lista de invocación vacía. El intento de quitar un delegado de una lista vacía (o de quitar un delegado que no existe de una lista no vacía) no es un error.
+Justo antes de la ejecución de la instrucción final, `cd3 -= cd1;`, el `cd3` delegado hace referencia a una lista de invocación vacía. El intento de quitar un delegado de una lista vacía (o de quitar un delegado que no existe de una lista no vacía) no es un error.
 
 La salida generada es:
 

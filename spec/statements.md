@@ -34,14 +34,14 @@ embedded_statement
     ;
 ```
 
-*Embedded_statement* nonterminal se utiliza para las instrucciones que aparecen dentro de otras instrucciones. El uso de *embedded_statement* en lugar de *Statement* excluye el uso de las instrucciones de declaración y las instrucciones con etiquetas en estos contextos. El ejemplo
+El *embedded_statement* nonterminal se utiliza para las instrucciones que aparecen dentro de otras instrucciones. El uso de *embedded_statement* en lugar de *Statement* excluye el uso de las instrucciones de declaración y las instrucciones con etiquetas en estos contextos. El ejemplo
 ```csharp
 void F(bool b) {
     if (b)
         int i = 44;
 }
 ```
-produce un error en tiempo de compilación porque una instrucción `if` requiere un *embedded_statement* en lugar de una *instrucción* para su bifurcación if. Si se permitía este código, la variable `i` se declararía, pero nunca se podía usar. Tenga en cuenta, sin embargo, `i`que si coloca la declaración de en un bloque, el ejemplo es válido.
+genera un error en tiempo de compilación porque una instrucción `if` requiere una *embedded_statement* en lugar de una *instrucción* para su bifurcación if. Si se permitiera este código, la variable `i` se declararía, pero nunca se podría usar. Tenga en cuenta, sin embargo, que colocando la declaración de `i`en un bloque, el ejemplo es válido.
 
 ## <a name="end-points-and-reachability"></a>Extremos y disponibilidad
 
@@ -49,7 +49,7 @@ Cada instrucción tiene un ***punto final***. En términos intuitivos, el punto 
 
 Si la ejecución puede alcanzar una instrucción, se dice que la instrucción es ***accesible***. Por el contrario, si no hay ninguna posibilidad de que se ejecute una instrucción, se dice que la instrucción no es ***accesible***.
 
-En el ejemplo
+en el ejemplo
 ```csharp
 void F() {
     Console.WriteLine("reachable");
@@ -65,44 +65,44 @@ Se genera una advertencia si el compilador determina que no se puede tener acces
 
 Para determinar si una instrucción o un extremo concreto es accesible, el compilador realiza el análisis de flujo según las reglas de disponibilidad definidas para cada instrucción. El análisis de flujo tiene en cuenta los valores de expresiones constantes ([expresiones constantes](expressions.md#constant-expressions)) que controlan el comportamiento de las instrucciones, pero no se tienen en cuenta los valores posibles de las expresiones que no son constantes. En otras palabras, a efectos del análisis de flujo de control, se considera que una expresión no constante de un tipo determinado tiene cualquier valor posible de ese tipo.
 
-En el ejemplo
+en el ejemplo
 ```csharp
 void F() {
     const int i = 1;
     if (i == 2) Console.WriteLine("unreachable");
 }
 ```
-la expresión booleana de la `if` instrucción es una expresión constante porque ambos operandos `==` del operador son constantes. Como la expresión constante se evalúa en tiempo de compilación, lo que genera `false`el valor `Console.WriteLine` , se considera que la invocación no es accesible. Sin embargo, `i` si se cambia para ser una variable local
+la expresión booleana de la instrucción `if` es una expresión constante porque ambos operandos del operador `==` son constantes. Como la expresión constante se evalúa en tiempo de compilación, lo que produce el valor `false`, se considera que la invocación del `Console.WriteLine` no es accesible. Sin embargo, si `i` se cambia para ser una variable local
 ```csharp
 void F() {
     int i = 1;
     if (i == 2) Console.WriteLine("reachable");
 }
 ```
-la `Console.WriteLine` invocación se considera accesible, aunque, en realidad, nunca se ejecutará.
+la invocación de `Console.WriteLine` se considera accesible, aunque, en realidad, nunca se ejecutará.
 
 El *bloque* de un miembro de función siempre se considera alcanzable. Al evaluar sucesivamente las reglas de disponibilidad de cada instrucción en un bloque, se puede determinar la disponibilidad de cualquier instrucción determinada.
 
-En el ejemplo
+en el ejemplo
 ```csharp
 void F(int x) {
     Console.WriteLine("start");
     if (x < 0) Console.WriteLine("negative");
 }
 ```
-la disponibilidad de la segunda `Console.WriteLine` se determina de la siguiente manera:
+la disponibilidad del segundo `Console.WriteLine` se determina de la siguiente manera:
 
-*  La primera `Console.WriteLine` instrucción `F` de expresión es accesible porque el bloque del método es accesible.
-*  El punto final de la primera `Console.WriteLine` instrucción de expresión es accesible porque esa instrucción es accesible.
-*  La `if` instrucción es accesible porque el punto final de la primera `Console.WriteLine` instrucción de expresión es accesible.
-*  La segunda `Console.WriteLine` instrucción de expresión es accesible porque la expresión booleana de la `if` instrucción no tiene el valor `false`constante.
+*  La primera instrucción de expresión `Console.WriteLine` es accesible porque el bloque del método de `F` es accesible.
+*  El punto final de la primera instrucción de expresión `Console.WriteLine` es accesible porque esa instrucción es accesible.
+*  La instrucción `if` es accesible porque el punto final de la primera instrucción de expresión `Console.WriteLine` es accesible.
+*  La segunda instrucción `Console.WriteLine` expresión es accesible porque la expresión booleana de la instrucción `if` no tiene el valor constante `false`.
 
 Hay dos situaciones en las que se trata de un error en tiempo de compilación para que el punto final de una instrucción sea alcanzable:
 
-*  Dado que `switch` la instrucción no permite que una sección switch pase a la siguiente sección switch, se trata de un error en tiempo de compilación para que el punto final de la lista de instrucciones de una sección switch sea accesible. Si se produce este error, normalmente es una indicación de que `break` falta una instrucción.
-*  Es un error en tiempo de compilación el punto final del bloque de un miembro de función que calcula un valor al que se puede tener acceso. Si se produce este error, normalmente es una indicación de que `return` falta una instrucción.
+*  Dado que la instrucción `switch` no permite que una sección switch pase a la siguiente sección switch, se trata de un error en tiempo de compilación para que el punto final de la lista de instrucciones de una sección switch sea accesible. Si se produce este error, normalmente es una indicación de que falta una instrucción `break`.
+*  Es un error en tiempo de compilación el punto final del bloque de un miembro de función que calcula un valor al que se puede tener acceso. Si se produce este error, normalmente es una indicación de que falta una instrucción `return`.
 
-## <a name="blocks"></a>Bloques
+## <a name="blocks"></a>Blocks
 
 Un *bloque* permite que se escriban varias instrucciones en contextos donde se permite una única instrucción.
 
@@ -125,9 +125,9 @@ La lista de instrucciones de un bloque es accesible si el propio bloque es acces
 
 El punto final de un bloque es accesible si el bloque está vacío o si el punto final de la lista de instrucciones es accesible.
 
-Un *bloque* que contiene una o más `yield` instrucciones ([la instrucción yield](statements.md#the-yield-statement)) se denomina bloque de iteradores. Los bloques de iterador se usan para implementar miembros de función como iteradores ([iteradores](classes.md#iterators)). Se aplican algunas restricciones adicionales a los bloques de iteradores:
+Un *bloque* que contiene una o varias instrucciones de `yield` ([la instrucción yield](statements.md#the-yield-statement)) se denomina bloque de iteradores. Los bloques de iterador se usan para implementar miembros de función como iteradores ([iteradores](classes.md#iterators)). Se aplican algunas restricciones adicionales a los bloques de iteradores:
 
-*  Se trata de un error en tiempo de compilación `return` para que una instrucción aparezca en un bloque de `yield return` iteradores (pero se permiten las instrucciones).
+*  Es un error en tiempo de compilación que una instrucción `return` aparezca en un bloque de iteradores (pero se permiten `yield return` instrucciones).
 *  Es un error en tiempo de compilación que un bloque de iteradores contenga un contexto no seguro ([contextos no seguros](unsafe-code.md#unsafe-contexts)). Un bloque de iterador siempre define un contexto seguro, incluso cuando su declaración está anidada en un contexto no seguro.
 
 ### <a name="statement-lists"></a>Listas de instrucciones
@@ -146,7 +146,7 @@ Se puede tener acceso a una instrucción de una lista de instrucciones si se cum
 
 *  La instrucción es la primera instrucción y la propia lista de instrucciones es accesible.
 *  El punto final de la instrucción anterior es accesible.
-*  La instrucción es una instrucción con etiqueta y una `goto` instrucción accesible hace referencia a la etiqueta.
+*  La instrucción es una instrucción con etiqueta y una instrucción de `goto` alcanzable hace referencia a la etiqueta.
 
 El punto final de una lista de instrucciones es accesible si el punto final de la última instrucción de la lista es accesible.
 
@@ -164,7 +164,7 @@ Se utiliza una instrucción vacía cuando no hay ninguna operación que realizar
 
 La ejecución de una instrucción vacía simplemente transfiere el control al punto final de la instrucción. Por lo tanto, el punto final de una instrucción vacía es accesible si la instrucción vacía es accesible.
 
-Se puede usar una instrucción vacía al escribir una `while` instrucción con un cuerpo nulo:
+Se puede usar una instrucción vacía al escribir una instrucción `while` con un cuerpo nulo:
 ```csharp
 bool ProcessMessage() {...}
 
@@ -174,7 +174,7 @@ void ProcessMessages() {
 }
 ```
 
-Además, se puede usar una instrucción vacía para declarar una etiqueta justo antes del cierre "`}`" de un bloque:
+Además, se puede usar una instrucción vacía para declarar una etiqueta justo antes de la "`}`" de cierre de un bloque:
 ```csharp
 void F() {
     ...
@@ -196,7 +196,7 @@ labeled_statement
 
 Una instrucción con etiqueta declara una etiqueta con el nombre proporcionado por el *identificador*. El ámbito de una etiqueta es el bloque entero en el que se declara la etiqueta, incluidos los bloques anidados. Es un error en tiempo de compilación que dos etiquetas con el mismo nombre tienen ámbitos superpuestos.
 
-Se puede hacer referencia a una etiqueta `goto` desde instrucciones ([instrucción Goto](statements.md#the-goto-statement)) dentro del ámbito de la etiqueta. Esto significa que `goto` las instrucciones pueden transferir el control dentro de los bloques y fuera de los bloques, pero nunca a los bloques.
+Se puede hacer referencia a una etiqueta desde `goto` instrucciones ([la instrucción Goto](statements.md#the-goto-statement)) dentro del ámbito de la etiqueta. Esto significa que `goto` instrucciones pueden transferir el control dentro de los bloques y fuera de los bloques, pero nunca a los bloques.
 
 Las etiquetas tienen su propio espacio de declaración y no interfieren con otros identificadores. El ejemplo
 ```csharp
@@ -206,11 +206,11 @@ int F(int x) {
     x: return x;
 }
 ```
-es válido y usa el nombre `x` como un parámetro y una etiqueta.
+es válido y utiliza el nombre `x` como un parámetro y una etiqueta.
 
 La ejecución de una instrucción con etiqueta corresponde exactamente a la ejecución de la instrucción que sigue a la etiqueta.
 
-Además de la disponibilidad proporcionada por el flujo de control normal, se puede tener acceso a una instrucción con etiqueta si se hace referencia a la etiqueta mediante una `goto` instrucción alcanzable. Excepcional Si una `goto` instrucción está dentro de `try` un que incluye `finally` un bloque y la instrucción con etiqueta está fuera `finally` de `try`, y no se puede tener acceso al punto final del bloque, la instrucción con etiqueta no es accesible desde esa `goto` instrucción).
+Además de la disponibilidad proporcionada por el flujo de control normal, se puede tener acceso a una instrucción con etiqueta si se hace referencia a la etiqueta mediante una instrucción de `goto` alcanzable. (Excepción: Si una instrucción `goto` está dentro de un `try` que incluye un bloque `finally` y la instrucción con etiqueta está fuera del `try`, y el punto final del bloque `finally` es inaccesible, la instrucción etiquetada no es accesible desde esa instrucción `goto`).
 
 ## <a name="declaration-statements"></a>Instrucciones de declaración
 
@@ -225,7 +225,7 @@ declaration_statement
 
 ### <a name="local-variable-declarations"></a>Declaraciones de variables locales
 
-Un *local_variable_declaration* declara una o varias variables locales.
+Un *local_variable_declaration* declara una o más variables locales.
 
 ```antlr
 local_variable_declaration
@@ -254,13 +254,13 @@ local_variable_initializer
     ;
 ```
 
-El *local_variable_type* de un *local_variable_declaration* especifica directamente el tipo de las variables introducidas por la declaración, o indica con el identificador `var` que el tipo se debe inferir en función de un inicializador. El tipo va seguido de una lista de *local_variable_declarator*s, cada uno de los cuales introduce una nueva variable. Un *local_variable_declarator* consta de un *identificador* que asigna un nombre a la variable, seguido opcionalmente por un token "`=`" y un *local_variable_initializer* que proporciona el valor inicial de la variable.
+El *local_variable_type* de una *local_variable_declaration* especifica directamente el tipo de las variables introducidas por la declaración, o indica con el identificador `var` que el tipo se debe inferir en función de un inicializador. El tipo va seguido de una lista de *local_variable_declarator*s, cada uno de los cuales introduce una nueva variable. Un *local_variable_declarator* consta de un *identificador* que asigna un nombre a la variable, seguido opcionalmente por un token "`=`" y un *local_variable_initializer* que proporciona el valor inicial de la variable.
 
-En el contexto de una declaración de variable local, el identificador var actúa como una palabra clave contextual ([palabras clave](lexical-structure.md#keywords)). Cuando *local_variable_type* se especifica como `var` y ningún tipo denominado `var` está en el ámbito, la declaración es una ***declaración de variable local con tipo implícito***, cuyo tipo se deduce del tipo de la expresión de inicializador asociada. Las declaraciones de variables locales con tipo implícito están sujetas a las siguientes restricciones:
+En el contexto de una declaración de variable local, el identificador var actúa como una palabra clave contextual ([palabras clave](lexical-structure.md#keywords)). Cuando el *local_variable_type* se especifica como `var` y ningún tipo denominado `var` está en el ámbito, la declaración es una ***declaración de variable local con tipo implícito***, cuyo tipo se deduce del tipo de la expresión de inicializador asociada. Las declaraciones de variables locales con tipo implícito están sujetas a las siguientes restricciones:
 
-*  *Local_variable_declaration* no puede incluir varios *local_variable_declarator*.
-*  *Local_variable_declarator* debe incluir un *local_variable_initializer*.
-*  *Local_variable_initializer* debe ser una *expresión*.
+*  El *local_variable_declaration* no puede incluir varios *local_variable_declarator*s.
+*  El *local_variable_declarator* debe incluir un *local_variable_initializer*.
+*  El *local_variable_initializer* debe ser una *expresión*.
 *  La *expresión* de inicializador debe tener un tipo en tiempo de compilación.
 *  La *expresión* de inicializador no puede hacer referencia a la variable declarada en sí misma
 
@@ -274,7 +274,7 @@ var u = x => x + 1;  // Error, anonymous functions do not have a type
 var v = v++;         // Error, initializer cannot refer to variable itself
 ```
 
-El valor de una variable local se obtiene en una expresión usando *simple_name* ([nombres simples](expressions.md#simple-names)) y el valor de una variable local se modifica mediante una *asignación* (operadores de[asignación](expressions.md#assignment-operators)). Una variable local debe estar asignada definitivamente ([asignación definitiva](variables.md#definite-assignment)) en cada ubicación donde se obtiene su valor.
+El valor de una variable local se obtiene en una expresión usando un *simple_name* ([nombres simples](expressions.md#simple-names)) y el valor de una variable local se modifica mediante una *asignación* ([operadores de asignación](expressions.md#assignment-operators)). Una variable local debe estar asignada definitivamente ([asignación definitiva](variables.md#definite-assignment)) en cada ubicación donde se obtiene su valor.
 
 El ámbito de una variable local declarada en un *local_variable_declaration* es el bloque en el que se produce la declaración. Es un error hacer referencia a una variable local en una posición textual que precede al *local_variable_declarator* de la variable local. Dentro del ámbito de una variable local, se trata de un error en tiempo de compilación para declarar otra variable o constante local con el mismo nombre.
 
@@ -331,11 +331,11 @@ constant_declarator
     ;
 ```
 
-El *tipo* de *local_constant_declaration* especifica el tipo de las constantes introducidas por la declaración. El tipo va seguido de una lista de *constant_declarator*s, cada uno de los cuales introduce una nueva constante. Un *constant_declarator* consta de un *identificador* que nombra la constante, seguido de un token "`=`", seguido de un *constant_expression* ([expresiones constantes](expressions.md#constant-expressions)) que proporciona el valor de la constante.
+El *tipo* de un *local_constant_declaration* especifica el tipo de las constantes introducidas por la declaración. El tipo va seguido de una lista de *constant_declarator*s, cada uno de los cuales introduce una nueva constante. Un *constant_declarator* consta de un *identificador* que nombra la constante, seguido de un token "`=`", seguido de un *constant_expression* ([expresiones constantes](expressions.md#constant-expressions)) que proporciona el valor de la constante.
 
-El *tipo* y *constant_expression* de una declaración de constante local deben seguir las mismas reglas que las de una declaración de miembro constante ([constantes](classes.md#constants)).
+El *tipo* y la *constant_expression* de una declaración de constante local deben seguir las mismas reglas que las de una declaración de miembro constante ([constantes](classes.md#constants)).
 
-El valor de una constante local se obtiene en una expresión usando *simple_name* ([nombres simples](expressions.md#simple-names)).
+El valor de una constante local se obtiene en una expresión usando un *simple_name* ([nombres simples](expressions.md#simple-names)).
 
 El ámbito de una constante local es el bloque en el que se produce la declaración. Es un error hacer referencia a una constante local en una posición textual que precede a su *constant_declarator*. Dentro del ámbito de una constante local, es un error en tiempo de compilación declarar otra variable o constante local con el mismo nombre.
 
@@ -363,9 +363,9 @@ statement_expression
     ;
 ```
 
-No todas las expresiones se permiten como instrucciones. En concreto, las expresiones `x + y` como y `x == 1` que simplemente calculan un valor (que se descartarán) no se permiten como instrucciones.
+No todas las expresiones se permiten como instrucciones. En concreto, las expresiones como `x + y` y `x == 1` que simplemente calculan un valor (que se descartarán), no se permiten como instrucciones.
 
-La ejecución de un *expression_statement* evalúa la expresión contenida y, a continuación, transfiere el control al punto final de *expression_statement*. El punto final de un *expression_statement* es accesible si ese *expression_statement* es accesible.
+La ejecución de una *expression_statement* evalúa la expresión contenida y, a continuación, transfiere el control al punto final de la *expression_statement*. El punto final de una *expression_statement* es accesible si ese *expression_statement* es accesible.
 
 ## <a name="selection-statements"></a>Instrucciones de selección
 
@@ -380,7 +380,7 @@ selection_statement
 
 ### <a name="the-if-statement"></a>La instrucción If
 
-La `if` instrucción selecciona una instrucción para su ejecución basada en el valor de una expresión booleana.
+La instrucción `if` selecciona una instrucción para su ejecución basada en el valor de una expresión booleana.
 
 ```antlr
 if_statement
@@ -389,7 +389,7 @@ if_statement
     ;
 ```
 
-Un `else` elemento está asociado a la parte anterior `if` léxicamente más cercana permitida por la sintaxis. Por lo tanto `if` , una instrucción con el formato
+Un elemento `else` está asociado a la `if` anterior léxicamente más cercana permitida por la sintaxis. Por lo tanto, una instrucción `if` del formulario
 ```csharp
 if (x) if (y) F(); else G();
 ```
@@ -405,18 +405,18 @@ if (x) {
 }
 ```
 
-Una `if` instrucción se ejecuta de la siguiente manera:
+Una instrucción `if` se ejecuta de la siguiente manera:
 
-*  Se evalúa *Boolean_expression* ([Expresiones booleanas](expressions.md#boolean-expressions)).
-*  Si la expresión booleana produce `true`, el control se transfiere a la primera instrucción incrustada. Cuando y si el control alcanza el punto final de la instrucción, el control se transfiere al punto final de `if` la instrucción.
-*  Si la expresión booleana produce `false` y si un `else` elemento está presente, el control se transfiere a la segunda instrucción incrustada. Cuando y si el control alcanza el punto final de la instrucción, el control se transfiere al punto final de `if` la instrucción.
-*  Si la expresión booleana produce `false` y si un `else` elemento no está presente, el control se transfiere al punto final de la `if` instrucción.
+*  Se evalúa el *Boolean_expression* ([Expresiones booleanas](expressions.md#boolean-expressions)).
+*  Si la expresión booleana produce `true`, el control se transfiere a la primera instrucción incrustada. Cuando y si el control alcanza el punto final de la instrucción, el control se transfiere al punto final de la instrucción `if`.
+*  Si la expresión booleana produce `false` y, si hay una parte `else`, el control se transfiere a la segunda instrucción incrustada. Cuando y si el control alcanza el punto final de la instrucción, el control se transfiere al punto final de la instrucción `if`.
+*  Si la expresión booleana produce `false` y, si no hay ninguna parte `else`, el control se transfiere al punto final de la instrucción `if`.
 
-La primera instrucción incrustada de `if` una instrucción es accesible si la `if` instrucción es accesible y la expresión booleana no tiene el valor `false`constante.
+La primera instrucción incrustada de una instrucción `if` es accesible si la instrucción de `if` es accesible y la expresión booleana no tiene el valor constante `false`.
 
-La segunda instrucción incrustada de `if` una instrucción, si está presente, es accesible si `if` la instrucción es accesible y la expresión booleana no tiene el valor `true`constante.
+La segunda instrucción incrustada de una instrucción `if`, si está presente, es accesible si la instrucción de `if` es accesible y la expresión booleana no tiene el valor constante `true`.
 
-El punto final de una `if` instrucción es accesible si el punto final de al menos una de sus instrucciones incrustadas es accesible. Además, el `if` punto final de una instrucción sin ninguna `else` parte es accesible si la `if` instrucción es accesible y la expresión booleana no tiene el valor `true`constante.
+El punto final de una instrucción `if` es accesible si el punto final de al menos una de sus instrucciones incrustadas es accesible. Además, se puede tener acceso al punto final de una instrucción `if` sin ningún elemento `else` si la instrucción `if` es accesible y la expresión booleana no tiene el valor constante `true`.
 
 ### <a name="the-switch-statement"></a>La instrucción switch
 
@@ -441,24 +441,24 @@ switch_label
     ;
 ```
 
-Un *switch_statement* consta de la palabra clave `switch`, seguido de una expresión entre paréntesis (denominada expresión switch), seguida de un *switch_block*. *Switch_block* consta de cero o más *switch_section*s, entre llaves. Cada *switch_section* consta de una o más *switch_label*s seguidos de una *statement_list* ([listas de instrucciones](statements.md#statement-lists)).
+Un *switch_statement* consta de la palabra clave `switch`, seguida de una expresión entre paréntesis (denominada expresión switch), seguida de un *switch_block*. El *switch_block* consta de cero o más *switch_section*s, entre llaves. Cada *switch_section* consta de uno o varios *switch_label*s seguidos de un *statement_list* ([listas de instrucciones](statements.md#statement-lists)).
 
-El ***tipo de control*** de `switch` una instrucción se establece mediante la expresión switch.
+La expresión switch establece el ***tipo de control*** de una instrucción `switch`.
 
-*  Si el tipo de la expresión switch es `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `bool`, `char`, 0 o un *enum_type*, o si es el tipo que acepta valores NULL correspondiente a uno de estos tipos , que es el tipo de control de la instrucción 2.
-*  De lo contrario, debe existir exactamente una conversión implícita definida por el usuario ([conversiones definidas por el usuario](conversions.md#user-defined-conversions)) del tipo de la expresión switch a uno de los siguientes tipos de `sbyte`control `byte`posibles: `ushort` ,, `short`, , `int`, `uint`, ,`long` ,`char`,o, un tipo que acepta valores NULL correspondiente a uno de esos tipos. `ulong` `string`
+*  Si el tipo de la expresión switch es `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `bool`, `char`, `string`o *enum_type*, o si es el tipo que acepta valores NULL correspondiente a uno de estos tipos, es el tipo aplicable de la instrucción `switch`.
+*  De lo contrario, debe existir exactamente una conversión implícita definida por el usuario ([conversiones definidas por el usuario](conversions.md#user-defined-conversions)) del tipo de la expresión switch a uno de los siguientes tipos de control posibles: `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `string`o, un tipo que acepta valores NULL correspondiente a uno de esos tipos.
 *  De lo contrario, si no existe ninguna conversión implícita, o si existe más de una conversión implícita de este tipo, se produce un error en tiempo de compilación.
 
-La expresión constante de cada `case` etiqueta debe indicar un valor que se pueda convertir implícitamente ([conversiones implícitas](conversions.md#implicit-conversions)) en el tipo aplicable de la `switch` instrucción. Se produce un error en tiempo de compilación si dos `case` o más etiquetas de `switch` la misma instrucción especifican el mismo valor constante.
+La expresión constante de cada etiqueta de `case` debe indicar un valor que se pueda convertir implícitamente ([conversiones implícitas](conversions.md#implicit-conversions)) en el tipo de control de la instrucción `switch`. Se produce un error en tiempo de compilación si dos o más etiquetas de `case` en la misma instrucción `switch` especifican el mismo valor constante.
 
-Puede haber como máximo `default` una etiqueta en una instrucción switch.
+Puede haber como máximo una `default` etiqueta en una instrucción switch.
 
-Una `switch` instrucción se ejecuta de la siguiente manera:
+Una instrucción `switch` se ejecuta de la siguiente manera:
 
 *  La expresión switch se evalúa y se convierte al tipo aplicable.
-*  Si una de las constantes especificadas en una `case` etiqueta en la misma `switch` instrucción es igual al valor de la expresión switch, el control se transfiere a la `case` lista de instrucciones que sigue a la etiqueta coincidente.
-*  Si ninguna de las constantes especificadas en `case` las etiquetas de la `switch` misma instrucción es igual al valor de la expresión switch y, si hay `default` una etiqueta, el control se transfiere a la lista de instrucciones que `default` sigue a la rótulo.
-*  Si ninguna de las constantes especificadas en `case` las etiquetas de la `switch` misma instrucción es igual al valor de la expresión switch y no hay ninguna `default` etiqueta, el control se transfiere al punto final de la `switch` instrucción.
+*  Si una de las constantes especificadas en una etiqueta de `case` en la misma instrucción `switch` es igual al valor de la expresión switch, el control se transfiere a la lista de instrucciones que sigue a la etiqueta `case` coincidente.
+*  Si ninguna de las constantes especificadas en `case` etiquetas de la misma instrucción `switch` es igual al valor de la expresión switch, y si hay una etiqueta `default`, el control se transfiere a la lista de instrucciones que sigue a la etiqueta `default`.
+*  Si ninguna de las constantes especificadas en `case` etiquetas de la misma instrucción `switch` es igual al valor de la expresión switch y no hay ninguna etiqueta `default`, el control se transfiere al punto final de la instrucción `switch`.
 
 Si el punto final de la lista de instrucciones de una sección switch es accesible, se producirá un error en tiempo de compilación. Esto se conoce como la regla "no pasar de un paso". El ejemplo
 ```csharp
@@ -485,7 +485,7 @@ default:
     CaseAny();
 }
 ```
-produce un error en tiempo de compilación. Cuando la ejecución de una sección switch va seguida de la ejecución de otra sección switch, se debe `goto case` usar `goto default` una instrucción or explícita:
+produce un error en tiempo de compilación. Cuando la ejecución de una sección switch va seguida de la ejecución de otra sección switch, se debe usar una instrucción `goto case` o `goto default` explícita:
 ```csharp
 switch (i) {
 case 0:
@@ -500,7 +500,7 @@ default:
 }
 ```
 
-Se permiten varias etiquetas en un *switch_section*. El ejemplo
+En un *switch_section*se permiten varias etiquetas. El ejemplo
 ```csharp
 switch (i) {
 case 0:
@@ -517,7 +517,7 @@ default:
 ```
 es válido. En el ejemplo no se infringe la regla "no hay que pasar" porque las etiquetas `case 2:` y `default:` forman parte del mismo *switch_section*.
 
-La regla "no pasar" evita una clase común de errores que se producen en C y C++ cuando `break` las instrucciones se omiten accidentalmente. Además, debido a esta regla, las secciones switch de una `switch` instrucción se pueden reorganizar arbitrariamente sin afectar al comportamiento de la instrucción. Por ejemplo, las secciones de la `switch` instrucción anterior se pueden revertir sin afectar al comportamiento de la instrucción:
+La regla "no pasar" evita una clase común de errores que se producen en C y C++ cuando `break` instrucciones se omiten accidentalmente. Además, debido a esta regla, las secciones switch de una instrucción `switch` se pueden reorganizar arbitrariamente sin afectar al comportamiento de la instrucción. Por ejemplo, las secciones de la instrucción `switch` anterior se pueden revertir sin que ello afecte al comportamiento de la instrucción:
 ```csharp
 switch (i) {
 default:
@@ -532,7 +532,7 @@ case 0:
 }
 ```
 
-La lista de instrucciones de una sección switch normalmente finaliza en `break`una `goto case`instrucción, `goto default` o, pero se permite cualquier construcción que representa el punto final de la lista de instrucciones inaccesible. Por ejemplo, se `while` sabe que una instrucción controlada por `true` la expresión booleana nunca alcanza su punto final. Del mismo modo `throw` , `return` una instrucción o siempre transfiere el control en otro lugar y nunca alcanza su punto final. Por lo tanto, el ejemplo siguiente es válido:
+La lista de instrucciones de una sección switch normalmente finaliza en una instrucción `break`, `goto case`o `goto default`, pero se permite cualquier construcción que representa el punto final de la lista de instrucciones inalcanzable. Por ejemplo, se sabe que una instrucción `while` controlada por la expresión booleana `true` nunca alcanza su punto final. Del mismo modo, una instrucción `throw` o `return` siempre transfiere el control en otro lugar y nunca alcanza su punto final. Por lo tanto, el ejemplo siguiente es válido:
 ```csharp
 switch (i) {
 case 0:
@@ -544,7 +544,7 @@ case 2:
 }
 ```
 
-El tipo de control de `switch` una instrucción puede ser el `string`tipo. Por ejemplo:
+El tipo de control de una instrucción `switch` puede ser el tipo `string`. Por ejemplo:
 ```csharp
 void DoCommand(string command) {
     switch (command.ToLower()) {
@@ -564,24 +564,24 @@ void DoCommand(string command) {
 }
 ```
 
-Al igual que los operadores de igualdad de cadena (operadores de `switch` igualdad de[cadena](expressions.md#string-equality-operators)), la instrucción distingue entre mayúsculas y minúsculas y ejecutará una sección de `case` modificador determinada solo si la cadena de expresión de modificador coincide exactamente con una constante de etiqueta.
+Al igual que los operadores de igualdad de cadena ([operadores de igualdad de cadena](expressions.md#string-equality-operators)), la instrucción `switch` distingue entre mayúsculas y minúsculas y ejecutará una sección de modificador determinada solo si la cadena de expresión de modificador coincide exactamente con una constante de etiqueta `case`.
 
-Cuando el tipo de control de `switch` una instrucción `string`es, se `null` permite el valor como una constante de etiqueta de caso.
+Cuando el tipo de control de una instrucción `switch` es `string`, se permite el valor `null` como una constante de etiqueta de caso.
 
-*Statement_list*s de un *switch_block* puede contener instrucciones de declaración ([instrucciones de declaración](statements.md#declaration-statements)). El ámbito de una variable local o constante declarada en un bloque switch es el bloque switch.
+Los *statement_list*s de un *switch_block* pueden contener instrucciones de declaración ([instrucciones de declaración](statements.md#declaration-statements)). El ámbito de una variable local o constante declarada en un bloque switch es el bloque switch.
 
-La lista de instrucciones de una sección de modificador determinada es accesible `switch` si la instrucción es accesible y se cumple al menos una de las siguientes condiciones:
+La lista de instrucciones de una sección de modificador determinada es accesible si la instrucción `switch` es accesible y se cumple al menos una de las siguientes condiciones:
 
 *  La expresión switch es un valor que no es constante.
-*  La expresión switch es un valor constante que coincide con `case` una etiqueta en la sección switch.
-*  La expresión switch es un valor constante que no coincide con `case` ninguna etiqueta y la sección switch contiene la `default` etiqueta.
-*  Se hace referencia a una etiqueta switch de la sección switch mediante una instrucción `goto case` o `goto default` alcanzable.
+*  La expresión switch es un valor constante que coincide con una `case` etiqueta en la sección switch.
+*  La expresión switch es un valor constante que no coincide con ninguna etiqueta `case`, y la sección switch contiene la etiqueta `default`.
+*  Se hace referencia a una etiqueta switch de la sección switch mediante una instrucción `goto case` o `goto default` accesible.
 
-El punto final de una `switch` instrucción es accesible si se cumple al menos una de las siguientes condiciones:
+El punto final de una instrucción `switch` es accesible si se cumple al menos una de las siguientes condiciones:
 
-*  La `switch` instrucción contiene una `break` instrucción accesible que sale de la `switch` instrucción.
-*  La `switch` instrucción es accesible, la expresión switch es un valor no constante y no hay ninguna `default` etiqueta.
-*  La `switch` instrucción es accesible, la expresión switch es un valor constante que no coincide con ninguna `case` etiqueta y no hay `default` ninguna etiqueta.
+*  La instrucción `switch` contiene una instrucción `break` alcanzable que sale de la instrucción `switch`.
+*  La instrucción `switch` es accesible, la expresión switch es un valor no constante y no hay ninguna etiqueta `default`.
+*  La instrucción `switch` es accesible, la expresión switch es un valor constante que no coincide con ninguna etiqueta de `case` y no hay ninguna etiqueta de `default`.
 
 ## <a name="iteration-statements"></a>Instrucciones de iteración
 
@@ -598,7 +598,7 @@ iteration_statement
 
 ### <a name="the-while-statement"></a>La instrucción while
 
-La `while` instrucción ejecuta condicionalmente una instrucción incrustada cero o más veces.
+La instrucción `while` ejecuta condicionalmente una instrucción incrustada cero o más veces.
 
 ```antlr
 while_statement
@@ -606,24 +606,24 @@ while_statement
     ;
 ```
 
-Una `while` instrucción se ejecuta de la siguiente manera:
+Una instrucción `while` se ejecuta de la siguiente manera:
 
-*  Se evalúa *Boolean_expression* ([Expresiones booleanas](expressions.md#boolean-expressions)).
-*  Si la expresión booleana produce `true`, el control se transfiere a la instrucción incrustada. Cuando el control alcanza el punto final de la instrucción incrustada (posiblemente desde la ejecución de `continue` una instrucción), el control se transfiere al principio de `while` la instrucción.
-*  Si la expresión booleana produce `false`, el control se transfiere al punto final de la `while` instrucción.
+*  Se evalúa el *Boolean_expression* ([Expresiones booleanas](expressions.md#boolean-expressions)).
+*  Si la expresión booleana produce `true`, el control se transfiere a la instrucción incrustada. Cuando el control alcanza el punto final de la instrucción incrustada (posiblemente desde la ejecución de una instrucción `continue`), el control se transfiere al principio de la instrucción `while`.
+*  Si la expresión booleana produce `false`, el control se transfiere al punto final de la instrucción `while`.
 
-Dentro de la instrucción incrustada `while` de una instrucción `break` , se puede usar una instrucción ([la instrucción break](statements.md#the-break-statement)) para transferir el control al punto final `while` de la instrucción (por lo tanto, finalizar la iteración de la instrucción incrustada) y un `continue` la instrucción ([la instrucción continue](statements.md#the-continue-statement)) se puede utilizar para transferir el control al punto final de la instrucción incrustada (con lo que se `while` realiza otra iteración de la instrucción).
+Dentro de la instrucción incrustada de una instrucción de `while`, se puede usar una instrucción `break` ([instrucción break](statements.md#the-break-statement)) para transferir el control al punto final de la instrucción `while` (con lo que finaliza la iteración de la instrucción incrustada) y se puede usar una instrucción `continue` ([la instrucción continue](statements.md#the-continue-statement)) para transferir el control al punto final de la instrucción incrustada (con lo que se realiza otra `while` iteración
 
-La instrucción incrustada de `while` una instrucción es accesible si la `while` instrucción es accesible y la expresión booleana no tiene el valor `false`constante.
+La instrucción incrustada de una instrucción `while` es accesible si la instrucción de `while` es accesible y la expresión booleana no tiene el valor constante `false`.
 
-El punto final de una `while` instrucción es accesible si se cumple al menos una de las siguientes condiciones:
+El punto final de una instrucción `while` es accesible si se cumple al menos una de las siguientes condiciones:
 
-*  La `while` instrucción contiene una `break` instrucción accesible que sale de la `while` instrucción.
-*  La `while` instrucción es accesible y la expresión booleana no tiene el valor `true`constante.
+*  La instrucción `while` contiene una instrucción `break` alcanzable que sale de la instrucción `while`.
+*  La instrucción `while` es accesible y la expresión booleana no tiene el valor constante `true`.
 
 ### <a name="the-do-statement"></a>La instrucción do
 
-La `do` instrucción ejecuta condicionalmente una instrucción incrustada una o varias veces.
+La instrucción `do` ejecuta condicionalmente una instrucción incrustada una o varias veces.
 
 ```antlr
 do_statement
@@ -631,23 +631,23 @@ do_statement
     ;
 ```
 
-Una `do` instrucción se ejecuta de la siguiente manera:
+Una instrucción `do` se ejecuta de la siguiente manera:
 
 *  El control se transfiere a la instrucción insertada.
-*  Cuando el control alcanza el punto final de la instrucción incrustada (posiblemente desde la ejecución de una instrucción `continue`), se evalúa la *Boolean_expression* ([Expresiones booleanas](expressions.md#boolean-expressions)). Si la expresión booleana produce `true`, el control se transfiere al principio de la `do` instrucción. De lo contrario, el control se transfiere al punto final `do` de la instrucción.
+*  Cuando el control alcanza el punto final de la instrucción incrustada (posiblemente desde la ejecución de una instrucción `continue`), se evalúa el *Boolean_expression* ([Expresiones booleanas](expressions.md#boolean-expressions)). Si la expresión booleana produce `true`, el control se transfiere al principio de la instrucción de `do`. De lo contrario, el control se transfiere al punto final de la instrucción `do`.
 
-Dentro de la instrucción incrustada `do` de una instrucción `break` , se puede usar una instrucción ([la instrucción break](statements.md#the-break-statement)) para transferir el control al punto final `do` de la instrucción (por lo tanto, finalizar la iteración de la instrucción incrustada) y un `continue` la instrucción ([la instrucción continue](statements.md#the-continue-statement)) se puede utilizar para transferir el control al punto final de la instrucción insertada.
+Dentro de la instrucción incrustada de una instrucción de `do`, se puede usar una instrucción `break` ([la instrucción break](statements.md#the-break-statement)) para transferir el control al punto final de la instrucción `do` (con lo que finaliza la iteración de la instrucción incrustada) y se puede usar una instrucción `continue` ([la instrucción continue](statements.md#the-continue-statement)) para transferir el control al punto final de la instrucción insertada.
 
-La instrucción insertada de `do` una instrucción es accesible si la `do` instrucción es accesible.
+La instrucción incrustada de una instrucción `do` es accesible si la instrucción de `do` es accesible.
 
-El punto final de una `do` instrucción es accesible si se cumple al menos una de las siguientes condiciones:
+El punto final de una instrucción `do` es accesible si se cumple al menos una de las siguientes condiciones:
 
-*  La `do` instrucción contiene una `break` instrucción accesible que sale de la `do` instrucción.
-*  El punto final de la instrucción incrustada es accesible y la expresión booleana no tiene el valor `true`constante.
+*  La instrucción `do` contiene una instrucción `break` alcanzable que sale de la instrucción `do`.
+*  El punto final de la instrucción incrustada es accesible y la expresión booleana no tiene el valor constante `true`.
 
 ### <a name="the-for-statement"></a>La instrucción for
 
-La `for` instrucción evalúa una secuencia de expresiones de inicialización y, a continuación, mientras una condición es true, ejecuta repetidamente una instrucción incrustada y evalúa una secuencia de expresiones de iteración.
+La instrucción `for` evalúa una secuencia de expresiones de inicialización y, a continuación, mientras una condición es true, ejecuta repetidamente una instrucción incrustada y evalúa una secuencia de expresiones de iteración.
 
 ```antlr
 for_statement
@@ -672,34 +672,34 @@ statement_expression_list
     ;
 ```
 
-El *for_initializer*, si está presente, consta de un *local_variable_declaration* ([declaraciones de variables locales](statements.md#local-variable-declarations)) o una lista de *statement_expression*s ([instrucciones de expresión](statements.md#expression-statements)) separadas por comas. El ámbito de una variable local declarada por un *for_initializer* comienza en el *local_variable_declarator* para la variable y se extiende hasta el final de la instrucción incrustada. El ámbito incluye *for_condition* y *for_iterator*.
+El *for_initializer*, si está presente, consta de un *local_variable_declaration* ([declaraciones de variables locales](statements.md#local-variable-declarations)) o una lista de *statement_expression*s ([instrucciones de expresión](statements.md#expression-statements)) separadas por comas. El ámbito de una variable local declarada por una *for_initializer* comienza en el *local_variable_declarator* de la variable y se extiende hasta el final de la instrucción incrustada. El ámbito incluye el *for_condition* y el *for_iterator*.
 
-El *for_condition*, si está presente, debe ser una *Boolean_expression* ([Expresiones booleanas](expressions.md#boolean-expressions)).
+El *for_condition*, si está presente, debe ser un *Boolean_expression* ([Expresiones booleanas](expressions.md#boolean-expressions)).
 
-*For_iterator*, si está presente, consta de una lista de *statement_expression*s ([instrucciones de expresión](statements.md#expression-statements)) separadas por comas.
+El *for_iterator*, si está presente, consta de una lista de *statement_expression*s ([instrucciones de expresión](statements.md#expression-statements)) separadas por comas.
 
 Una instrucción for se ejecuta de la siguiente manera:
 
 *  Si hay un *for_initializer* , los inicializadores variables o las expresiones de instrucción se ejecutan en el orden en que se escriben. Este paso solo se realiza una vez.
-*  Si un *for_condition* está presente, se evalúa.
-*  Si *for_condition* no está presente o si la evaluación produce `true`, el control se transfiere a la instrucción insertada. Cuando el control alcanza el punto final de la instrucción incrustada (posiblemente desde la ejecución de una instrucción `continue`), las expresiones de *for_iterator*, si hay alguna, se evalúan en secuencia y, a continuación, se realiza otra iteración, empezando por evaluación de *for_condition* en el paso anterior.
+*  Si hay un *for_condition* , se evalúa.
+*  Si el *for_condition* no está presente o si la evaluación produce `true`, el control se transfiere a la instrucción insertada. Cuando el control alcanza el punto final de la instrucción incrustada (posiblemente desde la ejecución de una instrucción `continue`), las expresiones del *for_iterator*, si las hay, se evalúan en secuencia y, a continuación, se realiza otra iteración, comenzando por la evaluación de la *for_condition* en el paso anterior.
 *  Si el *for_condition* está presente y la evaluación produce `false`, el control se transfiere al punto final de la instrucción `for`.
 
-Dentro de la instrucción incrustada de una instrucción `for`, se puede usar una instrucción `break` ([instrucción break](statements.md#the-break-statement)) para transferir el control al punto final de la instrucción `for` (por lo tanto, finalizar la iteración de la instrucción incrustada) y una instrucción `continue` ([ La instrucción continue](statements.md#the-continue-statement)) se puede usar para transferir el control al punto final de la instrucción incrustada (con lo que se ejecuta *for_iterator* y se realiza otra iteración de la instrucción `for`, comenzando por *for_condition*).
+Dentro de la instrucción incrustada de una instrucción `for`, una instrucción `break` ([instrucción break](statements.md#the-break-statement)) se puede utilizar para transferir el control al punto final de la instrucción `for` (por lo tanto, finalizar la iteración de la instrucción incrustada) y se puede usar una instrucción `continue` ([la instrucción continue](statements.md#the-continue-statement)) para transferir el control al punto final de la instrucción incrustada (lo que ejecuta la *for_iterator* y realiza otra iteración de la instrucción `for`, empezando por la *for_condition*
 
-La instrucción insertada de `for` una instrucción es accesible si se cumple una de las siguientes condiciones:
+La instrucción insertada de una instrucción `for` es accesible si se cumple una de las siguientes condiciones:
 
-*  La instrucción `for` es accesible y no hay *for_condition* .
-*  La instrucción `for` es accesible y está presente un *for_condition* y no tiene el valor constante `false`.
+*  La instrucción `for` es accesible y no hay ningún *for_condition* presente.
+*  La instrucción `for` es accesible y hay una *for_condition* presente y no tiene el valor constante `false`.
 
-El punto final de una `for` instrucción es accesible si se cumple al menos una de las siguientes condiciones:
+El punto final de una instrucción `for` es accesible si se cumple al menos una de las siguientes condiciones:
 
-*  La `for` instrucción contiene una `break` instrucción accesible que sale de la `for` instrucción.
-*  La instrucción `for` es accesible y está presente un *for_condition* y no tiene el valor constante `true`.
+*  La instrucción `for` contiene una instrucción `break` alcanzable que sale de la instrucción `for`.
+*  La instrucción `for` es accesible y hay una *for_condition* presente y no tiene el valor constante `true`.
 
 ### <a name="the-foreach-statement"></a>La instrucción foreach
 
-La `foreach` instrucción enumera los elementos de una colección y ejecuta una instrucción incrustada para cada elemento de la colección.
+La instrucción `foreach` enumera los elementos de una colección y ejecuta una instrucción incrustada para cada elemento de la colección.
 
 ```antlr
 foreach_statement
@@ -707,30 +707,30 @@ foreach_statement
     ;
 ```
 
-El *tipo* y el *identificador* de una `foreach` instrucción declaran la ***variable de iteración*** de la instrucción. Si se proporciona el identificador `var` como *local_variable_type*y no hay ningún tipo denominado `var` en el ámbito, se dice que la variable de iteración es una ***variable de iteración con tipo implícito***y se considera que su tipo es el tipo de elemento de `foreach`. tal y como se especifica a continuación. La variable de iteración corresponde a una variable local de solo lectura con un ámbito que se extiende a través de la instrucción incrustada. Durante la ejecución de `foreach` una instrucción, la variable de iteración representa el elemento de colección para el que se está realizando actualmente una iteración. Se produce un error en tiempo de compilación si la instrucción incrustada intenta modificar la variable de iteración ( `++` a `--` través de la asignación o los operadores y) `ref` o `out` pasar la variable de iteración como un parámetro o.
+El *tipo* y el *identificador* de una instrucción `foreach` declaran la ***variable de iteración*** de la instrucción. Si el identificador de `var` se proporciona como el *local_variable_type*y ningún tipo denominado `var` está en el ámbito, se dice que la variable de iteración es una ***variable de iteración con tipo implícito***y que su tipo es el tipo de elemento de la instrucción de `foreach`, tal y como se especifica a continuación. La variable de iteración corresponde a una variable local de solo lectura con un ámbito que se extiende a través de la instrucción incrustada. Durante la ejecución de una instrucción de `foreach`, la variable de iteración representa el elemento de colección para el que se está realizando actualmente una iteración. Se produce un error en tiempo de compilación si la instrucción insertada intenta modificar la variable de iteración (a través de la asignación o los operadores `++` y `--`) o pasar la variable de iteración como un `ref` o `out` parámetro.
 
-En el siguiente, por motivos de `IEnumerable`brevedad `IEnumerator`, `IEnumerable<T>` , `IEnumerator<T>` y hacen referencia a los tipos correspondientes de los `System.Collections` espacios `System.Collections.Generic`de nombres y.
+En el siguiente, para mayor brevedad, `IEnumerable`, `IEnumerator`, `IEnumerable<T>` y `IEnumerator<T>` hacen referencia a los tipos correspondientes de los espacios de nombres `System.Collections` y `System.Collections.Generic`.
 
 El procesamiento en tiempo de compilación de una instrucción foreach primero determina el ***tipo de colección***, el tipo de ***enumerador*** y el ***tipo de elemento*** de la expresión. Esta determinación se realiza de la siguiente manera:
 
-*  Si el tipo `X` de *expresión* es un tipo de matriz, hay una conversión de referencia implícita `X` de a `IEnumerable` la interfaz ( `System.Array` puesto que implementa esta interfaz). El ***tipo de colección*** es `IEnumerable` la interfaz, el ***tipo de enumerador*** es `IEnumerator` la interfaz ***y el tipo de elemento es*** el tipo de `X`elemento del tipo de matriz.
-*  Si el tipo `X` de *expresión* es `dynamic` , hay una conversión implícita de la *expresión* a la `IEnumerable` interfaz ([conversiones dinámicas implícitas](conversions.md#implicit-dynamic-conversions)). El ***tipo de colección*** es `IEnumerable` la interfaz y el ***tipo de enumerador*** es la `IEnumerator` interfaz. Si se proporciona el identificador `var` como *local_variable_type* , el tipo de ***elemento*** es `dynamic`, de lo contrario es `object`.
-*  De lo contrario, determine `X` si el tipo `GetEnumerator` tiene un método adecuado:
-   * Realiza la búsqueda de miembros en `X` el tipo con `GetEnumerator` el identificador y ningún argumento de tipo. Si la búsqueda de miembros no produce una coincidencia, o produce una ambigüedad, o produce una coincidencia que no es un grupo de métodos, busque una interfaz enumerable como se describe a continuación. Se recomienda emitir una advertencia si la búsqueda de miembros produce cualquier cosa, excepto un grupo de métodos o ninguna coincidencia.
+*  Si el tipo `X` de *Expression* es un tipo de matriz, hay una conversión de referencia implícita de `X` a la interfaz `IEnumerable` (ya que `System.Array` implementa esta interfaz). El ***tipo de colección*** es la interfaz `IEnumerable`, el ***tipo de enumerador*** es la interfaz `IEnumerator` y el tipo de ***elemento*** es el tipo de elemento del tipo de matriz `X`.
+*  Si el tipo `X` de la *expresión* es `dynamic`, hay una conversión implícita de la *expresión* a la interfaz `IEnumerable` ([conversiones dinámicas implícitas](conversions.md#implicit-dynamic-conversions)). El ***tipo de colección*** es la interfaz `IEnumerable` y el ***tipo de enumerador*** es la interfaz `IEnumerator`. Si se proporciona el identificador de `var` como *local_variable_type* , el ***tipo de elemento*** es `dynamic`; en caso contrario, es `object`.
+*  De lo contrario, determine si el tipo `X` tiene un método `GetEnumerator` adecuado:
+   * Realiza la búsqueda de miembros en el tipo `X` con el identificador `GetEnumerator` y ningún argumento de tipo. Si la búsqueda de miembros no produce una coincidencia, o produce una ambigüedad, o produce una coincidencia que no es un grupo de métodos, busque una interfaz enumerable como se describe a continuación. Se recomienda emitir una advertencia si la búsqueda de miembros produce cualquier cosa, excepto un grupo de métodos o ninguna coincidencia.
    * Realizar la resolución de sobrecarga utilizando el grupo de métodos resultante y una lista de argumentos vacía. Si la resolución de sobrecarga da como resultado ningún método aplicable, da como resultado una ambigüedad o tiene como resultado un único método mejor pero ese método es estático o no público, busque una interfaz enumerable como se describe a continuación. Se recomienda emitir una advertencia si la resolución de sobrecarga produce todo excepto un método de instancia pública inequívoco o ningún método aplicable.
-   * Si el tipo `E` `GetEnumerator` de valor devuelto del método no es una clase, una estructura o un tipo de interfaz, se genera un error y no se realiza ningún otro paso.
-   * La búsqueda de miembros se `E` realiza en con el `Current` identificador y sin argumentos de tipo. Si la búsqueda de miembros no produce ninguna coincidencia, el resultado es un error o el resultado es cualquier cosa excepto una propiedad de instancia pública que permita la lectura, se genera un error y no se realiza ningún paso más.
-   * La búsqueda de miembros se `E` realiza en con el `MoveNext` identificador y sin argumentos de tipo. Si la búsqueda de miembros no produce ninguna coincidencia, el resultado es un error o el resultado es cualquier cosa excepto un grupo de métodos, se genera un error y no se realiza ningún paso más.
-   * La resolución de sobrecarga se realiza en el grupo de métodos con una lista de argumentos vacía. Si la resolución de sobrecarga da como resultado ningún método aplicable, da como resultado una ambigüedad o tiene como resultado un único método mejor pero ese método es estático o no público, o su tipo de `bool`valor devuelto no es, se genera un error y no se realiza ningún otro paso.
-   * El ***tipo*** de colección `X`es, el tipo de `E` ***enumerador*** es y el tipo de ***elemento*** es el `Current` tipo de la propiedad.
+   * Si el tipo de valor devuelto `E` del método `GetEnumerator` no es una clase, una estructura o un tipo de interfaz, se genera un error y no se realiza ningún otro paso.
+   * La búsqueda de miembros se realiza en `E` con el identificador `Current` y ningún argumento de tipo. Si la búsqueda de miembros no produce ninguna coincidencia, el resultado es un error o el resultado es cualquier cosa excepto una propiedad de instancia pública que permita la lectura, se genera un error y no se realiza ningún paso más.
+   * La búsqueda de miembros se realiza en `E` con el identificador `MoveNext` y ningún argumento de tipo. Si la búsqueda de miembros no produce ninguna coincidencia, el resultado es un error o el resultado es cualquier cosa excepto un grupo de métodos, se genera un error y no se realiza ningún paso más.
+   * La resolución de sobrecarga se realiza en el grupo de métodos con una lista de argumentos vacía. Si la resolución de sobrecarga da como resultado ningún método aplicable, da como resultado una ambigüedad o tiene como resultado un único método mejor pero ese método es estático o no público, o su tipo de valor devuelto no se `bool`, se genera un error y no se realiza ningún otro paso.
+   * El ***tipo de colección*** es `X`, el ***tipo de enumerador*** es `E`y el tipo de ***elemento*** es el tipo de la propiedad `Current`.
 
 *  De lo contrario, compruebe si hay una interfaz enumerable:
-   * Si entre todos los tipos `Ti` para los que hay una conversión implícita de `X` a `IEnumerable<Ti>`, hay un tipo `T` único, de modo `T` que no `dynamic` es y para todos los `Ti` demás hay un conversión implícita de `IEnumerable<T>` a `IEnumerable<Ti>`, el ***tipo de colección*** es la interfaz `IEnumerable<T>`, el ***tipo de enumerador*** es `IEnumerator<T>`la interfaz y el ***tipo de elemento*** es `T`.
-   * De lo contrario, si hay más de un tipo `T`de este tipo, se genera un error y no se realiza ningún paso más.
-   * De lo contrario, si hay una conversión implícita `X` de en `System.Collections.IEnumerable` la interfaz, el ***tipo de colección*** es esta interfaz, el ***tipo de enumerador*** es la interfaz `System.Collections.IEnumerator`y el ***tipo de elemento*** es `object`.
+   * Si entre todos los tipos `Ti` para los que hay una conversión implícita de `X` a `IEnumerable<Ti>`, hay un tipo único `T` tal que `T` no se `dynamic` y para el resto `Ti` existe una conversión implícita de `IEnumerable<T>` a `IEnumerable<Ti>`, entonces el ***tipo de colección*** es la interfaz `IEnumerable<T>`, el tipo de ***enumerador*** es la interfaz `IEnumerator<T>`y el ***tipo de elemento*** es `T`.
+   * De lo contrario, si hay más de un tipo de este tipo `T`, se genera un error y no se realiza ningún otro paso.
+   * De lo contrario, si hay una conversión implícita de `X` a la interfaz `System.Collections.IEnumerable`, el ***tipo de colección*** es esta interfaz, el ***tipo de enumerador*** es la interfaz `System.Collections.IEnumerator`y se `object`el ***tipo de elemento*** .
    * De lo contrario, se genera un error y no se realiza ningún paso más.
 
-Los pasos anteriores, si son correctos, producen de forma inequívoca `C`un tipo de `E` colección, un `T`tipo de enumerador y un tipo de elemento. Una instrucción foreach con el formato
+Los pasos anteriores, si son correctos, producen inequívocamente un tipo de colección `C`, un tipo de enumerador `E` y un tipo de elemento `T`. Una instrucción foreach con el formato
 ```csharp
 foreach (V v in x) embedded_statement
 ```
@@ -750,7 +750,7 @@ se expande a continuación hasta:
 }
 ```
 
-La variable `e` no es visible o accesible para la expresión `x` o la instrucción incrustada ni cualquier otro código fuente del programa. La variable `v` es de solo lectura en la instrucción insertada. Si no hay una conversión explícita ([conversiones explícitas](conversions.md#explicit-conversions)) de `T` (el tipo de elemento) a `V` ( *local_variable_type* en la instrucción foreach), se genera un error y no se realiza ningún otro paso. Si `x` tiene el valor `null`, se `System.NullReferenceException` produce una excepción en tiempo de ejecución.
+La variable `e` no es visible o accesible para la expresión `x` o la instrucción incrustada o cualquier otro código fuente del programa. La variable `v` es de solo lectura en la instrucción insertada. Si no hay una conversión explícita ([conversiones explícitas](conversions.md#explicit-conversions)) de `T` (el tipo de elemento) en `V` (el *local_variable_type* en la instrucción foreach), se genera un error y no se realiza ningún otro paso. Si `x` tiene el valor `null`, se produce una `System.NullReferenceException` en tiempo de ejecución.
 
 Una implementación puede implementar una instrucción foreach determinada de forma diferente, por ejemplo, por motivos de rendimiento, siempre que el comportamiento sea coherente con la expansión anterior.
 
@@ -768,11 +768,11 @@ foreach (var value in values)
 
 f();
 ```
-Si `v` se declaró fuera del bucle while, se compartirá entre todas las iteraciones y su valor después del bucle for sería el valor final, `13`, que es lo que la invocación de `f` imprimiría. En su lugar, dado que cada iteración tiene `v`su propia variable, la `f` que captura en la primera iteración seguirá conservando `7`el valor, que es lo que se va a imprimir. (Nota: versiones anteriores de C# declaradas `v` fuera del bucle while).
+Si `v` se declaró fuera del bucle while, se compartirá entre todas las iteraciones y su valor después del bucle for sería el valor final, `13`, que es lo que la invocación de `f` imprimiría. En su lugar, dado que cada iteración tiene su propia variable `v`, la captura de `f` en la primera iteración seguirá conservando el valor `7`, que es lo que se va a imprimir. (Nota: las versiones anteriores C# de declaraban `v` fuera del bucle while).
 
 El cuerpo del bloque finally se construye según los pasos siguientes:
 
-*  Si hay una conversión implícita de `E` en la `System.IDisposable` interfaz,
+*  Si hay una conversión implícita de `E` a la interfaz `System.IDisposable`,
    *  Si `E` es un tipo de valor que no acepta valores NULL, la cláusula finally se expande al equivalente semántico de:
 
       ```csharp
@@ -789,9 +789,9 @@ El cuerpo del bloque finally se construye según los pasos siguientes:
       }
       ```
 
-   salvo que si `E` es un tipo de valor o un parámetro de tipo al que se ha creado una instancia de un tipo `e` de `System.IDisposable` valor, la conversión de a no hará que se produzca la conversión boxing.
+   salvo que si `E` es un tipo de valor o un parámetro de tipo al que se ha creado una instancia de un tipo de valor, la conversión de `e` a `System.IDisposable` no hará que se produzca la conversión boxing.
 
-*  De lo contrario `E` , si es un tipo sellado, la cláusula finally se expande a un bloque vacío:
+*  De lo contrario, si `E` es un tipo sellado, la cláusula finally se expande a un bloque vacío:
 
    ```csharp
    finally {
@@ -807,9 +807,9 @@ El cuerpo del bloque finally se construye según los pasos siguientes:
    }
    ```    
 
-   La variable `d` local no es visible o accesible para cualquier código de usuario. En concreto, no entra en conflicto con ninguna otra variable cuyo ámbito incluya el bloque Finally.
+   La variable local `d` no es visible o accesible para cualquier código de usuario. En concreto, no entra en conflicto con ninguna otra variable cuyo ámbito incluya el bloque Finally.
 
-El orden en el `foreach` que recorre los elementos de una matriz es el siguiente: En el caso de las matrices unidimensionales, los elementos se recorren en orden `0` creciente de índice, `Length - 1`empezando por el índice y terminando por el índice. En el caso de las matrices multidimensionales, los elementos se recorren de forma que los índices de la dimensión situada más a la derecha aumenten primero, la dimensión izquierda siguiente y así sucesivamente hacia la izquierda.
+El orden en el que `foreach` atraviesa los elementos de una matriz es el siguiente: para las matrices unidimensionales, los elementos se recorren en orden creciente de índice, empezando por el `0` de índice y terminando por el índice `Length - 1`. En el caso de las matrices multidimensionales, los elementos se recorren de forma que los índices de la dimensión situada más a la derecha aumenten primero, la dimensión izquierda siguiente y así sucesivamente hacia la izquierda.
 
 En el ejemplo siguiente se imprime cada valor en una matriz bidimensional, en el orden de los elementos:
 ```csharp
@@ -835,12 +835,12 @@ La salida generada es la siguiente:
 1.2 2.3 3.4 4.5 5.6 6.7 7.8 8.9
 ```
 
-En el ejemplo
+en el ejemplo
 ```csharp
 int[] numbers = { 1, 3, 5, 7, 9 };
 foreach (var n in numbers) Console.WriteLine(n);
 ```
-el tipo de `n` se deduce `int`como, el tipo de elemento de `numbers`.
+el tipo de `n` se deduce que se va a `int`, el tipo de elemento de `numbers`.
 
 ## <a name="jump-statements"></a>Instrucciones de salto
 
@@ -860,9 +860,9 @@ La ubicación a la que una instrucción de salto transfiere el control se denomi
 
 Cuando una instrucción de salto se produce dentro de un bloque y el destino de la instrucción de salto está fuera del bloque, se dice que la instrucción de salto ***sale*** del bloque. Aunque una instrucción de salto puede transferir el control fuera de un bloque, nunca puede transferir el control a un bloque.
 
-La ejecución de instrucciones de salto es complicada por la presencia de `try` instrucciones intermedias. En ausencia de estas `try` instrucciones, una instrucción de salto transfiere incondicionalmente el control de la instrucción de salto a su destino. En presencia de dichas `try` instrucciones intermedias, la ejecución es más compleja. Si la instrucción de salto sale de uno o `try` más bloques con `finally` bloques asociados, el `finally` control se transfiere inicialmente al bloque de la `try` instrucción más interna. Cuando y si el control alcanza el punto final de `finally` un bloque, el `finally` control se transfiere al bloque de la siguiente instrucción `try` de inclusión. Este proceso se repite hasta `finally` que se hayan ejecutado los `try` bloques de todas las instrucciones que intervienen.
+La ejecución de instrucciones de salto es complicada por la presencia de instrucciones `try` intermedias. En ausencia de estas instrucciones `try`, una instrucción de salto transfiere incondicionalmente el control de la instrucción de salto a su destino. En presencia de tales instrucciones de `try` intermedias, la ejecución es más compleja. Si la instrucción de salto sale de uno o varios bloques de `try` con los bloques de `finally` asociados, el control se transfiere inicialmente al bloque de `finally` de la instrucción de `try` más interna. Cuando el control alcanza el punto final de un bloque `finally`, el control se transfiere al bloque `finally` de la siguiente instrucción `try` envolvente. Este proceso se repite hasta que se hayan ejecutado los bloques de `finally` de todas las instrucciones de `try` intermedias.
 
-En el ejemplo
+en el ejemplo
 ```csharp
 using System;
 
@@ -887,7 +887,7 @@ class Test
     }
 }
 ```
-los `finally` bloques asociados a dos `try` instrucciones se ejecutan antes de que el control se transfiera al destino de la instrucción de salto.
+los bloques `finally` asociados con dos instrucciones `try` se ejecutan antes de que el control se transfiera al destino de la instrucción de salto.
 
 La salida generada es la siguiente:
 ```console
@@ -899,7 +899,7 @@ After break
 
 ### <a name="the-break-statement"></a>Instrucción break
 
-La `break` instrucción sale de la instrucción de inclusión `switch`, `while` `do` `for`,, o `foreach` más cercana.
+La instrucción `break` sale de la instrucción envolvente `switch`, `while`, `do`, `for`o `foreach` más cercana.
 
 ```antlr
 break_statement
@@ -907,22 +907,22 @@ break_statement
     ;
 ```
 
-El destino de una `break` instrucción es el punto final de la instrucción envolvente `switch`, `while`, `do` `for`, o `foreach` más cercana. Si una `break` instrucción no está delimitada por `switch`una `while`instrucción `do`, `for`,, `foreach` o, se produce un error en tiempo de compilación.
+El destino de una instrucción `break` es el punto final de la instrucción envolvente `switch`, `while`, `do`, `for`o `foreach` más cercana. Si una instrucción `break` no está delimitada por una instrucción `switch`, `while`, `do`, `for`o `foreach`, se produce un error en tiempo de compilación.
 
-Cuando varias `switch`instrucciones `while` `break` , `do` ,,`foreach` o se anidan entre sí, una instrucción solo se aplica a la instrucción más interna. `for` Para transferir el control entre varios niveles de anidamiento, `goto` se debe usar una instrucción ([instrucción Goto](statements.md#the-goto-statement)).
+Cuando varias instrucciones `switch`, `while`, `do`, `for`o `foreach` se anidan entre sí, una instrucción `break` se aplica solo a la instrucción más interna. Para transferir el control a través de varios niveles de anidamiento, se debe usar una instrucción `goto` ([instrucción Goto](statements.md#the-goto-statement)).
 
-Una `break` instrucción no puede salir `finally` de un bloque ([la instrucción try](statements.md#the-try-statement)). Cuando una `break` instrucción aparece dentro de `finally` un bloque, el destino de `break` la instrucción debe estar dentro del `finally` mismo bloque; de lo contrario, se produce un error en tiempo de compilación.
+Una instrucción `break` no puede salir de un bloque de `finally` ([la instrucción try](statements.md#the-try-statement)). Cuando una instrucción de `break` se produce dentro de un bloque de `finally`, el destino de la instrucción `break` debe estar dentro del mismo bloque de `finally`; de lo contrario, se produce un error en tiempo de compilación.
 
-Una `break` instrucción se ejecuta de la siguiente manera:
+Una instrucción `break` se ejecuta de la siguiente manera:
 
-*  Si la `break` instrucción sale de uno o más `try` bloques con `finally` bloques `finally` asociados, el control se transfiere inicialmente al bloque de la instrucción `try` más interna. Cuando y si el control alcanza el punto final de `finally` un bloque, el `finally` control se transfiere al bloque de la siguiente instrucción `try` de inclusión. Este proceso se repite hasta `finally` que se hayan ejecutado los `try` bloques de todas las instrucciones que intervienen.
-*  El control se transfiere al destino de la `break` instrucción.
+*  Si la instrucción `break` sale de uno o varios bloques de `try` con los bloques de `finally` asociados, el control se transfiere inicialmente al bloque de `finally` de la instrucción de `try` más interna. Cuando el control alcanza el punto final de un bloque `finally`, el control se transfiere al bloque `finally` de la siguiente instrucción `try` envolvente. Este proceso se repite hasta que se hayan ejecutado los bloques de `finally` de todas las instrucciones de `try` intermedias.
+*  El control se transfiere al destino de la instrucción `break`.
 
-Dado que `break` una instrucción transfiere el control incondicionalmente a otra parte, el `break` punto final de una instrucción nunca es accesible.
+Dado que una instrucción `break` transfiere incondicionalmente el control en otro lugar, nunca se puede obtener acceso al punto final de una instrucción de `break`.
 
 ### <a name="the-continue-statement"></a>La instrucción continue
 
-La `continue` instrucción inicia una nueva iteración de la instrucción envolvente `while`, `do`, `for`o `foreach` más cercana.
+La instrucción `continue` inicia una nueva iteración de la instrucción envolvente `while`, `do`, `for`o `foreach` más cercana.
 
 ```antlr
 continue_statement
@@ -930,22 +930,22 @@ continue_statement
     ;
 ```
 
-El destino de una `continue` instrucción es el punto final de la instrucción incrustada de la instrucción envolvente `while`, `do`, `for`o `foreach` más cercana. Si una `continue` instrucción no está delimitada por `while`una `do`instrucción `for`,, `foreach` o, se produce un error en tiempo de compilación.
+El destino de una instrucción `continue` es el punto final de la instrucción incrustada de la instrucción envolvente `while`, `do`, `for`o `foreach` más cercana. Si una instrucción `continue` no está delimitada por una instrucción `while`, `do`, `for`o `foreach`, se produce un error en tiempo de compilación.
 
-Cuando varias `while`instrucciones `do`, `for`, `continue` o `foreach` se anidan entre sí, una instrucción solo se aplica a la instrucción más interna. Para transferir el control entre varios niveles de anidamiento, `goto` se debe usar una instrucción ([instrucción Goto](statements.md#the-goto-statement)).
+Cuando varias instrucciones `while`, `do`, `for`o `foreach` se anidan entre sí, una instrucción `continue` se aplica solo a la instrucción más interna. Para transferir el control a través de varios niveles de anidamiento, se debe usar una instrucción `goto` ([instrucción Goto](statements.md#the-goto-statement)).
 
-Una `continue` instrucción no puede salir `finally` de un bloque ([la instrucción try](statements.md#the-try-statement)). Cuando una `continue` instrucción aparece dentro de `finally` un bloque, el destino de `continue` la instrucción debe estar dentro del `finally` mismo bloque; de lo contrario, se produce un error en tiempo de compilación.
+Una instrucción `continue` no puede salir de un bloque de `finally` ([la instrucción try](statements.md#the-try-statement)). Cuando una instrucción de `continue` se produce dentro de un bloque de `finally`, el destino de la instrucción `continue` debe estar dentro del mismo bloque de `finally`; en caso contrario, se produce un error en tiempo de compilación.
 
-Una `continue` instrucción se ejecuta de la siguiente manera:
+Una instrucción `continue` se ejecuta de la siguiente manera:
 
-*  Si la `continue` instrucción sale de uno o más `try` bloques con `finally` bloques `finally` asociados, el control se transfiere inicialmente al bloque de la instrucción `try` más interna. Cuando y si el control alcanza el punto final de `finally` un bloque, el `finally` control se transfiere al bloque de la siguiente instrucción `try` de inclusión. Este proceso se repite hasta `finally` que se hayan ejecutado los `try` bloques de todas las instrucciones que intervienen.
-*  El control se transfiere al destino de la `continue` instrucción.
+*  Si la instrucción `continue` sale de uno o varios bloques de `try` con los bloques de `finally` asociados, el control se transfiere inicialmente al bloque de `finally` de la instrucción de `try` más interna. Cuando el control alcanza el punto final de un bloque `finally`, el control se transfiere al bloque `finally` de la siguiente instrucción `try` envolvente. Este proceso se repite hasta que se hayan ejecutado los bloques de `finally` de todas las instrucciones de `try` intermedias.
+*  El control se transfiere al destino de la instrucción `continue`.
 
-Dado que `continue` una instrucción transfiere el control incondicionalmente a otra parte, el `continue` punto final de una instrucción nunca es accesible.
+Dado que una instrucción `continue` transfiere incondicionalmente el control en otro lugar, nunca se puede obtener acceso al punto final de una instrucción de `continue`.
 
 ### <a name="the-goto-statement"></a>La instrucción goto
 
-La `goto` instrucción transfiere el control a una instrucción marcada por una etiqueta.
+La instrucción `goto` transfiere el control a una instrucción marcada por una etiqueta.
 
 ```antlr
 goto_statement
@@ -955,7 +955,7 @@ goto_statement
     ;
 ```
 
-El destino de una `goto` instrucción *Identifier* es la instrucción con etiqueta con la etiqueta especificada. Si no existe una etiqueta con el nombre especificado en el miembro de función actual, o si la `goto` instrucción no está dentro del ámbito de la etiqueta, se produce un error en tiempo de compilación. Esta regla permite el uso de una `goto` instrucción para transferir el control fuera de un ámbito anidado, pero no a un ámbito anidado. En el ejemplo
+El destino de una instrucción de *identificador* `goto` es la instrucción con etiqueta con la etiqueta especificada. Si no existe una etiqueta con el nombre especificado en el miembro de función actual, o si la instrucción `goto` no está dentro del ámbito de la etiqueta, se produce un error en tiempo de compilación. Esta regla permite el uso de una instrucción `goto` para transferir el control fuera de un ámbito anidado, pero no a un ámbito anidado. en el ejemplo
 ```csharp
 using System;
 
@@ -982,24 +982,24 @@ class Test
     }
 }
 ```
-una `goto` instrucción se usa para transferir el control fuera de un ámbito anidado.
+se utiliza una instrucción `goto` para transferir el control fuera de un ámbito anidado.
 
-El destino de una `goto case` instrucción es la lista de instrucciones de la instrucción de `switch` inclusión inmediata ([la instrucción switch](statements.md#the-switch-statement)), que contiene `case` una etiqueta con el valor constante especificado. Si la instrucción `goto case` no está delimitada por una instrucción `switch`, si *constant_expression* no se pueden convertir implícitamente ([conversiones implícitas](conversions.md#implicit-conversions)) al tipo de control de la instrucción envolvente de `switch` más cercana, o si el contenedor más cercano la instrucción `switch` no contiene una etiqueta `case` con el valor constante especificado, se produce un error en tiempo de compilación.
+El destino de una instrucción `goto case` es la lista de instrucciones de la instrucción de `switch` de inclusión inmediata ([la instrucción switch](statements.md#the-switch-statement)), que contiene una etiqueta de `case` con el valor constante especificado. Si la instrucción de `goto case` no está delimitada por una instrucción de `switch`, si el *constant_expression* no se convierte implícitamente ([conversiones implícitas](conversions.md#implicit-conversions)) al tipo de control de la instrucción de `switch` envolvente más cercana, o si la instrucción de `switch` envolvente más cercana no contiene una etiqueta de `case` con el valor constante especificado, se produce un error en tiempo de compilación.
 
-El destino de una `goto default` instrucción es la lista de instrucciones de la instrucción de `switch` inclusión inmediata ([la instrucción switch](statements.md#the-switch-statement)), que contiene `default` una etiqueta. Si la `goto default` instrucción no está delimitada por `switch` una instrucción, o si la instrucción de `switch` inclusión más cercana no contiene `default` una etiqueta, se produce un error en tiempo de compilación.
+El destino de una instrucción `goto default` es la lista de instrucciones de la instrucción de `switch` de inclusión inmediata ([la instrucción switch](statements.md#the-switch-statement)), que contiene una etiqueta de `default`. Si la instrucción de `goto default` no está delimitada por una instrucción de `switch` o si la instrucción de `switch` envolvente más cercana no contiene una etiqueta de `default`, se produce un error en tiempo de compilación.
 
-Una `goto` instrucción no puede salir `finally` de un bloque ([la instrucción try](statements.md#the-try-statement)). Cuando una `goto` instrucción aparece dentro de `finally` un bloque, el destino de `goto` la instrucción debe estar dentro del `finally` mismo bloque o, de lo contrario, se producirá un error en tiempo de compilación.
+Una instrucción `goto` no puede salir de un bloque de `finally` ([la instrucción try](statements.md#the-try-statement)). Cuando una instrucción de `goto` se produce dentro de un bloque de `finally`, el destino de la instrucción `goto` debe estar dentro del mismo bloque de `finally` o, de lo contrario, se producirá un error en tiempo de compilación.
 
-Una `goto` instrucción se ejecuta de la siguiente manera:
+Una instrucción `goto` se ejecuta de la siguiente manera:
 
-*  Si la `goto` instrucción sale de uno o más `try` bloques con `finally` bloques `finally` asociados, el control se transfiere inicialmente al bloque de la instrucción `try` más interna. Cuando y si el control alcanza el punto final de `finally` un bloque, el `finally` control se transfiere al bloque de la siguiente instrucción `try` de inclusión. Este proceso se repite hasta `finally` que se hayan ejecutado los `try` bloques de todas las instrucciones que intervienen.
-*  El control se transfiere al destino de la `goto` instrucción.
+*  Si la instrucción `goto` sale de uno o varios bloques de `try` con los bloques de `finally` asociados, el control se transfiere inicialmente al bloque de `finally` de la instrucción de `try` más interna. Cuando el control alcanza el punto final de un bloque `finally`, el control se transfiere al bloque `finally` de la siguiente instrucción `try` envolvente. Este proceso se repite hasta que se hayan ejecutado los bloques de `finally` de todas las instrucciones de `try` intermedias.
+*  El control se transfiere al destino de la instrucción `goto`.
 
-Dado que `goto` una instrucción transfiere el control incondicionalmente a otra parte, el `goto` punto final de una instrucción nunca es accesible.
+Dado que una instrucción `goto` transfiere incondicionalmente el control en otro lugar, nunca se puede obtener acceso al punto final de una instrucción de `goto`.
 
 ### <a name="the-return-statement"></a>La instrucción return
 
-La `return` instrucción devuelve el control al llamador actual de la función en la que `return` aparece la instrucción.
+La instrucción `return` devuelve el control al autor de la llamada actual de la función en la que aparece la instrucción `return`.
 
 ```antlr
 return_statement
@@ -1007,26 +1007,26 @@ return_statement
     ;
 ```
 
-Una `return` instrucción sin expresión solo se puede usar en un miembro de función que no calcule un valor, es decir, un método con el tipo de resultado ([cuerpo del método](classes.md#method-body)) `void`, el `set` descriptor de acceso de una propiedad o `add` un indizador, el los `remove` descriptores de acceso de un evento, un constructor de instancia, un constructor estático o un destructor.
+Una instrucción `return` sin expresión solo se puede usar en un miembro de función que no calcule un valor, es decir, un método con el tipo de resultado ([cuerpo del método](classes.md#method-body)) `void`, el descriptor de acceso `set` de una propiedad o un indizador, los descriptores de acceso `add` y `remove` de un evento, un constructor de instancia, un constructor estático o un destructor.
 
-Una `return` instrucción con una expresión solo se puede usar en un miembro de función que calcula un valor, es decir, un método con un tipo de resultado no void, el `get` descriptor de acceso de una propiedad o un indizador, o un operador definido por el usuario. Debe existir una conversión implícita ([conversiones implícitas](conversions.md#implicit-conversions)) del tipo de la expresión al tipo de valor devuelto del miembro de función contenedora.
+Una instrucción `return` con una expresión solo se puede usar en un miembro de función que calcula un valor, es decir, un método con un tipo de resultado no void, el descriptor de acceso `get` de una propiedad o un indizador, o un operador definido por el usuario. Debe existir una conversión implícita ([conversiones implícitas](conversions.md#implicit-conversions)) del tipo de la expresión al tipo de valor devuelto del miembro de función contenedora.
 
 Las instrucciones Return también se pueden utilizar en el cuerpo de expresiones de función anónimas ([expresiones de función anónimas](expressions.md#anonymous-function-expressions)) y participar en la determinación de las conversiones que existen para esas funciones.
 
-Se trata de un error en tiempo de compilación `return` para que una instrucción aparezca `finally` en un bloque ([la instrucción try](statements.md#the-try-statement)).
+Es un error en tiempo de compilación que una instrucción `return` aparezca en un bloque de `finally` ([la instrucción try](statements.md#the-try-statement)).
 
-Una `return` instrucción se ejecuta de la siguiente manera:
+Una instrucción `return` se ejecuta de la siguiente manera:
 
-*  Si la `return` instrucción especifica una expresión, se evalúa la expresión y el valor resultante se convierte al tipo de valor devuelto de la función que la contiene mediante una conversión implícita. El resultado de la conversión se convierte en el valor de resultado producido por la función.
-*  Si la `return` instrucción está incluida en uno o varios `try` bloques `catch` o con bloques `finally` asociados, el `finally` control se transfiere inicialmente al bloque de la instrucción `try` más interna. Cuando y si el control alcanza el punto final de `finally` un bloque, el `finally` control se transfiere al bloque de la siguiente instrucción `try` de inclusión. Este proceso se repite hasta `finally` que se hayan ejecutado los `try` bloques de todas las instrucciones envolventes.
+*  Si la instrucción `return` especifica una expresión, se evalúa la expresión y el valor resultante se convierte al tipo de valor devuelto de la función contenedora mediante una conversión implícita. El resultado de la conversión se convierte en el valor de resultado producido por la función.
+*  Si la instrucción `return` está incluida en uno o varios bloques `try` o `catch` con los bloques `finally` asociados, el control se transfiere inicialmente al bloque `finally` de la instrucción de `try` más interna. Cuando el control alcanza el punto final de un bloque `finally`, el control se transfiere al bloque `finally` de la siguiente instrucción `try` envolvente. Este proceso se repite hasta que se hayan ejecutado los bloques de `finally` de todas las instrucciones de `try` envolventes.
 *  Si la función contenedora no es una función asincrónica, el control se devuelve al autor de la llamada de la función contenedora junto con el valor del resultado, si existe.
 *  Si la función contenedora es una función asincrónica, el control se devuelve al llamador actual y el valor del resultado, si existe, se registra en la tarea devuelta tal y como se describe en ([interfaces del enumerador](classes.md#enumerator-interfaces)).
 
-Dado que `return` una instrucción transfiere el control incondicionalmente a otra parte, el `return` punto final de una instrucción nunca es accesible.
+Dado que una instrucción `return` transfiere incondicionalmente el control en otro lugar, nunca se puede obtener acceso al punto final de una instrucción de `return`.
 
 ### <a name="the-throw-statement"></a>La instrucción throw
 
-La `throw` instrucción produce una excepción.
+La instrucción `throw` produce una excepción.
 
 ```antlr
 throw_statement
@@ -1034,19 +1034,19 @@ throw_statement
     ;
 ```
 
-Una `throw` instrucción con una expresión inicia el valor generado al evaluar la expresión. La expresión debe indicar un valor del tipo `System.Exception`de clase, de un tipo de clase que se deriva de o de un tipo de parámetro de tipo que tiene `System.Exception` (o una subclase de `System.Exception` ella) como su clase base efectiva. Si la evaluación de la expresión `null`produce, `System.NullReferenceException` se produce una excepción en su lugar.
+Una instrucción `throw` con una expresión inicia el valor generado al evaluar la expresión. La expresión debe indicar un valor del tipo de clase `System.Exception`, de un tipo de clase que deriva de `System.Exception` o de un tipo de parámetro de tipo que tiene `System.Exception` (o una subclase de ella) como su clase base efectiva. Si la evaluación de la expresión produce `null`, se produce una `System.NullReferenceException` en su lugar.
 
-Una `throw` instrucción sin expresión solo se puede usar en un `catch` bloque, en cuyo caso la instrucción vuelve a iniciar la excepción que está controlando actualmente ese `catch` bloque.
+Una instrucción `throw` sin expresión solo se puede usar en un bloque de `catch`, en cuyo caso la instrucción vuelve a iniciar la excepción que el bloque de `catch` está controlando actualmente.
 
-Dado que `throw` una instrucción transfiere el control incondicionalmente a otra parte, el `throw` punto final de una instrucción nunca es accesible.
+Dado que una instrucción `throw` transfiere incondicionalmente el control en otro lugar, nunca se puede obtener acceso al punto final de una instrucción de `throw`.
 
-Cuando se produce una excepción, el control se transfiere a la `catch` primera cláusula de una instrucción `try` de inclusión que puede controlar la excepción. El proceso que tiene lugar desde el punto de la excepción que se está iniciando hasta el punto de transferir el control a un controlador de excepciones adecuado se conoce como ***propagación de excepciones***. La propagación de una excepción consiste en evaluar repetidamente los siguientes pasos hasta `catch` que se encuentre una cláusula que coincida con la excepción. En esta descripción, el ***punto de inicio*** es inicialmente la ubicación en la que se produce la excepción.
+Cuando se produce una excepción, el control se transfiere a la primera cláusula `catch` en una instrucción `try` envolvente que puede controlar la excepción. El proceso que tiene lugar desde el punto de la excepción que se está iniciando hasta el punto de transferir el control a un controlador de excepciones adecuado se conoce como ***propagación de excepciones***. La propagación de una excepción consiste en evaluar repetidamente los siguientes pasos hasta que se encuentre una cláusula `catch` que coincida con la excepción. En esta descripción, el ***punto de inicio*** es inicialmente la ubicación en la que se produce la excepción.
 
-*  En el miembro de función actual, `try` se examina cada instrucción que incluye el punto de inicio. Para cada instrucción `S`, empezando por la instrucción `try` más interna y finalizando con `try` la instrucción externa, se evalúan los pasos siguientes:
+*  En el miembro de función actual, se examina cada instrucción `try` que incluye el punto de inicio. Para cada instrucción `S`, empezando por la instrucción de `try` más interna y terminando con la instrucción de `try` más externa, se evalúan los pasos siguientes:
 
-   * Si el `try` bloque de `S` incluye el punto de inicio y si S tiene una o más `catch` cláusulas, las `catch` cláusulas se examinan en orden de aparición para encontrar un controlador adecuado para la excepción, de acuerdo con las reglas especificadas en. Sección [de la instrucción try](statements.md#the-try-statement). Si se encuentra `catch` una cláusula coincidente, la propagación de excepciones se completa mediante la transferencia del control al bloque de esa `catch` cláusula.
+   * Si el `try` bloque de `S` incluye el punto de inicio y si S tiene una o más cláusulas `catch`, las cláusulas `catch` se examinan en orden de aparición para encontrar un controlador adecuado para la excepción, según las reglas especificadas en [la sección instrucción try](statements.md#the-try-statement). Si se encuentra una cláusula de `catch` coincidente, la propagación de excepciones se completa mediante la transferencia del control al bloque de esa cláusula `catch`.
 
-   * De lo contrario, `try` si el bloque `catch` o un `S` bloque de incluye el punto de inicio y `S` si tiene `finally` un bloque, el `finally` control se transfiere al bloque. Si el `finally` bloque produce otra excepción, finaliza el procesamiento de la excepción actual. De lo contrario, cuando el control alcanza el punto `finally` final del bloque, continúa el procesamiento de la excepción actual.
+   * De lo contrario, si el bloque de `try` o un bloque de `catch` de `S` incluye el punto de inicio y si `S` tiene un bloque de `finally`, el control se transfiere al bloque de `finally`. Si el bloque `finally` inicia otra excepción, se finaliza el procesamiento de la excepción actual. De lo contrario, cuando el control alcanza el punto final del bloque `finally`, continúa el procesamiento de la excepción actual.
 
 *  Si no se encuentra un controlador de excepciones en la invocación de función actual, se termina la invocación de la función y se produce uno de los siguientes casos:
 
@@ -1060,7 +1060,7 @@ Cuando se produce una excepción, el control se transfiere a la `catch` primera 
 
 ## <a name="the-try-statement"></a>Instrucción try
 
-La `try` instrucción proporciona un mecanismo para detectar las excepciones que se producen durante la ejecución de un bloque. Además, la `try` instrucción proporciona la capacidad de especificar un bloque de código que siempre se ejecuta cuando el control sale `try` de la instrucción.
+La instrucción `try` proporciona un mecanismo para detectar las excepciones que se producen durante la ejecución de un bloque. Además, la instrucción `try` proporciona la capacidad de especificar un bloque de código que siempre se ejecuta cuando el control sale de la instrucción `try`.
 
 ```antlr
 try_statement
@@ -1088,25 +1088,25 @@ finally_clause
 
 Hay tres formas posibles de `try` instrucciones:
 
-*  Un `try` bloque seguido de uno o varios `catch` bloques.
-*  Un `try` bloque seguido de un `finally` bloque.
-*  Un `try` bloque seguido de uno o varios `catch` bloques seguidos de `finally` un bloque.
+*  Un bloque `try` seguido de uno o varios bloques de `catch`.
+*  Un bloque `try` seguido de un bloque `finally`.
+*  Un bloque `try` seguido de uno o varios bloques `catch` seguidos de un bloque `finally`.
 
-Cuando una cláusula `catch` especifica un *exception_specifier*, el tipo debe ser `System.Exception`, un tipo que se deriva de `System.Exception` o un tipo de parámetro de tipo que tiene `System.Exception` (o una subclase de ella) como su clase base efectiva.
+Cuando una cláusula `catch` especifica un *exception_specifier*, el tipo debe ser `System.Exception`, un tipo que se deriva de `System.Exception` o un tipo de parámetro de tipo que tiene `System.Exception` (o una subclase) como su clase base efectiva.
 
-Cuando una cláusula `catch` especifica un *exception_specifier* con un *identificador*, se declara una ***variable de excepción*** con el nombre y el tipo especificados. La variable de excepción corresponde a una variable local con un ámbito que se extiende `catch` por encima de la cláusula. Durante la ejecución del *exception_filter* y el *bloque*, la variable de excepción representa la excepción que se está controlando actualmente. A efectos de la comprobación de asignación definitiva, la variable de excepción se considera asignada definitivamente en todo el ámbito.
+Cuando una cláusula `catch` especifica un *exception_specifier* con un *identificador*, se declara una ***variable de excepción*** con el nombre y el tipo especificados. La variable de excepción corresponde a una variable local con un ámbito que se extiende por la cláusula `catch`. Durante la ejecución del *exception_filter* y el *bloque*, la variable de excepción representa la excepción que se está controlando actualmente. A efectos de la comprobación de asignación definitiva, la variable de excepción se considera asignada definitivamente en todo el ámbito.
 
-A menos `catch` que una cláusula incluya un nombre de variable de excepción, no es posible tener acceso al objeto de `catch` excepción en el filtro y bloque.
+A menos que una cláusula `catch` incluya un nombre de variable de excepción, no es posible tener acceso al objeto de excepción en el bloque de filtro y `catch`.
 
-Una cláusula `catch` que no especifica un *exception_specifier* se denomina cláusula general de @no__t 2.
+Una cláusula de `catch` que no especifica una *exception_specifier* se denomina cláusula de `catch` general.
 
-Algunos lenguajes de programación pueden admitir excepciones que no se pueden representar como un objeto derivado `System.Exception`de, aunque estas excepciones nunca se pueden generar C# mediante código. Se puede `catch` usar una cláusula general para detectar tales excepciones. Por lo tanto, `catch` una cláusula general es semánticamente diferente de una que especifica `System.Exception`el tipo, en que la primera también puede detectar excepciones de otros lenguajes.
+Algunos lenguajes de programación pueden admitir excepciones que no pueden representarse como un objeto derivado de `System.Exception`, aunque estas excepciones nunca podrían generarse mediante C# código. Se puede usar una cláusula de `catch` general para detectar tales excepciones. Por lo tanto, una cláusula de `catch` general es semánticamente diferente de una que especifica el tipo `System.Exception`, en que la primera también puede detectar excepciones de otros lenguajes.
 
-Para buscar un controlador de una excepción, `catch` las cláusulas se examinan en orden léxico. Si una `catch` cláusula especifica un tipo pero no un filtro de excepción, se trata de un error en tiempo de `catch` compilación para una cláusula `try` posterior en la misma instrucción para especificar un tipo que sea igual o derivado de ese tipo. Si una `catch` cláusula no especifica ningún tipo y no hay ningún filtro, debe ser `catch` la última cláusula `try` para esa instrucción.
+Para buscar un controlador de una excepción, las cláusulas `catch` se examinan en orden léxico. Si una cláusula `catch` especifica un tipo pero no un filtro de excepción, se trata de un error en tiempo de compilación para una cláusula `catch` posterior en la misma instrucción `try` para especificar un tipo que es igual o derivado de ese tipo. Si una cláusula `catch` no especifica ningún tipo y no hay ningún filtro, debe ser la última cláusula `catch` para esa instrucción `try`.
 
-Dentro de `catch` un bloque, `throw` se puede usar una instrucción ([instrucción throw](statements.md#the-throw-statement)) sin expresión para volver a producir la excepción detectada por el `catch` bloque. Las asignaciones a una variable de excepción no modifican la excepción que se vuelve a iniciar.
+Dentro de un bloque `catch`, se puede usar una instrucción `throw` ([instrucción throw](statements.md#the-throw-statement)) sin expresión para volver a producir la excepción detectada por el bloque `catch`. Las asignaciones a una variable de excepción no modifican la excepción que se vuelve a iniciar.
 
-En el ejemplo
+en el ejemplo
 ```csharp
 using System;
 
@@ -1143,56 +1143,56 @@ Exception in F: G
 Exception in Main: G
 ```
 
-Si se produjo `e` el primer bloque catch en lugar de volver a producir la excepción actual, la salida generada sería la siguiente:
+Si el primer bloque catch se hubiera producido `e` en lugar de volver a producir la excepción actual, la salida generada sería la siguiente:
 ```console
 Exception in F: G
 Exception in Main: F
 ```
 
-Es un error en tiempo de compilación para una `break`instrucción `continue`, o `goto` para transferir el control fuera de un `finally` bloque. Cuando una `break`instrucción `continue`, o `goto` aparece en un `finally` bloque, el destino de la instrucción debe estar dentro del mismo `finally` bloque o, de lo contrario, se produce un error en tiempo de compilación.
+Se trata de un error en tiempo de compilación para que una instrucción `break`, `continue`o `goto` transfiera el control fuera de un bloque de `finally`. Cuando se produce una instrucción `break`, `continue`o `goto` en un bloque de `finally`, el destino de la instrucción debe estar dentro del mismo bloque `finally` o, de lo contrario, se producirá un error en tiempo de compilación.
 
-Se trata de un error en tiempo de compilación `return` para que una instrucción se `finally` produzca en un bloque.
+Se trata de un error en tiempo de compilación para que una instrucción `return` se produzca en un bloque de `finally`.
 
-Una `try` instrucción se ejecuta de la siguiente manera:
+Una instrucción `try` se ejecuta de la siguiente manera:
 
-*  El `try` control se transfiere al bloque.
-*  When y si el control alcanza el punto final del `try` bloque:
-   *  Si la `try` instrucción tiene un `finally` bloque, se `finally` ejecuta el bloque.
-   *  El control se transfiere al punto final de la `try` instrucción.
+*  El control se transfiere al bloque `try`.
+*  Cuando el control alcanza el punto final del bloque `try`:
+   *  Si la instrucción `try` tiene un bloque `finally`, se ejecuta el bloque `finally`.
+   *  El control se transfiere al punto final de la instrucción `try`.
 
-*  Si una excepción se propaga a la `try` instrucción durante la `try` ejecución del bloque:
-   *  Las `catch` cláusulas, si las hay, se examinan en orden de aparición para encontrar un controlador adecuado para la excepción. Si una `catch` cláusula no especifica un tipo, o especifica el tipo de excepción o un tipo base del tipo de excepción:
-      *  Si la `catch` cláusula declara una variable de excepción, el objeto de excepción se asigna a la variable de excepción.
-      *  Si la `catch` cláusula declara un filtro de excepción, se evalúa el filtro. Si se evalúa como `false`, la cláusula catch no es una coincidencia y la búsqueda continúa a través de las cláusulas posteriores `catch` de un controlador adecuado.
-      *  De lo contrario `catch` , la cláusula se considera una coincidencia y el control se transfiere al `catch` bloque coincidente.
-      *  When y si el control alcanza el punto final del `catch` bloque:
-         * Si la `try` instrucción tiene un `finally` bloque, se `finally` ejecuta el bloque.
-         * El control se transfiere al punto final de la `try` instrucción.
-      *  Si una excepción se propaga a la `try` instrucción durante la `catch` ejecución del bloque:
-         *  Si la `try` instrucción tiene un `finally` bloque, se `finally` ejecuta el bloque.
-         *  La excepción se propaga a la siguiente instrucción de inclusión `try` .
-   *  Si la `try` instrucción no `catch` tiene cláusulas o si ninguna `catch` cláusula coincide con la excepción:
-      *  Si la `try` instrucción tiene un `finally` bloque, se `finally` ejecuta el bloque.
-      *  La excepción se propaga a la siguiente instrucción de inclusión `try` .
+*  Si se propaga una excepción a la instrucción `try` durante la ejecución del bloque de `try`:
+   *  Las cláusulas `catch`, si las hay, se examinan en orden de aparición para encontrar un controlador adecuado para la excepción. Si una cláusula `catch` no especifica un tipo, o especifica el tipo de excepción o un tipo base del tipo de excepción:
+      *  Si la cláusula `catch` declara una variable de excepción, el objeto de excepción se asigna a la variable de excepción.
+      *  Si la cláusula `catch` declara un filtro de excepción, se evalúa el filtro. Si se evalúa como `false`, la cláusula catch no es una coincidencia y la búsqueda continúa a través de las cláusulas de `catch` subsiguientes para un controlador adecuado.
+      *  De lo contrario, la cláusula de `catch` se considera una coincidencia y el control se transfiere al bloque de `catch` coincidente.
+      *  Cuando el control alcanza el punto final del bloque `catch`:
+         * Si la instrucción `try` tiene un bloque `finally`, se ejecuta el bloque `finally`.
+         * El control se transfiere al punto final de la instrucción `try`.
+      *  Si se propaga una excepción a la instrucción `try` durante la ejecución del bloque de `catch`:
+         *  Si la instrucción `try` tiene un bloque `finally`, se ejecuta el bloque `finally`.
+         *  La excepción se propaga a la siguiente instrucción `try` envolvente.
+   *  Si la instrucción `try` no tiene ninguna cláusula `catch` o si ninguna cláusula `catch` coincide con la excepción:
+      *  Si la instrucción `try` tiene un bloque `finally`, se ejecuta el bloque `finally`.
+      *  La excepción se propaga a la siguiente instrucción `try` envolvente.
 
-Las instrucciones de un `finally` bloque siempre se ejecutan cuando el control `try` sale de una instrucción. Esto es cierto si la transferencia de control se produce como resultado de la ejecución normal, como resultado de la ejecución `break`de `continue`una `goto`instrucción, `return` , o, o como resultado de propagar una excepción fuera de la `try` privacidad.
+Las instrucciones de un bloque `finally` siempre se ejecutan cuando el control sale de una instrucción `try`. Esto es cierto si la transferencia de control se produce como resultado de la ejecución normal, como resultado de la ejecución de una instrucción `break`, `continue`, `goto`o `return`, o como resultado de propagar una excepción fuera de la instrucción `try`.
 
-Si se produce una excepción durante la ejecución de `finally` un bloque y no se detecta en el mismo bloque Finally, la excepción se propaga a la siguiente instrucción envolvente `try` . Si hay otra excepción en el proceso de propagación, se perderá esa excepción. El proceso de propagación de una excepción se describe con más detalle en la descripción `throw` de la instrucción ([la instrucción throw](statements.md#the-throw-statement)).
+Si se produce una excepción durante la ejecución de un bloque `finally` y no se detecta en el mismo bloque Finally, la excepción se propaga a la siguiente instrucción `try` envolvente. Si hay otra excepción en el proceso de propagación, se perderá esa excepción. El proceso de propagación de una excepción se describe con más detalle en la descripción de la instrucción `throw` ([instrucción throw](statements.md#the-throw-statement)).
 
-El `try` bloque de una `try` instrucción es accesible si la `try` instrucción es accesible.
+Se puede tener acceso al bloque `try` de una instrucción `try` si la instrucción `try` es accesible.
 
-Se `catch` puede tener acceso `try` a un bloque de una instrucción `try` si la instrucción es accesible.
+Se puede tener acceso a un bloque `catch` de una instrucción `try` si la instrucción `try` es accesible.
 
-El `finally` bloque de una `try` instrucción es accesible si la `try` instrucción es accesible.
+Se puede tener acceso al bloque `finally` de una instrucción `try` si la instrucción `try` es accesible.
 
-El punto final de una `try` instrucción es accesible si se cumplen las dos condiciones siguientes:
+El punto final de una instrucción `try` es accesible si se cumplen las dos condiciones siguientes:
 
-*  El punto final del `try` bloque es accesible o se puede tener acceso al punto final de al menos un `catch` bloque.
-*  Si hay `finally` un bloque, se puede tener acceso al punto `finally` final del bloque.
+*  El punto final del bloque `try` es accesible o se puede tener acceso al punto final de al menos un bloque `catch`.
+*  Si hay un bloque de `finally`, el punto final del bloque de `finally` es accesible.
 
 ## <a name="the-checked-and-unchecked-statements"></a>Las instrucciones checked y unchecked
 
-Las `checked` instrucciones `unchecked` y se utilizan para controlar el ***contexto de comprobación de desbordamiento*** para conversiones y operaciones aritméticas de tipo entero.
+Las instrucciones `checked` y `unchecked` se utilizan para controlar el ***contexto de comprobación de desbordamiento*** para conversiones y operaciones aritméticas de tipo entero.
 
 ```antlr
 checked_statement
@@ -1204,13 +1204,13 @@ unchecked_statement
     ;
 ```
 
-La `checked` instrucción hace que todas las expresiones del *bloque* se evalúen en un contexto comprobado, `unchecked` y la instrucción hace que todas las expresiones del *bloque* se evalúen en un contexto no comprobado.
+La instrucción `checked` hace que todas las expresiones del *bloque* se evalúen en un contexto comprobado y la instrucción `unchecked` hace que todas las expresiones del *bloque* se evalúen en un contexto no comprobado.
 
-Las `checked` instrucciones `unchecked` y son exactamente equivalentes a `checked` los `unchecked` operadores y ([los operadores Checked y unchecked](expressions.md#the-checked-and-unchecked-operators)), salvo que operan en bloques en lugar de en expresiones.
+Las instrucciones `checked` y `unchecked` son exactamente equivalentes a los operadores `checked` y `unchecked` ([los operadores Checked y unchecked](expressions.md#the-checked-and-unchecked-operators)), salvo que operan en bloques en lugar de en expresiones.
 
 ## <a name="the-lock-statement"></a>La instrucción lock
 
-La `lock` instrucción obtiene el bloqueo de exclusión mutua para un objeto determinado, ejecuta una instrucción y, a continuación, libera el bloqueo.
+La instrucción `lock` obtiene el bloqueo de exclusión mutua para un objeto determinado, ejecuta una instrucción y, a continuación, libera el bloqueo.
 
 ```antlr
 lock_statement
@@ -1218,13 +1218,13 @@ lock_statement
     ;
 ```
 
-La expresión de una instrucción `lock` debe indicar un valor de un tipo conocido como *reference_type*. No se realiza ninguna conversión boxing implícita ([conversiones boxing](conversions.md#boxing-conversions)) en la expresión de una instrucción `lock` y, por lo tanto, es un error en tiempo de compilación para que la expresión denote un valor de *value_type*.
+La expresión de una instrucción `lock` debe indicar un valor de un tipo conocido como *reference_type*. No se realiza ninguna conversión boxing implícita ([conversiones boxing](conversions.md#boxing-conversions)) en la expresión de una instrucción `lock` y, por tanto, es un error en tiempo de compilación para que la expresión denote un valor de un *value_type*.
 
-Una `lock` instrucción con el formato
+Una instrucción `lock` del formulario
 ```csharp
 lock (x) ...
 ```
-donde `x` es una expresión de *reference_type*, es exactamente equivalente a
+donde `x` es una expresión de un *reference_type*, es precisamente equivalente a
 ```csharp
 bool __lockWasTaken = false;
 try {
@@ -1239,7 +1239,7 @@ salvo que `x` solo se evalúa una vez.
 
 Mientras se mantiene un bloqueo de exclusión mutua, el código que se ejecuta en el mismo subproceso de ejecución también puede obtener y liberar el bloqueo. Sin embargo, el código que se ejecuta en otros subprocesos no obtiene el bloqueo hasta que se libera el bloqueo.
 
-No `System.Type` se recomienda el bloqueo de objetos para sincronizar el acceso a los datos estáticos. Otro código podría bloquearse en el mismo tipo, lo que puede provocar un interbloqueo. Un mejor enfoque es sincronizar el acceso a los datos estáticos bloqueando un objeto estático privado. Por ejemplo:
+No se recomienda bloquear `System.Type` objetos para sincronizar el acceso a los datos estáticos. Otro código podría bloquearse en el mismo tipo, lo que puede provocar un interbloqueo. Un mejor enfoque es sincronizar el acceso a los datos estáticos bloqueando un objeto estático privado. Por ejemplo:
 ```csharp
 class Cache
 {
@@ -1261,7 +1261,7 @@ class Cache
 
 ## <a name="the-using-statement"></a>La instrucción using
 
-La `using` instrucción obtiene uno o más recursos, ejecuta una instrucción y, a continuación, desecha el recurso.
+La instrucción `using` obtiene uno o más recursos, ejecuta una instrucción y, a continuación, desecha el recurso.
 
 ```antlr
 using_statement
@@ -1274,15 +1274,15 @@ resource_acquisition
     ;
 ```
 
-Un ***recurso*** es una clase o estructura que implementa `System.IDisposable`, que incluye un único método sin parámetros denominado. `Dispose` El código que usa un recurso puede llamar `Dispose` a para indicar que el recurso ya no es necesario. Si `Dispose` no se llama a, la eliminación automática se produce finalmente como consecuencia de la recolección de elementos no utilizados.
+Un ***recurso*** es una clase o estructura que implementa `System.IDisposable`, que incluye un método sin parámetros único denominado `Dispose`. El código que usa un recurso puede llamar a `Dispose` para indicar que el recurso ya no es necesario. Si no se llama a `Dispose`, la eliminación automática se produce finalmente como consecuencia de la recolección de elementos no utilizados.
 
-Si el formato de *resource_acquisition* es *local_variable_declaration* , el tipo de *local_variable_declaration* debe ser `dynamic` o un tipo que se pueda convertir implícitamente a `System.IDisposable`. Si el formato de *resource_acquisition* es *Expression* , esta expresión debe poder convertirse implícitamente a `System.IDisposable`.
+Si el formato de *resource_acquisition* es *local_variable_declaration* , el tipo de la *local_variable_declaration* debe ser `dynamic` o un tipo que se pueda convertir implícitamente a `System.IDisposable`. Si el formato de *resource_acquisition* es *Expression* , esta expresión debe poder convertirse implícitamente a `System.IDisposable`.
 
-Las variables locales declaradas en un *resource_acquisition* son de solo lectura y deben incluir un inicializador. Se produce un error en tiempo de compilación si la instrucción incrustada intenta modificar estas variables locales (a través `++` de `--` la asignación o los operadores y), tomar la dirección de ellas `ref` o `out` pasarlas como parámetros o.
+Las variables locales declaradas en un *resource_acquisition* son de solo lectura y deben incluir un inicializador. Se produce un error en tiempo de compilación si la instrucción incrustada intenta modificar estas variables locales (a través de la asignación o los operadores `++` y `--`), tomar la dirección de ellas o pasarlas como `ref` o `out` parámetros.
 
-Una `using` instrucción se traduce en tres partes: adquisición, uso y eliminación. El uso del recurso se adjunta implícitamente en una `try` instrucción que incluye una `finally` cláusula. Esta `finally` cláusula desecha el recurso. Si se `null` adquiere un recurso, no se realiza ninguna `Dispose` llamada a y no se produce ninguna excepción. Si el recurso es de tipo `dynamic` , se convierte dinámicamente a través de una conversión dinámica implícita ([conversiones dinámicas implícitas](conversions.md#implicit-dynamic-conversions)) en `IDisposable` durante la adquisición para asegurarse de que la conversión se realiza correctamente antes del uso y elimina.
+Una instrucción `using` se traduce en tres partes: adquisición, uso y eliminación. El uso del recurso se adjunta implícitamente en una instrucción `try` que incluye una cláusula `finally`. Esta cláusula `finally` desecha el recurso. Si se adquiere un recurso de `null`, no se realiza ninguna llamada a `Dispose` y no se produce ninguna excepción. Si el recurso es de tipo `dynamic` se convierte dinámicamente mediante una conversión dinámica implícita ([conversiones dinámicas implícitas](conversions.md#implicit-dynamic-conversions)) en `IDisposable` durante la adquisición para asegurarse de que la conversión se realiza correctamente antes del uso y la eliminación.
 
-Una `using` instrucción con el formato
+Una instrucción `using` del formulario
 ```csharp
 using (ResourceType resource = expression) statement
 ```
@@ -1299,7 +1299,7 @@ corresponde a una de las tres expansiones posibles. Cuando `ResourceType` es un 
 }
 ```
 
-De lo contrario `ResourceType` , cuando es un tipo de valor que acepta valores NULL o `dynamic`un tipo de referencia distinto de, la expansión es
+De lo contrario, cuando `ResourceType` es un tipo de valor que acepta valores NULL o un tipo de referencia distinto de `dynamic`, la expansión es
 ```csharp
 {
     ResourceType resource = expression;
@@ -1312,7 +1312,7 @@ De lo contrario `ResourceType` , cuando es un tipo de valor que acepta valores N
 }
 ```
 
-De lo contrario `ResourceType` , `dynamic`cuando es, la expansión es
+De lo contrario, cuando se `dynamic``ResourceType`, la expansión es
 ```csharp
 {
     ResourceType resource = expression;
@@ -1326,21 +1326,21 @@ De lo contrario `ResourceType` , `dynamic`cuando es, la expansión es
 }
 ```
 
-En cualquier expansión, la `resource` variable es de solo lectura en la instrucción incrustada, y `d` no se puede obtener acceso a la variable en la instrucción incrustada y no es visible para ella.
+En cualquier expansión, la variable `resource` es de solo lectura en la instrucción incrustada, y no se puede tener acceso a la variable `d` en y no es visible para la instrucción incrustada.
 
 Una implementación puede implementar una instrucción using determinada de forma diferente, por ejemplo, por motivos de rendimiento, siempre que el comportamiento sea coherente con la expansión anterior.
 
-Una `using` instrucción con el formato
+Una instrucción `using` del formulario
 ```csharp
 using (expression) statement
 ```
-tiene las mismas tres expansiones posibles. En este caso `ResourceType` `expression`, es implícitamente el tipo en tiempo de compilación de, si tiene uno. En caso contrario `IDisposable` , la propia interfaz se `ResourceType`utiliza como. No `resource` se puede obtener acceso a la variable en y no es visible para la instrucción incrustada.
+tiene las mismas tres expansiones posibles. En este caso `ResourceType` es implícitamente el tipo en tiempo de compilación del `expression`, si tiene uno. En caso contrario, se utiliza la interfaz `IDisposable` misma como `ResourceType`. No se puede obtener acceso a la variable `resource` en y no es visible para la instrucción incrustada.
 
-Cuando un *resource_acquisition* toma la forma de un *local_variable_declaration*, es posible adquirir varios recursos de un tipo determinado. Una `using` instrucción con el formato
+Cuando un *resource_acquisition* adopta la forma de un *local_variable_declaration*, es posible adquirir varios recursos de un tipo determinado. Una instrucción `using` del formulario
 ```csharp
 using (ResourceType r1 = e1, r2 = e2, ..., rN = eN) statement
 ```
-es exactamente equivalente a una secuencia de `using` instrucciones anidadas:
+es precisamente equivalente a una secuencia de instrucciones `using` anidadas:
 ```csharp
 using (ResourceType r1 = e1)
     using (ResourceType r2 = e2)
@@ -1349,7 +1349,7 @@ using (ResourceType r1 = e1)
                 statement
 ```
 
-En el ejemplo siguiente se crea un `log.txt` archivo denominado y se escriben dos líneas de texto en el archivo. A continuación, el ejemplo abre el mismo archivo para leer y copia las líneas de texto contenidas en la consola.
+En el ejemplo siguiente se crea un archivo denominado `log.txt` y se escriben dos líneas de texto en el archivo. A continuación, el ejemplo abre el mismo archivo para leer y copia las líneas de texto contenidas en la consola.
 ```csharp
 using System;
 using System.IO;
@@ -1373,11 +1373,11 @@ class Test
 }
 ```
 
-Dado que `TextWriter` las `TextReader` clases y implementan la `IDisposable` interfaz, el ejemplo `using` puede utilizar instrucciones para asegurarse de que el archivo subyacente está cerrado correctamente después de las operaciones de escritura o lectura.
+Dado que las clases `TextWriter` y `TextReader` implementan la interfaz `IDisposable`, el ejemplo puede utilizar las instrucciones `using` para asegurarse de que el archivo subyacente se cierra correctamente después de las operaciones de escritura o lectura.
 
 ## <a name="the-yield-statement"></a>La instrucción yield
 
-La `yield` instrucción se usa en un bloque de iteradores ([bloques](statements.md#blocks)) para obtener un valor para el objeto enumerador ([objetos enumerador](classes.md#enumerator-objects)) o el objeto enumerable ([objetos enumerables](classes.md#enumerable-objects)) de un iterador o para señalar el final de la iteración.
+La instrucción `yield` se usa en un bloque de iteradores ([bloques](statements.md#blocks)) para producir un valor en el objeto enumerador ([objetos Enumerator](classes.md#enumerator-objects)) o el objeto enumerable ([objetos enumerables](classes.md#enumerable-objects)) de un iterador o para indicar el final de la iteración.
 
 ```antlr
 yield_statement
@@ -1386,16 +1386,16 @@ yield_statement
     ;
 ```
 
-`yield`no es una palabra reservada; tiene un significado especial solo cuando se usa inmediatamente antes `return` de `break` una palabra clave o. En otros contextos, `yield` se puede usar como identificador.
+`yield` no es una palabra reservada; tiene un significado especial solo cuando se usa inmediatamente antes de una palabra clave `return` o `break`. En otros contextos, `yield` se puede usar como identificador.
 
-Hay varias restricciones sobre dónde puede aparecer `yield` una instrucción, tal y como se describe a continuación.
+Existen varias restricciones sobre el lugar en el que puede aparecer una instrucción `yield`, como se describe a continuación.
 
-*  Es un error en tiempo de compilación que una instrucción `yield` (de cualquier forma) aparezca fuera de *method_body*, *operator_body* o *accessor_body*
-*  Es un error en tiempo de compilación para una `yield` instrucción (de cualquier forma) que aparezca dentro de una función anónima.
-*  Es un error en tiempo de compilación para una `yield` instrucción (de cualquier forma) que aparezca en la `finally` cláusula de una `try` instrucción.
-*  Se trata de un error en tiempo de compilación `yield return` para que una instrucción aparezca en `try` cualquier parte de una `catch` instrucción que contenga cláusulas.
+*  Es un error en tiempo de compilación que una instrucción `yield` (de cualquier forma) aparezca fuera de una *method_body*, *operator_body* o *accessor_body*
+*  Es un error en tiempo de compilación que una instrucción `yield` (de cualquier forma) aparezca dentro de una función anónima.
+*  Es un error en tiempo de compilación que una instrucción `yield` (de cualquier forma) aparezca en la cláusula `finally` de una instrucción `try`.
+*  Es un error en tiempo de compilación que una instrucción `yield return` aparezca en cualquier parte de una instrucción `try` que contenga cualquier cláusula `catch`.
 
-En el ejemplo siguiente se muestran algunos usos válidos `yield` y no válidos de las instrucciones.
+En el ejemplo siguiente se muestran algunos usos válidos y no válidos de `yield` instrucciones.
 
 ```csharp
 delegate IEnumerable<int> D();
@@ -1429,19 +1429,19 @@ int MyMethod() {
 }
 ```
 
-Debe existir una conversión implícita ([conversiones implícitas](conversions.md#implicit-conversions)) del tipo de la expresión en la `yield return` instrucción al tipo yield ([yield Type](classes.md#yield-type)) del iterador.
+Debe existir una conversión implícita ([conversiones implícitas](conversions.md#implicit-conversions)) del tipo de la expresión en la instrucción `yield return` al tipo yield ([yield Type](classes.md#yield-type)) del iterador.
 
-Una `yield return` instrucción se ejecuta de la siguiente manera:
+Una instrucción `yield return` se ejecuta de la siguiente manera:
 
-*  La expresión dada en la instrucción se evalúa, se convierte implícitamente al tipo Yield y se asigna a la `Current` propiedad del objeto enumerador.
-*  La ejecución del bloque de iterador está suspendida. Si la `yield return` instrucción está dentro de uno o `try` más bloques, los `finally` bloques asociados no se ejecutan en este momento.
-*  El `MoveNext` método del objeto de enumerador `true` vuelve a su llamador, lo que indica que el objeto de enumerador avanzó correctamente al siguiente elemento.
+*  La expresión dada en la instrucción se evalúa, se convierte implícitamente al tipo Yield y se asigna a la propiedad `Current` del objeto de enumerador.
+*  La ejecución del bloque de iterador está suspendida. Si la instrucción `yield return` está en uno o varios bloques de `try`, los bloques de `finally` asociados no se ejecutan en este momento.
+*  El método `MoveNext` del objeto de enumerador devuelve `true` a su llamador, lo que indica que el objeto de enumerador avanzó correctamente al siguiente elemento.
 
-La siguiente llamada al método del `MoveNext` objeto de enumerador reanuda la ejecución del bloque de iterador desde donde se suspendió por última vez.
+La siguiente llamada al método `MoveNext` del objeto de enumerador reanuda la ejecución del bloque de iterador desde donde se suspendió por última vez.
 
-Una `yield break` instrucción se ejecuta de la siguiente manera:
+Una instrucción `yield break` se ejecuta de la siguiente manera:
 
-*  Si la `yield break` instrucción está delimitada por uno o `try` más bloques con `finally` bloques asociados, el `finally` control se transfiere inicialmente al bloque de la `try` instrucción más interna. Cuando y si el control alcanza el punto final de `finally` un bloque, el `finally` control se transfiere al bloque de la siguiente instrucción `try` de inclusión. Este proceso se repite hasta `finally` que se hayan ejecutado los `try` bloques de todas las instrucciones envolventes.
-*  El control se devuelve al llamador del bloque de iteradores. Este es el `MoveNext` método o `Dispose` el método del objeto de enumerador.
+*  Si el `yield break` instrucción está incluido en uno o varios bloques de `try` con bloques de `finally` asociados, el control se transfiere inicialmente al bloque de `finally` de la instrucción de `try` más interna. Cuando el control alcanza el punto final de un bloque `finally`, el control se transfiere al bloque `finally` de la siguiente instrucción `try` envolvente. Este proceso se repite hasta que se hayan ejecutado los bloques de `finally` de todas las instrucciones de `try` envolventes.
+*  El control se devuelve al llamador del bloque de iteradores. Este es el método `MoveNext` o `Dispose` método del objeto enumerador.
 
-Dado que `yield break` una instrucción transfiere el control incondicionalmente a otra parte, el `yield break` punto final de una instrucción nunca es accesible.
+Dado que una instrucción `yield break` transfiere incondicionalmente el control en otro lugar, nunca se puede obtener acceso al punto final de una instrucción de `yield break`.

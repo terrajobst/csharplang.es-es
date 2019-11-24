@@ -12,11 +12,11 @@ Las estructuras son similares a las clases en que representan las estructuras de
 
 Los structs son particularmente útiles para estructuras de datos pequeñas que tengan semánticas de valor. Los números complejos, los puntos de un sistema de coordenadas o los pares clave-valor de un diccionario son buenos ejemplos de structs. La clave de estas estructuras de datos es que tienen pocos miembros de datos, que no requieren el uso de la herencia o la identidad referencial, y que se pueden implementar de forma cómoda mediante la semántica de valores donde la asignación copia el valor en lugar de la referencia.
 
-Como se describe en [tipos simples](types.md#simple-types), los tipos simples que C#proporciona, como `int`, `double` y `bool`, son en realidad todos los tipos de estructura. Del mismo modo que estos tipos predefinidos son Structs, también es posible usar estructuras y sobrecarga de operadores para implementar nuevos tipos "primitivos" en el C# lenguaje. Al final de este capítulo ([ejemplos de struct](structs.md#struct-examples)) se proporcionan dos ejemplos de estos tipos.
+Tal y como se describe en [tipos simples](types.md#simple-types), los tipos C#simples que proporciona, como `int`, `double`y `bool`, son en realidad todos los tipos de estructura. Del mismo modo que estos tipos predefinidos son Structs, también es posible usar estructuras y sobrecarga de operadores para implementar nuevos tipos "primitivos" en el C# lenguaje. Al final de este capítulo ([ejemplos de struct](structs.md#struct-examples)) se proporcionan dos ejemplos de estos tipos.
 
 ## <a name="struct-declarations"></a>Declaraciones de struct
 
-Un *struct_declaration* es un *type_declaration* ([declaraciones de tipos](namespaces.md#type-declarations)) que declara un nuevo struct:
+Una *struct_declaration* es una *type_declaration* ([declaraciones de tipos](namespaces.md#type-declarations)) que declara un nuevo struct:
 
 ```antlr
 struct_declaration
@@ -25,7 +25,7 @@ struct_declaration
     ;
 ```
 
-Un *struct_declaration* consta de un conjunto opcional de *atributos* ([atributos](attributes.md)), seguido de un conjunto opcional de *struct_modifier*s ([modificadores de estructura](structs.md#struct-modifiers)), seguido de un modificador `partial` opcional, seguido del parámetro palabra clave `struct` y un *identificador* que nombra el struct, seguido de una especificación *type_parameter_list* opcional ([parámetros de tipo](classes.md#type-parameters)), seguida de una especificación de *struct_interfaces* opcional ([parcial) modificador](structs.md#partial-modifier)), seguido de una especificación de *type_parameter_constraints_clause*s opcional ([restricciones de parámetro de tipo](classes.md#type-parameter-constraints)), seguida de un *struct_body* ([cuerpo de estructura](structs.md#struct-body)), opcionalmente seguido de un punto y coma.
+Un *struct_declaration* consta de un conjunto opcional de *atributos* ([atributos](attributes.md)), seguido de un conjunto opcional de *struct_modifier*s ([modificadores de struct](structs.md#struct-modifiers)), seguido de un modificador de `partial` opcional, seguido de la palabra clave `struct` y un *identificador* que nombra el struct, seguido de una especificación de *type_parameter_list* opcional ([parámetros de tipo](classes.md#type-parameters)), seguida de una especificación de *struct_interfaces* opcional ([modificador parcial ](structs.md#partial-modifier)), seguido de una especificación de *type_parameter_constraints_clause*s opcional ([restricciones de parámetro de tipo](classes.md#type-parameter-constraints)), seguida de un *struct_body* ([cuerpo de estructura](structs.md#struct-body)), opcionalmente seguido de un punto y coma.
 
 ### <a name="struct-modifiers"></a>Modificadores de struct
 
@@ -52,7 +52,7 @@ El modificador `partial` indica que este *struct_declaration* es una declaració
 
 ### <a name="struct-interfaces"></a>Interfaces de struct
 
-Una declaración de estructura puede incluir una especificación *struct_interfaces* , en cuyo caso se dice que el struct implementa directamente los tipos de interfaz especificados.
+Una declaración de estructura puede incluir una especificación de *struct_interfaces* , en cuyo caso se dice que el struct implementa directamente los tipos de interfaz especificados.
 
 ```antlr
 struct_interfaces
@@ -74,7 +74,7 @@ struct_body
 
 ## <a name="struct-members"></a>Miembros de struct
 
-Los miembros de una estructura se componen de los miembros introducidos por sus *struct_member_declaration*s y los miembros heredados del tipo `System.ValueType`.
+Los miembros de una estructura se componen de los miembros introducidos por su *struct_member_declaration*s y los miembros heredados del tipo `System.ValueType`.
 
 ```antlr
 struct_member_declaration
@@ -128,9 +128,9 @@ struct B { C c; }
 
 struct C { A a; }
 ```
-es un error porque cada uno de los tipos `A`, `B` y `C` dependen entre sí.
+es un error porque cada uno de los tipos `A`, `B`y `C` dependen entre sí.
 
-Con las clases, es posible que dos variables hagan referencia al mismo objeto y, por lo tanto, las operaciones en una variable afecten al objeto al que hace referencia la otra variable. Con las estructuras, cada variable tiene su propia copia de los datos (excepto en el caso de las variables de parámetro `ref` y `out`) y no es posible que las operaciones en una afecten a la otra. Además, dado que los Structs no son tipos de referencia, no es posible que los valores de un tipo struct sean `null`.
+Con las clases, es posible que dos variables hagan referencia al mismo objeto y, por lo tanto, las operaciones en una variable afecten al objeto al que hace referencia la otra variable. Con las estructuras, cada variable tiene su propia copia de los datos (excepto en el caso de las variables de parámetro `ref` y `out`) y no es posible que las operaciones en una afecten a la otra. Además, dado que los Structs no son tipos de referencia, no es posible que se `null`los valores de un tipo struct.
 
 Dada la declaración
 ```csharp
@@ -151,7 +151,7 @@ Point b = a;
 a.x = 100;
 System.Console.WriteLine(b.x);
 ```
-Devuelve el valor `10`. La asignación de `a` a `b` crea una copia del valor y, por tanto, `b` no se ve afectada por la asignación a `a.x`. Si `Point` se hubiera declarado como una clase, el resultado sería `100` porque `a` y `b` hacían referencia al mismo objeto.
+genera el valor `10`. La asignación de `a` a `b` crea una copia del valor y, por tanto, `b` no se ve afectada por la asignación a `a.x`. Si `Point` se hubieran declarado como una clase, el resultado sería `100` porque `a` y `b` harían referencia al mismo objeto.
 
 ### <a name="inheritance"></a>Herencia
 
@@ -161,7 +161,7 @@ Los tipos de struct nunca son abstractos y siempre están sellados implícitamen
 
 Puesto que no se admite la herencia para Structs, la accesibilidad declarada de un miembro de struct no puede ser `protected` ni `protected internal`.
 
-Los miembros de función de un struct no pueden ser `abstract` o `virtual`, y el modificador `override` solo se permite para invalidar métodos heredados de `System.ValueType`.
+Los miembros de función de una estructura no se pueden `abstract` ni `virtual`, y el modificador `override` solo se permite para reemplazar métodos heredados de `System.ValueType`.
 
 ### <a name="assignment"></a>Asignación
 
@@ -173,17 +173,17 @@ Cuando una propiedad o un indizador de una estructura es el destino de una asign
 
 ### <a name="default-values"></a>Valores predeterminados
 
-Tal y como se describe en [valores predeterminados](variables.md#default-values), varios tipos de variables se inicializan automáticamente en su valor predeterminado cuando se crean. En el caso de las variables de tipos de clase y otros tipos de referencia, este valor predeterminado es `null`. Sin embargo, dado que las estructuras son tipos de valor que no pueden ser `null`, el valor predeterminado de una estructura es el valor generado al establecer todos los campos de tipo de valor en sus valores predeterminados y todos los campos de tipo de referencia en `null`.
+Tal y como se describe en [valores predeterminados](variables.md#default-values), varios tipos de variables se inicializan automáticamente en su valor predeterminado cuando se crean. En el caso de las variables de tipos de clase y otros tipos de referencia, este valor predeterminado es `null`. Sin embargo, dado que los Structs son tipos de valor que no se pueden `null`, el valor predeterminado de un struct es el valor generado al establecer todos los campos de tipo de valor en sus valores predeterminados y todos los campos de tipo de referencia en `null`.
 
-En el ejemplo se hace referencia al struct `Point` declarado anteriormente.
+En el ejemplo se hace referencia al `Point` struct declarado anteriormente.
 ```csharp
 Point[] a = new Point[100];
 ```
 Inicializa cada `Point` de la matriz con el valor generado al establecer los campos `x` y `y` en cero.
 
-El valor predeterminado de un struct corresponde al valor devuelto por el constructor predeterminado de la estructura ([constructores predeterminados](types.md#default-constructors)). A diferencia de una clase, un struct no puede declarar un constructor de instancia sin parámetros. En su lugar, cada struct tiene implícitamente un constructor de instancia sin parámetros que siempre devuelve el valor que se obtiene al establecer todos los campos de tipo de valor en sus valores predeterminados y todos los campos de tipo de referencia en `null`.
+El valor predeterminado de un struct corresponde al valor devuelto por el constructor predeterminado de la estructura ([constructores predeterminados](types.md#default-constructors)). A diferencia de una clase, un struct no puede declarar un constructor de instancia sin parámetros. En su lugar, cada struct tiene implícitamente un constructor de instancia sin parámetros que siempre devuelve el valor resultante de establecer todos los campos de tipo de valor en sus valores predeterminados y todos los campos de tipo de referencia en `null`.
 
-Los Structs se deben diseñar para considerar el estado de inicialización predeterminado como un estado válido. En el ejemplo
+Los Structs se deben diseñar para considerar el estado de inicialización predeterminado como un estado válido. en el ejemplo
 ```csharp
 using System;
 
@@ -205,9 +205,9 @@ el constructor de instancia definido por el usuario protege solo los valores NUL
 
 Un valor de un tipo de clase se puede convertir al tipo `object` o a un tipo de interfaz implementado por la clase simplemente tratando la referencia como otro tipo en tiempo de compilación. Del mismo modo, un valor de tipo `object` o un valor de un tipo de interfaz se puede volver a convertir a un tipo de clase sin cambiar la referencia (pero, por supuesto, se requiere una comprobación de tipo en tiempo de ejecución en este caso).
 
-Dado que los Structs no son tipos de referencia, estas operaciones se implementan de forma diferente para los tipos de struct. Cuando un valor de un tipo struct se convierte al tipo `object` o a un tipo de interfaz implementado por la estructura, se produce una operación de conversión boxing. Del mismo modo, cuando un valor de tipo `object` o un valor de un tipo de interfaz se vuelve a convertir a un tipo de estructura, se produce una operación de conversión unboxing. Una diferencia clave de las mismas operaciones en los tipos de clase es que la conversión boxing y la conversión unboxing copia el valor de la estructura dentro o fuera de la instancia de conversión boxing. Por lo tanto, después de una operación de conversión boxing o unboxing, los cambios realizados en la estructura desempaquetada no se reflejan en la estructura con conversión boxing.
+Dado que los Structs no son tipos de referencia, estas operaciones se implementan de forma diferente para los tipos de struct. Cuando un valor de un tipo struct se convierte al tipo `object` o a un tipo de interfaz implementado por el struct, se realiza una operación de conversión boxing. Del mismo modo, cuando un valor de tipo `object` o un valor de un tipo de interfaz se vuelve a convertir a un tipo de estructura, se produce una operación de conversión unboxing. Una diferencia clave de las mismas operaciones en los tipos de clase es que la conversión boxing y la conversión unboxing copia el valor de la estructura dentro o fuera de la instancia de conversión boxing. Por lo tanto, después de una operación de conversión boxing o unboxing, los cambios realizados en la estructura desempaquetada no se reflejan en la estructura con conversión boxing.
 
-Cuando un tipo de struct invalida un método virtual heredado de `System.Object` (como `Equals`, `GetHashCode` o `ToString`), la invocación del método virtual a través de una instancia del tipo struct no produce la conversión boxing. Esto es así incluso cuando el struct se utiliza como parámetro de tipo y la invocación se produce a través de una instancia del tipo de parámetro de tipo. Por ejemplo:
+Cuando un tipo de struct invalida un método virtual heredado de `System.Object` (como `Equals`, `GetHashCode`o `ToString`), la invocación del método virtual a través de una instancia del tipo struct no produce la conversión boxing. Esto es así incluso cuando el struct se utiliza como parámetro de tipo y la invocación se produce a través de una instancia del tipo de parámetro de tipo. Por ejemplo:
 ```csharp
 using System;
 
@@ -245,7 +245,7 @@ La salida del programa es:
 
 Aunque el estilo no es válido para que `ToString` tenga efectos secundarios, en el ejemplo se muestra que no se ha producido ninguna conversión boxing para las tres invocaciones de `x.ToString()`.
 
-Del mismo modo, la conversión boxing nunca se produce implícitamente cuando se obtiene acceso a un miembro en un parámetro de tipo restringido. Por ejemplo, supongamos que una interfaz `ICounter` contiene un método `Increment` que se puede utilizar para modificar un valor. Si `ICounter` se utiliza como una restricción, se llama a la implementación del método `Increment` con una referencia a la variable en la que se llamó a `Increment`, nunca a una copia con conversión boxing.
+Del mismo modo, la conversión boxing nunca se produce implícitamente cuando se obtiene acceso a un miembro en un parámetro de tipo restringido. Por ejemplo, supongamos que una interfaz `ICounter` contiene un método `Increment` que se puede utilizar para modificar un valor. Si `ICounter` se utiliza como una restricción, se llama a la implementación del método `Increment` con una referencia a la variable en la que se llamó `Increment`, nunca a una copia con conversión boxing.
 
 ```csharp
 using System;
@@ -298,7 +298,7 @@ Para obtener más información sobre las conversiones boxing y unboxing, consult
 
 Dentro de un constructor de instancia o un miembro de función de instancia de una clase, `this` se clasifica como un valor. Por lo tanto, aunque se puede usar `this` para hacer referencia a la instancia para la que se invocó el miembro de función, no es posible asignar a `this` en un miembro de función de una clase.
 
-Dentro de un constructor de instancia de un struct, `this` corresponde a un parámetro `out` del tipo struct, y dentro de un miembro de función de instancia de un struct, `this` corresponde a un parámetro `ref` del tipo struct. En ambos casos, `this` está clasificado como una variable y es posible modificar la estructura completa para la que se invocó el miembro de la función mediante la asignación a `this` o pasando esto como un parámetro `ref` o `out`.
+Dentro de un constructor de instancia de un struct, `this` corresponde a un parámetro `out` del tipo struct y dentro de un miembro de función de instancia de un struct, `this` corresponde a un parámetro `ref` del tipo struct. En ambos casos, `this` se clasifica como una variable y es posible modificar la estructura completa para la que se invocó el miembro de función mediante la asignación a `this` o pasando esto como un parámetro de `ref` o `out`.
 
 ### <a name="field-initializers"></a>Inicializadores de campo
 
@@ -338,7 +338,7 @@ ambos crean un `Point` con `x` y `y` inicializado en cero.
 
 Un constructor de instancia de struct no puede incluir un inicializador de constructor con el formato `base(...)`.
 
-Si el constructor de instancia de struct no especifica un inicializador de constructor, la variable `this` corresponde a un parámetro `out` del tipo struct y es similar a un parámetro `out`, `this` debe estar asignado definitivamente ([asignación definitiva ](variables.md#definite-assignment)) en cada ubicación donde el constructor devuelve. Si el constructor de instancia de struct especifica un inicializador de constructor, la variable `this` corresponde a un parámetro `ref` del tipo struct y similar a un parámetro `ref`, `this` se considera definitivamente asignada en la entrada al cuerpo del constructor . Considere la implementación del constructor de instancia a continuación:
+Si el constructor de instancia de struct no especifica un inicializador de constructor, la variable `this` corresponde a un parámetro `out` del tipo struct y similar a un parámetro `out`, `this` debe estar asignado definitivamente ([asignación definitiva](variables.md#definite-assignment)) en cada ubicación donde el constructor devuelva. Si el constructor de instancia de struct especifica un inicializador de constructor, la variable `this` corresponde a un parámetro `ref` del tipo struct y similar a un parámetro `ref`, `this` se considera definitivamente asignada en la entrada al cuerpo del constructor. Considere la implementación del constructor de instancia a continuación:
 ```csharp
 struct Point
 {
@@ -359,7 +359,7 @@ struct Point
 }
 ```
 
-No se puede llamar a ninguna función miembro de instancia (incluidos los descriptores de acceso set para las propiedades `X` y `Y`) hasta que todos los campos del struct que se está construyendo se hayan asignado definitivamente. La única excepción implica las propiedades implementadas automáticamente ([propiedades implementadas automáticamente](classes.md#automatically-implemented-properties)). Las reglas de asignación definitiva ([expresiones de asignación simple](variables.md#simple-assignment-expressions)) excluyen específicamente la asignación a una propiedad automática de un tipo de estructura dentro de un constructor de instancia de ese tipo de estructura: una asignación se considera una asignación definitiva del objeto oculto campo de respaldo de la propiedad automática. Por lo tanto, se permite lo siguiente:
+No se puede llamar a ninguna función miembro de instancia (incluidos los descriptores de acceso set para las propiedades `X` y `Y`) hasta que todos los campos del struct que se está construyendo se hayan asignado definitivamente. La única excepción implica las propiedades implementadas automáticamente ([propiedades implementadas automáticamente](classes.md#automatically-implemented-properties)). Las reglas de asignación definitiva ([expresiones de asignación simple](variables.md#simple-assignment-expressions)) excluyen específicamente la asignación a una propiedad automática de un tipo de estructura dentro de un constructor de instancia de ese tipo de estructura: una asignación se considera una asignación definitiva del campo oculto de respaldo de la propiedad automática. Por lo tanto, se permite lo siguiente:
 
 ```csharp
 struct Point
@@ -388,11 +388,11 @@ La creación de valores predeterminados ([valores predeterminados](structs.md#de
 
 ## <a name="struct-examples"></a>Ejemplos de struct
 
-A continuación se muestran dos ejemplos importantes del uso de tipos `struct` para crear tipos que se pueden usar de forma similar a los tipos predefinidos del lenguaje, pero con semántica modificada.
+A continuación se muestran dos ejemplos significativos del uso de `struct` tipos para crear tipos que se pueden usar de forma similar a los tipos predefinidos del lenguaje, pero con semántica modificada.
 
 ### <a name="database-integer-type"></a>Tipo entero de base de datos
 
-El struct `DBInt` siguiente implementa un tipo entero que puede representar el conjunto completo de valores del tipo `int`, además de un estado adicional que indica un valor desconocido. Un tipo con estas características se utiliza normalmente en las bases de datos.
+El `DBInt` struct siguiente implementa un tipo entero que puede representar el conjunto completo de valores del tipo `int`, además de un estado adicional que indica un valor desconocido. Un tipo con estas características se utiliza normalmente en las bases de datos.
 
 ```csharp
 using System;
@@ -510,7 +510,7 @@ public struct DBInt
 
 ### <a name="database-boolean-type"></a>Tipo booleano de base de datos
 
-El struct `DBBool` siguiente implementa un tipo lógico de tres valores. Los valores posibles de este tipo son `DBBool.True`, `DBBool.False` y @no__t 2, donde el miembro `Null` indica un valor desconocido. Estos tipos lógicos de tres valores se utilizan normalmente en las bases de datos de.
+El `DBBool` struct siguiente implementa un tipo lógico de tres valores. Los valores posibles de este tipo son `DBBool.True`, `DBBool.False`y `DBBool.Null`, donde el miembro `Null` indica un valor desconocido. Estos tipos lógicos de tres valores se utilizan normalmente en las bases de datos de.
 
 ```csharp
 using System;

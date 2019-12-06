@@ -1,14 +1,14 @@
 ---
-ms.openlocfilehash: d082393a00496b948ad4e3ff9e135d94e89d2448
-ms.sourcegitcommit: 1a46441156b13db6c845f4bbb886284387d73023
+ms.openlocfilehash: 4d6d28a3127bc701867afe157aa5496377a06f69
+ms.sourcegitcommit: 63d276488c9770a565fd787020783ffc1d2af9d6
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67047037"
+ms.lasthandoff: 12/05/2019
+ms.locfileid: "74868009"
 ---
 # <a name="conversions"></a>Conversiones
 
-Un ***conversión*** permite que una expresión se traten como de un tipo determinado. Una conversión puede producir una expresión de un tipo determinado se traten como si tuviera un tipo diferente, o puede hacer que una expresión sin un tipo que se va a obtener un tipo. Las conversiones pueden ser ***implícita*** o ***explícita***, y esto determina si se requiere una conversión explícita. Por ejemplo, la conversión del tipo `int` escriba `long` es implícito, es así expresiones de tipo `int` implícitamente se pueden tratar como tipo `long`. La conversión opuesta, del tipo `long` escriba `int`, es explícita, por lo que se requiere una conversión explícita.
+Una ***conversión*** permite que una expresión se trate de un tipo determinado. Una conversión puede hacer que una expresión de un tipo determinado se trate como si tuviera un tipo diferente o que una expresión sin un tipo obtenga un tipo. Las conversiones pueden ser ***implícitas*** o ***explícitas***, y esto determina si se requiere una conversión explícita. Por ejemplo, la conversión del tipo `int` al tipo `long` es implícita, por lo que las expresiones de tipo `int` se pueden tratar implícitamente como `long`de tipo. La conversión opuesta, del tipo `long` al tipo `int`, es explícita y, por tanto, se requiere una conversión explícita.
 
 ```csharp
 int a = 123;
@@ -16,7 +16,7 @@ long b = a;         // implicit conversion from int to long
 int c = (int) b;    // explicit conversion from long to int
 ```
 
-Algunas conversiones se definen mediante el lenguaje. Los programas también pueden definir sus propias conversiones ([conversiones definidas por el usuario](conversions.md#user-defined-conversions)).
+Algunas conversiones están definidas por el lenguaje. Los programas también pueden definir sus propias conversiones ([conversiones definidas por el usuario](conversions.md#user-defined-conversions)).
 
 ## <a name="implicit-conversions"></a>Conversiones implícitas
 
@@ -24,129 +24,130 @@ Las conversiones siguientes se clasifican como conversiones implícitas:
 
 *  Conversiones de identidad
 *  Conversiones numéricas implícitas
-*  Conversiones implícitas de enumeración.
-*  Conversiones implícitas que acepta valores null
-*  Conversiones de literal null
-*  Conversiones implícitas de referencia
-*  Conversiones boxing
-*  Conversiones implícitas de dinámicas
-*  Conversiones implícitas de expresión constante
-*  Conversiones implícitas definido por el usuario
-*  Conversiones de función anónima
-*  Conversiones de métodos de grupo
+*  Conversiones de enumeración IMPLÍCITAS
+*  Conversiones de cadenas interpoladas IMPLÍCITAS
+*  Conversiones implícitas que aceptan valores NULL
+*  Conversiones de literales null
+*  Conversiones de referencias implícitas
+*  Conversiones Boxing
+*  Conversiones dinámicas IMPLÍCITAS
+*  Conversiones implícitas de expresiones constantes
+*  Conversiones implícitas definidas por el usuario
+*  Conversiones de funciones anónimas
+*  Conversiones de grupos de métodos
 
-Conversiones implícitas pueden ocurrir en una variedad de situaciones, incluidas las llamadas a funciones miembro ([comprobación de la resolución de sobrecarga dinámicas de tiempo de compilación](expressions.md#compile-time-checking-of-dynamic-overload-resolution)), las expresiones de conversión ([expresiones de conversión](expressions.md#cast-expressions)), y las asignaciones ([operadores de asignación](expressions.md#assignment-operators)).
+Las conversiones implícitas pueden producirse en diversas situaciones, incluidas las invocaciones de miembros de función ([comprobación en tiempo de compilación de la resolución dinámica de sobrecarga](expressions.md#compile-time-checking-of-dynamic-overload-resolution)), las expresiones de conversión ([expresiones de conversión](expressions.md#cast-expressions)) y las asignaciones (operadores de[asignación](expressions.md#assignment-operators)).
 
-Las conversiones implícitas predefinidas siempre se ejecuta correctamente y nunca causan que se produzcan excepciones. Las conversiones implícitas diseñadas correctamente definido por el usuario deben presentar estas características también.
+Las conversiones implícitas predefinidas siempre se realizan correctamente y nunca provocan que se inicien excepciones. Las conversiones implícitas definidas por el usuario diseñadas correctamente deberían presentar también estas características.
 
-Para los fines de conversión, los tipos de `object` y `dynamic` se consideran equivalentes.
+En lo que respecta a la conversión, los tipos `object` y `dynamic` se consideran equivalentes.
 
-Sin embargo, las conversiones dinámicas ([conversiones implícitas de dinámicas](conversions.md#implicit-dynamic-conversions) y [las conversiones explícitas de dinámicas](conversions.md#explicit-dynamic-conversions)) solo se aplican a expresiones de tipo `dynamic` ([el tipo dinámico](types.md#the-dynamic-type)).
+Sin embargo, las conversiones dinámicas (conversiones dinámicas[implícitas](conversions.md#implicit-dynamic-conversions) y [conversiones dinámicas explícitas](conversions.md#explicit-dynamic-conversions)) solo se aplican a las expresiones de tipo `dynamic` ([el tipo dinámico](types.md#the-dynamic-type)).
 
 ### <a name="identity-conversion"></a>Conversión de identidad
 
-Convierte una conversión de identidad de cualquier tipo en el mismo tipo. Esta conversión existe de forma que se puede decir una entidad que ya tiene un tipo necesario se pueda convertir a ese tipo.
+Una conversión de identidad convierte de cualquier tipo al mismo tipo. Esta conversión existe de manera que se puede decir que una entidad que ya tiene un tipo necesario se puede convertir en ese tipo.
 
-*  Dado que `object` y `dynamic` se consideran equivalentes que hay una conversión de identidad entre `object` y `dynamic`y entre tipos construidos que son iguales cuando se reemplaza todas las apariciones de `dynamic` con `object`.
+*  Dado que `object` y `dynamic` se consideran equivalentes, hay una conversión de identidad entre `object` y `dynamic`, y entre los tipos construidos que son iguales al reemplazar todas las apariciones de `dynamic` por `object`.
 
 ### <a name="implicit-numeric-conversions"></a>Conversiones numéricas implícitas
 
 Las conversiones numéricas implícitas son:
 
-*  Desde `sbyte` a `short`, `int`, `long`, `float`, `double`, o `decimal`.
-*  Desde `byte` a `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `float`, `double`, o `decimal`.
-*  Desde `short` a `int`, `long`, `float`, `double`, o `decimal`.
-*  Desde `ushort` a `int`, `uint`, `long`, `ulong`, `float`, `double`, o `decimal`.
-*  Desde `int` a `long`, `float`, `double`, o `decimal`.
-*  Desde `uint` a `long`, `ulong`, `float`, `double`, o `decimal`.
-*  Desde `long` a `float`, `double`, o `decimal`.
-*  Desde `ulong` a `float`, `double`, o `decimal`.
-*  Desde `char` a `ushort`, `int`, `uint`, `long`, `ulong`, `float`, `double`, o `decimal`.
-*  Desde `float` a `double`.
+*  De `sbyte` a `short`, `int`, `long`, `float`, `double`o `decimal`.
+*  De `byte` a `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `float`, `double`o `decimal`.
+*  De `short` a `int`, `long`, `float`, `double`o `decimal`.
+*  De `ushort` a `int`, `uint`, `long`, `ulong`, `float`, `double`o `decimal`.
+*  De `int` a `long`, `float`, `double`o `decimal`.
+*  De `uint` a `long`, `ulong`, `float`, `double`o `decimal`.
+*  De `long` a `float`, `double`o `decimal`.
+*  De `ulong` a `float`, `double`o `decimal`.
+*  De `char` a `ushort`, `int`, `uint`, `long`, `ulong`, `float`, `double`o `decimal`.
+*  De `float` a `double`.
 
-Conversiones de `int`, `uint`, `long`, o `ulong` a `float` y desde `long` o `ulong` a `double` puede provocar una pérdida de precisión, pero no una pérdida de magnitud. Las conversiones numéricas implícitas nunca pierden información.
+Las conversiones de `int`, `uint`, `long`o `ulong` a `float` y desde `long` o `ulong` a `double` pueden provocar una pérdida de precisión, pero nunca producirán una pérdida de magnitud. El resto de conversiones numéricas implícitas nunca pierden información.
 
-No hay ninguna conversión implícita para el `char` escriba, por lo que los valores de los otros tipos enteros no se convierten automáticamente en el `char` tipo.
+No hay conversiones implícitas al tipo de `char`, por lo que los valores de los otros tipos enteros no se convierten automáticamente al tipo de `char`.
 
-### <a name="implicit-enumeration-conversions"></a>Conversiones implícitas de enumeración
+### <a name="implicit-enumeration-conversions"></a>Conversiones de enumeración IMPLÍCITAS
 
-Permite una conversión implícita de enumeración el *decimal_integer_literal* `0` convertirse a cualquier *enum_type* y a cualquier *nullable_type* cuyo el tipo subyacente es un *enum_type*. En este caso, la conversión se evalúa mediante la conversión subyacente *enum_type* y ajuste el resultado ([tipos que aceptan valores NULL](types.md#nullable-types)).
+Una conversión de enumeración implícita permite convertir el `0` de *decimal_integer_literal* en cualquier *enum_type* y en cualquier *nullable_type* cuyo tipo subyacente sea una *enum_type*. En el último caso, la conversión se evalúa convirtiendo en el *enum_type* subyacente y ajustando el resultado ([tipos que aceptan valores NULL](types.md#nullable-types)).
 
-### <a name="implicit-interpolated-string-conversions"></a>Conversiones implícitas de cadena interpolada
+### <a name="implicit-interpolated-string-conversions"></a>Conversiones de cadenas interpoladas IMPLÍCITAS
 
-Implicit interpoladas cadena conversión permite un *interpolated_string_expression* ([cadenas interpoladas](expressions.md#interpolated-strings)) va a convertir en `System.IFormattable` o `System.FormattableString` (que implementa `System.IFormattable`).
+Una conversión de cadena interpolada implícita permite convertir un *interpolated_string_expression* ([cadenas interpoladas](expressions.md#interpolated-strings)) en `System.IFormattable` o `System.FormattableString` (que implementa `System.IFormattable`).
 
-Cuando esta conversión se aplica un valor de cadena no está compuesto por la cadena interpolada. En su lugar una instancia de `System.FormattableString` está creado, tal como se describe en [cadenas interpoladas](expressions.md#interpolated-strings).
+Cuando se aplica esta conversión, un valor de cadena no se compone de la cadena interpolada. En su lugar, se crea una instancia de `System.FormattableString`, como se describe en [cadenas interpoladas](expressions.md#interpolated-strings).
 
-### <a name="implicit-nullable-conversions"></a>Conversiones implícitas que acepta valores null
+### <a name="implicit-nullable-conversions"></a>Conversiones implícitas que aceptan valores NULL
 
-Las conversiones implícitas predefinidas que funcionan en tipos de valor distinto de NULL también pueden utilizarse con los formularios de esos tipos que aceptan valores NULL. Para cada identidad implícita predefinida y las conversiones numéricas que conversión de un tipo de valor distinto de NULL `S` a un tipo de valor distinto de NULL `T`, existen las siguientes conversiones implícitas que acepta valores NULL:
+Las conversiones implícitas predefinidas que operan en tipos de valor que no aceptan valores null también se pueden usar con formas que aceptan valores NULL de esos tipos. Para cada una de las conversiones implícitas y numéricas predefinidas que convierten de un tipo de valor que no acepta valores NULL `S` a un `T`tipo de valor que no acepta valores NULL, existen las siguientes conversiones implícitas que aceptan valores NULL:
 
-*  Una conversión implícita de `S?` a `T?`.
-*  Una conversión implícita de `S` a `T?`.
+*  Conversión implícita de `S?` a `T?`.
+*  Conversión implícita de `S` a `T?`.
 
-Evaluación de una conversión implícita que acepta valores NULL en función de una conversión subyacente de `S` a `T` continúa como sigue:
+La evaluación de una conversión implícita que acepta valores NULL en función de una conversión subyacente de `S` a `T` continúa de la siguiente manera:
 
-*  Si la conversión que acepta valores NULL es desde `S?` a `T?`:
-    * Si el valor de origen es null (`HasValue` propiedad es false), el resultado es el valor null del tipo `T?`.
-    * En caso contrario, la conversión se evalúa como un desajuste de `S?` a `S`, seguido de la conversión subyacente de `S` a `T`, seguido de un ajuste ([tipos que aceptan valores NULL](types.md#nullable-types)) desde `T` a `T?`.
+*  Si la conversión que acepta valores NULL es de `S?` a `T?`:
+    * Si el valor de origen es null (`HasValue` propiedad es false), el resultado es el valor null de tipo `T?`.
+    * De lo contrario, la conversión se evalúa como un desencapsulado de `S?` a `S`, seguido de la conversión subyacente de `S` a `T`, seguido de un ajuste ([tipos que aceptan valores NULL](types.md#nullable-types)) de `T` a `T?`.
 
-*  Si la conversión que acepta valores NULL es desde `S` a `T?`, la conversión se evalúa como la conversión subyacente de `S` a `T` seguida de un ajuste de `T` a `T?`.
+*  Si la conversión que acepta valores NULL es de `S` a `T?`, la conversión se evalúa como la conversión subyacente de `S` a `T` seguido de un ajuste de `T` a `T?`.
 
-### <a name="null-literal-conversions"></a>Conversiones de literal null
+### <a name="null-literal-conversions"></a>Conversiones de literales null
 
-Existe una conversión implícita desde el `null` literal a cualquier tipo que acepta valores NULL. Esta conversión genera el valor null ([tipos que aceptan valores NULL](types.md#nullable-types)) del tipo que acepta valores NULL especificado.
+Existe una conversión implícita del literal `null` a cualquier tipo que acepte valores NULL. Esta conversión genera el valor null ([tipos que aceptan valores NULL](types.md#nullable-types)) del tipo que acepta valores NULL dado.
 
-### <a name="implicit-reference-conversions"></a>Conversiones implícitas de referencia
+### <a name="implicit-reference-conversions"></a>Conversiones de referencias implícitas
 
-Las conversiones implícitas de referencia son:
+Las conversiones de referencia implícitas son:
 
 *  Desde cualquier *reference_type* a `object` y `dynamic`.
-*  Desde cualquier *class_type* `S` a cualquier *class_type* `T`, que proporciona `S` se deriva de `T`.
-*  Desde cualquier *class_type* `S` a cualquier *interface_type* `T`, que proporciona `S` implementa `T`.
-*  Desde cualquier *interface_type* `S` a cualquier *interface_type* `T`, que proporciona `S` se deriva de `T`.
-*  Desde un *array_type* `S` con un tipo de elemento `SE` a un *array_type* `T` con un tipo de elemento `TE`, siempre que todos los elementos siguientes son verdaderas:
-    * `S` y `T` difieren solo en el tipo de elemento. En otras palabras, `S` y `T` tienen el mismo número de dimensiones.
-    * Ambos `SE` y `TE` son *reference_type*s.
-    * Existe una conversión implícita de referencia de `SE` a `TE`.
+*  Desde cualquier *class_type* `S` a cualquier `T`de *class_type* , proporcionado `S` se deriva de `T`.
+*  Desde cualquier *class_type* `S` a cualquier `T`de *interface_type* , proporcionado `S` implementa `T`.
+*  Desde cualquier *interface_type* `S` a cualquier `T`de *interface_type* , proporcionado `S` se deriva de `T`.
+*  A partir de un `S` de *array_type* con un tipo de elemento `SE` a un `T` de *array_type* con un tipo de elemento `TE`, siempre que se cumplan todas las condiciones siguientes:
+    * `S` y `T` solo difieren en el tipo de elemento. En otras palabras, `S` y `T` tienen el mismo número de dimensiones.
+    * Tanto `SE` como `TE` son *reference_type*s.
+    * Existe una conversión de referencia implícita de `SE` a `TE`.
 *  Desde cualquier *array_type* a `System.Array` y las interfaces que implementa.
-*  Desde un tipo de matriz unidimensional `S[]` a `System.Collections.Generic.IList<T>` y sus interfaces base, proporcionadas que hay una conversión implícita de referencia o identidad de `S` a `T`.
+*  Desde un tipo de matriz unidimensional `S[]` a `System.Collections.Generic.IList<T>` y sus interfaces base, siempre que haya una conversión implícita de identidad o de referencia de `S` a `T`.
 *  Desde cualquier *delegate_type* a `System.Delegate` y las interfaces que implementa.
-*  Desde el literal null para alguna *reference_type*.
-*  Desde cualquier *reference_type* a un *reference_type* `T` si tiene una conversión implícita de identidad o una referencia a un *reference_type* `T0` y `T0` tiene una conversión de identidad a `T`.
-*  Desde cualquier *reference_type* a un tipo de interfaz o delegado `T` si tiene una conversión implícita de identidad o una referencia a un tipo de interfaz o delegado `T0` y `T0` es convertible de varianza ([ Conversión de varianza](interfaces.md#variance-conversion)) a `T`.
-*  Conversiones implícitas que implica parámetros de tipo que se sabe que son tipos de referencia. Consulte [conversiones implícitas que implica parámetros de tipo](conversions.md#implicit-conversions-involving-type-parameters) para obtener más detalles sobre las conversiones implícitas que implica parámetros de tipo.
+*  Del literal null a cualquier *reference_type*.
+*  Desde cualquier *reference_type* a un *reference_type* `T` si tiene una conversión implícita de identidad o de referencia a una *reference_type* `T0` y `T0` tiene una conversión de identidad en `T`.
+*  Desde cualquier *reference_type* a un tipo de interfaz o delegado `T` si tiene una conversión implícita o de referencia a una interfaz o un tipo de delegado `T0` y `T0` es de varianza ([conversión de varianza](interfaces.md#variance-conversion)) para `T`.
+*  Conversiones implícitas que implican parámetros de tipo que se sabe que son tipos de referencia. Vea [conversiones implícitas que implican parámetros de tipo](conversions.md#implicit-conversions-involving-type-parameters) para obtener más información sobre las conversiones implícitas que implican parámetros de tipo.
 
-Las conversiones implícitas de referencia son aquellas conversiones entre *reference_type*s que se pueda demostrar que siempre se realizan correctamente y, por lo tanto, no requieren comprobaciones en tiempo de ejecución.
+Las conversiones de referencia implícitas son las conversiones entre *reference_type*s que se pueden demostrar que siempre se realizan correctamente y, por tanto, no requieren comprobaciones en tiempo de ejecución.
 
-Las conversiones de referencia, implícitas o explícitas, nunca cambian la identidad referencial del objeto que se va a convertir. En otras palabras, mientras que una conversión de referencia puede cambiar el tipo de la referencia, nunca cambia el tipo o valor del objeto que hace referencia.
+Las conversiones de referencia, implícitas o explícitas, nunca cambian la identidad referencial del objeto que se va a convertir. En otras palabras, aunque una conversión de referencia puede cambiar el tipo de la referencia, nunca cambia el tipo o valor del objeto al que se hace referencia.
 
-### <a name="boxing-conversions"></a>Conversiones boxing
+### <a name="boxing-conversions"></a>Conversiones Boxing
 
-Una conversión boxing permite un *value_type* convertir implícitamente a un tipo de referencia. Existe una conversión boxing de cualquier *non_nullable_value_type* a `object` y `dynamic`a `System.ValueType` y a cualquier *interface_type* implementado por el *non_ nullable_value_type*. Además un *enum_type* puede convertirse al tipo `System.Enum`.
+Una conversión boxing permite que un *value_type* se convierta implícitamente en un tipo de referencia. Existe una conversión boxing de cualquier *non_nullable_value_type* a `object` y `dynamic`, a `System.ValueType` y a cualquier *interface_type* implementado por el *non_nullable_value_type*. Además, un *enum_type* se puede convertir al tipo `System.Enum`.
 
-Existe una conversión boxing de un *nullable_type* a un tipo de referencia, si y solo si una conversión boxing existe subyacente *non_nullable_value_type* al tipo de referencia.
+Existe una conversión boxing de una *nullable_type* a un tipo de referencia, solo si existe una conversión boxing del *non_nullable_value_type* subyacente al tipo de referencia.
 
-Un tipo de valor tiene una conversión boxing a un tipo de interfaz `I` si tiene una conversión boxing a un tipo de interfaz `I0` y `I0` tiene una conversión de identidad a `I`.
+Un tipo de valor tiene una conversión boxing a un tipo de interfaz `I` si tiene una conversión boxing a un tipo de interfaz `I0` y `I0` tiene una conversión de identidad en `I`.
 
-Un tipo de valor tiene una conversión boxing a un tipo de interfaz `I` si tiene una conversión boxing a un tipo de interfaz o delegado `I0` y `I0` es convertible de varianza ([conversión de varianza](interfaces.md#variance-conversion)) a `I`.
+Un tipo de valor tiene una conversión boxing a un tipo de interfaz `I` si tiene una conversión boxing a un tipo de interfaz o delegado `I0` y `I0` es convertible por varianza ([conversión de varianza](interfaces.md#variance-conversion)) en `I`.
 
-Conversión boxing de un valor de un *non_nullable_value_type* consiste en asignar una instancia del objeto y copiar el *value_type* valor en esa instancia. Un struct puede realizar la conversión boxing al tipo `System.ValueType`, ya que es una clase base para todas las estructuras ([herencia](structs.md#inheritance)).
+La conversión boxing de un valor de una *non_nullable_value_type* consiste en asignar una instancia de objeto y copiar el valor de *value_type* en esa instancia. Se puede aplicar la conversión boxing a un struct al `System.ValueType`de tipos, ya que es una clase base para todos los Structs ([herencia](structs.md#inheritance)).
 
-Conversión boxing de un valor de un *nullable_type* continúa como sigue:
+La conversión boxing de un valor de una *nullable_type* procede de la siguiente manera:
 
 *  Si el valor de origen es null (`HasValue` propiedad es false), el resultado es una referencia nula del tipo de destino.
-*  En caso contrario, el resultado es una referencia a una conversión boxing `T` producidos por boxing el valor de origen y la acción de desencapsular.
+*  De lo contrario, el resultado es una referencia a una `T` con conversión boxing generada al desempaquetar y aplicar la conversión boxing al valor de origen.
 
-Se describe más detalladamente en las conversiones boxing [conversiones Boxing](types.md#boxing-conversions).
+Las conversiones Boxing se describen con más detalle en [conversiones boxing](types.md#boxing-conversions).
 
-### <a name="implicit-dynamic-conversions"></a>Conversiones implícitas de dinámicas
+### <a name="implicit-dynamic-conversions"></a>Conversiones dinámicas IMPLÍCITAS
 
-Existe una conversión implícita de dinámica de una expresión de tipo `dynamic` a cualquier tipo `T`. La conversión se enlaza dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)), lo que significa que se buscará una conversión implícita en tiempo de ejecución desde el tipo de tiempo de ejecución de la expresión `T`. Si no se encuentra ninguna conversión, se produce una excepción en tiempo de ejecución.
+Existe una conversión dinámica implícita de una expresión de tipo `dynamic` a cualquier tipo `T`. La conversión está enlazada dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)), lo que significa que se buscará una conversión implícita en tiempo de ejecución desde el tipo en tiempo de ejecución de la expresión que se va a `T`. Si no se encuentra ninguna conversión, se produce una excepción en tiempo de ejecución.
 
-Tenga en cuenta que esta conversión implícita aparentemente infringe el Consejo al principio de [conversiones implícitas](conversions.md#implicit-conversions) que una conversión implícita nunca debe producir una excepción. Sin embargo no es la conversión, pero la *buscar* de la conversión que produce la excepción. El riesgo de las excepciones de tiempo de ejecución es inherente en el uso de enlace dinámico. Si el enlace dinámico de la conversión no es el deseado, la expresión se puede convertir en primer lugar a `object`y, a continuación, al tipo deseado.
+Tenga en cuenta que esta conversión implícita aparentemente infringe el Consejo en el principio de las [conversiones implícitas](conversions.md#implicit-conversions) que una conversión implícita nunca debe producir una excepción. Sin embargo, no es la propia conversión, sino la *búsqueda* de la conversión que produce la excepción. El riesgo de que se produzcan excepciones en tiempo de ejecución es inherente al uso del enlace dinámico. Si no se desea el enlace dinámico de la conversión, la expresión se puede convertir primero en `object`y, a continuación, en el tipo deseado.
 
-El ejemplo siguiente muestra las conversiones implícitas de dinámicas:
+En el ejemplo siguiente se muestran las conversiones dinámicas implícitas:
 
 ```csharp
 object o  = "object"
@@ -157,175 +158,175 @@ string s2 = d; // Compiles and succeeds at run-time
 int i     = d; // Compiles but fails at run-time -- no conversion exists
 ```
 
-Las asignaciones a `s2` y `i` ambos emplean las conversiones implícitas dinámicas, donde se suspende el enlace de las operaciones hasta el tiempo de ejecución. En tiempo de ejecución, se buscan las conversiones implícitas del tipo de tiempo de ejecución de `d`  --  `string` --al tipo de destino. Se encuentra una conversión a `string` pero no a `int`.
+Las asignaciones a `s2` y `i` emplean conversiones dinámicas IMPLÍCITAS, donde el enlace de las operaciones se suspende hasta el tiempo de ejecución. En tiempo de ejecución, se buscan conversiones implícitas desde el tipo en tiempo de ejecución de `d` -- `string` al tipo de destino. Se ha encontrado una conversión en `string` pero no `int`.
 
-### <a name="implicit-constant-expression-conversions"></a>Conversiones implícitas de expresión constante
+### <a name="implicit-constant-expression-conversions"></a>Conversiones implícitas de expresiones constantes
 
-Una conversión implícita de expresión constante permite las siguientes conversiones:
+Una conversión de expresión constante implícita permite las siguientes conversiones:
 
-*  Un *constant_expression* ([expresiones constantes](expressions.md#constant-expressions)) de tipo `int` puede convertirse al tipo `sbyte`, `byte`, `short`, `ushort`, `uint`, o `ulong`, siempre que el valor de la *constant_expression* está dentro del intervalo del tipo de destino.
-*  Un *constant_expression* typu `long` puede convertirse al tipo `ulong`, siempre que el valor de la *constant_expression* no es negativo.
+*  Un *constant_expression* ([expresiones constantes](expressions.md#constant-expressions)) de tipo `int` se puede convertir al tipo `sbyte`, `byte`, `short`, `ushort`, `uint`o `ulong`, siempre que el valor de la *constant_expression* esté dentro del intervalo del tipo de destino.
+*  Un *constant_expression* de tipo `long` se puede convertir al tipo `ulong`, siempre que el valor de la *constant_expression* no sea negativo.
 
-### <a name="implicit-conversions-involving-type-parameters"></a>Conversiones implícitas que implica parámetros de tipo
+### <a name="implicit-conversions-involving-type-parameters"></a>Conversiones implícitas que implican parámetros de tipo
 
-Existen las siguientes conversiones implícitas para un parámetro de tipo dado `T`:
+Existen las siguientes conversiones implícitas para un parámetro de tipo determinado `T`:
 
-*  Desde `T` a su clase base eficaz `C`, desde `T` a cualquier clase base de `C`y desde `T` a cualquier interfaz implementada por `C`. En tiempo de ejecución, si `T` es un tipo de valor, la conversión se ejecuta como una conversión boxing. En caso contrario, la conversión se ejecuta como una conversión implícita de referencia o una conversión de identidad.
-*  Desde `T` a un tipo de interfaz `I` en `T`del conjunto de interfaces efectivas y desde `T` a cualquier interfaz base de `I`. En tiempo de ejecución, si `T` es un tipo de valor, la conversión se ejecuta como una conversión boxing. En caso contrario, la conversión se ejecuta como una conversión implícita de referencia o una conversión de identidad.
-*  Desde `T` a un parámetro de tipo `U`, que proporciona `T` depende `U` ([restricciones de parámetro de tipo](classes.md#type-parameter-constraints)). En tiempo de ejecución, si `U` es un tipo de valor, a continuación, `T` y `U` son necesariamente del mismo tipo y se realiza ninguna conversión. De lo contrario, si `T` es un tipo de valor, la conversión se ejecuta como una conversión boxing. En caso contrario, la conversión se ejecuta como una conversión implícita de referencia o una conversión de identidad.
-*  Desde el literal null a `T`, que proporciona `T` se sabe que es un tipo de referencia.
-*  Desde `T` a un tipo de referencia `I` si tiene una conversión implícita a un tipo de referencia `S0` y `S0` tiene una conversión de identidad a `S`. En tiempo de ejecución, la conversión se ejecuta la misma manera que la conversión a `S0`.
-*  Desde `T` a un tipo de interfaz `I` si tiene una conversión implícita a un tipo de interfaz o delegado `I0` y `I0` es convertible de varianza a `I` ([conversión de varianza](interfaces.md#variance-conversion) ). En tiempo de ejecución, si `T` es un tipo de valor, la conversión se ejecuta como una conversión boxing. En caso contrario, la conversión se ejecuta como una conversión implícita de referencia o una conversión de identidad.
+*  Desde `T` a su clase base efectiva `C`, desde `T` a cualquier clase base de `C`y desde `T` a cualquier interfaz implementada por `C`. En tiempo de ejecución, si `T` es un tipo de valor, la conversión se ejecuta como conversión boxing. De lo contrario, la conversión se ejecuta como una conversión de referencia implícita o una conversión de identidad.
+*  Desde `T` a un tipo de interfaz `I` en el conjunto de interfaz efectivo de `T`y de `T` a cualquier interfaz base de `I`. En tiempo de ejecución, si `T` es un tipo de valor, la conversión se ejecuta como conversión boxing. De lo contrario, la conversión se ejecuta como una conversión de referencia implícita o una conversión de identidad.
+*  De `T` a un `U`de parámetro de tipo, proporcionado `T` depende de `U` ([restricciones de parámetro de tipo](classes.md#type-parameter-constraints)). En tiempo de ejecución, si `U` es un tipo de valor, `T` y `U` son necesariamente el mismo tipo y no se realiza ninguna conversión. De lo contrario, si `T` es un tipo de valor, la conversión se ejecuta como conversión boxing. De lo contrario, la conversión se ejecuta como una conversión de referencia implícita o una conversión de identidad.
+*  Desde el literal null hasta `T`, se sabe que el `T` proporcionado es un tipo de referencia.
+*  De `T` a un tipo de referencia `I` si tiene una conversión implícita a un tipo de referencia `S0` y `S0` tiene una conversión de identidad a `S`. En tiempo de ejecución, la conversión se ejecuta de la misma forma que la conversión en `S0`.
+*  De `T` a un tipo de interfaz `I` si tiene una conversión implícita a una interfaz o un tipo de delegado `I0` y `I0` se pueden convertir en `I` ([conversión de varianza](interfaces.md#variance-conversion)). En tiempo de ejecución, si `T` es un tipo de valor, la conversión se ejecuta como conversión boxing. De lo contrario, la conversión se ejecuta como una conversión de referencia implícita o una conversión de identidad.
 
-Si `T` se sabe que es un tipo de referencia ([restricciones de parámetro de tipo](classes.md#type-parameter-constraints)), las conversiones anteriores se clasifican como conversiones implícitas de referencia ([conversiones implícitas de referencia](conversions.md#implicit-reference-conversions)). Si `T` no es sabe que un tipo de referencia, las conversiones anteriores se clasifican como conversiones boxing ([conversiones Boxing](conversions.md#boxing-conversions)).
+Si se sabe que `T` es un tipo de referencia ([restricciones de parámetro de tipo](classes.md#type-parameter-constraints)), las conversiones anteriores se clasifican como conversiones de referencia IMPLÍCITAS ([conversiones de referencia implícita](conversions.md#implicit-reference-conversions)). Si no se sabe que `T` es un tipo de referencia, las conversiones anteriores se clasifican como conversiones Boxing (conversiones[Boxing](conversions.md#boxing-conversions)).
 
-### <a name="user-defined-implicit-conversions"></a>Conversiones implícitas definido por el usuario
+### <a name="user-defined-implicit-conversions"></a>Conversiones implícitas definidas por el usuario
 
-Una conversión implícita definido por el usuario consta de una conversión implícita opcional estándar, seguida por la ejecución de un operador de conversión implícito definido por el usuario, seguido de otra conversión implícita opcional estándar. Las reglas exactas para evaluar las conversiones implícitas definido por el usuario se describen en [de procesamiento de las conversiones implícitas definido por el usuario](conversions.md#processing-of-user-defined-implicit-conversions).
+Una conversión implícita definida por el usuario se compone de una conversión implícita estándar opcional, seguida de una ejecución de un operador de conversión implícita definido por el usuario, seguida de otra conversión implícita estándar opcional. Las reglas exactas para evaluar las conversiones implícitas definidas por el usuario se describen en [procesamiento de conversiones implícitas definidas por el usuario](conversions.md#processing-of-user-defined-implicit-conversions).
 
-### <a name="anonymous-function-conversions-and-method-group-conversions"></a>Conversiones de función anónima y conversiones de métodos de grupo
+### <a name="anonymous-function-conversions-and-method-group-conversions"></a>Conversiones de funciones anónimas y conversiones de grupos de métodos
 
-Funciones anónimas y grupos de métodos no tienen tipos de por sí mismos, pero se pueden convertir implícitamente para delegar tipos o tipos de árbol de expresión. Conversiones de función anónima se describen con más detalle en [conversiones de función anónima](conversions.md#anonymous-function-conversions) y conversiones de grupo de métodos en [conversiones de métodos de grupo](conversions.md#method-group-conversions).
+Las funciones anónimas y los grupos de métodos no tienen tipos en y, pero se pueden convertir implícitamente en tipos de delegado o tipos de árbol de expresión. Las conversiones de función anónima se describen con más detalle en conversiones de [funciones anónimas](conversions.md#anonymous-function-conversions) y conversiones de grupos de métodos en [conversiones de grupos de métodos](conversions.md#method-group-conversions).
 
 ## <a name="explicit-conversions"></a>Conversiones explícitas
 
-Las conversiones siguientes se clasifican como las conversiones explícitas:
+Las conversiones siguientes se clasifican como conversiones explícitas:
 
 *  Todas las conversiones implícitas.
 *  Conversiones numéricas explícitas.
-*  Conversiones explícitas de enumeración.
-*  Conversiones explícitas que acepta valores NULL.
-*  Conversiones explícitas de referencia.
-*  Conversiones de interfaz explícita.
+*  Conversiones de enumeración explícitas.
+*  Conversiones explícitas que aceptan valores NULL.
+*  Conversiones de referencia explícitas.
+*  Conversiones explícitas de la interfaz.
 *  Conversiones unboxing.
-*  Conversiones explícitas de dinámicas
+*  Conversiones dinámicas explícitas
 *  Conversiones explícitas definidas por el usuario.
 
 Las conversiones explícitas pueden producirse en expresiones de conversión ([expresiones de conversión](expressions.md#cast-expressions)).
 
 El conjunto de conversiones explícitas incluye todas las conversiones implícitas. Esto significa que se permiten expresiones de conversión redundantes.
 
-Las conversiones explícitas que no son las conversiones implícitas son las conversiones que no se puede demostrar que siempre se realizan correctamente, las conversiones que se sabe que posiblemente se pierde información y las conversiones en dominios de tipos lo suficientemente diferentes para ameritar explícita notación.
+Las conversiones explícitas que no son conversiones implícitas son conversiones que no se pueden demostrar que siempre se realizan correctamente, conversiones en las que se sabe que podrían perder información y conversiones entre dominios de tipos lo suficientemente diferentes como para méritos explícitos. notación.
 
 ### <a name="explicit-numeric-conversions"></a>Conversiones numéricas explícitas
 
-Las conversiones numéricas explícitas son las conversiones de un *numeric_type* a otro *numeric_type* para que una conversión numérica implícita ([deconversionesnuméricasimplícitas](conversions.md#implicit-numeric-conversions)) aún no existe:
+Las conversiones numéricas explícitas son las conversiones de un *numeric_type* a otro *numeric_type* para el que no existe una conversión numérica implícita ([Conversiones numéricas implícitas](conversions.md#implicit-numeric-conversions)):
 
-*  Desde `sbyte` a `byte`, `ushort`, `uint`, `ulong`, o `char`.
-*  Desde `byte` a `sbyte` y `char`.
-*  Desde `short` a `sbyte`, `byte`, `ushort`, `uint`, `ulong`, o `char`.
-*  Desde `ushort` a `sbyte`, `byte`, `short`, o `char`.
-*  Desde `int` a `sbyte`, `byte`, `short`, `ushort`, `uint`, `ulong`, o `char`.
-*  Desde `uint` a `sbyte`, `byte`, `short`, `ushort`, `int`, o `char`.
-*  Desde `long` a `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `ulong`, o `char`.
-*  Desde `ulong` a `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, o `char`.
-*  Desde `char` a `sbyte`, `byte`, o `short`.
-*  Desde `float` a `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, o `decimal`.
-*  Desde `double` a `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `float`, o `decimal`.
-*  Desde `decimal` a `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `float`, o `double`.
+*  De `sbyte` a `byte`, `ushort`, `uint`, `ulong`o `char`.
+*  De `byte` a `sbyte` y `char`.
+*  De `short` a `sbyte`, `byte`, `ushort`, `uint`, `ulong`o `char`.
+*  De `ushort` a `sbyte`, `byte`, `short`o `char`.
+*  De `int` a `sbyte`, `byte`, `short`, `ushort`, `uint`, `ulong`o `char`.
+*  De `uint` a `sbyte`, `byte`, `short`, `ushort`, `int`o `char`.
+*  De `long` a `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `ulong`o `char`.
+*  De `ulong` a `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`o `char`.
+*  De `char` a `sbyte`, `byte`o `short`.
+*  De `float` a `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`o `decimal`.
+*  De `double` a `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `float`o `decimal`.
+*  De `decimal` a `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `float`o `double`.
 
-Dado que las conversiones explícitas incluyen todas las conversiones numéricas implícitas y explícitas, siempre es posible convertir desde cualquier *numeric_type* a cualquier otro *numeric_type* mediante una expresión de conversión () [Expresiones de conversión](expressions.md#cast-expressions)).
+Dado que las conversiones explícitas incluyen todas las conversiones numéricas implícitas y explícitas, siempre es posible convertir de cualquier *numeric_type* a cualquier otra *numeric_type* mediante una expresión de conversión ([expresiones de conversión](expressions.md#cast-expressions)).
 
-Las conversiones numéricas explícitas producir pérdida de información o incluso producen que se produzcan excepciones. Una conversión numérica explícita se procesa como sigue:
+Las conversiones numéricas explícitas podrían perder información o provocar que se produzcan excepciones. Una conversión numérica explícita se procesa de la siguiente manera:
 
-*  Para una conversión de un tipo integral a otro tipo entero, el procesamiento depende del contexto de comprobación de desbordamiento ([los operadores checked y unchecked](expressions.md#the-checked-and-unchecked-operators)) en que se toma la conversión colocar:
-    * En un `checked` contexto, la conversión se realiza correctamente si el valor del operando de origen está dentro del intervalo del tipo de destino, pero inicia una `System.OverflowException` si el valor del operando de origen está fuera del intervalo del tipo de destino.
-    * En un `unchecked` contexto, la conversión siempre se realiza correctamente y continúa como sigue.
+*  En el caso de una conversión de un tipo entero a otro tipo entero, el procesamiento depende del contexto de comprobación de desbordamiento ([los operadores comprobados y sin comprobar](expressions.md#the-checked-and-unchecked-operators)) en el que tiene lugar la conversión:
+    * En un contexto de `checked`, la conversión se realiza correctamente si el valor del operando de origen está dentro del intervalo del tipo de destino, pero produce una `System.OverflowException` si el valor del operando de origen está fuera del intervalo del tipo de destino.
+    * En un contexto de `unchecked`, la conversión siempre se realiza correctamente y continúa como se indica a continuación.
         * Si el tipo de origen es mayor que el tipo de destino, el valor de origen se trunca al descartar sus bits "extra" más significativos. El resultado se trata como un valor del tipo de destino.
         * Si el tipo de origen es menor que el tipo de destino, el valor de origen se amplía mediante signos o ceros para que tenga el mismo tamaño que el tipo de destino. La ampliación mediante signos se usa si el tipo de origen tiene signo; se emplea ampliación mediante ceros si el tipo de origen no tiene signo. El resultado se trata como un valor del tipo de destino.
         * Si el tipo de origen es del mismo tamaño que el tipo de destino, el valor de origen se trata como un valor del tipo de destino.
-*  Para una conversión de `decimal` a un tipo entero, el valor de origen se redondea hacia cero al valor entero más cercano, y este valor entero se convierte en el resultado de la conversión. Si el valor entero resultante está fuera del intervalo del tipo de destino, un `System.OverflowException` se produce.
-*  Para una conversión de `float` o `double` a un tipo entero, el procesamiento depende del contexto de comprobación de desbordamiento ([los operadores checked y unchecked](expressions.md#the-checked-and-unchecked-operators)) en que se toma la conversión colocar:
-    * En un `checked` contexto, la conversión continúa como sigue:
-        * Si el valor del operando es NaN o infinito, un `System.OverflowException` se produce.
-        * En caso contrario, el operando de origen se redondea hacia cero al valor entero más cercano. Si este valor entero está dentro del intervalo del tipo de destino, a continuación, este valor es el resultado de la conversión.
+*  Para una conversión de `decimal` a un tipo entero, el valor de origen se redondea hacia cero al valor entero más cercano, y este valor entero se convierte en el resultado de la conversión. Si el valor entero resultante está fuera del intervalo del tipo de destino, se produce una `System.OverflowException`.
+*  Para una conversión desde `float` o `double` a un tipo entero, el procesamiento depende del contexto de comprobación de desbordamiento ([los operadores comprobados y sin comprobar](expressions.md#the-checked-and-unchecked-operators)) en el que tiene lugar la conversión:
+    * En un contexto de `checked`, la conversión se realiza de la siguiente manera:
+        * Si el valor del operando es NaN o infinito, se produce una `System.OverflowException`.
+        * De lo contrario, el operando de origen se redondea hacia cero al valor entero más cercano. Si este valor entero está dentro del intervalo del tipo de destino, este valor es el resultado de la conversión.
         * De lo contrario, se produce una excepción `System.OverflowException`.
-    * En un `unchecked` contexto, la conversión siempre se realiza correctamente y continúa como sigue.
+    * En un contexto de `unchecked`, la conversión siempre se realiza correctamente y continúa como se indica a continuación.
         * Si el valor del operando es NaN o infinito, el resultado de la conversión es un valor no especificado del tipo de destino.
-        * En caso contrario, el operando de origen se redondea hacia cero al valor entero más cercano. Si este valor entero está dentro del intervalo del tipo de destino, a continuación, este valor es el resultado de la conversión.
-        * En caso contrario, el resultado de la conversión es un valor no especificado del tipo de destino.
-*  Para una conversión de `double` a `float`, `double` valor se redondea al más cercano `float` valor. Si el `double` valor es demasiado pequeño para representarse como un `float`, el resultado se convierte en cero positivo o cero negativo. Si el `double` valor es demasiado grande para representarse como un `float`, el resultado es infinito positivo o infinito negativo. Si el `double` valor es NaN, el resultado también es NaN.
-*  Para una conversión de `float` o `double` a `decimal`, el valor de origen se convierte en `decimal` representación y redondea al número más cercano después de la posición decimal 28 si es necesario ([el tipo decimal](types.md#the-decimal-type)). Si el valor de origen es demasiado pequeño para representarse como un `decimal`, el resultado se convierte en cero. Si el valor de origen es NaN, infinito o demasiado grande para representarse como un `decimal`, un `System.OverflowException` se produce.
-*  Para una conversión de `decimal` a `float` o `double`, `decimal` valor se redondea al más cercano `double` o `float` valor. Aunque esta conversión puede perder precisión, nunca hace que se produzca una excepción.
+        * De lo contrario, el operando de origen se redondea hacia cero al valor entero más cercano. Si este valor entero está dentro del intervalo del tipo de destino, este valor es el resultado de la conversión.
+        * De lo contrario, el resultado de la conversión es un valor no especificado del tipo de destino.
+*  Para una conversión desde `double` a `float`, el valor de `double` se redondea al valor de `float` más próximo. Si el valor de `double` es demasiado pequeño para representarlo como un `float`, el resultado es cero positivo o cero negativo. Si el valor de `double` es demasiado grande para representarlo como un `float`, el resultado se convierte en infinito positivo o infinito negativo. Si el valor de `double` es NaN, el resultado es también NaN.
+*  Para una conversión desde `float` o `double` a `decimal`, el valor de origen se convierte en `decimal` representación y se redondea al número más cercano después de la posición decimal 28 si es necesario ([el tipo decimal](types.md#the-decimal-type)). Si el valor de origen es demasiado pequeño para representarlo como `decimal`, el resultado es cero. Si el valor de origen es NaN, infinito o demasiado grande para representarse como `decimal`, se produce una `System.OverflowException`.
+*  Para realizar una conversión de `decimal` a `float` o `double`, el valor `decimal` se redondea al valor `double` o `float` más próximo. Aunque esta conversión puede perder precisión, nunca provoca que se produzca una excepción.
 
 ### <a name="explicit-enumeration-conversions"></a>Conversiones explícitas de enumeración
 
-Las conversiones explícitas de enumeración son:
+Las conversiones de enumeración explícitas son:
 
-*  Desde `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `float`, `double`, o `decimal` a cualquier *enum_type*.
-*  Desde cualquier *enum_type* a `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `float`, `double`, o `decimal`.
+*  Desde `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `float`, `double`o `decimal` a cualquier *enum_type*.
+*  Desde cualquier *enum_type* a `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `float`, `double`o `decimal`.
 *  Desde cualquier *enum_type* a cualquier otro *enum_type*.
 
-Una conversión explícita de enumeración entre dos tipos se procesa al tratar cualquier participan *enum_type* como el tipo subyacente de la que *enum_type*a continuación, realiza un implícita o explícita conversión numérica entre los tipos resultantes. Por ejemplo, dada una *enum_type* `E` con y el tipo subyacente de `int`, una conversión de `E` a `byte` se procesa como una conversión numérica explícita ([Explicit conversiones numéricas](conversions.md#explicit-numeric-conversions)) desde `int` a `byte`y una conversión de `byte` a `E` se procesa como una conversión numérica implícita ([deconversionesnuméricasimplícitas](conversions.md#implicit-numeric-conversions)) desde `byte` a `int`.
+Una conversión de enumeración explícita entre dos tipos se procesa tratando cualquier *enum_type* participante como el tipo subyacente de ese *enum_type*y, a continuación, realizando una conversión numérica implícita o explícita entre los tipos resultantes. Por ejemplo, dado un *enum_type* `E` con y el tipo subyacente de `int`, una conversión de `E` a `byte` se procesa como una conversión numérica explícita ([Conversiones numéricas explícitas](conversions.md#explicit-numeric-conversions)) de `int` a `byte`, y una conversión de `byte` a `E` se procesa como una conversión numérica implícita ([Conversiones numéricas implícitas](conversions.md#implicit-numeric-conversions)) de `byte` a `int`.
 
-### <a name="explicit-nullable-conversions"></a>Conversiones explícitas que acepta valores null
+### <a name="explicit-nullable-conversions"></a>Conversiones explícitas que aceptan valores NULL
 
-***Las conversiones que aceptan valores NULL explícitas*** predefinidos de permitir las conversiones explícitas que funcionan en tipos de valor distinto de NULL para utilizarse también con los formularios de esos tipos que aceptan valores NULL. Para cada una de las conversiones explícitas predefinidas que convierten de un tipo de valor distinto de NULL `S` a un tipo de valor distinto de NULL `T` ([conversión de identidad](conversions.md#identity-conversion), [deconversionesnuméricasimplícitas](conversions.md#implicit-numeric-conversions), [Conversiones implícitas de enumeración](conversions.md#implicit-enumeration-conversions), [conversiones numéricas explícitas](conversions.md#explicit-numeric-conversions), y [conversiones explícitas de enumeración](conversions.md#explicit-enumeration-conversions)), lo siguiente Existen las conversiones que aceptan valores NULL:
+Las ***conversiones explícitas que aceptan valores NULL*** permiten conversiones explícitas explícitas que operan en tipos de valor que no aceptan valores NULL para usarse también con formas que aceptan valores NULL de esos tipos. Para cada una de las conversiones explícitas predefinidas que convierten de un tipo de valor que no acepta valores NULL `S` a un tipo de valor que no acepta valores NULL `T` ([conversión de identidad](conversions.md#identity-conversion), [Conversiones numéricas implícitas](conversions.md#implicit-numeric-conversions), conversiones de [enumeración implícita](conversions.md#implicit-enumeration-conversions), [Conversiones numéricas explícitas](conversions.md#explicit-numeric-conversions)y [conversiones de enumeración explícita](conversions.md#explicit-enumeration-conversions)), existen las siguientes conversiones que aceptan valores NULL
 
-*  Una conversión explícita de `S?` a `T?`.
-*  Una conversión explícita de `S` a `T?`.
-*  Una conversión explícita de `S?` a `T`.
+*  Conversión explícita de `S?` en `T?`.
+*  Conversión explícita de `S` en `T?`.
+*  Conversión explícita de `S?` en `T`.
 
-Evaluación de una conversión que acepta valores NULL en función de una conversión subyacente de `S` a `T` continúa como sigue:
+La evaluación de una conversión que acepta valores NULL en función de una conversión subyacente de `S` a `T` continúa de la siguiente manera:
 
-*  Si la conversión que acepta valores NULL es desde `S?` a `T?`:
-    * Si el valor de origen es null (`HasValue` propiedad es false), el resultado es el valor null del tipo `T?`.
-    * En caso contrario, la conversión se evalúa como un desajuste de `S?` a `S`, seguido de la conversión subyacente de `S` a `T`, seguido de un ajuste de `T` a `T?`.
-*  Si la conversión que acepta valores NULL es desde `S` a `T?`, la conversión se evalúa como la conversión subyacente de `S` a `T` seguida de un ajuste de `T` a `T?`.
-*  Si la conversión que acepta valores NULL es desde `S?` a `T`, la conversión se evalúa como un desajuste de `S?` a `S` seguido de la conversión subyacente de `S` a `T`.
+*  Si la conversión que acepta valores NULL es de `S?` a `T?`:
+    * Si el valor de origen es null (`HasValue` propiedad es false), el resultado es el valor null de tipo `T?`.
+    * De lo contrario, la conversión se evalúa como un desencapsulado de `S?` a `S`, seguido de la conversión subyacente de `S` a `T`, seguido de un ajuste de `T` a `T?`.
+*  Si la conversión que acepta valores NULL es de `S` a `T?`, la conversión se evalúa como la conversión subyacente de `S` a `T` seguido de un ajuste de `T` a `T?`.
+*  Si la conversión que acepta valores NULL es de `S?` a `T`, la conversión se evalúa como un desencapsulado de `S?` a `S` seguido de la conversión subyacente de `S` a `T`.
 
-Tenga en cuenta que un intento para desempaquetar un valor que acepta valores NULL producirá una excepción si el valor es `null`.
+Tenga en cuenta que un intento de desencapsular un valor que acepta valores null producirá una excepción si el valor es `null`.
 
-### <a name="explicit-reference-conversions"></a>Conversiones explícitas de referencia
+### <a name="explicit-reference-conversions"></a>Conversiones de referencia explícitas
 
-Las conversiones explícitas de referencia son:
+Las conversiones de referencia explícitas son:
 
 *  Desde `object` y `dynamic` a cualquier otro *reference_type*.
-*  Desde cualquier *class_type* `S` a cualquier *class_type* `T`, que proporciona `S` es una clase base de `T`.
-*  Desde cualquier *class_type* `S` a cualquier *interface_type* `T`, que proporciona `S` no está sellado y proporciona `S` no implementa `T`.
-*  Desde cualquier *interface_type* `S` a cualquier *class_type* `T`, que proporciona `T` no está sellado o proporcionado `T` implementa `S`.
-*  Desde cualquier *interface_type* `S` a cualquier *interface_type* `T`, que proporciona `S` no se deriva `T`.
-*  Desde un *array_type* `S` con un tipo de elemento `SE` a un *array_type* `T` con un tipo de elemento `TE`, siempre que todos los elementos siguientes son verdaderas:
-    * `S` y `T` difieren solo en el tipo de elemento. En otras palabras, `S` y `T` tienen el mismo número de dimensiones.
-    * Ambos `SE` y `TE` son *reference_type*s.
-    * Existe una conversión explícita de referencia de `SE` a `TE`.
-*  Desde `System.Array` y las interfaces que implementa a cualquier *array_type*.
-*  Desde un tipo de matriz unidimensional `S[]` a `System.Collections.Generic.IList<T>` y sus interfaces base, siempre que una conversión explícita de referencia de `S` a `T`.
-*  Desde `System.Collections.Generic.IList<S>` y sus interfaces base a un tipo de matriz unidimensional `T[]`, siempre que hay una conversión explícita de referencia o identidad de `S` a `T`.
-*  Desde `System.Delegate` y las interfaces que implementa a cualquier *delegate_type*.
-*  Un tipo de referencia a un tipo de referencia `T` si tiene una conversión de referencia explícita a un tipo de referencia `T0` y `T0` tiene una conversión de identidad `T`.
-*  Un tipo de referencia a un tipo de interfaz o delegado `T` si tiene una conversión de referencia explícita a un tipo de interfaz o delegado `T0` y `T0` es convertible de varianza a `T` o `T` es convertir a varianza `T0` ([conversión de varianza](interfaces.md#variance-conversion)).
-*  Desde `D<S1...Sn>` a `D<T1...Tn>` donde `D<X1...Xn>` es un tipo de delegado genérico, `D<S1...Sn>` no es compatible con o idénticos a `D<T1...Tn>`y para cada parámetro de tipo `Xi` de `D` contiene la siguiente:
-    * Si `Xi` es invariable, a continuación, `Si` es idéntico a `Ti`.
-    * Si `Xi` es covariante, a continuación, hay una conversión de referencia o identidad implícita o explícita desde `Si` a `Ti`.
-    * Si `Xi` es contravariante, a continuación, `Si` y `Ti` son idénticos o ambos tipos de referencia.
-*  Conversiones explícitas que implica parámetros de tipo que se sabe que son tipos de referencia. Para obtener más información sobre las conversiones explícitas que implica parámetros de tipo, consulte [las conversiones explícitas que implica parámetros de tipo](conversions.md#explicit-conversions-involving-type-parameters).
+*  Desde cualquier *class_type* `S` a cualquier `T`de *class_type* , proporcionado `S` es una clase base de `T`.
+*  De cualquier *class_type* `S` a cualquier `T`de *interface_type* , se proporciona `S` no se sella y se proporciona `S` no implementa `T`.
+*  Desde cualquier `S` de *interface_type* a cualquier `T`de *class_type* , se proporciona `T` que no está sellada ni se proporciona `T` implementa `S`.
+*  Desde cualquier *interface_type* `S` a cualquier `T`de *interface_type* , proporcionado `S` no se deriva de `T`.
+*  A partir de un `S` de *array_type* con un tipo de elemento `SE` a un `T` de *array_type* con un tipo de elemento `TE`, siempre que se cumplan todas las condiciones siguientes:
+    * `S` y `T` solo difieren en el tipo de elemento. En otras palabras, `S` y `T` tienen el mismo número de dimensiones.
+    * Tanto `SE` como `TE` son *reference_type*s.
+    * Existe una conversión de referencia explícita de `SE` a `TE`.
+*  Desde `System.Array` y las interfaces que implementa en cualquier *array_type*.
+*  Desde un tipo de matriz unidimensional `S[]` a `System.Collections.Generic.IList<T>` y sus interfaces base, siempre que haya una conversión de referencia explícita de `S` a `T`.
+*  Desde `System.Collections.Generic.IList<S>` y sus interfaces base a un tipo de matriz unidimensional `T[]`, siempre que haya una conversión explícita de identidad o de referencia de `S` a `T`.
+*  Desde `System.Delegate` y las interfaces que implementa en cualquier *delegate_type*.
+*  Desde un tipo de referencia a un tipo de referencia `T` si tiene una conversión de referencia explícita a un tipo de referencia `T0` y `T0` tiene un `T`de conversión de identidad.
+*  Desde un tipo de referencia a un tipo de interfaz o delegado `T` si tiene una conversión de referencia explícita a una interfaz o un tipo de delegado `T0` y `T0` se puede convertir en `T` o `T` de varianza a `T0` ([conversión de varianza](interfaces.md#variance-conversion)).
+*  De `D<S1...Sn>` a `D<T1...Tn>` donde `D<X1...Xn>` es un tipo de delegado genérico, `D<S1...Sn>` no es compatible con o es idéntico a `D<T1...Tn>`, y para cada parámetro de tipo `Xi` de `D` las siguientes:
+    * Si `Xi` es invariable, `Si` es idéntica a `Ti`.
+    * Si `Xi` es covariante, hay una conversión implícita o explícita o una conversión de referencia de `Si` a `Ti`.
+    * Si `Xi` es contravariante, `Si` y `Ti` son idénticos o ambos tipos de referencia.
+*  Conversiones explícitas que implican parámetros de tipo que se sabe que son tipos de referencia. Para obtener más información sobre las conversiones explícitas que implican parámetros de tipo, vea [conversiones explícitas que implican parámetros de tipo](conversions.md#explicit-conversions-involving-type-parameters).
 
-Las conversiones explícitas de referencia son aquellas conversiones entre tipos de referencia que requieren comprobaciones en tiempo de ejecución para garantizar que son correctos.
+Las conversiones de referencia explícitas son esas conversiones entre los tipos de referencia que requieren comprobaciones en tiempo de ejecución para asegurarse de que son correctas.
 
-Para que una conversión de referencia explícita sea correcta en tiempo de ejecución, el valor del operando de origen debe ser `null`, o el tipo real del objeto al que hace referencia el operando de origen debe ser un tipo que pueda convertirse al tipo de destino mediante una referencia implícita conversión ([conversiones implícitas de referencia](conversions.md#implicit-reference-conversions)) o una conversión boxing ([conversiones Boxing](conversions.md#boxing-conversions)). Si se produce un error en una conversión explícita de referencia, un `System.InvalidCastException` se produce.
+Para que una conversión de referencia explícita se realice correctamente en tiempo de ejecución, el valor del operando de origen debe ser `null`, o el tipo real del objeto al que hace referencia el operando de origen debe ser un tipo que se pueda convertir al tipo de destino mediante una conversión de referencia implícita ([conversiones de referencia implícita](conversions.md#implicit-reference-conversions)) o una conversión boxing ([conversiones boxing](conversions.md#boxing-conversions)). Si se produce un error en una conversión de referencia explícita, se produce una `System.InvalidCastException`.
 
-Las conversiones de referencia, implícitas o explícitas, nunca cambian la identidad referencial del objeto que se va a convertir. En otras palabras, mientras que una conversión de referencia puede cambiar el tipo de la referencia, nunca cambia el tipo o valor del objeto que hace referencia.
+Las conversiones de referencia, implícitas o explícitas, nunca cambian la identidad referencial del objeto que se va a convertir. En otras palabras, aunque una conversión de referencia puede cambiar el tipo de la referencia, nunca cambia el tipo o valor del objeto al que se hace referencia.
 
 ### <a name="unboxing-conversions"></a>Conversiones unboxing
 
-Una conversión unboxing permite un tipo de referencia para convertirse explícitamente a un *value_type*. Existe una conversión unboxing de los tipos `object`, `dynamic` y `System.ValueType` a cualquier *non_nullable_value_type*y desde cualquier *interface_type* a cualquier *non_ nullable_value_type* que implementa el *interface_type*. Escriba además `System.Enum` puede aplicar la conversión unboxing a cualquier *enum_type*.
+Una conversión unboxing permite que un tipo de referencia se convierta explícitamente en un *value_type*. Existe una conversión unboxing de los tipos `object`, `dynamic` y `System.ValueType` a cualquier *non_nullable_value_type*y de cualquier *interface_type* a cualquier *non_nullable_value_type* que implemente el *interface_type*. Además, se puede aplicar la conversión unboxing a `System.Enum` de tipos a cualquier *enum_type*.
 
-Existe una conversión unboxing de un tipo de referencia a un *nullable_type* si existe una conversión unboxing del tipo de referencia subyacente *non_nullable_value_type* de la  *nullable_type*.
+Existe una conversión unboxing de un tipo de referencia a un *nullable_type* si existe una conversión unboxing del tipo de referencia al *non_nullable_value_type* subyacente de la *nullable_type*.
 
-Un tipo de valor `S` tiene una conversión unboxing de un tipo de interfaz `I` si tiene una conversión unboxing de un tipo de interfaz `I0` y `I0` tiene una conversión de identidad a `I`.
+Un tipo de valor `S` tiene una conversión unboxing de un tipo de interfaz `I` si tiene una conversión unboxing de un tipo de interfaz `I0` y `I0` tiene una conversión de identidad en `I`.
 
-Un tipo de valor `S` tiene una conversión unboxing de un tipo de interfaz `I` si tiene una conversión unboxing de un tipo de interfaz o delegado `I0` y `I0` es convertible de varianza a `I` o `I`es convertible de varianza a `I0` ([conversión de varianza](interfaces.md#variance-conversion)).
+Un tipo de valor `S` tiene una conversión unboxing de un tipo de interfaz `I` si tiene una conversión unboxing de una interfaz o de un tipo de delegado `I0` y `I0` es la varianza que se puede convertir en `I` o `I` es una varianza que se puede convertir en `I0` ([conversión de varianza](interfaces.md#variance-conversion)).
 
-Una operación de conversión unboxing consiste en comprobar primero que la instancia de objeto es un valor con conversión boxing de la dada *value_type*y, a continuación, copia el valor fuera de la instancia. Conversión unboxing a una referencia nula a un *nullable_type* genera el valor null de la *nullable_type*. Un struct puede aplicar la conversión unboxing del tipo `System.ValueType`, ya que es una clase base para todas las estructuras ([herencia](structs.md#inheritance)).
+Una operación de conversión unboxing consiste en comprobar primero que la instancia de objeto es un valor de conversión boxing del *value_type*especificado y, a continuación, copiar el valor fuera de la instancia. Al aplicar la conversión unboxing a una referencia nula a un *nullable_type* , se genera el valor null de la *nullable_type*. Se puede aplicar la conversión unboxing a un struct del tipo `System.ValueType`, ya que es una clase base para todos los Structs ([herencia](structs.md#inheritance)).
 
-Se describe más detalladamente en las conversiones unboxing [Conversiones Unboxing](types.md#unboxing-conversions).
+Las conversiones unboxing se describen con más detalle en [conversiones unboxing](types.md#unboxing-conversions).
 
-### <a name="explicit-dynamic-conversions"></a>Conversiones explícitas de dinámicas
+### <a name="explicit-dynamic-conversions"></a>Conversiones dinámicas explícitas
 
-Existe una conversión explícita de dinámica de una expresión de tipo `dynamic` a cualquier tipo `T`. La conversión se enlaza dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)), lo que significa que se buscará una conversión explícita en tiempo de ejecución desde el tipo de tiempo de ejecución de la expresión `T`. Si no se encuentra ninguna conversión, se produce una excepción en tiempo de ejecución.
+Existe una conversión dinámica explícita de una expresión de tipo `dynamic` a cualquier tipo `T`. La conversión está enlazada dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)), lo que significa que se buscará una conversión explícita en tiempo de ejecución desde el tipo en tiempo de ejecución de la expresión que se va a `T`. Si no se encuentra ninguna conversión, se produce una excepción en tiempo de ejecución.
 
-Si el enlace dinámico de la conversión no es el deseado, la expresión se puede convertir en primer lugar a `object`y, a continuación, al tipo deseado.
+Si no se desea el enlace dinámico de la conversión, la expresión se puede convertir primero en `object`y, a continuación, en el tipo deseado.
 
 Supongamos que se define la clase siguiente:
 ```csharp
@@ -342,7 +343,7 @@ class C
 }
 ```
 
-El ejemplo siguiente muestra las conversiones explícitas de dinámicas:
+En el ejemplo siguiente se muestran las conversiones dinámicas explícitas:
 ```csharp
 object o  = "1";
 dynamic d = "2";
@@ -351,20 +352,20 @@ var c1 = (C)o; // Compiles, but explicit reference conversion fails
 var c2 = (C)d; // Compiles and user defined conversion succeeds
 ```
 
-La conversión de mejor `o` a `C` se encuentra en tiempo de compilación para ser una conversión explícita de referencia. Esto se produce un error en tiempo de ejecución, porque `"1"` no es en realidad un `C`. La conversión de `d` a `C` sin embargo, como una conversión explícita dinámica, se suspende en tiempo de ejecución, donde un usuario definió la conversión del tipo de tiempo de ejecución de `d`  --  `string` --a `C` se encuentra, y se realiza correctamente.
+La mejor conversión de `o` en `C` se encuentra en tiempo de compilación para que sea una conversión de referencia explícita. Esto produce un error en tiempo de ejecución, porque `"1"` no es en realidad una `C`. La conversión de `d` en `C` sin embargo, como una conversión dinámica explícita, se suspende en tiempo de ejecución, donde se encuentra una conversión definida por el usuario del tipo en tiempo de ejecución de `d` -- `string`--hasta `C` y se realiza correctamente.
 
-### <a name="explicit-conversions-involving-type-parameters"></a>Conversiones explícitas que implica parámetros de tipo
+### <a name="explicit-conversions-involving-type-parameters"></a>Conversiones explícitas que implican parámetros de tipo
 
-Existen las siguientes conversiones explícitas para un parámetro de tipo dado `T`:
+Existen las siguientes conversiones explícitas para un parámetro de tipo determinado `T`:
 
-*  De la clase base eficaz `C` de `T` a `T` y desde cualquier clase base de `C` a `T`. En tiempo de ejecución, si `T` es un tipo de valor, la conversión se ejecuta como una conversión unboxing. En caso contrario, la conversión se ejecuta como una conversión de referencia explícita o conversión de identidad.
-*  De cualquier tipo de interfaz a `T`. En tiempo de ejecución, si `T` es un tipo de valor, la conversión se ejecuta como una conversión unboxing. En caso contrario, la conversión se ejecuta como una conversión de referencia explícita o conversión de identidad.
-*  Desde `T` a cualquier *interface_type* `I` proporcionado no exista ya una conversión implícita de `T` a `I`. En tiempo de ejecución, si `T` es un tipo de valor, la conversión se ejecuta como una conversión boxing seguida de una conversión explícita de referencia. En caso contrario, la conversión se ejecuta como una conversión de referencia explícita o conversión de identidad.
-*  Un parámetro de tipo `U` a `T`, que proporciona `T` depende `U` ([restricciones de parámetro de tipo](classes.md#type-parameter-constraints)). En tiempo de ejecución, si `U` es un tipo de valor, a continuación, `T` y `U` son necesariamente del mismo tipo y se realiza ninguna conversión. De lo contrario, si `T` es un tipo de valor, la conversión se ejecuta como una conversión unboxing. En caso contrario, la conversión se ejecuta como una conversión de referencia explícita o conversión de identidad.
+*  Desde la clase base efectiva `C` de `T` a `T` y de cualquier clase base de `C` a `T`. En tiempo de ejecución, si `T` es un tipo de valor, la conversión se ejecuta como conversión unboxing. De lo contrario, la conversión se ejecuta como una conversión de referencia explícita o una conversión de identidad.
+*  De cualquier tipo de interfaz que se va a `T`. En tiempo de ejecución, si `T` es un tipo de valor, la conversión se ejecuta como conversión unboxing. De lo contrario, la conversión se ejecuta como una conversión de referencia explícita o una conversión de identidad.
+*  De `T` a cualquier *interface_type* `I` siempre y cuando no haya una conversión implícita de `T` a `I`. En tiempo de ejecución, si `T` es un tipo de valor, la conversión se ejecuta como una conversión boxing seguida de una conversión de referencia explícita. De lo contrario, la conversión se ejecuta como una conversión de referencia explícita o una conversión de identidad.
+*  De un parámetro de tipo `U` a `T`, siempre y cuando `T` dependa de `U` ([restricciones de parámetro de tipo](classes.md#type-parameter-constraints)). En tiempo de ejecución, si `U` es un tipo de valor, `T` y `U` son necesariamente el mismo tipo y no se realiza ninguna conversión. De lo contrario, si `T` es un tipo de valor, la conversión se ejecuta como conversión unboxing. De lo contrario, la conversión se ejecuta como una conversión de referencia explícita o una conversión de identidad.
 
-Si `T` es sabe que un tipo de referencia, las conversiones anteriores están clasificadas como conversiones explícitas de referencia ([conversiones explícitas de referencia](conversions.md#explicit-reference-conversions)). Si `T` no es sabe que un tipo de referencia, las conversiones anteriores se clasifican como conversiones unboxing ([Conversiones Unboxing](conversions.md#unboxing-conversions)).
+Si se sabe que `T` es un tipo de referencia, las conversiones anteriores se clasifican como conversiones de referencia explícitas ([conversiones de referencia explícita](conversions.md#explicit-reference-conversions)). Si no se sabe que `T` es un tipo de referencia, las conversiones anteriores se clasifican como conversiones unboxing (conversiones[unboxing](conversions.md#unboxing-conversions)).
 
-Las reglas anteriores no permiten que una conversión explícita directa de un parámetro de tipo sin restricciones a un tipo de interfaz, lo que podría resultar sorprendente. La razón de esta regla es evitar la confusión y realizar la semántica de estas conversiones no cifradas. Por ejemplo, consideremos la siguiente declaración:
+Las reglas anteriores no permiten una conversión explícita directa de un parámetro de tipo sin restricciones a un tipo que no sea de interfaz, lo que podría ser sorprendente. La razón de esta regla es evitar la confusión y hacer que la semántica de dichas conversiones sea clara. Por ejemplo, consideremos la siguiente declaración:
 ```csharp
 class X<T>
 {
@@ -374,7 +375,7 @@ class X<T>
 }
 ```
 
-Si la conversión explícita directa de `t` a `int` permiten, fácilmente uno podría esperar que `X<int>.F(7)` devolvería `7L`. Sin embargo, no es así porque las conversiones numéricas estándares solo se consideran cuando se conocen los tipos numéricos en tiempo de enlace. Para hacer que la semántica claras y en el ejemplo anterior se debe escribir:
+Si se permitía la conversión directa explícita de `t` a `int`, es posible que se espere fácilmente que `X<int>.F(7)` devuelva `7L`. Sin embargo, no lo haría, porque las conversiones numéricas estándar solo se tienen en cuenta cuando se sabe que los tipos son numéricos en tiempo de enlace. Para que la semántica esté clara, en su lugar se debe escribir en el ejemplo anterior:
 ```csharp
 class X<T>
 {
@@ -384,150 +385,150 @@ class X<T>
 }
 ```
 
-Este código se compilará, pero si se ejecuta `X<int>.F(7)` , a continuación, generaría una excepción en tiempo de ejecución, desde una conversión boxing `int` no se puede convertir directamente a un `long`.
+Este código se compilará ahora, pero la ejecución de `X<int>.F(7)` producirá una excepción en tiempo de ejecución, ya que no se puede convertir directamente un `int` con conversión boxing en un `long`.
 
 ### <a name="user-defined-explicit-conversions"></a>Conversiones explícitas definidas por el usuario
 
-Una conversión explícita definido por el usuario consta de una conversión explícita opcional estándar, seguida por la ejecución de un operador de conversión implícita o explícita definido por el usuario, seguido de otra conversión explícita opcional estándar. Las reglas exactas para evaluar las conversiones explícitas definidas por el usuario se describen en [de procesamiento de las conversiones explícitas definidas por el usuario](conversions.md#processing-of-user-defined-explicit-conversions).
+Una conversión explícita definida por el usuario se compone de una conversión explícita estándar opcional, seguida de una ejecución de un operador de conversión implícito o explícito definido por el usuario, seguida de otra conversión explícita estándar opcional. Las reglas exactas para evaluar las conversiones explícitas definidas por el usuario se describen en [procesamiento de conversiones explícitas definidas por el usuario](conversions.md#processing-of-user-defined-explicit-conversions).
 
 ## <a name="standard-conversions"></a>Conversiones estándar
 
-Las conversiones estándar son aquellas conversiones predefinidas que se pueden producir como parte de una conversión definida por el usuario.
+Las conversiones estándar son las conversiones predefinidas que pueden producirse como parte de una conversión definida por el usuario.
 
 ### <a name="standard-implicit-conversions"></a>Conversiones implícitas estándar
 
 Las siguientes conversiones implícitas se clasifican como conversiones implícitas estándar:
 
 *  Conversiones de identidad ([conversión de identidad](conversions.md#identity-conversion))
-*  Conversiones numéricas implícitas ([conversiones numéricas implícitas](conversions.md#implicit-numeric-conversions))
-*  Las conversiones implícitas que acepta valores null ([conversiones que aceptan valores NULL implícitas](conversions.md#implicit-nullable-conversions))
-*  Conversiones implícitas de referencia ([conversiones implícitas de referencia](conversions.md#implicit-reference-conversions))
-*  Las conversiones boxing ([conversiones Boxing](conversions.md#boxing-conversions))
-*  Conversiones implícitas de expresión constante ([conversiones implícitas de dinámicas](conversions.md#implicit-dynamic-conversions))
-*  Las conversiones implícitas que implica parámetros de tipo ([conversiones implícitas que implica parámetros de tipo](conversions.md#implicit-conversions-involving-type-parameters))
+*  Conversiones numéricas IMPLÍCITAS ([Conversiones numéricas implícitas](conversions.md#implicit-numeric-conversions))
+*  Conversiones implícitas que aceptan valores NULL ([conversiones implícitas que aceptan valores NULL](conversions.md#implicit-nullable-conversions))
+*  Conversiones de referencia IMPLÍCITAS ([conversiones de referencia implícitas](conversions.md#implicit-reference-conversions))
+*  Conversiones Boxing ([conversiones boxing](conversions.md#boxing-conversions))
+*  Conversiones implícitas de expresiones constantes ([conversiones dinámicas implícitas](conversions.md#implicit-dynamic-conversions))
+*  Conversiones implícitas que implican parámetros de tipo ([conversiones implícitas que implican parámetros de tipo](conversions.md#implicit-conversions-involving-type-parameters))
 
-Las conversiones implícitas estándares excluyen específicamente las conversiones implícitas definido por el usuario.
+Las conversiones implícitas estándar excluyen específicamente las conversiones implícitas definidas por el usuario.
 
 ### <a name="standard-explicit-conversions"></a>Conversiones explícitas estándar
 
-Las conversiones explícitas estándares son todas las conversiones implícitas estándares más el subconjunto de las conversiones explícitas para el que existe una conversión implícita estándar opuesta. En otras palabras, si un estándar implícito no existe conversión de un tipo `A` a un tipo `B`, a continuación, existe una conversión explícita estándar de tipo `A` escriba `B` y del tipo `B` escriba `A`.
+Las conversiones explícitas estándar son todas las conversiones implícitas estándar más el subconjunto de las conversiones explícitas para las que existe una conversión implícita estándar opuesta. En otras palabras, si existe una conversión implícita estándar de un tipo `A` a un tipo `B`, existe una conversión explícita estándar del tipo `A` al tipo `B` y del tipo `B` al tipo `A`.
 
 ## <a name="user-defined-conversions"></a>Conversiones definidas por el usuario
 
-C# permite que las conversiones implícitas y explícitas predefinidas para ampliarse por ***conversiones definidas por el usuario***. Conversiones definidas por el usuario se introducen mediante la declaración de operadores de conversión ([operadores de conversión](classes.md#conversion-operators)) en tipos de clase y estructura.
+C#permite aumentar las conversiones implícitas y explícitas predefinidas mediante ***conversiones definidas por el usuario***. Las conversiones definidas por el usuario se introducen mediante la declaración de operadores de conversión ([operadores de conversión](classes.md#conversion-operators)) en tipos de clase y estructura.
 
-### <a name="permitted-user-defined-conversions"></a>Permite conversiones definidas por el usuario
+### <a name="permitted-user-defined-conversions"></a>Conversiones permitidas definidas por el usuario
 
-C# permite que solo determinadas conversiones definidas por el usuario a declararse. En concreto, no es posible volver a definir una conversión implícita o explícita ya existente.
+C#permite declarar solo determinadas conversiones definidas por el usuario. En concreto, no es posible volver a definir una conversión implícita o explícita ya existente.
 
-Para un tipo de origen dado `S` y tipo de destino `T`si `S` o `T` son tipos que aceptan valores NULL, permiten `S0` y `T0` hacen referencia a sus tipos subyacentes, de lo contrario `S0` y `T0` son igual que `S` y `T` respectivamente. Una clase o struct se puede declarar una conversión de un tipo de origen `S` a un tipo de destino `T` sólo si se cumplen todas las opciones siguientes:
+Para un tipo de origen determinado `S` y el tipo de destino `T`, si `S` o `T` son tipos que aceptan valores NULL, permita que `S0` y `T0` hagan referencia a sus tipos subyacentes; de lo contrario, `S0` y `T0` son iguales a `S` y `T` respectivamente. Una clase o struct puede declarar una conversión de un tipo de origen `S` a un tipo de destino `T` solo si se cumplen todas las condiciones siguientes:
 
 *  `S0` y `T0` son tipos diferentes.
-*  Ya sea `S0` o `T0` es el tipo de clase o estructura en la que realiza la declaración del operador.
-*  Ni `S0` ni `T0` es un *interface_type*.
-*  Excluyendo las conversiones definidas por el usuario, no existe una conversión desde `S` a `T` o desde `T` a `S`.
+*  `S0` o `T0` es el tipo de clase o estructura en el que tiene lugar la declaración del operador.
+*  Ni `S0` ni `T0` es una *interface_type*.
+*  Sin incluir las conversiones definidas por el usuario, no existe una conversión de `S` a `T` o de `T` a `S`.
 
-Las restricciones que se aplican a las conversiones definidas por el usuario se explican con más detalle en [operadores de conversión](classes.md#conversion-operators).
+Las restricciones que se aplican a las conversiones definidas por el usuario se explican en los [operadores de conversión](classes.md#conversion-operators).
 
 ### <a name="lifted-conversion-operators"></a>Operadores de conversión de elevación
 
-Dado un operador de conversión definido por el usuario que convierte de un tipo de valor distinto de NULL `S` a un tipo de valor distinto de NULL `T`, un ***eleva el operador de conversión*** existe que convierte de `S?` a `T?`. Este operador de conversión de elevación realiza un desajuste de `S?` a `S` seguido de la conversión definida por el usuario de `S` a `T` seguida de un ajuste de `T` a `T?`, excepto en que un valor null con valores `S?` pasa directamente a un valor null con valores `T?`.
+Dado un operador de conversión definido por el usuario que convierte de un tipo de valor que no acepta valores NULL `S` a un tipo de valor que no acepta valores NULL `T`, existe un ***operador de conversión de elevación*** que convierte `S?` en `T?`. Este operador de conversión de elevación realiza un desajuste de `S?` a `S` seguido de la conversión definida por el usuario de `S` a `T` seguido de un ajuste de `T` a `T?`, salvo que un valor null `S?` convierte directamente en una `T?`con valores NULL.
 
-Un operador de conversión de elevación tiene la misma clasificación implícita o explícita, como su operador de conversión definido por el usuario subyacente. El término "conversión definida por el usuario" se aplica al uso de ambos definido por el usuario y los operadores de conversión de elevación.
+Un operador de conversión de elevación tiene la misma clasificación implícita o explícita que su operador de conversión definido por el usuario subyacente. El término "conversión definida por el usuario" se aplica al uso de operadores de conversión definidos por el usuario y de elevación.
 
 ### <a name="evaluation-of-user-defined-conversions"></a>Evaluación de conversiones definidas por el usuario
 
-Una conversión definida por el usuario convierte un valor de su tipo, denominado el ***tipo de origen***, a otro tipo, denominado el ***tipo de destino***. Evaluación de una conversión definida por el usuario se centra en encontrar el ***más específica*** operador de conversión definido por el usuario para los tipos de origen y de destino determinados. Esta determinación se divide en varios pasos:
+Una conversión definida por el usuario convierte un valor de su tipo, denominado ***tipo de origen***, a otro tipo, denominado ***tipo de destino***. La evaluación de una conversión definida por el usuario se centra en buscar el operador de conversión definido por el usuario ***más específico*** para los tipos de origen y de destino determinados. Esta determinación se divide en varios pasos:
 
-*  Encontrar el conjunto de clases y structs desde el que se considerarán los operadores de conversión definido por el usuario. Este conjunto está formado por el tipo de origen y sus clases base y el tipo de destino y sus clases base (con los supuestos implícitos que sólo las clases y structs pueden declarar los operadores definidos por el usuario, y que los tipos de clase no tienen ninguna clase base). Para los fines de este paso, si el tipo de origen o destino es un *nullable_type*, su tipo subyacente se usa en su lugar.
-*  Desde ese conjunto de tipos, determinar que definido por el usuario y eleva los operadores de conversión son aplicables. Para que un operador de conversión sea aplicable, debe ser posible realizar una conversión estándar ([conversiones estándar](conversions.md#standard-conversions)) del tipo de origen que el operando tipo del operador y debe ser posible realizar una conversión estándar desde el tipo de resultado del operador para el tipo de destino.
-*  Desde el conjunto de operadores definidos por el usuario aplicables, determinar qué operador es la más específica sin ambigüedades. En términos generales, el operador más específico es el operador cuyo tipo de operando es "más cercana" al tipo de origen y cuyo tipo de resultado es "más cercana" al tipo de destino. Operadores de conversión de elevación se prefieren los operadores de conversión definido por el usuario. Las reglas exactas para establecer el operador de conversión definido por el usuario más específico se definen en las secciones siguientes.
+*  Buscar el conjunto de clases y estructuras desde las que se considerarán los operadores de conversión definidos por el usuario. Este conjunto está formado por el tipo de origen y sus clases base, así como el tipo de destino y sus clases base (con suposiciones implícitas de que solo las clases y los Structs pueden declarar operadores definidos por el usuario, y que los tipos que no son de clase no tienen clases base). Para los fines de este paso, si el tipo de origen o de destino es un *nullable_type*, se utiliza en su lugar su tipo subyacente.
+*  A partir de ese conjunto de tipos, determinar qué operadores de conversión definidos por el usuario y de elevación son aplicables. Para que un operador de conversión sea aplicable, debe ser posible realizar una conversión estándar ([conversiones estándar](conversions.md#standard-conversions)) del tipo de origen al tipo de operando del operador, y debe ser posible realizar una conversión estándar del tipo de resultado del operador al tipo de destino.
+*  Del conjunto de operadores definidos por el usuario aplicables, que determinan qué operador es el más específico de forma inequívoca. En términos generales, el operador más específico es el operador cuyo tipo de operando es "más cercano" al tipo de origen y cuyo tipo de resultado es "más cercano" al tipo de destino. Los operadores de conversión definidos por el usuario son preferibles a los operadores de conversión de elevación. En las secciones siguientes se definen las reglas exactas para establecer el operador de conversión definido por el usuario más específico.
 
 Una vez que se ha identificado un operador de conversión definido por el usuario más específico, la ejecución real de la conversión definida por el usuario implica hasta tres pasos:
 
-*  En primer lugar, si es necesario, realizar una conversión estándar del tipo de origen para el tipo de operando del operador de conversión definido por el usuario o la elevación.
-*  A continuación, invocar el operador de conversión definido por el usuario o la elevación para llevar a cabo la conversión.
-*  Por último, si es necesario, realizar una conversión estándar desde el tipo de resultado del operador de conversión definido por el usuario o la elevación para el tipo de destino.
+*  En primer lugar, si es necesario, realizar una conversión estándar del tipo de origen al tipo de operando del operador de conversión definido por el usuario o de elevación.
+*  A continuación, se invoca el operador de conversión definido por el usuario o de elevación para realizar la conversión.
+*  Por último, si es necesario, realizar una conversión estándar del tipo de resultado del operador de conversión definido por el usuario o de elevación al tipo de destino.
 
-Evaluación de una conversión definida por el usuario nunca implica a más de un operador de conversión definido por el usuario o la elevación. En otras palabras, una conversión de tipo `S` escriba `T` ejecutará nunca primero una conversión definida por el usuario de `S` a `X` y, a continuación, ejecutar una conversión definida por el usuario de `X` a `T`.
+La evaluación de una conversión definida por el usuario nunca implica más de un operador de conversión definido por el usuario o de elevación. En otras palabras, una conversión del tipo `S` al tipo `T` nunca ejecutará en primer lugar una conversión definida por el usuario de `S` a `X` y, a continuación, ejecutará una conversión definida por el usuario de `X` a `T`.
 
-Las definiciones exactas de la evaluación de las conversiones implícitas o explícitas definidas por el usuario se proporcionan en las secciones siguientes. Las definiciones de hacer uso de los siguientes términos:
+En las secciones siguientes se proporcionan definiciones exactas de la evaluación de las conversiones implícitas o explícitas definidas por el usuario. Las definiciones hacen uso de los siguientes términos:
 
-*  Si una conversión implícita estándar ([conversiones implícitas estándar](conversions.md#standard-implicit-conversions)) existe desde un tipo `A` a un tipo `B`y si no `A` ni `B` son *interface_type*s, `A` se dice que ***abarcado por*** `B`, y `B` se dice que ***abarcan*** `A`.
-*  El ***tipo más incluyente*** en un conjunto de tipos es un tipo que abarca todos los demás tipos en el conjunto. Si ningún tipo único abarca a todos los demás tipos, el conjunto no tiene ningún tipo más completa. En términos más intuitivos, el tipo más incluyente es el tipo "más grande" en el conjunto, un tipo al que puede convertirse implícitamente cada uno de los otros tipos.
-*  El ***un tipo más abarcado*** en un conjunto de tipos es un tipo que está incluido en todos los demás tipos en el conjunto. Si no los tipos es abarcado por todos los demás tipos, el conjunto más no ha abarcado a tipo. En términos más intuitivos, el tipo más abarcado es el tipo "más pequeño" en el conjunto, un tipo que pueda convertirse implícitamente a cada uno de los otros tipos.
+*  Si existe una conversión implícita estándar ([conversiones implícitas estándar](conversions.md#standard-implicit-conversions)) de un tipo `A` a un tipo `B`, y si ninguna `A` ni `B` se *interface_type*s, se dice que `A` se ***incluye*** en `B`y `B` se dice que ***abarca*** `A`.
+*  El ***tipo más abarcado*** en un conjunto de tipos es el que abarca todos los demás tipos del conjunto. Si no hay ningún tipo único que abarque todos los demás tipos, el conjunto no tiene más tipo de englobado. En términos más intuitivos, el tipo más amplio es el tipo "mayor" del conjunto (el tipo al que se puede convertir cada uno de los demás tipos de forma implícita).
+*  El ***tipo más abarcado*** en un conjunto de tipos es el que se incluye en todos los demás tipos del conjunto. Si no hay ningún tipo único incluido en el resto de tipos, el conjunto no tiene el tipo más abarcado. En términos más intuitivos, el tipo más abarcado es el tipo "más pequeño" del conjunto (el tipo que se puede convertir implícitamente en cada uno de los demás tipos).
 
-### <a name="processing-of-user-defined-implicit-conversions"></a>Procesamiento de las conversiones implícitas definido por el usuario
+### <a name="processing-of-user-defined-implicit-conversions"></a>Procesamiento de conversiones implícitas definidas por el usuario
 
-Una conversión implícita del tipo definido por el usuario `S` escriba `T` se procesa como sigue:
+Una conversión implícita definida por el usuario del tipo `S` al tipo `T` se procesa de la siguiente manera:
 
-*  Determinar los tipos `S0` y `T0`. Si `S` o `T` son tipos que aceptan valores NULL, `S0` y `T0` son sus tipos subyacentes, de lo contrario, `S0` y `T0` son iguales a `S` y `T` respectivamente.
-*  Busque el conjunto de tipos, `D`, desde qué conversión definida por el usuario se considerarán los operadores. Este conjunto consta de `S0` (si `S0` es una clase o struct), las clases base de `S0` (si `S0` es una clase), y `T0` (si `T0` es una clase o struct).
-*  Busque el conjunto de operadores de conversión definido por el usuario y la elevación aplicables, `U`. Este conjunto consta de los operadores de conversión implícita de elevación y definido por el usuario declarados por las clases o structs en `D` que convertir de un tipo que abarca `S` a un tipo englobado por `T`. Si `U` está vacía, la conversión es indefinida y se produce un error de tiempo de compilación.
-*  Busca el tipo de origen más específico, `SX`, de los operadores de `U`:
-    * Si cualquiera de los operadores en `U` convertir de `S`, a continuación, `SX` es `S`.
-    * En caso contrario, `SX` es el tipo más abarcado en el conjunto combinado de tipos de origen de los operadores de `U`. Si exactamente uno más abarcado no se encuentra el tipo, a continuación, la conversión es ambigua y se produce un error de tiempo de compilación.
-*  Busca el tipo de destino más específico, `TX`, de los operadores de `U`:
-    * Si cualquiera de los operadores en `U` convertir en `T`, a continuación, `TX` es `T`.
-    * En caso contrario, `TX` es el tipo más completa en el conjunto combinado de tipos de destino de los operadores de `U`. Si no se encuentra exactamente un tipo más incluyente, a continuación, la conversión es ambigua y se produce un error de tiempo de compilación.
-*  Buscar el operador de conversión más específico:
-    * Si `U` contiene exactamente un operador de conversión definido por el usuario que convierte de `SX` a `TX`, este es el operador de conversión más específico.
-    * De lo contrario, si `U` contiene exactamente un operador de conversión de elevación que convierte de `SX` a `TX`, este es el operador de conversión más específico.
-    * En caso contrario, la conversión es ambigua y se produce un error de tiempo de compilación.
+*  Determine los tipos `S0` y `T0`. Si `S` o `T` son tipos que aceptan valores NULL, `S0` y `T0` son sus tipos subyacentes; de lo contrario, `S0` y `T0` son iguales a `S` y `T` respectivamente.
+*  Busque el conjunto de tipos, `D`, desde el que se tendrán en cuenta los operadores de conversión definidos por el usuario. Este conjunto consta de `S0` (si `S0` es una clase o estructura), las clases base de `S0` (si `S0` es una clase) y `T0` (si `T0` es una clase o struct).
+*  Busque el conjunto de operadores de conversión de elevación y definidos por el usuario aplicables `U`. Este conjunto consta de los operadores de conversión implícita definidos por el usuario y de elevación que se declaran en las clases o Structs de `D` que convierten de un tipo que abarca `S` a un tipo englobado por `T`. Si `U` está vacío, la conversión no está definida y se produce un error en tiempo de compilación.
+*  Busque el tipo de origen más específico, `SX`, de los operadores en `U`:
+    * Si alguno de los operadores de `U` convierte de `S`, se `S``SX`.
+    * De lo contrario, `SX` es el tipo más abarcado en el conjunto combinado de tipos de origen de los operadores de `U`. Si no se encuentra exactamente un tipo más abarcado, la conversión es ambigua y se produce un error en tiempo de compilación.
+*  Busque el tipo de destino más específico, `TX`, de los operadores en `U`:
+    * Si alguno de los operadores de `U` convierte en `T`, se `T``TX`.
+    * De lo contrario, `TX` es el tipo más abarcado en el conjunto combinado de tipos de destino de los operadores de `U`. Si no se encuentra exactamente un tipo más englobado, la conversión es ambigua y se produce un error en tiempo de compilación.
+*  Busque el operador de conversión más específico:
+    * Si `U` contiene exactamente un operador de conversión definido por el usuario que convierte de `SX` a `TX`, éste es el operador de conversión más específico.
+    * De lo contrario, si `U` contiene exactamente un operador de conversión de elevación que convierte de `SX` a `TX`, éste es el operador de conversión más específico.
+    * De lo contrario, la conversión es ambigua y se produce un error en tiempo de compilación.
 *  Por último, aplique la conversión:
-    * Si `S` no `SX`, a continuación, una conversión implícita estándar de `S` a `SX` se lleva a cabo.
+    * Si `S` no se `SX`, se realiza una conversión implícita estándar de `S` a `SX`.
     * Se invoca el operador de conversión más específico para convertir de `SX` a `TX`.
-    * Si `TX` no `T`, a continuación, una conversión implícita estándar de `TX` a `T` se lleva a cabo.
+    * Si `TX` no se `T`, se realiza una conversión implícita estándar de `TX` a `T`.
 
-### <a name="processing-of-user-defined-explicit-conversions"></a>Procesamiento de las conversiones explícitas definidas por el usuario
+### <a name="processing-of-user-defined-explicit-conversions"></a>Procesamiento de conversiones explícitas definidas por el usuario
 
-Una conversión explícita de tipo definido por el usuario `S` escriba `T` se procesa como sigue:
+Una conversión explícita definida por el usuario del tipo `S` al tipo `T` se procesa de la siguiente manera:
 
-*  Determinar los tipos `S0` y `T0`. Si `S` o `T` son tipos que aceptan valores NULL, `S0` y `T0` son sus tipos subyacentes, de lo contrario, `S0` y `T0` son iguales a `S` y `T` respectivamente.
-*  Busque el conjunto de tipos, `D`, desde qué conversión definida por el usuario se considerarán los operadores. Este conjunto consta de `S0` (si `S0` es una clase o struct), las clases base de `S0` (si `S0` es una clase), `T0` (si `T0` es una clase o struct) y las clases base de `T0` (si `T0`es una clase).
-*  Busque el conjunto de operadores de conversión definido por el usuario y la elevación aplicables, `U`. Este conjunto consta de definido por el usuario y elevación implícita o declaran de operadores de conversión explícitos por las clases o structs en `D` que convertir de un tipo que abarca o abarcado por `S` a un tipo que abarca o abarcado por `T`. Si `U` está vacía, la conversión es indefinida y se produce un error de tiempo de compilación.
-*  Busca el tipo de origen más específico, `SX`, de los operadores de `U`:
-    * Si cualquiera de los operadores en `U` convertir de `S`, a continuación, `SX` es `S`.
-    * En caso contrario, si cualquiera de los operadores en `U` convertir de tipos que abarca `S`, a continuación, `SX` es el tipo más abarcado en el conjunto combinado de tipos de origen de estos operadores. Si no hay más abarcado se encuentra un tipo, a continuación, la conversión es ambigua y se produce un error de tiempo de compilación.
-    * En caso contrario, `SX` es el tipo más completa en el conjunto combinado de tipos de origen de los operadores de `U`. Si no se encuentra exactamente un tipo más incluyente, a continuación, la conversión es ambigua y se produce un error de tiempo de compilación.
-*  Busca el tipo de destino más específico, `TX`, de los operadores de `U`:
-    * Si cualquiera de los operadores en `U` convertir en `T`, a continuación, `TX` es `T`.
-    * En caso contrario, si cualquiera de los operadores en `U` convertir a tipos abarcados por `T`, a continuación, `TX` es el tipo más completa en el conjunto combinado de tipos de destino de los operadores. Si no se encuentra exactamente un tipo más incluyente, a continuación, la conversión es ambigua y se produce un error de tiempo de compilación.
-    * En caso contrario, `TX` es el tipo más abarcado en el conjunto combinado de tipos de destino de los operadores de `U`. Si no hay más abarcado se encuentra un tipo, a continuación, la conversión es ambigua y se produce un error de tiempo de compilación.
-*  Buscar el operador de conversión más específico:
-    * Si `U` contiene exactamente un operador de conversión definido por el usuario que convierte de `SX` a `TX`, este es el operador de conversión más específico.
-    * De lo contrario, si `U` contiene exactamente un operador de conversión de elevación que convierte de `SX` a `TX`, este es el operador de conversión más específico.
-    * En caso contrario, la conversión es ambigua y se produce un error de tiempo de compilación.
+*  Determine los tipos `S0` y `T0`. Si `S` o `T` son tipos que aceptan valores NULL, `S0` y `T0` son sus tipos subyacentes; de lo contrario, `S0` y `T0` son iguales a `S` y `T` respectivamente.
+*  Busque el conjunto de tipos, `D`, desde el que se tendrán en cuenta los operadores de conversión definidos por el usuario. Este conjunto consta de `S0` (si `S0` es una clase o estructura), las clases base de `S0` (si `S0` es una clase), `T0` (si `T0` es una clase o estructura) y las clases base de `T0` (si `T0` es una clase).
+*  Busque el conjunto de operadores de conversión de elevación y definidos por el usuario aplicables `U`. Este conjunto consta de los operadores de conversión implícitos y de elevación definidos por el usuario declarados por las clases o Structs en `D` que se convierten de un tipo que abarca o engloba `S` a un tipo englobado o englobado por `T`. Si `U` está vacío, la conversión no está definida y se produce un error en tiempo de compilación.
+*  Busque el tipo de origen más específico, `SX`, de los operadores en `U`:
+    * Si alguno de los operadores de `U` convierte de `S`, se `S``SX`.
+    * De lo contrario, si cualquiera de los operadores de `U` convierte de tipos que abarcan `S`, `SX` es el tipo más abarcado en el conjunto combinado de tipos de origen de esos operadores. Si no se puede encontrar ningún tipo más abarcado, la conversión es ambigua y se produce un error en tiempo de compilación.
+    * De lo contrario, `SX` es el tipo más abarcado en el conjunto combinado de tipos de origen de los operadores de `U`. Si no se encuentra exactamente un tipo más englobado, la conversión es ambigua y se produce un error en tiempo de compilación.
+*  Busque el tipo de destino más específico, `TX`, de los operadores en `U`:
+    * Si alguno de los operadores de `U` convierte en `T`, se `T``TX`.
+    * De lo contrario, si cualquiera de los operadores de `U` convierte en tipos que están englobados por `T`, `TX` es el tipo más abarcado en el conjunto combinado de tipos de destino de esos operadores. Si no se encuentra exactamente un tipo más englobado, la conversión es ambigua y se produce un error en tiempo de compilación.
+    * De lo contrario, `TX` es el tipo más abarcado en el conjunto combinado de tipos de destino de los operadores de `U`. Si no se puede encontrar ningún tipo más abarcado, la conversión es ambigua y se produce un error en tiempo de compilación.
+*  Busque el operador de conversión más específico:
+    * Si `U` contiene exactamente un operador de conversión definido por el usuario que convierte de `SX` a `TX`, éste es el operador de conversión más específico.
+    * De lo contrario, si `U` contiene exactamente un operador de conversión de elevación que convierte de `SX` a `TX`, éste es el operador de conversión más específico.
+    * De lo contrario, la conversión es ambigua y se produce un error en tiempo de compilación.
 *  Por último, aplique la conversión:
-    * Si `S` no `SX`, a continuación, una conversión explícita estándar de `S` a `SX` se lleva a cabo.
+    * Si `S` no se `SX`, se realiza una conversión explícita estándar de `S` a `SX`.
     * Se invoca el operador de conversión definido por el usuario más específico para convertir de `SX` a `TX`.
-    * Si `TX` no `T`, a continuación, una conversión explícita estándar de `TX` a `T` se lleva a cabo.
+    * Si `TX` no se `T`, se realiza una conversión explícita estándar de `TX` a `T`.
 
-## <a name="anonymous-function-conversions"></a>Conversiones de función anónima
+## <a name="anonymous-function-conversions"></a>Conversiones de funciones anónimas
 
-Un *anonymous_method_expression* o *lambda_expression* se clasifica como una función anónima ([expresiones de función anónima](expressions.md#anonymous-function-expressions)). La expresión no tiene un tipo, pero puede convertirse implícitamente a un tipo de árbol de expresión o delegado compatible. En concreto, una función anónima `F` es compatible con un tipo de delegado `D` proporcionado:
+Un *anonymous_method_expression* o *lambda_expression* se clasifica como una función anónima ([expresiones de función anónima](expressions.md#anonymous-function-expressions)). La expresión no tiene un tipo, pero se puede convertir de forma implícita a un tipo de delegado o un tipo de árbol de expresión compatible. En concreto, una función anónima `F` es compatible con un tipo de delegado `D` proporcionado:
 
-*  Si `F` contiene un *anonymous_function_signature*, a continuación, `D` y `F` tienen el mismo número de parámetros.
-*  Si `F` no contiene un *anonymous_function_signature*, a continuación, `D` puede tener cero o más parámetros de cualquier tipo, siempre y cuando ningún parámetro de `D` tiene la `out` modificador de parámetro.
-*  Si `F` tiene una lista de parámetros con tipo explícito, cada parámetro de `D` tiene el mismo tipo y modificadores como el parámetro correspondiente en `F`.
-*  Si `F` tiene una lista de parámetros con tipo implícito, `D` no tiene ningún `ref` o `out` parámetros.
-*  Si el cuerpo de `F` es una expresión y `D` tiene un `void` tipo de valor devuelto o `F` es asincrónico y `D` tiene el tipo de valor devuelto `Task`, entonces, cuando cada parámetro de `F` se le asigna el tipo de la el parámetro correspondiente en `D`, el cuerpo de `F` es una expresión válida (wrt [expresiones](expressions.md)) que se permitirían como un *statement_expression* ([Las instrucciones de expresión](statements.md#expression-statements)).
-*  Si el cuerpo de `F` es un bloque de instrucciones y `D` tiene un `void` tipo de valor devuelto o `F` es asincrónico y `D` tiene el tipo de valor devuelto `Task`, entonces, cuando cada parámetro de `F` se le asigna el tipo de el parámetro correspondiente en `D`, el cuerpo de `F` es un bloque de instrucciones válido (wrt [bloques](statements.md#blocks)) no `return` instrucción especifica una expresión.
-*  Si el cuerpo de `F` es una expresión, y *cualquier* `F` es que no es asincrónico y `D` tiene un tipo de valor devuelto distinto de void `T`, *o* `F` es asincrónico y `D` tiene un tipo de valor devuelto `Task<T>`, entonces, cuando cada parámetro de `F` tiene el tipo del parámetro correspondiente en `D`, el cuerpo de `F` es una expresión válida (wrt [ Las expresiones](expressions.md)) que es implícitamente convertible a `T`.
-*  Si el cuerpo de `F` es un bloque de instrucciones, y *cualquier* `F` es que no es asincrónico y `D` tiene un tipo de valor devuelto distinto de void `T`, *o* `F` es asincrónico y `D` tiene un tipo de valor devuelto `Task<T>`, entonces, cuando cada parámetro de `F` tiene el tipo del parámetro correspondiente en `D`, el cuerpo de `F` es un bloque de instrucciones válido (wrt [bloques ](statements.md#blocks)) con un punto de conexión que no sea accesible en el que cada `return` instrucción especifica una expresión que es implícitamente convertible a `T`.
+*  Si `F` contiene un *anonymous_function_signature*, `D` y `F` tienen el mismo número de parámetros.
+*  Si `F` no contiene un *anonymous_function_signature*, `D` puede tener cero o más parámetros de cualquier tipo, siempre que ningún parámetro de `D` tenga el modificador de parámetro `out`.
+*  Si `F` tiene una lista de parámetros con tipo explícito, cada parámetro de `D` tiene el mismo tipo y modificadores que el parámetro correspondiente en `F`.
+*  Si `F` tiene una lista de parámetros con tipo implícito, `D` no tiene ningún parámetro `ref` o `out`.
+*  Si el cuerpo de `F` es una expresión y `D` tiene un tipo de valor devuelto `void` o `F` es Async y `D` tiene el tipo de valor devuelto `Task`, cuando cada parámetro de `F` recibe el tipo del parámetro correspondiente en `D`, el cuerpo de `F` es una expresión válida (las [expresiones](expressions.md)WRT) que se permitiría como *statement_expression* ([instrucciones de expresión](statements.md#expression-statements)).
+*  Si el cuerpo de `F` es un bloque de instrucciones y `D` tiene un tipo de valor devuelto `void` o `F` es Async y `D` tiene el tipo de valor devuelto `Task`, cuando cada parámetro de `F` recibe el tipo del parámetro correspondiente en `D`, el cuerpo de `F` es un bloque de instrucciones válido (WRT [bloques](statements.md#blocks)) en el que ninguna instrucción `return` especifica una expresión.
+*  Si el cuerpo de `F` es una expresión *y `F` no es Async y `D`* tiene un tipo de valor devuelto distinto de void `T`, *o* `F` es Async y `D` tiene un tipo de valor devuelto `Task<T>`, cuando cada parámetro de `F` recibe el tipo del parámetro correspondiente en `D`, el cuerpo de `F` es una expresión válida (WRT [expresiones](expressions.md)) que es implícitamente convertible a `T`.
+*  Si el cuerpo de `F` es un bloque de instrucciones y *`F` no es asincrónico y `D`* tiene un tipo de valor devuelto distinto de void `T`, *o* `F` es Async y `D` tiene un tipo de valor devuelto `Task<T>`, cuando cada parámetro de `F` recibe el tipo del parámetro correspondiente en `D`, el cuerpo de `F` es un bloque de instrucciones válido (WRT [bloques](statements.md#blocks)) con un punto final no accesible en el que cada instrucción `return` especifica una expresión que se puede convertir implícitamente en `T`.
 
-Para mayor brevedad, esta sección usa la forma abreviada para los tipos de tareas `Task` y `Task<T>` ([funciones asincrónicas](classes.md#async-functions)).
+Por motivos de brevedad, en esta sección se usa la forma abreviada para los tipos de tarea `Task` y `Task<T>` ([funciones asincrónicas](classes.md#async-functions)).
 
-Una expresión lambda `F` es compatible con un tipo de árbol de expresión `Expression<D>` si `F` es compatible con el tipo de delegado `D`. Tenga en cuenta que esto no es aplicable a los métodos anónimos, solo las expresiones lambda.
+Una expresión lambda `F` es compatible con un tipo de árbol de expresión `Expression<D>` si `F` es compatible con el tipo de delegado `D`. Tenga en cuenta que esto no se aplica a los métodos anónimos, solo a las expresiones lambda.
 
-Algunas expresiones lambda no se puede convertir a tipos de árbol de expresión: Aunque la conversión *existe*, se produce un error en tiempo de compilación. Este es el caso si la expresión lambda:
+Ciertas expresiones lambda no se pueden convertir en tipos de árbol de expresión: aunque la conversión *existe*, se produce un error en tiempo de compilación. Este es el caso si la expresión lambda:
 
-*  Tiene un *bloque* cuerpo
-*  Contiene los operadores de asignación simple o compuesta
+*  Tiene un cuerpo de *bloque*
+*  Contiene operadores de asignación simples o compuestos
 *  Contiene una expresión enlazada dinámicamente
-*  Es la asincronía
+*  Async
 
-Los ejemplos siguientes usan un tipo de delegado genérico `Func<A,R>` que representa una función que toma un argumento de tipo `A` y devuelve un valor de tipo `R`:
+En los ejemplos siguientes se usa un tipo de delegado genérico `Func<A,R>` que representa una función que toma un argumento de tipo `A` y devuelve un valor de tipo `R`:
 ```csharp
 delegate R Func<A,R>(A arg);
 ```
@@ -542,25 +543,25 @@ Func<double,int> f3 = x => x + 1;              // Error
 
 Func<int, Task<int>> f4 = async x => x + 1;    // Ok
 ```
-los tipos de parámetro y valor devuelto de cada función anónima se determinan a partir del tipo de la variable al que se asigna la función anónima.
+los tipos de valor devuelto y de parámetro de cada función anónima se determinan a partir del tipo de la variable a la que se asigna la función anónima.
 
-La primera asignación convierte correctamente la función anónima en el tipo de delegado `Func<int,int>` porque, cuando `x` tiene tipo `int`, `x+1` es una expresión válida que sea implícitamente convertible al tipo `int`.
+La primera asignación convierte correctamente la función anónima en el tipo de delegado `Func<int,int>` porque, cuando `x` tiene el tipo `int`, `x+1` es una expresión válida que se pueda convertir implícitamente al tipo `int`.
 
 Del mismo modo, la segunda asignación convierte correctamente la función anónima en el tipo de delegado `Func<int,double>` porque el resultado de `x+1` (de tipo `int`) es implícitamente convertible al tipo `double`.
 
-Sin embargo, la asignación de terceros es un error en tiempo de compilación porque, cuando `x` tiene tipo `double`, el resultado de `x+1` (de tipo `double`) no es implícitamente convertible al tipo `int`.
+Sin embargo, la tercera asignación es un error en tiempo de compilación porque, cuando `x` tiene el tipo `double`, el resultado de `x+1` (de tipo `double`) no se pueden convertir implícitamente al tipo `int`.
 
-El cuarta asignación convierte correctamente la función anónima asincrónico para el tipo de delegado `Func<int, Task<int>>` porque el resultado de `x+1` (de tipo `int`) es implícitamente convertible al tipo de resultado `int` del tipo de tarea `Task<int>`.
+La cuarta asignación convierte correctamente la función asincrónica anónima en el tipo de delegado `Func<int, Task<int>>` porque el resultado de `x+1` (de tipo `int`) es implícitamente convertible al tipo de resultado `int` del tipo de tarea `Task<int>`.
 
-Funciones anónimas pueden influir en la resolución de sobrecarga y participar en la inferencia de tipos. Consulte [miembros de función](expressions.md#function-members) para obtener más detalles.
+Las funciones anónimas pueden influir en la resolución de sobrecarga y participar en la inferencia de tipos. Consulte [miembros de función](expressions.md#function-members) para obtener más detalles.
 
-### <a name="evaluation-of-anonymous-function-conversions-to-delegate-types"></a>Evaluación de función anónima conversiones a tipos de delegado
+### <a name="evaluation-of-anonymous-function-conversions-to-delegate-types"></a>Evaluación de conversiones de funciones anónimas a tipos de delegado
 
-Conversión de una función anónima para un tipo de delegado, genera una instancia de delegado que hace referencia a la función anónima y el conjunto de variables externas capturadas que están activos en el momento de la evaluación (posiblemente vacío). Cuando se invoca el delegado, se ejecuta el cuerpo de la función anónima. Se ejecuta el código en el cuerpo con el conjunto de variables externas capturadas al que hace referencia el delegado.
+La conversión de una función anónima a un tipo de delegado genera una instancia de delegado que hace referencia a la función anónima y al conjunto (posiblemente vacío) de variables externas capturadas que están activas en el momento de la evaluación. Cuando se invoca el delegado, se ejecuta el cuerpo de la función anónima. El código del cuerpo se ejecuta utilizando el conjunto de variables externas capturadas al que hace referencia el delegado.
 
-La lista de invocaciones de un delegado generada a partir de una función anónima contiene una sola entrada. El objeto de destino exacto y el método de destino del delegado se especifican. En concreto, no se especifica si el objeto de destino del delegado es `null`, el `this` valor del miembro de función envolvente o algún otro objeto.
+La lista de invocaciones de un delegado generado a partir de una función anónima contiene una sola entrada. No se especifican el objeto de destino exacto y el método de destino del delegado. En concreto, no se especifica si el objeto de destino del delegado es `null`, el valor `this` del miembro de función envolvente o algún otro objeto.
 
-Las conversiones de funciones anónimas semánticamente idénticas con el mismo conjunto (posiblemente vacía) de instancias de variables externas capturadas en los mismos tipos de delegado se permiten (aunque no es necesario) para devolver la misma instancia de delegado. El término semánticamente idéntico se usa aquí para indicar que la ejecución de las funciones anónimas, en todos los casos, generará el mismo efecto que tiene los mismos argumentos. Esta regla permite que el código como el siguiente que se optimizarán.
+Se permiten las conversiones de funciones anónimas semánticamente idénticas con el mismo conjunto (posiblemente vacío) de instancias de variables externas capturadas en los mismos tipos de delegado (aunque no es necesario) para devolver la misma instancia de delegado. El término semánticamente idéntico se usa aquí para indicar que la ejecución de las funciones anónimas, en todos los casos, produce los mismos efectos dados los mismos argumentos. Esta regla permite optimizar el código como el siguiente.
 
 ```csharp
 delegate double Function(double x);
@@ -581,22 +582,22 @@ class Test
 }
 ```
 
-Puesto que los dos delegados de función anónima tienen igual (vacío) conjunto de variables externas capturadas y puesto que las funciones anónimas son semánticamente idénticas, el compilador puede tener delegados que hacen referencia al mismo método de destino. De hecho, el compilador puede devolver la misma instancia de delegado de ambas expresiones de función anónima.
+Dado que los dos delegados de función anónimos tienen el mismo conjunto (vacío) de variables externas capturadas y como las funciones anónimas son idénticas semánticamente, el compilador puede hacer que los delegados hagan referencia al mismo método de destino. En realidad, el compilador puede devolver la misma instancia de delegado de ambas expresiones de función anónimas.
 
-### <a name="evaluation-of-anonymous-function-conversions-to-expression-tree-types"></a>Evaluación de función anónima conversiones a tipos de árbol de expresión
+### <a name="evaluation-of-anonymous-function-conversions-to-expression-tree-types"></a>Evaluación de conversiones de funciones anónimas a tipos de árbol de expresión
 
-Conversión de una función anónima en un tipo de árbol de expresión genera un árbol de expresión ([tipos de árbol de expresión](types.md#expression-tree-types)). Más concretamente, la evaluación de la conversión de función anónima conduce a la construcción de una estructura de objeto que representa la estructura de la propia función anónima. La estructura de árbol de expresión, así como el proceso exacto para crearlo, precisa son implementación definida.
+La conversión de una función anónima en un tipo de árbol de expresión genera un árbol de expresión ([tipos de árbol de expresión](types.md#expression-tree-types)). Más concretamente, la evaluación de la conversión de funciones anónimas conduce a la construcción de una estructura de objeto que representa la estructura de la propia función anónima. La estructura precisa del árbol de expresión, así como el proceso exacto para crearla, se definen en la implementación.
 
 ### <a name="implementation-example"></a>Ejemplo de implementación
 
-Esta sección describe una posible implementación de las conversiones de función anónima en cuanto a otras construcciones de C#. La implementación que se describen aquí se basa en los mismos principios utilizados por el compilador de C# de Microsoft, pero no es una implementación obligatoria, ni es el único posible. Mencionan brevemente conversiones en árboles de expresión, como su semántica exacta está fuera del ámbito de esta especificación.
+En esta sección se describe una posible implementación de conversiones de funciones anónimas en C# términos de otras construcciones. La implementación que se describe aquí se basa en los mismos principios utilizados por C# el compilador de Microsoft, pero no es una implementación asignada, ni es lo único posible. Solo se mencionan brevemente las conversiones a los árboles de expresión, ya que su semántica exacta está fuera del ámbito de esta especificación.
 
-El resto de esta sección proporciona varios ejemplos de código que contiene las funciones anónimas con diferentes características. Para cada ejemplo, se proporciona una traducción correspondiente al código que usa solo otras construcciones de C#. En los ejemplos, el identificador `D` supone representan el siguiente tipo de delegado:
+En el resto de esta sección se proporcionan varios ejemplos de código que contiene funciones anónimas con diferentes características. En cada ejemplo, se proporciona una traducción correspondiente al código que usa C# solo otras construcciones. En los ejemplos, se supone que el identificador `D` representa el siguiente tipo de delegado:
 ```csharp
 public delegate void D();
 ```
 
-La forma más sencilla de una función anónima es uno que no captura variables externas:
+La forma más sencilla de una función anónima es aquella que no captura variables externas:
 ```csharp
 class Test
 {
@@ -606,7 +607,7 @@ class Test
 }
 ```
 
-Esto se puede traducir a una instancia de delegado que hace referencia a un método estático generado por el compilador en el que se coloca el código de la función anónima:
+Esto se puede traducir a una creación de instancias de delegado que hace referencia a un método estático generado por el compilador en el que se coloca el código de la función anónima:
 ```csharp
 class Test
 {
@@ -620,7 +621,7 @@ class Test
 }
 ```
 
-En el ejemplo siguiente, la función anónima, hace referencia a miembros de instancia de `this`:
+En el ejemplo siguiente, la función anónima hace referencia a los miembros de instancia de `this`:
 ```csharp
 class Test
 {
@@ -632,7 +633,7 @@ class Test
 }
 ```
 
-Esto se puede traducir a un método de instancia generado por el compilador que contiene el código de la función anónima:
+Esto puede traducirse a un método de instancia generado por el compilador que contenga el código de la función anónima:
 ```csharp
 class Test
 {
@@ -659,7 +660,7 @@ class Test
 }
 ```
 
-La duración de la variable local debe ser ampliada al menos la vigencia del delegado de función anónima. Esto puede lograrse mediante "uno" de la variable local en un campo de una clase generada por compilador. Creación de instancias de la variable local ([creación de instancias de las variables locales](expressions.md#instantiation-of-local-variables)), a continuación, corresponde a la creación de una instancia de la clase generada por compilador y el acceso a la variable local corresponde al acceso a un campo en la instancia de la clase generada por compilador. Además, la función anónima se convierte en un método de instancia de la clase generada por compilador:
+La duración de la variable local debe extenderse ahora a al menos la duración del delegado de función anónima. Esto puede lograrse mediante la "activación" de la variable local en un campo de una clase generada por el compilador. La creación de instancias de la variable local (creación[de instancias de variables locales](expressions.md#instantiation-of-local-variables)) corresponde entonces a la creación de una instancia de la clase generada por el compilador y el acceso a la variable local corresponde al acceso a un campo en la instancia de la clase generada por el compilador. Además, la función anónima se convierte en un método de instancia de la clase generada por el compilador:
 ```csharp
 class Test
 {
@@ -680,7 +681,7 @@ class Test
 }
 ```
 
-Por último, la siguiente anónima función capturas `this` , así como dos variables locales con diferentes períodos de duración:
+Por último, la función anónima siguiente captura `this` así como dos variables locales con distintas duraciones:
 ```csharp
 class Test
 {
@@ -696,7 +697,7 @@ class Test
 }
 ```
 
-En este caso, se crea una clase generada por compilador para cada instrucción bloque en que se capturan las variables locales que las variables locales en los distintos bloques pueden tengan duraciones independientes. Una instancia de `__Locals2`, la clase generada por compilador para el bloque de instrucciones internas, contiene la variable local `z` y un campo que hace referencia a una instancia de `__Locals1`.  Una instancia de `__Locals1`, la clase generada por compilador para el bloque de instrucción externa, contiene la variable local `y` y un campo que hace referencia a `this` del miembro de función envolvente. Con estas estructuras de datos, es posible obtener acceso a todas capturar variables externas a través de una instancia de `__Local2`, y el código de la función anónima, por tanto, se puede implementar como un método de instancia de esa clase.
+En este caso, se crea una clase generada por el compilador para cada bloque de instrucciones en el que se capturan las variables locales de forma que las variables locales de los diferentes bloques puedan tener duraciones independientes. Una instancia de `__Locals2`, la clase generada por el compilador para el bloque de instrucciones interno, contiene la variable local `z` y un campo que hace referencia a una instancia de `__Locals1`.  Una instancia de `__Locals1`, la clase generada por el compilador para el bloque de instrucciones exterior, contiene la variable local `y` y un campo que hace referencia a `this` del miembro de función envolvente. Con estas estructuras de datos es posible llegar a todas las variables externas capturadas a través de una instancia de `__Local2`, y el código de la función anónima se puede implementar como un método de instancia de esa clase.
 
 ```csharp
 class Test
@@ -731,25 +732,25 @@ class Test
 }
 ```
 
-También puede utilizar la misma técnica que se aplica aquí para capturar las variables locales al convertir las funciones anónimas en árboles de expresión: Referencias a los objetos generados por el compilador pueden almacenarse en el árbol de expresión y el acceso a las variables locales se puede representar como campo tiene acceso a estos objetos. La ventaja de este enfoque es que permite que las variables locales "elevación" para compartirse entre los delegados y árboles de expresión.
+También se puede usar la misma técnica que se aplica aquí para capturar variables locales al convertir funciones anónimas en árboles de expresión: las referencias a los objetos generados por el compilador se pueden almacenar en el árbol de expresión y el acceso a las variables locales puede ser se representa como accesos de campo en estos objetos. La ventaja de este enfoque es que permite compartir las variables locales "levantadas" entre los delegados y los árboles de expresión.
 
-## <a name="method-group-conversions"></a>Conversiones de métodos de grupo
+## <a name="method-group-conversions"></a>Conversiones de grupos de métodos
 
-Una conversión implícita ([conversiones implícitas](conversions.md#implicit-conversions)) existe desde un grupo de métodos ([clasificaciones de expresiones](expressions.md#expression-classifications)) a un tipo delegado compatible. Dado un tipo de delegado `D` y una expresión `E` que se clasifica como un grupo de métodos, existe una conversión implícita de `E` a `D` si `E` contiene al menos un método que es aplicable en su forma normal () [Miembro de función aplicable](expressions.md#applicable-function-member)) a una lista de argumentos que se construye mediante el uso de los tipos de parámetros y modificadores de `D`, como se describe en la siguiente.
+Existe una conversión implícita ([conversiones implícitas](conversions.md#implicit-conversions)) de un grupo de métodos ([clasificaciones de expresión](expressions.md#expression-classifications)) a un tipo de delegado compatible. Dado un tipo de delegado `D` y una expresión `E` que se clasifica como un grupo de métodos, existe una conversión implícita de `E` a `D` si `E` contiene al menos un método que es aplicable en su forma normal ([miembro de función aplicable](expressions.md#applicable-function-member)) a una lista de argumentos construida mediante el uso de los tipos de parámetros y modificadores de `D`, como se describe en el siguiente.
 
-La aplicación en tiempo de compilación de una conversión de un grupo de métodos `E` a un tipo delegado `D` se describe en la siguiente. Tenga en cuenta que la existencia de una conversión implícita de `E` a `D` no garantiza que la aplicación en tiempo de compilación de la conversión se realizará correctamente sin errores.
+La aplicación en tiempo de compilación de una conversión de un grupo de métodos `E` a un tipo de delegado `D` se describe en lo siguiente. Tenga en cuenta que la existencia de una conversión implícita de `E` a `D` no garantiza que la aplicación en tiempo de compilación de la conversión se realice correctamente sin errores.
 
-*  Un único método `M` se selecciona correspondiente a una invocación de método ([las invocaciones de método](expressions.md#method-invocations)) del formulario `E(A)`, con las siguientes modificaciones:
-    * La lista de argumentos `A` es una lista de expresiones, cada uno de ellos clasificadas como una variable y con el tipo y el modificador (`ref` o `out`) del parámetro correspondiente en el *formal_parameter_list* de `D`.
-    * Los métodos de candidato considerados son solo aquellos métodos que son aplicables en su forma normal ([miembro de función aplicable](expressions.md#applicable-function-member)), no los aplicables únicamente en su forma expandida.
-*  Si el algoritmo de [las invocaciones de método](expressions.md#method-invocations) produce un error, a continuación, se produce un error de tiempo de compilación. En caso contrario, el algoritmo genera un único método mejor `M` tener el mismo número de parámetros como `D` y la conversión se considera que existe.
-*  El método seleccionado `M` deben ser compatibles ([compatibilidad de delegado](delegates.md#delegate-compatibility)) con el tipo de delegado `D`, o en caso contrario, se produce un error en tiempo de compilación.
-*  Si el método seleccionado `M` es un método de instancia, la expresión de instancia asociada `E` determina el objeto de destino del delegado.
-*  Si el método seleccionado M es un método de extensión que se indica mediante un acceso de miembro en una expresión de instancia, esa expresión de instancia determina el objeto de destino del delegado.
-*  El resultado de la conversión es un valor de tipo `D`, es decir, un delegado recién creado que hace referencia al objeto de método y el destino seleccionado.
-*  Tenga en cuenta que este proceso puede dar lugar a la creación de un delegado a un método de extensión, si el algoritmo de [las invocaciones de método](expressions.md#method-invocations) no puede encontrar un método de instancia, pero se realiza correctamente en el procesamiento de la invocación de `E(A)` como una extensión invocación de método ([las invocaciones de método de extensión](expressions.md#extension-method-invocations)). Un delegado creado, por tanto, captura el método de extensión, así como su primer argumento.
+*  Se selecciona un único método `M` que corresponde a una invocación de método ([invocaciones de método](expressions.md#method-invocations)) del formulario `E(A)`, con las siguientes modificaciones:
+    * La lista de argumentos `A` es una lista de expresiones, cada una clasificada como una variable y con el tipo y el modificador (`ref` o `out`) del parámetro correspondiente en la *formal_parameter_list* de `D`.
+    * Los métodos candidatos considerados solo son aquellos que se aplican en su forma normal ([miembro de función aplicable](expressions.md#applicable-function-member)), no los que solo se aplican en su forma expandida.
+*  Si el algoritmo de las [invocaciones de método](expressions.md#method-invocations) produce un error, se produce un error en tiempo de compilación. De lo contrario, el algoritmo genera un único método mejor `M` tener el mismo número de parámetros que `D` y se considera que la conversión existe.
+*  El método seleccionado `M` debe ser compatible con el tipo[de delegado `D`](delegates.md#delegate-compatibility), o de lo contrario, se producirá un error en tiempo de compilación.
+*  Si el método seleccionado `M` es un método de instancia, la expresión de instancia asociada a `E` determina el objeto de destino del delegado.
+*  Si el método seleccionado M es un método de extensión que se indica mediante un acceso a miembro en una expresión de instancia, esa expresión de instancia determina el objeto de destino del delegado.
+*  El resultado de la conversión es un valor de tipo `D`, es decir, un delegado recién creado que hace referencia al método seleccionado y al objeto de destino.
+*  Tenga en cuenta que este proceso puede dar lugar a la creación de un delegado a un método de extensión, si el algoritmo de las [invocaciones de método](expressions.md#method-invocations) no encuentra un método de instancia pero realiza correctamente el procesamiento de la invocación de `E(A)` como una invocación de método de extensión ([invocaciones de método de extensión](expressions.md#extension-method-invocations)). Por lo tanto, un delegado creado captura el método de extensión, así como su primer argumento.
 
-El ejemplo siguiente muestra las conversiones de grupo de métodos:
+En el ejemplo siguiente se muestran las conversiones de grupos de métodos:
 ```csharp
 delegate string D1(object o);
 
@@ -778,31 +779,31 @@ class Test
 
 La asignación a `d1` convierte implícitamente el grupo de métodos `F` en un valor de tipo `D1`.
 
-La asignación a `d2` muestra cómo es posible crear un delegado a un método que tiene tipos de parámetro menos derivados (contravariante) y una más derivado a tipo de valor devuelto (covariante).
+La asignación a `d2` muestra cómo se puede crear un delegado para un método que tiene tipos de parámetro menos derivados (contravariante) y un tipo de valor devuelto más derivado (covariante).
 
-La asignación a `d3` muestra cómo no existe ninguna conversión si el método no es aplicable.
+La asignación a `d3` muestra el modo en que no existe ninguna conversión si el método no es aplicable.
 
-La asignación a `d4` se muestra cómo el método debe ser aplicable en su forma normal.
+La asignación a `d4` muestra cómo el método debe ser aplicable en su forma normal.
 
-La asignación a `d5` se muestra cómo se permiten los tipos de parámetro y valor devuelto del método y delegado difieran solo para los tipos de referencia.
+La asignación a `d5` muestra cómo se permite que los tipos de parámetro y de valor devuelto del delegado y el método difieran solo para los tipos de referencia.
 
-Al igual que con todas las otras conversiones implícitas y explícitas, el operador de conversión puede usarse para realizar explícitamente la conversión de grupos de un método. Por lo tanto, el ejemplo
+Como con todas las demás conversiones implícitas y explícitas, el operador de conversión se puede usar para realizar explícitamente una conversión de grupo de métodos. Por lo tanto, el ejemplo
 ```csharp
 object obj = new EventHandler(myDialog.OkClick);
 ```
-en su lugar se podría escribir
+en su lugar, se puede escribir
 ```csharp
 object obj = (EventHandler)myDialog.OkClick;
 ```
 
-Grupos de métodos pueden influir en la resolución de sobrecarga y participar en la inferencia de tipos. Consulte [miembros de función](expressions.md#function-members) para obtener más detalles.
+Los grupos de métodos pueden influir en la resolución de sobrecarga y participar en la inferencia de tipos. Consulte [miembros de función](expressions.md#function-members) para obtener más detalles.
 
-La evaluación de tiempo de ejecución de la conversión de grupos de un método continúa como sigue:
+La evaluación en tiempo de ejecución de una conversión de grupo de métodos continúa como sigue:
 
-*  Si el método seleccionado en tiempo de compilación es un método de instancia, o es un método de extensión que se obtiene acceso como un método de instancia, el objeto de destino del delegado se determina a partir de la expresión de instancia asociada `E`:
-    * Se evalúa la expresión de instancia. Si esta evaluación, produce una excepción, no se ejecuta ningún paso adicional.
-    * Si la expresión de instancia es de un *reference_type*, el valor calculado por la expresión de instancia se convierte en el objeto de destino. Si el método seleccionado es un método de instancia y el objeto de destino es `null`, un `System.NullReferenceException` se inicia y no se ejecuta ningún paso adicional.
-    * Si la expresión de instancia es de un *value_type*, una operación de conversión boxing ([conversiones Boxing](types.md#boxing-conversions)) se realiza para convertir el valor a un objeto, y este objeto se convierte en el objeto de destino.
-*  En caso contrario, el método seleccionado es parte de una llamada al método estático y el objeto de destino del delegado es `null`.
-*  Una nueva instancia del tipo de delegado `D` está asignada. Si no hay suficiente memoria disponible para asignar la nueva instancia, un `System.OutOfMemoryException` se inicia y no se ejecuta ningún paso adicional.
+*  Si el método seleccionado en tiempo de compilación es un método de instancia, o es un método de extensión al que se tiene acceso como un método de instancia, el objeto de destino del delegado se determina a partir de la expresión de instancia asociada a `E`:
+    * Se evalúa la expresión de instancia. Si esta evaluación provoca una excepción, no se ejecuta ningún paso más.
+    * Si la expresión de instancia es de un *reference_type*, el valor calculado por la expresión de instancia se convierte en el objeto de destino. Si el método seleccionado es un método de instancia y el objeto de destino es `null`, se produce una `System.NullReferenceException` y no se ejecuta ningún otro paso.
+    * Si la expresión de instancia es de un *value_type*, se realiza una operación de conversión boxing ([conversiones boxing](types.md#boxing-conversions)) para convertir el valor en un objeto y este objeto se convierte en el objeto de destino.
+*  De lo contrario, el método seleccionado forma parte de una llamada al método estático y el objeto de destino del delegado es `null`.
+*  Se asigna una nueva instancia del tipo de delegado `D`. Si no hay suficiente memoria disponible para asignar la nueva instancia, se produce una `System.OutOfMemoryException` y no se ejecuta ningún otro paso.
 *  La nueva instancia de delegado se inicializa con una referencia al método que se determinó en tiempo de compilación y una referencia al objeto de destino calculado anteriormente.

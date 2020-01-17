@@ -1,9 +1,9 @@
 ---
 ms.openlocfilehash: f61039abd6bd557ac0ea625e6aac1c8bafa57b02
-ms.sourcegitcommit: 892af9016b3317a8fae12d195014dc38ba51cf16
+ms.sourcegitcommit: e134bb7058e9848120b93b345f96d6ac0cb8c815
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/01/2019
+ms.lasthandoff: 01/17/2020
 ms.locfileid: "71704088"
 ---
 # <a name="expressions"></a>Expresiones
@@ -122,9 +122,9 @@ Cuando una expresión contiene varios operadores, la ***precedencia*** de los op
 
 En la tabla siguiente se resumen todos los operadores en orden de prioridad, de mayor a menor:
 
-| __Sección__                                                                                   | __Categoría__                | __Operadores__ | 
+| __Section__                                                                                   | __Categoría__                | __Operadores__ | 
 |-----------------------------------------------------------------------------------------------|-----------------------------|---------------|
-| [Expresiones primarias](expressions.md#primary-expressions)                                     | Principal                     | `x.y`  `f(x)`  `a[x]`  `x++`  `x--`  `new`  `typeof`  `default`  `checked`  `unchecked`  `delegate` | 
+| [Expresiones primarias](expressions.md#primary-expressions)                                     | Primary                     | `x.y`  `f(x)`  `a[x]`  `x++`  `x--`  `new`  `typeof`  `default`  `checked`  `unchecked`  `delegate` | 
 | [Operadores unarios](expressions.md#unary-operators)                                             | Unario                       | `+`  `-`  `!`  `~`  `++x`  `--x`  `(T)x` | 
 | [Operadores aritméticos](expressions.md#arithmetic-operators)                                   | Multiplicativo              | `*`  `/`  `%` | 
 | [Operadores aritméticos](expressions.md#arithmetic-operators)                                   | Aditivo                    | `+`  `-`      | 
@@ -137,7 +137,7 @@ En la tabla siguiente se resumen todos los operadores en orden de prioridad, de 
 | [Operadores lógicos condicionales](expressions.md#conditional-logical-operators)                 | AND condicional             | `&&`          | 
 | [Operadores lógicos condicionales](expressions.md#conditional-logical-operators)                 | OR condicional              | <code>&#124;&#124;</code>          | 
 | [Operador de uso combinado de NULL](expressions.md#the-null-coalescing-operator)                   | Uso combinado de NULL             | `??`          | 
-| [Operador condicional](expressions.md#conditional-operator)                                   | Condicional                 | `?:`          | 
+| [Operador condicional](expressions.md#conditional-operator)                                   | Acceso                 | `?:`          | 
 | [Operadores de asignación](expressions.md#assignment-operators), [expresiones de función anónimas](expressions.md#anonymous-function-expressions)  | Asignación y expresión lambda | `=`  `*=`  `/=`  `%=`  `+=`  `-=`  `<<=`  `>>=`  `&=`  `^=`  <code>&#124;=</code>  `=>` | 
 
 Cuando se produce un operando entre dos operadores con la misma prioridad, la asociatividad de los operadores controla el orden en el que se realizan las operaciones:
@@ -254,7 +254,7 @@ Tenga en cuenta también que no es posible que un operando sea de tipo `ulong` c
 
 En los dos casos anteriores, se puede usar una expresión de conversión para convertir explícitamente un operando en un tipo que sea compatible con el otro operando.
 
-en el ejemplo
+En el ejemplo
 ```csharp
 decimal AddPercent(decimal x, double percent) {
     return x * (1.0 + percent / 100.0);
@@ -351,7 +351,7 @@ Los miembros de función son miembros que contienen instrucciones ejecutables. L
 
 *  Métodos
 *  Propiedades
-*  Eventos
+*  eventos
 *  Indizadores
 *  Operadores definidos por el usuario
 *  Constructores de instancias
@@ -492,7 +492,7 @@ x = 0, y = 1, z = 2
 x = 4, y = -1, z = 3
 ```
 
-Las reglas de covarianza de matriz ([covarianza de matriz](arrays.md#array-covariance)) permiten que un valor de un tipo de matriz `A[]` sea una referencia a una instancia de un tipo de matriz `B[]`, siempre que exista una conversión de referencia implícita de `B` a `A`. Debido a estas reglas, cuando un elemento de matriz de un *reference_type* se pasa como parámetro de referencia o de salida, se requiere una comprobación en tiempo de ejecución para asegurarse de que el tipo de elemento real de la matriz es idéntico al del parámetro. en el ejemplo
+Las reglas de covarianza de matriz ([covarianza de matriz](arrays.md#array-covariance)) permiten que un valor de un tipo de matriz `A[]` sea una referencia a una instancia de un tipo de matriz `B[]`, siempre que exista una conversión de referencia implícita de `B` a `A`. Debido a estas reglas, cuando un elemento de matriz de un *reference_type* se pasa como parámetro de referencia o de salida, se requiere una comprobación en tiempo de ejecución para asegurarse de que el tipo de elemento real de la matriz es idéntico al del parámetro. En el ejemplo
 ```csharp
 class Test
 {
@@ -938,13 +938,13 @@ El procesamiento en tiempo de ejecución de una invocación de miembro de funci�
 
 *  Si `M` es un miembro de función estático:
    * La lista de argumentos se evalúa como se describe en [listas de argumentos](expressions.md#argument-lists).
-   * `M` se invoca.
+   * Se invoca a `M`.
 
 *  Si `M` es un miembro de función de instancia declarado en un *value_type*:
    * `E` se evalúa. Si esta evaluación provoca una excepción, no se ejecuta ningún paso más.
    * Si `E` no está clasificado como una variable, se crea una variable local temporal de tipo de `E`y se asigna el valor de `E` a esa variable. a continuación, `E` se reclasifica como una referencia a esa variable local temporal. La variable temporal es accesible como `this` dentro de `M`, pero no de otra manera. Por lo tanto, solo cuando `E` es una variable verdadera, el autor de la llamada puede observar los cambios que `M` realiza en `this`.
    * La lista de argumentos se evalúa como se describe en [listas de argumentos](expressions.md#argument-lists).
-   * `M` se invoca. La variable a la que hace referencia `E` se convierte en la variable a la que hace referencia `this`.
+   * Se invoca a `M`. La variable a la que hace referencia `E` se convierte en la variable a la que hace referencia `this`.
 
 *  Si `M` es un miembro de función de instancia declarado en un *reference_type*:
    * `E` se evalúa. Si esta evaluación provoca una excepción, no se ejecuta ningún paso más.
@@ -1967,7 +1967,7 @@ La lista de invocaciones de un delegado se determina cuando se crea una instanci
 
 No es posible crear un delegado que haga referencia a una propiedad, un indexador, un operador definido por el usuario, un constructor de instancia, un destructor o un constructor estático.
 
-Como se describió anteriormente, cuando se crea un delegado a partir de un grupo de métodos, la lista de parámetros formales y el tipo de valor devuelto del delegado determinan cuál de los métodos sobrecargados se deben seleccionar. en el ejemplo
+Como se describió anteriormente, cuando se crea un delegado a partir de un grupo de métodos, la lista de parámetros formales y el tipo de valor devuelto del delegado determinan cuál de los métodos sobrecargados se deben seleccionar. En el ejemplo
 ```csharp
 delegate double DoubleFunc(double x);
 
@@ -2048,7 +2048,7 @@ El compilador genera automáticamente los nombres de un tipo anónimo y del par�
 
 En el mismo programa, dos inicializadores de objeto anónimo que especifican una secuencia de propiedades de los mismos nombres y tipos en tiempo de compilación en el mismo orden generarán instancias del mismo tipo anónimo.
 
-en el ejemplo
+En el ejemplo
 ```csharp
 var p1 = new { Name = "Lawnmower", Price = 495.00 };
 var p2 = new { Name = "Shovel", Price = 26.95 };
@@ -2195,7 +2195,7 @@ En el caso de expresiones constantes (expresiones que se pueden evaluar por comp
 
 El cuerpo de una función anónima no se ve afectado por `checked` o `unchecked` contextos en los que se produce la función anónima.
 
-en el ejemplo
+En el ejemplo
 ```csharp
 class Test
 {
@@ -2217,7 +2217,7 @@ class Test
 ```
 no se detectan errores en tiempo de compilación, ya que ninguna de las expresiones se puede evaluar en tiempo de compilación. En tiempo de ejecución, el método `F` produce una `System.OverflowException`y el método `G` devuelve-727379968 (los 32 bits inferiores del resultado fuera del intervalo). El comportamiento del método `H` depende del contexto de comprobación de desbordamiento predeterminado para la compilación, pero es igual que `F` o igual que `G`.
 
-en el ejemplo
+En el ejemplo
 ```csharp
 class Test
 {
@@ -2239,7 +2239,7 @@ class Test
 ```
 los desbordamientos que se producen al evaluar las expresiones constantes en `F` y `H` provocan que se notifiquen los errores en tiempo de compilación porque las expresiones se evalúan en un contexto de `checked`. También se produce un desbordamiento al evaluar la expresión constante en `G`, pero como la evaluación tiene lugar en un contexto de `unchecked`, no se genera el desbordamiento.
 
-Los operadores `checked` y `unchecked` solo afectan al contexto de comprobación de desbordamiento para las operaciones que están contenidas textualmente en los tokens "`(`" y "`)`". Los operadores no tienen ningún efecto en los miembros de función que se invocan como resultado de evaluar la expresión contenida. en el ejemplo
+Los operadores `checked` y `unchecked` solo afectan al contexto de comprobación de desbordamiento para las operaciones que están contenidas textualmente en los tokens "`(`" y "`)`". Los operadores no tienen ningún efecto en los miembros de función que se invocan como resultado de evaluar la expresión contenida. En el ejemplo
 ```csharp
 class Test
 {
@@ -2434,7 +2434,7 @@ y suponiendo que el tipo de la invocación final no es un tipo de valor que no a
 ```csharp
 var x = (a.b == null) ? null : (a.b[0] == null) ? null : a.b[0].c();
 ```
-Salvo que `a.b` y `a.b[0]` se evalúan solo una vez.
+salvo que `a.b` y `a.b[0]` se evalúan solo una vez.
 
 #### <a name="null-conditional-expressions-as-projection-initializers"></a>Expresiones condicionales NULL como inicializadores de proyección
 
@@ -2708,7 +2708,7 @@ A continuación se enumeran los operadores de multiplicación predefinidos. Todo
 
    |      |      |      |     |     |      |      |     |
    |:----:|-----:|:----:|:---:|:---:|:----:|:----:|:----|
-   |      | \+ y   | -y   | +0  | -0  | +inf | -inf | NaN | 
+   |      | +y   | -y   | +0  | -0  | +inf | -inf | NaN | 
    | +x   | +z   | -z   | +0  | -0  | +inf | -inf | NaN | 
    | -x   | -z   | +z   | -0  | +0  | -inf | +inf | NaN | 
    | +0   | +0   | -0   | +0  | -0  | NaN  | NaN  | NaN | 
@@ -2760,7 +2760,7 @@ A continuación se enumeran los operadores de división predefinidos. Todos los 
 
    |      |      |      |      |      |      |      |      |
    |:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
-   |      | \+ y   | -y   | +0   | -0   | +inf | -inf | NaN  | 
+   |      | +y   | -y   | +0   | -0   | +inf | -inf | NaN  | 
    | +x   | +z   | -z   | +inf | -inf | +0   | -0   | NaN  | 
    | -x   | -z   | +z   | -inf | +inf | -0   | +0   | NaN  | 
    | +0   | +0   | -0   | NaN  | NaN  | +0   | -0   | NaN  | 
@@ -2810,7 +2810,7 @@ A continuación se enumeran los operadores de resto predefinidos. Todos los oper
 
    |      |      |      |      |      |      |      |      |
    |:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
-   |      | \+ y   | -y   | +0   | -0   | +inf | -inf | NaN  | 
+   |      | +y   | -y   | +0   | -0   | +inf | -inf | NaN  | 
    | +x   | +z   | +z   | NaN  | NaN  | x    | x    | NaN  | 
    | -x   | -z   | -z   | NaN  | NaN  | -x   | -x   | NaN  | 
    | +0   | +0   | +0   | NaN  | NaN  | +0   | +0   | NaN  | 
@@ -2858,10 +2858,10 @@ A continuación se enumeran los operadores de suma predefinidos. En el caso de l
 
    |      |      |      |      |      |      |      |
    |:----:|:----:|:----:|:----:|:----:|:----:|:----:|
-   |      | y    | +0   | -0   | +inf | -inf | NaN  | 
+   |      | s    | +0   | -0   | +inf | -inf | NaN  | 
    | x    | z    | x    | x    | +inf | -inf | NaN  | 
-   | +0   | y    | +0   | +0   | +inf | -inf | NaN  | 
-   | -0   | y    | +0   | -0   | +inf | -inf | NaN  | 
+   | +0   | s    | +0   | +0   | +inf | -inf | NaN  | 
+   | -0   | s    | +0   | -0   | +inf | -inf | NaN  | 
    | +inf | +inf | +inf | +inf | +inf | NaN  | NaN  | 
    | -inf | -inf | -inf | -inf | NaN  | -inf | NaN  | 
    | NaN  | NaN  | NaN  | NaN  | NaN  | NaN  | NaN  | 
@@ -2951,7 +2951,7 @@ A continuación se enumeran los operadores de resta predefinidos. Todos los oper
 
    |      |      |      |      |      |      |     |
    |:----:|:----:|:----:|:----:|:----:|:----:|:---:|
-   |      | y    | +0   | -0   | +inf | -inf | NaN | 
+   |      | s    | +0   | -0   | +inf | -inf | NaN | 
    | x    | z    | x    | x    | -inf | +inf | NaN | 
    | +0   | -y   | +0   | +0   | -inf | +inf | NaN | 
    | -0   | -y   | -0   | +0   | -inf | +inf | NaN | 
@@ -3115,7 +3115,7 @@ En el caso de una operación con el formato `x` *op* `y`, donde *OP* es un opera
 Los operadores de comparación predefinidos se describen en las secciones siguientes. Todos los operadores de comparación predefinidos devuelven un resultado de tipo `bool`, como se describe en la tabla siguiente.
 
 
-| __Sesión__ | __Resultado__                                                       |
+| __Operación__ | __Resultado__                                                       |
 |---------------|------------------------------------------------------------------|
 | `x == y`      | `true` si `x` es igual a `y`, `false` de lo contrario                 | 
 | `x != y`      | `true` si `x` no es igual a `y`, `false` de lo contrario             | 
@@ -3220,9 +3220,9 @@ bool operator ==(bool x, bool y);
 bool operator !=(bool x, bool y);
 ```
 
-El resultado de la `==` se `true` si `x` y `y` son `true` o si `x` y `y`.`false` De lo contrario, el resultado es `false`.
+El resultado de la `==` se `true` si `x` y `y` son `true` o si `x` y `y`. De lo contrario, el resultado es `false`.
 
-El resultado de la `!=` se `false` si `x` y `y` son `true` o si `x` y `y`.`false` De lo contrario, el resultado es `true`. Cuando los operandos son del tipo `bool`, el operador `!=` produce el mismo resultado que el operador `^`.
+El resultado de la `!=` se `false` si `x` y `y` son `true` o si `x` y `y`. De lo contrario, el resultado es `true`. Cuando los operandos son del tipo `bool`, el operador `!=` produce el mismo resultado que el operador `^`.
 
 ### <a name="enumeration-comparison-operators"></a>Operadores de comparación de enumeración
 
@@ -3404,7 +3404,7 @@ E is T ? (T)(object)(E) : (T)null
 
 Tenga en cuenta que algunas conversiones, como las conversiones definidas por el usuario, no son posibles con el operador `as` y, en su lugar, deben realizarse mediante expresiones de conversión.
 
-en el ejemplo
+En el ejemplo
 ```csharp
 class X
 {
@@ -3546,7 +3546,7 @@ Los operadores `&&` y `||` son versiones condicionales de los operadores `&` y `
 
 Si un operando de un operador lógico condicional tiene el tipo en tiempo de compilación `dynamic`, la expresión está enlazada dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el tipo en tiempo de compilación de la expresión es `dynamic`y la resolución que se describe a continuación se realiza en tiempo de ejecución mediante el tipo en tiempo de ejecución de los operandos que tienen el tipo en tiempo de compilación `dynamic`.
 
-Una operación con el formato `x && y` o `x || y` se procesa aplicando la resolución de sobrecarga ([resolución de sobrecarga del operador binario](expressions.md#binary-operator-overload-resolution)) como si la operación se hubiera escrito `x & y` o `x | y`. A
+Una operación con el formato `x && y` o `x || y` se procesa aplicando la resolución de sobrecarga ([resolución de sobrecarga del operador binario](expressions.md#binary-operator-overload-resolution)) como si la operación se hubiera escrito `x & y` o `x | y`. A continuación,
 
 *  Si la resolución de sobrecarga no encuentra un único operador mejor, o si la resolución de sobrecarga selecciona uno de los operadores lógicos de enteros predefinidos, se produce un error en tiempo de enlace.
 *  De lo contrario, si el operador seleccionado es uno de los operadores lógicos booleanos predefinidos ([operadores lógicos booleanos](expressions.md#boolean-logical-operators)) o los operadores lógicos booleanos que aceptan valores NULL (operadores lógicos[booleanos que aceptan valores NULL](expressions.md#nullable-boolean-logical-operators)), la operación se procesa como se describe en [operadores lógicos condicionales booleanos](expressions.md#boolean-conditional-logical-operators).
@@ -3813,7 +3813,7 @@ Cualquier variable local, parámetro de valor o matriz de parámetros cuyo ámbi
 
 Cuando una función anónima hace referencia a una variable externa, se dice que la función anónima ha ***capturado*** la variable externa. Normalmente, la duración de una variable local se limita a la ejecución del bloque o la instrucción con la que está asociada ([variables locales](variables.md#local-variables)). Sin embargo, la duración de una variable externa capturada se extiende al menos hasta que el delegado o el árbol de expresión creado a partir de la función anónima sea válido para la recolección de elementos no utilizados.
 
-en el ejemplo
+En el ejemplo
 ```csharp
 using System;
 
@@ -4669,7 +4669,7 @@ El procesamiento en tiempo de ejecución de una asignación simple del formulari
    * `y` se evalúa y, si es necesario, se convierte al tipo de `x` a través de una conversión implícita ([conversiones implícitas](conversions.md#implicit-conversions)).
    * El descriptor de acceso `set` de `x` se invoca con el valor calculado para `y` como su `value` argumento.
 
-Las reglas de covarianza de matriz ([covarianza de matriz](arrays.md#array-covariance)) permiten que un valor de un tipo de matriz `A[]` sea una referencia a una instancia de un tipo de matriz `B[]`, siempre que exista una conversión de referencia implícita de `B` a `A`. Debido a estas reglas, la asignación a un elemento de matriz de un *reference_type* requiere una comprobación en tiempo de ejecución para asegurarse de que el valor que se está asignando es compatible con la instancia de la matriz. en el ejemplo
+Las reglas de covarianza de matriz ([covarianza de matriz](arrays.md#array-covariance)) permiten que un valor de un tipo de matriz `A[]` sea una referencia a una instancia de un tipo de matriz `B[]`, siempre que exista una conversión de referencia implícita de `B` a `A`. Debido a estas reglas, la asignación a un elemento de matriz de un *reference_type* requiere una comprobación en tiempo de ejecución para asegurarse de que el valor que se está asignando es compatible con la instancia de la matriz. En el ejemplo
 ```csharp
 string[] sa = new string[10];
 object[] oa = sa;
@@ -4747,7 +4747,7 @@ las asignaciones no son válidas, ya que `r.A` y `r.B` no son variables.
 
 Si el operando izquierdo de una asignación compuesta tiene el formato `E.P` o `E[Ei]` donde `E` tiene el tipo en tiempo de compilación `dynamic`, la asignación está enlazada dinámicamente ([enlace dinámico](expressions.md#dynamic-binding)). En este caso, el tipo en tiempo de compilación de la expresión de asignación es `dynamic`y la resolución que se describe a continuación se realiza en tiempo de ejecución en función del tipo de `E`en tiempo de ejecución.
 
-Una operación con el formato `x op= y` se procesa mediante la aplicación de la resolución de sobrecarga del operador binario ([resolución de sobrecarga del operador binario](expressions.md#binary-operator-overload-resolution)) como si la operación se hubiera escrito `x op y`. A
+Una operación con el formato `x op= y` se procesa mediante la aplicación de la resolución de sobrecarga del operador binario ([resolución de sobrecarga del operador binario](expressions.md#binary-operator-overload-resolution)) como si la operación se hubiera escrito `x op y`. A continuación,
 
 *  Si el tipo de valor devuelto del operador seleccionado es implícitamente convertible al tipo de `x`, la operación se evalúa como `x = x op y`, salvo que `x` solo se evalúa una vez.
 *  De lo contrario, si el operador seleccionado es un operador predefinido, si el tipo de valor devuelto del operador seleccionado es convertible explícitamente al tipo de `x`, y si `y` es implícitamente convertible al tipo de `x` o el operador es un operador de desplazamiento, la operación se evalúa como `x = (T)(x op y)`, donde `T` es el tipo de `x`, salvo que `x` se evalúa solo una vez.
@@ -4759,7 +4759,7 @@ Cuando el operando izquierdo de una asignación compuesta es un acceso a propied
 
 La segunda regla anterior permite evaluar `x op= y` como `x = (T)(x op y)` en determinados contextos. La regla existe de forma que los operadores predefinidos se pueden usar como operadores compuestos cuando el operando izquierdo es de tipo `sbyte`, `byte`, `short`, `ushort`o `char`. Incluso cuando ambos argumentos son de uno de esos tipos, los operadores predefinidos producen un resultado de tipo `int`, como se describe en [promociones numéricas binarias](expressions.md#binary-numeric-promotions). Por lo tanto, sin una conversión, no sería posible asignar el resultado al operando izquierdo.
 
-El efecto intuitivo de la regla para los operadores predefinidos es simplemente que se permite `x op= y` si se permiten los dos `x op y` y `x = y`. en el ejemplo
+El efecto intuitivo de la regla para los operadores predefinidos es simplemente que se permite `x op= y` si se permiten los dos `x op y` y `x = y`. En el ejemplo
 ```csharp
 byte b = 0;
 char ch = '\0';
@@ -4775,7 +4775,7 @@ ch += (char)1;      // Ok
 ```
 la razón intuitiva de cada error es que una asignación simple correspondiente también habría sido un error.
 
-Esto también significa que las operaciones de asignación compuesta admiten operaciones de elevación. en el ejemplo
+Esto también significa que las operaciones de asignación compuesta admiten operaciones de elevación. En el ejemplo
 ```csharp
 int? i = 0;
 i += 1;             // Ok
@@ -4809,7 +4809,7 @@ non_assignment_expression
     ;
 ```
 
-## <a name="constant-expressions"></a>Expresiones constantes
+## <a name="constant-expressions"></a>Expresiones de constante
 
 Una *constant_expression* es una expresión que se puede evaluar por completo en tiempo de compilación.
 

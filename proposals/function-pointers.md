@@ -1,10 +1,10 @@
 ---
-ms.openlocfilehash: d9080202f9413f8beb80db222d47f5fc082ae641
-ms.sourcegitcommit: f3170512e7a3193efbcea52ec330648375e36915
+ms.openlocfilehash: 8bf3a18dc42e225e64bd3ccda2106aed89b421ed
+ms.sourcegitcommit: 9aa177443b83116fe1be2ab28e2c7291947fe32d
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/11/2020
-ms.locfileid: "79484361"
+ms.lasthandoff: 03/21/2020
+ms.locfileid: "80108394"
 ---
 # <a name="function-pointers"></a>Punteros a funciones
 
@@ -174,7 +174,8 @@ En un contexto no seguro, un método `M` es compatible con un tipo de puntero de
 En un contexto no seguro, existe una conversión implícita de una dirección de una expresión cuyo destino es un grupo de métodos `E` a un tipo de puntero de función compatible `F` si `E` contiene al menos un método que es aplicable en su forma normal a una lista de argumentos construida mediante el uso de los tipos de parámetros y modificadores de `F`, como se describe a continuación.
 - Se selecciona un único método `M` que corresponde a una invocación de método del formulario `E(A)` con las modificaciones siguientes:
    - La lista de argumentos `A` es una lista de expresiones, cada una clasificada como una variable y con el tipo y el modificador (`ref`, `out`o `in`) del _parámetro de\_formal correspondiente\_lista_ de `D`.
-   - Los métodos candidatos son solo aquellos métodos que son solo aquellos que se aplican en su forma normal, no los que se aplican en su forma expandida.
+   - Los métodos candidatos son solo aquellos que se aplican en su forma normal, no los que se aplican en su forma expandida.
+   - Los métodos candidatos son solo los métodos que son estáticos.
 - Si el algoritmo de las invocaciones de método produce un error, se produce un error en tiempo de compilación. De lo contrario, el algoritmo genera un único método mejor `M` tener el mismo número de parámetros que `F` y se considera que la conversión existe.
 - El método seleccionado `M` debe ser compatible (tal y como se definió anteriormente) con el tipo de puntero de función `F`. De lo contrario, se produce un error en tiempo de compilación.
 - El resultado de la conversión es un puntero de función de tipo `F`.

@@ -1,10 +1,10 @@
 ---
-ms.openlocfilehash: 25756c1811d5e6dc97512ce70f99ab7fefa91c4a
-ms.sourcegitcommit: 2a6dffb60718065ece95df75e1cc7eb509e48a8d
+ms.openlocfilehash: 258ae6865c5b2c3103a0cdf7e1e5a2cdee11e740
+ms.sourcegitcommit: 1e1c7c72b156e2fbc54d6d6ac8d21bca9934d8d2
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/01/2020
-ms.locfileid: "79484133"
+ms.lasthandoff: 03/26/2020
+ms.locfileid: "80281962"
 ---
 # <a name="records-work-in-progress"></a>Registra el trabajo en curso
 
@@ -78,3 +78,31 @@ Los tipos de registros producen implementaciones sintetizadas para los métodos 
 ```C#
 override Equals(object o) => Equals(o as T);
 ```
+
+## <a name="with-expression"></a>Expresión `with`
+
+Una expresión de `with` es una expresión nueva con la sintaxis siguiente.
+
+```antlr
+with_expression
+    : switch_expression
+    | switch_expression 'with' anonymous_object_initializer
+```
+
+Una expresión `with` permite la "mutación no destructiva", diseñada para producir una copia de la expresión del receptor con modificaciones en las propiedades enumeradas en el `anonymous_object_initializer`.
+
+Una expresión `with` válida tiene un receptor con un tipo que no es void. El tipo de receptor debe contener un método de instancia accesible denominado `With` con los parámetros adecuados y el tipo de valor devuelto. Es un error si hay varios métodos `With` no invalidados. Si hay varias invalidaciones de `With`, debe haber un método de `With` no invalidado, que es el método de destino. De lo contrario, debe haber exactamente un método `With`.
+
+En el lado derecho de la expresión de `with` es una `anonymous_object_initializer` con una secuencia de asignaciones con un campo o propiedad del receptor en el lado izquierdo de la asignación, y una expresión arbitraria en el lado derecho, que se puede convertir implícitamente al tipo del lado izquierdo del mismo.
+
+Dado un método de `With` de destino, el tipo de valor devuelto debe ser el tipo del tipo de expresión de receptor o un tipo base de este. Para cada parámetro del método `With`, debe haber un campo de instancia correspondiente accesible o una propiedad legible en el tipo de receptor con el mismo nombre y el mismo tipo. Cada propiedad o campo del lado derecho de la expresión with también debe corresponder a un parámetro con el mismo nombre en el método `With`.
+
+Dado un método `With` válido, la evaluación de una expresión de `with` es equivalente a llamar al método `With` con las expresiones de la `anonymous_object_initializer` sustituida por el parámetro con el mismo nombre que la propiedad del lado izquierdo. Si no hay ninguna propiedad coincidente para un parámetro determinado en el `anonymous_object_initializer`, el argumento es la evaluación del campo o propiedad del mismo nombre en el receptor.
+
+El orden de evaluación de los efectos secundarios es el siguiente, y cada expresión se evalúa exactamente una vez:
+
+1. Expresión de receptor
+
+2. Expresiones en el `anonymous_object_initializer`, en orden léxico
+
+3. Evaluación de las propiedades que coinciden con los parámetros del método `With`, en orden de definición de los parámetros del método `With`.
